@@ -47,7 +47,7 @@
                 android:textAlignment="center"
                 android:text="@string/quick_menu_title"
                 android:textColor="#58595b"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
         </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:textAlignment="center"
                 android:text="@string/full_menu_title"
                 android:textColor="#58595b"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:textAlignment="center"
                 android:text="@string/full_menu_title"
                 android:textColor="#58595b"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 

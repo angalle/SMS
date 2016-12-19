@@ -44,6 +44,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
-
+    //font
+    compile 'com.tsengvn:Typekit:1.0.0'
 
 }
