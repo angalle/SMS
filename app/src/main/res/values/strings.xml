@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SMS</string>
+    <string name="app_full_name">SunMoon Bus Time Scheduler</string>
+
+    <!--        평일/토요일(공휴일)/일요일 타이틀      -->
+    <string name="weekday">Weekday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+
+    <!--        일정 타이틀      -->
+    <string name="sm2cheonan">선문대 → 천안역</string>
+    <string name="cheonan2sm"> 천안역 ← 선문대</string>
+    <string name="sm2terminal">선문대 → 터미널</string>
+    <string name="terminal2sm">터미널 ← 선문대</string>
+
+
+    <!--        일정 타이틀      -->
+    <string name="quick_menu_title">빠른 버스 보기</string>
+    <string name="full_menu_title">버스시간표 보기</string>
+    <string name="question_menu_title">공지사항 ＆ 사용방법</string>
+</resources>

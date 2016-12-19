@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#4fb2b3"
+    android:weightSum="5.7"
+    >
+    <!-- header -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:src="@drawable/main"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:scaleType="fitXY"/>
+
+    <!-- center -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.3"
+        android:weightSum="3"
+        android:background="#f1f1f2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/sch_detail_btn">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:src="@drawable/quick_menu_btn"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/quick_menu_title"
+                android:textColor="#58595b"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:id="@+id/sch_entry_btn">
+
+            <ImageView
+                android:src="@drawable/full_menu_btn"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/full_menu_title"
+                android:textColor="#58595b"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:id="@+id/app_info_btn">
+            <ImageView
+                android:src="@drawable/question_menu_btn"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/full_menu_title"
+                android:textColor="#58595b"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- footer -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:paddingTop="5dp"
+        android:gravity="right"
+        android:textColor="#FFFFFF"
+        android:text="@string/app_full_name"/>
+</LinearLayout>
