@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(v.getId() == R.id.sch_entry_btn){
-            intent.setClass(MainActivity.this,SchDetail.class);
+            intent.setClass(MainActivity.this,SchEntry.class);
             startActivity(intent);
         }
         else if(v.getId() == R.id.app_info_btn){
