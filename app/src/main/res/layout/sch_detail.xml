@@ -148,8 +148,9 @@
         <ImageView
             android:layout_centerHorizontal="true"
             android:src="@drawable/quick_btn"
+            android:id="@+id/quickBtn"
             android:layout_height="80dp"
-            android:layout_width="80dp" />
+            android:layout_width="80dp"/>
     </RelativeLayout>
 
 </LinearLayout>
