@@ -2,11 +2,9 @@ package univ.sm.data;
 
 public class SplashData {
 
-
-	//public static String addrSM = "http://210.119.32.237:40001/register";
 	public static String register_GCM_AWS = "http://52.79.137.125:40001/register";
 
-	public static String ip = "http://210.119.32.237:4001/shuttle?where=";
+	public static String ip = "http://52.78.113.18:40001/shuttle?where=";
 	public static String bus_cheonanasan = ip + "cheonanasan"; // 0
 	public static String bus_terminal = ip + "terminal"; // 1
 	public static String bus_onyang = ip + "onyang"; // 2
@@ -19,10 +17,10 @@ public class SplashData {
 	public static String bus_sunmoonOnyang = ip + "busSMOnyang"; // 9
 	public static String info = ip + "info"; // 10
 	public static String bus_cheonanCampers = ip + "cheonanCampers"; // 11
-	
+
 	public static String notice_con = "";
-	
-	public  static String[] busUrl = { 
+
+	public  static String[] busUrl = {
 			bus_cheonanasan, // 0
 			bus_terminal, // 1
 			bus_onyang, // 2
@@ -37,7 +35,6 @@ public class SplashData {
 			info, // 11
 
 	};
-
 
 	public static String getNotice_con() {
 		return notice_con;

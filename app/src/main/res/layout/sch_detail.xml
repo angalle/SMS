@@ -19,7 +19,8 @@
             android:scaleType="fitXY"
             android:layout_width="280dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true" />
 
         <LinearLayout
             android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/sch_detail_top_bar"/>
+                    android:id="@+id/sch_detail_top_bar"
+                    android:adjustViewBounds="true" />
 
                 <LinearLayout
                     android:layout_gravity="center_vertical"
@@ -106,7 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/sch_detail_cheonan"/>
+            android:src="@drawable/sch_detail_cheonan"
+            android:adjustViewBounds="true" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -150,7 +153,8 @@
             android:src="@drawable/quick_btn"
             android:id="@+id/quickBtn"
             android:layout_height="80dp"
-            android:layout_width="80dp"/>
+            android:layout_width="80dp"
+            android:adjustViewBounds="true" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -17,32 +17,29 @@ import univ.sm.data.Shuttle;
 
 
 public class Connection {
+	public static ArrayList<String> busarr = new ArrayList<String>();
+	public static ArrayList<Shuttle> ShuttleArr = new ArrayList<Shuttle>();
+	public static ArrayList<Shuttle> SchDetail = new ArrayList<Shuttle>();
 	String addr = "";
 	StringBuffer sb = null;
 	private int arryrows = 8; // ���
-	private ArrayList<Shuttle> ShuttleArr = new ArrayList<Shuttle>();// ��ƲŬ����
-																		// �����ͷ�
-																		// �簡��.
-	ArrayList<String> busarr = new ArrayList<String>(); // ���ͳݿ��� �迭�� �޾ƿ��� �κ�
 
-	public Connection(String str) {
-		addr = str;
+
+	public Connection(String urlAddress) {
+		addr = urlAddress;
 	}
 
 	public ArrayList<Shuttle> getBusArray() {
 		return ShuttleArr;
 	}
 
-	public void HttpConnect() { // when method call, return
-								// ArrayList<String>(->busStrArr) and return
-								// String[][](-> busStrArr)
+	public void HttpConnect() {
 		try {
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet();
 			URI uri = URI.create(addr);
 			request.setURI(uri);
 			HttpResponse response = client.execute(request);
-			// respose�� �����Ͱ� ����
 			final int statusCode = response.getStatusLine().getStatusCode();
 
 			if (statusCode != HttpStatus.SC_OK) {
@@ -62,9 +59,9 @@ public class Connection {
 				html = line.toString();
 
 				if (html.equals("error"))
-					throw new Exception();// �ִµ� �ƹ� ���� ���� ��
+					throw new Exception();
 				if (html.equals("false"))
-					throw new Exception();// ���� ���� ��û �� ��
+					throw new Exception();
 
 				int i = 0;
 				while (html.length() > i) {
@@ -81,7 +78,7 @@ public class Connection {
 			ShuttleArr = busArrayMake(busarr.size(), busarr);
 
 		} catch (Exception e) {
-			Log.i("internet connecting fail", "connecting fail");
+			Log.i("internet connecting fail", ""+e.toString());
 			Shuttle s = new Shuttle(); // 초기화는 그대로
 			ShuttleArr.add(s);
 		}
