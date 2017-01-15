@@ -35,9 +35,10 @@ import univ.sm.data.SplashData;
  * Created by heesun on 2016-12-13.
  */
 
-public class SchDetail extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener {
+public class SchDetail extends AppCompatActivity implements View.OnClickListener {
     ImageView schDetailTopBar,quickBtn,changeDirection;
     TextView schDetailWeekDay,schDetailSatureDay,schDetailSunDay;
+    RecyclerView recyclerView;
     int roatationDegree_quick = 0;
     int roatationDegree_change = 0;
     Context context;
@@ -49,29 +50,18 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
         context = getApplicationContext();
 
-        schDetailWeekDay = (TextView) findViewById(R.id.sch_detail_weekDay);
-        schDetailSatureDay = (TextView) findViewById(R.id.sch_detail_satureDay);
-        schDetailSunDay = (TextView) findViewById(R.id.sch_detail_sunDay);
         quickBtn = (ImageView) findViewById(R.id.quickBtn);
         changeDirection = (ImageView) findViewById(R.id.changeDirection);
 
-        /* 기본좌표 재 설정 / xml 상에서 정확한 좌표를 표시 할 수 없음*/
-        schDetailTopBar = (ImageView) findViewById(R.id.sch_detail_top_bar);
-        schDetailTopBar.getViewTreeObserver().addOnGlobalLayoutListener(this);
-
 
         /* 각 버튼 마다 이벤트 리스너*/
-        schDetailWeekDay.setOnClickListener(this);
-        schDetailSatureDay.setOnClickListener(this);
-        schDetailSunDay.setOnClickListener(this);
         quickBtn.setOnClickListener(this);
         changeDirection.setOnClickListener(this);
 
         //System.out.println("httpConnection::::result::::");
         //System.out.println(Connection.ShuttleArr);
         /*Recycle view에 대한 설정*/
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
-
+        recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new RecyclerAdapter(context,Connection.positionShuttleArr[0], R.layout.activity_main));
@@ -79,20 +69,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        float toX=0,toWidth=0;      /* 이동해야할 x좌표 */
-        if(v.getId() == R.id.sch_detail_weekDay){
-            toX = v.getLeft();
-            toWidth = v.getWidth();
-            moveImageBar(toWidth,toX);
-        }else if(v.getId() == R.id.sch_detail_satureDay){
-            toX = v.getLeft();
-            toWidth = v.getWidth();
-            moveImageBar(toWidth,toX);
-        }else if(v.getId() == R.id.sch_detail_sunDay){
-            toX = v.getLeft();
-            toWidth = v.getWidth();
-            moveImageBar(toWidth,toX);
-        }else if(v.getId() == R.id.quickBtn){
+       if(v.getId() == R.id.quickBtn){
             roatationDegree_quick += 360;
             ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotation", roatationDegree_quick).setDuration(500);
             rotation.setRepeatCount(Animation.ABSOLUTE);
@@ -105,15 +82,5 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void moveImageBar(float toWidth,float toX){
-        float width = schDetailTopBar.getWidth();
-        schDetailTopBar.animate().scaleX(toWidth/width);
-        schDetailTopBar.animate().translationX(toX-(width-toWidth)/2.0f).withLayer();
-    }
 
-    @Override
-    public void onGlobalLayout() {
-        schDetailTopBar.setX(schDetailWeekDay.getX());
-        schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
-    }
 }

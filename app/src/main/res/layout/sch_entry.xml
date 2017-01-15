@@ -6,13 +6,83 @@
     android:background="#f1f1f2"
     android:weightSum="8">
     <!-- header -->
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3.4"
-        android:orientation="horizontal">
+        android:layout_gravity="center_vertical">
 
-    </RelativeLayout>
+        <ImageView
+            android:layout_height="wrap_content"
+            android:src="@drawable/weekbar"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:layout_width="280dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="270dp"
+            android:gravity="center_vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:src="@drawable/weekbar_select"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/sch_detail_top_bar"
+                    android:adjustViewBounds="true" />
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="17dp"
+                        android:text="WeekDay"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_weekDay"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:text="SatureDay"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_satureDay"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="SunDay"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_sunDay"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,19 +95,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3.1"
-            android:orientation="vertical"
-            android:background="@drawable/sch_header">
+            android:orientation="horizontal"
+            android:background="@drawable/sch_header"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AsanCampus"
+                android:textSize="25dp"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="right|center_vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/detail_btn"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/detail_btn"/>
+            </LinearLayout>
+
         </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/sch_detail_cheonan"
             android:adjustViewBounds="false"
-            android:id="@+id/imageView"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
@@ -64,8 +156,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
-
+        android:layout_weight="0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +169,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#e16175"
+                android:background="#eeb8b8"
                 android:orientation="vertical"
                 android:layout_height="70dp">
             </LinearLayout>
@@ -87,7 +178,7 @@
 
         <ImageView
             android:layout_centerHorizontal="true"
-            android:src="@drawable/quick_btn"
+            android:src="@drawable/top_btn"
             android:layout_height="80dp"
             android:layout_width="80dp" />
     </RelativeLayout>
