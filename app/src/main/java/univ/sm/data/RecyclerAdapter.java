@@ -18,6 +18,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     Context context;
     ArrayList<Shuttle> items;
     int item_layout;
+    String title,startTitle,middleTitle,endTitle;
+
 
     public RecyclerAdapter(Context context, ArrayList<Shuttle> items, int item_layout) {
         this.context = context;
@@ -30,7 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sch_detail_holder,null);
         return new ViewHolder(v);
     }
-    String title,startTitle,middleTitle,endTitle;
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Shuttle item = items.get(position+1);
