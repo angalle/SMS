@@ -14,12 +14,13 @@ import java.net.URI;
 import java.util.ArrayList;
 
 import univ.sm.data.Shuttle;
+import univ.sm.data.SplashData;
 
 
 public class Connection {
 	public static ArrayList<String> busarr = new ArrayList<String>();
 	public static ArrayList<Shuttle> ShuttleArr = new ArrayList<Shuttle>();
-	public static ArrayList<Shuttle> SchDetail = new ArrayList<Shuttle>();
+	public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
 	String addr = "";
 	StringBuffer sb = null;
 	private int arryrows = 8; // ���

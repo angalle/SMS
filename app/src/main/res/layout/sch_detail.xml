@@ -88,10 +88,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3.1"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/sch_header"
         android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp">
+        android:layout_marginRight="19dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="AsanCampus"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/three_arrow"
+            android:id="@+id/changeDirection"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="CheonanStation"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"/>
 
     </LinearLayout>
     <!-- center -->
@@ -104,20 +134,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:weightSum="5">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:src="@drawable/sch_detail_cheonan"
-            android:adjustViewBounds="true" />
-
+        <!--android:background="@drawable/sch_detail_gradation"-->
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@drawable/sch_detail_gradation"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/sch_entry_list">
-
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
@@ -138,10 +162,18 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="30dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#FFFFFF"
+                    android:layout_height="30dp">
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#e16175"
+                android:background="#eeb8b8"
                 android:orientation="vertical"
                 android:layout_height="70dp">
             </LinearLayout>
