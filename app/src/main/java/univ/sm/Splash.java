@@ -8,7 +8,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import univ.sm.connect.Connection;
+import univ.sm.data.Shuttle;
 import univ.sm.data.SplashData;
 
 public class Splash extends Activity {
@@ -24,10 +27,11 @@ public class Splash extends Activity {
             public void run() {
                 try {
                     System.out.println("access1::::");
-                    Connection connection = new Connection(SplashData.ip);
-                    connection.HttpConnect();
+                    DataSetting();
+                    //Connection connection = new Connection(SplashData.ip);
+                    //connection.HttpConnect();
                     System.out.println("httpConnection::::result::::");
-                    System.out.println(Connection.ShuttleArr);
+                    System.out.println(Connection.positionShuttleArr[0]);
                     //connection for 문돌리는곳이 따로있음 ip 끝주소 다시 한번 더 돌려줘야 데이터 다 들어옴
                     // 이부분 세팅
                     sleep(5000);
@@ -44,6 +48,24 @@ public class Splash extends Activity {
         };
         th.start();
 
+    }
+
+    private void DataSetting() {
+        int i = 0;
+        for (String url : SplashData.busUrl) {
+            Connection.positionShuttleArr[i] = new ArrayList<Shuttle>();
+            Connection getBusArray = new Connection(url);
+            if (i != SplashData.busUrl.length - 1) {
+                getBusArray.HttpConnect();
+                Connection.positionShuttleArr[i] = getBusArray.getBusArray();
+                if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
+                    break;
+                }
+            } else {
+                SplashData.setNotice_con(getBusArray.HttpInfoConnect());
+            }
+            i++;
+        }
     }
 
 }
