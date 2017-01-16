@@ -28,12 +28,14 @@ public class SplashData {
 			bus_asansunmoon, // 4
 			bus_sunmoonasan, // 5
 			bus_sunmoonOnyang,// 6
+
 			bus_saturdayCheonanAsan, // 7
 			bus_sundayCheonanAsan, // 8
+
 			bus_saturdayTerminal, // 9
 			bus_sundayTerminal, // 10
-			info, // 11
 
+			info, // 11
 	};
 
 	public static String getNotice_con() {

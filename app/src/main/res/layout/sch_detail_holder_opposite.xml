@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/pivotTime"
+                android:id="@+id/pivotTime_opposite"
                 android:text="time"
                 android:textColor="#e16175"
                 android:gravity="bottom|center"
@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/indx"
+                    android:id="@+id/indx_opposite"
                     android:text="1"
                     android:textColor="#FFFFFF"
                     android:layout_alignParentTop="true"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:id="@+id/textSchduleFirst"
+                android:id="@+id/textSchduleFirst_opposite"
                 android:text="textSchduleFirst"
                 android:textColor="#e16175"
                 android:padding="5dp" />
@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textSchduleSecond"
+                android:id="@+id/textSchduleSecond_opposite"
                 android:text="textSchduleSecond"
                 android:textColor="#e16175"
                 android:padding="5dp" />
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textSchduleThird"
+                android:id="@+id/textSchduleThird_opposite"
                 android:text="textSchduleThird"
                 android:textColor="#e16175"
                 android:padding="5dp" />

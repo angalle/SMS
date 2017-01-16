@@ -12,6 +12,76 @@
         android:layout_weight="3.4"
         android:layout_gravity="center_vertical">
 
+        <ImageView
+            android:layout_height="wrap_content"
+            android:src="@drawable/weekbar"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:layout_width="280dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="270dp"
+            android:gravity="center_vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:src="@drawable/weekbar_select"
+                    android:layout_width="100dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/sch_detail_top_bar"
+                    android:adjustViewBounds="true" />
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="17dp"
+                        android:text="WeekDay"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_weekDay"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:text="SatureDay"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_satureDay"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="SunDay"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:id="@+id/sch_detail_sunDay"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
     </FrameLayout>
 
     <LinearLayout
@@ -22,8 +92,8 @@
         android:background="@drawable/sch_header"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="19dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center"
         android:weightSum="5">
 
@@ -34,7 +104,9 @@
             android:gravity="center"
             android:text="AsanCampus"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"/>
+            android:textStyle="bold"
+            android:id="@+id/changeStation_front"
+            android:textSize="18dp"/>
 
         <ImageView
             android:layout_width="30dp"
@@ -49,9 +121,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
+            android:id="@+id/changeStation_back"
             android:text="CheonanStation"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"/>
+            android:textStyle="bold"
+            android:textSize="18dp"/>
 
     </LinearLayout>
     <!-- center -->
@@ -64,7 +138,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:weightSum="5">
-        <!--android:background="@drawable/sch_detail_gradation"-->
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

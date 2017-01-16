@@ -40,7 +40,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/sch_detail_top_bar"
+                    android:id="@+id/sch_entry_top_bar"
                     android:adjustViewBounds="true" />
 
                 <LinearLayout
@@ -59,7 +59,7 @@
                         android:textSize="17dp"
                         android:text="WeekDay"
                         android:textStyle="bold"
-                        android:id="@+id/sch_detail_weekDay"/>
+                        android:id="@+id/sch_entry_weekDay"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                         android:text="SatureDay"
                         android:textSize="17dp"
                         android:textStyle="bold"
-                        android:id="@+id/sch_detail_satureDay"/>
+                        android:id="@+id/sch_entry_satureDay"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                         android:text="SunDay"
                         android:textSize="17dp"
                         android:textStyle="bold"
-                        android:id="@+id/sch_detail_sunDay"/>
+                        android:id="@+id/sch_entry_sunDay"/>
                 </LinearLayout>
             </RelativeLayout>
 

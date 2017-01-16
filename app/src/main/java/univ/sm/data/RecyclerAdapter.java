@@ -17,19 +17,23 @@ import univ.sm.R;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
     Context context;
     ArrayList<Shuttle> items;
-    int item_layout;
-    String title,startTitle,middleTitle,endTitle;
+    int directionFlag = 0;
+    String pivotTime,startTitle,middleTitle,endTitle;
+    /*정방향 역방향 레이아웃 구분*/
+    int[] directionLayout = {
+            R.layout.sch_detail_holder_opposite,
+            R.layout.sch_detail_holder_reverse
+    };
 
-
-    public RecyclerAdapter(Context context, ArrayList<Shuttle> items, int item_layout) {
+    public RecyclerAdapter(Context context, ArrayList<Shuttle> items, int directionFlag) {
         this.context = context;
         this.items = items;
-        this.item_layout = item_layout;
+        this.directionFlag = directionFlag;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sch_detail_holder,null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],null);
         return new ViewHolder(v);
     }
 
@@ -38,14 +42,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         Shuttle item = items.get(position+1);
         if(position == 0){
             item = items.get(0);
-            title=item.getB()[0];
+            pivotTime=item.getB()[0];
             startTitle=item.getB()[0];
             middleTitle=item.getB()[2];
             endTitle=item.getB()[4];
             item = items.get(position+1);
         }
         holder.indx.setText(item.getNo());
-        holder.pivotTime.setText(item.getB()[0]);
+        holder.pivotTime.setText(pivotTime);
         holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
         holder.textSchduleSecond.setText(item.getB()[2]+" "+middleTitle);
         holder.textSchduleThird.setText(item.getB()[4]+" "+endTitle);
@@ -61,11 +65,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            pivotTime=(TextView)itemView.findViewById(R.id.pivotTime);
-            textSchduleFirst=(TextView)itemView.findViewById(R.id.textSchduleFirst);
-            textSchduleSecond=(TextView)itemView.findViewById(R.id.textSchduleSecond);
-            textSchduleThird=(TextView)itemView.findViewById(R.id.textSchduleThird);
-            indx=(TextView)itemView.findViewById(R.id.indx);
+            if(directionFlag == 0){
+                pivotTime=(TextView)itemView.findViewById(R.id.pivotTime_opposite);
+                textSchduleFirst=(TextView)itemView.findViewById(R.id.textSchduleFirst_opposite);
+                textSchduleSecond=(TextView)itemView.findViewById(R.id.textSchduleSecond_opposite);
+                textSchduleThird=(TextView)itemView.findViewById(R.id.textSchduleThird_opposite);
+                indx=(TextView)itemView.findViewById(R.id.indx_opposite);
+            }else{
+                pivotTime=(TextView)itemView.findViewById(R.id.pivotTime_reverse);
+                textSchduleFirst=(TextView)itemView.findViewById(R.id.textSchduleFirst_reverse);
+                textSchduleSecond=(TextView)itemView.findViewById(R.id.textSchduleSecond_reverse);
+                textSchduleThird=(TextView)itemView.findViewById(R.id.textSchduleThird_reverse);
+                indx=(TextView)itemView.findViewById(R.id.indx_reverse);
+            }
         }
     }
 }
