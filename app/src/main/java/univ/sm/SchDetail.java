@@ -18,9 +18,11 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.apache.commons.logging.Log;
@@ -36,9 +38,10 @@ import univ.sm.data.SplashData;
  * Created by heesun on 2016-12-13.
  */
 
-public class SchDetail extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
+public class SchDetail extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,Spinner.OnItemSelectedListener{
     ImageView schDetailTopBar,  quickBtn,   changeDirection;
-    TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay,    changeStation_front,    changeStation_back;
+    TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay;
+    Spinner destination;
     RecyclerView recyclerView;
     int roatationDegree_quick = 0;
     int roatationDegree_change = 0;
@@ -52,39 +55,25 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         context = getApplicationContext();
 
         /*Recycle view에 대한 설정*/
+        //changeShuttleArr(0,Const.OPPOSIT);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new RecyclerAdapter(context,Connection.positionShuttleArr[0], Const.OPPOSIT));
+        ra = new RecyclerAdapter(context,Connection.positionShuttleArr[0], Const.OPPOSIT);
+        recyclerView.setAdapter(ra);
+    }
+    RecyclerAdapter ra;
+    private void changeShuttleArr(int ShuttleIdex,int const_direction){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+        //recyclerView.invalidate();
+        System.out.println("ShuttleIdex:::::::"+ShuttleIdex);
+        //ra = new RecyclerAdapter(context,Connection.positionShuttleArr[ShuttleIdex], const_direction);
+        ra.setItems(Connection.positionShuttleArr[ShuttleIdex]);
+        ra.notifyDataSetChanged();
+        recyclerView.setAdapter(ra);
     }
 
-    @Override
-    public void onClick(View v) {
 
-        /*평일 기능*/
-        if(v.getId() == R.id.sch_detail_weekDay){
-            moveImageBar(v);
-            /*토요일 기능*/
-        }else if(v.getId() == R.id.sch_detail_satureDay){
-            moveImageBar(v);
-            /*일요일 기능*/
-        }else if(v.getId() == R.id.sch_detail_sunDay) {
-            moveImageBar(v);
-            /*빨리찾기 기능 구현*/
-        }else if(v.getId() == R.id.quickBtn){
-            roatationDegree_quick += 360;
-            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotation", roatationDegree_quick).setDuration(500);
-            rotation.setRepeatCount(Animation.ABSOLUTE);
-            rotation.start();
-            /*반대방향 구현*/
-        }else if(v.getId() == R.id.changeDirection){
-            roatationDegree_change += 180;
-            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotationY", roatationDegree_change).setDuration(500);
-            rotation.setRepeatCount(Animation.ABSOLUTE);
-            rotation.start();
-        }else if(v.getId() == R.id.changeStation_front || v.getId() == R.id.changeStation_back){
-
-        }
-    }
 
     /*주말선택의 빨간바를 이동하는 함수*/
     private void moveImageBar(View v){
@@ -102,8 +91,8 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         schDetailWeekDay = (TextView) findViewById(R.id.sch_detail_weekDay);
         schDetailSatureDay = (TextView) findViewById(R.id.sch_detail_satureDay);
         schDetailSunDay = (TextView) findViewById(R.id.sch_detail_sunDay);
-        changeStation_front = (TextView) findViewById(R.id.changeStation_front);
-        changeStation_back = (TextView) findViewById(R.id.changeStation_back);
+        destination = (Spinner) findViewById(R.id.destination);
+
 
         quickBtn = (ImageView) findViewById(R.id.quickBtn);
         changeDirection = (ImageView) findViewById(R.id.changeDirection);
@@ -114,8 +103,8 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         schDetailWeekDay.setOnClickListener(this);
         schDetailSatureDay.setOnClickListener(this);
         schDetailSunDay.setOnClickListener(this);
-        changeStation_front.setOnClickListener(this);
-        changeStation_back.setOnClickListener(this);
+        //destination.setOnClickListener(this);
+        destination.setOnItemSelectedListener(this);
 
         /* 기본좌표 재 설정 / xml 상에서 정확한 좌표를 표시 할 수 없음*/
         schDetailTopBar = (ImageView) findViewById(R.id.sch_detail_top_bar);
@@ -129,5 +118,45 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     public void onGlobalLayout() {
         schDetailTopBar.setX(schDetailWeekDay.getX());
         schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
+    }
+
+    @Override
+    public void onClick(View v) {
+        /*평일 기능*/
+        if(v.getId() == R.id.sch_detail_weekDay){
+            moveImageBar(v);
+            /*토요일 기능*/
+        }else if(v.getId() == R.id.sch_detail_satureDay){
+            moveImageBar(v);
+            changeShuttleArr(7,Const.OPPOSIT);
+            /*일요일 기능*/
+        }else if(v.getId() == R.id.sch_detail_sunDay) {
+            moveImageBar(v);
+            changeShuttleArr(8,Const.OPPOSIT);
+            /*빨리찾기 기능 구현*/
+        }else if(v.getId() == R.id.quickBtn){
+            roatationDegree_quick += 360;
+            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotation", roatationDegree_quick).setDuration(500);
+            rotation.setRepeatCount(Animation.ABSOLUTE);
+            rotation.start();
+            /*반대방향 구현*/
+        }else if(v.getId() == R.id.changeDirection){
+            roatationDegree_change += 180;
+            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotationY", roatationDegree_change).setDuration(500);
+            rotation.setRepeatCount(Animation.ABSOLUTE);
+            rotation.start();
+        }else if(v.getId() == R.id.destination ){
+
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

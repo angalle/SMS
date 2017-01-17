@@ -47,4 +47,7 @@ dependencies {
     //font
     compile 'com.tsengvn:Typekit:1.0.0'
 
+    //expandable layout
+    //compile 'com.github.aakira:expandable-layout:1.6.0@aar'
+
 }

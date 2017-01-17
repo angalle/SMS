@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -97,36 +98,35 @@
         android:gravity="center"
         android:weightSum="5">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="AsanCampus"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:id="@+id/changeStation_front"
-            android:textSize="18dp"/>
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:text="AsanCampus"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/three_arrow"
-            android:id="@+id/changeDirection"
-            android:adjustViewBounds="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:id="@+id/changeStation_back"
-            android:text="CheonanStation"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="18dp"/>
-
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/three_arrow"
+                android:id="@+id/changeDirection"
+                android:adjustViewBounds="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:id="@+id/destination"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_weight="2"
+                android:entries="@array/destination">
+            </Spinner>
     </LinearLayout>
     <!-- center -->
     <LinearLayout

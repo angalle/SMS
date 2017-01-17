@@ -17,6 +17,11 @@ import univ.sm.R;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
     Context context;
     ArrayList<Shuttle> items;
+
+    public void setItems(ArrayList<Shuttle> items) {
+        this.items = items;
+    }
+
     int directionFlag = 0;
     String pivotTime,startTitle,middleTitle,endTitle;
     /*정방향 역방향 레이아웃 구분*/
@@ -49,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             item = items.get(position+1);
         }
         holder.indx.setText(item.getNo());
-        holder.pivotTime.setText(pivotTime);
+        holder.pivotTime.setText(item.getB()[0]);
         holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
         holder.textSchduleSecond.setText(item.getB()[2]+" "+middleTitle);
         holder.textSchduleThird.setText(item.getB()[4]+" "+endTitle);
