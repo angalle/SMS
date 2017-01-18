@@ -41,22 +41,26 @@ public class Splash extends Activity {
 
     }
 
-    private void DataSetting() {
+    private boolean DataSetting() {
         int i = 0;
-        for (String url : SplashData.busUrl) {
-            Connection.positionShuttleArr[i] = new ArrayList<Shuttle>();
-            Connection getBusArray = new Connection(url);
-            if (i != SplashData.busUrl.length - 1) {
-                getBusArray.HttpConnect();
-                Connection.positionShuttleArr[i] = getBusArray.getBusArray();
-                if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
-                    break;
+        try{
+            for (String url : SplashData.busUrl) {
+                Connection getBusArray = new Connection(url);
+                if (i != SplashData.busUrl.length - 1) {
+                    Connection.positionShuttleArr[i] = getBusArray.HttpConnect();
+                    //Connection.positionShuttleArr[i] = getBusArray.getBusArray();
+                    if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
+                        break;
+                    }
+                } else {
+                    SplashData.setNotice_con(getBusArray.HttpInfoConnect());
                 }
-            } else {
-                SplashData.setNotice_con(getBusArray.HttpInfoConnect());
+                i++;
             }
-            i++;
+        }catch (Exception e){
+            return false;
         }
+        return true;
     }
 
 }

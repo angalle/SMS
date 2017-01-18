@@ -18,8 +18,7 @@ import univ.sm.data.SplashData;
 
 
 public class Connection {
-	public static ArrayList<String> busarr = new ArrayList<String>();
-	public static ArrayList<Shuttle> ShuttleArr = new ArrayList<Shuttle>();
+	//public static ArrayList<String> busarr = new ArrayList<String>();
 	public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
 	String addr = "";
 	StringBuffer sb = null;
@@ -30,11 +29,13 @@ public class Connection {
 		addr = urlAddress;
 	}
 
-	public ArrayList<Shuttle> getBusArray() {
+	/*public ArrayList<Shuttle> getBusArray() {
 		return ShuttleArr;
-	}
+	}*/
 
-	public void HttpConnect() {
+	public ArrayList<Shuttle> HttpConnect() {
+		ArrayList<Shuttle> ShuttleArr = new ArrayList<Shuttle>();
+		ArrayList<String> busarr = new ArrayList<String>();
 		try {
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet();
@@ -45,7 +46,9 @@ public class Connection {
 
 			if (statusCode != HttpStatus.SC_OK) {
 				Log.i("what?", "Error");
-				return;
+				Shuttle s = new Shuttle(); // 초기화는 그대로
+				ShuttleArr.add(s);
+				return ShuttleArr;
 			}
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -77,12 +80,12 @@ public class Connection {
 			}
 			busarr.add(st);
 			ShuttleArr = busArrayMake(busarr.size(), busarr);
-
 		} catch (Exception e) {
 			Log.i("internet connecting fail", ""+e.toString());
 			Shuttle s = new Shuttle(); // 초기화는 그대로
 			ShuttleArr.add(s);
 		}
+		return ShuttleArr;
 	}
 
 	private ArrayList<Shuttle> busArrayMake(int r, ArrayList<String> list) // change)

@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import univ.sm.R;
+
+import static android.R.id.list;
 
 /**
  * Created by uaer on 2017-01-13.
@@ -84,5 +87,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 indx=(TextView)itemView.findViewById(R.id.indx_reverse);
             }
         }
+    }
+    public void clear(){
+        items.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(List<Shuttle> list){
+        items.clear();
+        items.addAll(list);
+        notifyDataSetChanged();
     }
 }

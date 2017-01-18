@@ -27,11 +27,14 @@ import android.widget.TextView;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
+import univ.sm.data.Shuttle;
 import univ.sm.data.SplashData;
 
 /**
@@ -47,6 +50,8 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     int roatationDegree_change = 0;
     Context context;
 
+    ArrayList<Shuttle> changeTemp ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,21 +61,26 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
         /*Recycle view에 대한 설정*/
         //changeShuttleArr(0,Const.OPPOSIT);
+
+        changeTemp = Connection.positionShuttleArr[0];
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,Connection.positionShuttleArr[0], Const.OPPOSIT);
+        ra = new RecyclerAdapter(context,changeTemp, Const.OPPOSIT);
         recyclerView.setAdapter(ra);
     }
     RecyclerAdapter ra;
     private void changeShuttleArr(int ShuttleIdex,int const_direction){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        //recyclerView.invalidate();
-        System.out.println("ShuttleIdex:::::::"+ShuttleIdex);
-        //ra = new RecyclerAdapter(context,Connection.positionShuttleArr[ShuttleIdex], const_direction);
-        ra.setItems(Connection.positionShuttleArr[ShuttleIdex]);
-        ra.notifyDataSetChanged();
-        recyclerView.setAdapter(ra);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        //recyclerView.setLayoutManager(layoutManager);
+        //ra.setItems(Connection.positionShuttleArr[ShuttleIdex]);
+        //recyclerView.setAdapter(ra);
+        //changeTemp = Connection.positionShuttleArr[ShuttleIdex];
+        changeTemp = Connection.positionShuttleArr[ShuttleIdex];
+        System.out.println("::::::::::"+changeTemp.size());
+        //ra.clear();
+        ra.addAll(changeTemp);
+        //ra = new RecyclerAdapter(context,changeTemp, const_direction);
+
     }
 
 
@@ -121,18 +131,22 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         /*평일 기능*/
         if(v.getId() == R.id.sch_detail_weekDay){
             moveImageBar(v);
+            startThread(this,0);
+            //changeShuttleArr(0,Const.OPPOSIT);
             /*토요일 기능*/
         }else if(v.getId() == R.id.sch_detail_satureDay){
             moveImageBar(v);
-            changeShuttleArr(7,Const.OPPOSIT);
+            startThread(this,7);
+            //changeShuttleArr(7,Const.OPPOSIT);
             /*일요일 기능*/
         }else if(v.getId() == R.id.sch_detail_sunDay) {
             moveImageBar(v);
-            changeShuttleArr(8,Const.OPPOSIT);
+            startThread(this,8);
+            //changeShuttleArr(8,Const.OPPOSIT);
             /*빨리찾기 기능 구현*/
         }else if(v.getId() == R.id.quickBtn){
             roatationDegree_quick += 360;
@@ -150,6 +164,15 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    public void startThread(SchDetail schDetail,final int indx){
+        schDetail.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                changeShuttleArr(indx,Const.OPPOSIT);
+            }
+        });
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -159,4 +182,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
+
 }
