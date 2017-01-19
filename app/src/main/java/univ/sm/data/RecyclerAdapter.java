@@ -92,8 +92,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         items.clear();
         notifyDataSetChanged();
     }
-    public void addAll(List<Shuttle> list){
-        items.clear();
+    public void addAll(ArrayList<Shuttle> list){
         items.addAll(list);
         notifyDataSetChanged();
     }

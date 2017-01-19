@@ -15,7 +15,7 @@ import univ.sm.data.Shuttle;
 import univ.sm.data.SplashData;
 
 public class Splash extends Activity {
-
+    public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -48,6 +48,7 @@ public class Splash extends Activity {
                 Connection getBusArray = new Connection(url);
                 if (i != SplashData.busUrl.length - 1) {
                     Connection.positionShuttleArr[i] = getBusArray.HttpConnect();
+                    positionShuttleArr[i] = getBusArray.HttpConnect();
                     //Connection.positionShuttleArr[i] = getBusArray.getBusArray();
                     if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
                         break;

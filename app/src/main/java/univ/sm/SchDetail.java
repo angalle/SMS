@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import univ.sm.connect.Connection;
@@ -36,6 +37,8 @@ import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.Shuttle;
 import univ.sm.data.SplashData;
+
+import static univ.sm.Splash.positionShuttleArr;
 
 /**
  * Created by heesun on 2016-12-13.
@@ -50,7 +53,8 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     int roatationDegree_change = 0;
     Context context;
 
-    ArrayList<Shuttle> changeTemp ;
+    ArrayList<Shuttle>[] changeTemp= Splash.positionShuttleArr;
+    RecyclerAdapter ra;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,29 +62,21 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.sch_detail);
         initView();
         context = getApplicationContext();
-
+        //changeTemp = Splash.positionShuttleArr.clone();
+        //System.arraycopy(Splash.positionShuttleArr, 0, changeTemp, 0, Splash.positionShuttleArr.length);
         /*Recycle view에 대한 설정*/
         //changeShuttleArr(0,Const.OPPOSIT);
-
-        changeTemp = Connection.positionShuttleArr[0];
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,changeTemp, Const.OPPOSIT);
+        ra = new RecyclerAdapter(context,changeTemp[0], Const.OPPOSIT);
+        //ra.addAll(changeTemp[0]);
         recyclerView.setAdapter(ra);
+        changeShuttleArr(0,0);
     }
-    RecyclerAdapter ra;
-    private void changeShuttleArr(int ShuttleIdex,int const_direction){
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        //recyclerView.setLayoutManager(layoutManager);
-        //ra.setItems(Connection.positionShuttleArr[ShuttleIdex]);
-        //recyclerView.setAdapter(ra);
-        //changeTemp = Connection.positionShuttleArr[ShuttleIdex];
-        changeTemp = Connection.positionShuttleArr[ShuttleIdex];
-        System.out.println("::::::::::"+changeTemp.size());
-        //ra.clear();
-        ra.addAll(changeTemp);
-        //ra = new RecyclerAdapter(context,changeTemp, const_direction);
 
+    private void changeShuttleArr(int ShuttleIdex,int const_direction){
+        ra = new RecyclerAdapter(context,changeTemp[ShuttleIdex], Const.OPPOSIT);
+        recyclerView.setAdapter(ra);
     }
 
 
