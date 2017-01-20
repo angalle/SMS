@@ -52,15 +52,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             item = items.get(0);
             pivotTime=item.getB()[0];
             startTitle=item.getB()[0];
-            middleTitle=item.getB()[2];
-            endTitle=item.getB()[4];
+            middleTitle=item.getB()[1];
+            endTitle=item.getB()[2];
             item = items.get(position+1);
         }
         holder.indx.setText(item.getNo());
         holder.pivotTime.setText(item.getB()[0]);
-        holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
-        holder.textSchduleSecond.setText(item.getB()[2]+" "+middleTitle);
-        holder.textSchduleThird.setText(item.getB()[4]+" "+endTitle);
+        if(directionFlag == 0){
+            holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
+            holder.textSchduleSecond.setText(item.getB()[1]+" "+middleTitle);
+            holder.textSchduleThird.setText(item.getB()[2]+" "+endTitle);
+        }else{
+            holder.textSchduleFirst.setText(startTitle+" "+item.getB()[0]);
+            holder.textSchduleSecond.setText(middleTitle+" "+item.getB()[1]);
+            holder.textSchduleThird.setText(endTitle+" "+item.getB()[2]);
+        }
     }
 
     @Override

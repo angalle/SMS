@@ -2,7 +2,7 @@
 <resources>
     <string-array name="destination">
         <item>Cheonan Station</item>
-        <item>KTX Station</item>
+        <item>Terminal</item>
         <item>Onyang</item>
     </string-array>
 </resources>

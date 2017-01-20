@@ -5,7 +5,9 @@ import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,8 +55,16 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     int roatationDegree_change = 0;
     Context context;
 
-    ArrayList<Shuttle>[] changeTemp= Splash.positionShuttleArr;
+    ArrayList<int[]> STATION;
+    ArrayList<Shuttle>[] changeTemp;
     RecyclerAdapter ra;
+
+    /*TERMINAL_C // ONYANG_C*/
+    int STATION_FLAG = Const.CHEONANSTATION_C;
+    /*SATURDAY // SUNDAY*/
+    int DAY_FLAG = Const.WEEKDAY;
+    /* OPPOSIT REVERSE*/
+    int DIRECTION_FLAG = Const.OPPOSIT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,25 +72,19 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.sch_detail);
         initView();
         context = getApplicationContext();
-        //changeTemp = Splash.positionShuttleArr.clone();
-        //System.arraycopy(Splash.positionShuttleArr, 0, changeTemp, 0, Splash.positionShuttleArr.length);
-        /*Recycle view에 대한 설정*/
-        //changeShuttleArr(0,Const.OPPOSIT);
+        changeTemp= Connection.positionShuttleArr;
+
+        STATION = new ArrayList<>();
+        /*역 관련 상수 초기화*/
+        STATION.add(Const.CHEONANSTATION);
+        STATION.add(Const.TERMINAL);
+        STATION.add(Const.ONYANG);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,changeTemp[0], Const.OPPOSIT);
-        //ra.addAll(changeTemp[0]);
-        recyclerView.setAdapter(ra);
-        changeShuttleArr(0,0);
-    }
-
-    private void changeShuttleArr(int ShuttleIdex,int const_direction){
-        ra = new RecyclerAdapter(context,changeTemp[ShuttleIdex], Const.OPPOSIT);
+        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
         recyclerView.setAdapter(ra);
     }
-
-
-
     /*주말선택의 빨간바를 이동하는 함수*/
     private void moveImageBar(View v){
         /* 이동해야할 x좌표 */
@@ -99,7 +103,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         schDetailSunDay = (TextView) findViewById(R.id.sch_detail_sunDay);
         destination = (Spinner) findViewById(R.id.destination);
 
-
+        /* 역방향 기능 빨리찾기 기능 */
         quickBtn = (ImageView) findViewById(R.id.quickBtn);
         changeDirection = (ImageView) findViewById(R.id.changeDirection);
 
@@ -120,10 +124,24 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
     }
 
+    /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
     @Override
     public void onGlobalLayout() {
         schDetailTopBar.setX(schDetailWeekDay.getX());
         schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
+        removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
+    }
+
+    /*GlobalLayout을 사용할때 계속 호출 되는 경우가 있는데 Listener를 remove 시켜줘야 계속 호출이 반복되지 않음.*/
+    private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
+        if (observer == null) {
+            return ;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            observer.removeGlobalOnLayoutListener(listener);
+        } else {
+            observer.removeOnGlobalLayoutListener(listener);
+        }
     }
 
     @Override
@@ -131,54 +149,63 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         /*평일 기능*/
         if(v.getId() == R.id.sch_detail_weekDay){
             moveImageBar(v);
-            startThread(this,0);
-            //changeShuttleArr(0,Const.OPPOSIT);
+            DAY_FLAG = Const.WEEKDAY;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             /*토요일 기능*/
         }else if(v.getId() == R.id.sch_detail_satureDay){
             moveImageBar(v);
-            startThread(this,7);
-            //changeShuttleArr(7,Const.OPPOSIT);
+            DAY_FLAG = Const.SATUREDAY;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
             /*일요일 기능*/
         }else if(v.getId() == R.id.sch_detail_sunDay) {
             moveImageBar(v);
-            startThread(this,8);
-            //changeShuttleArr(8,Const.OPPOSIT);
+            DAY_FLAG = Const.SUNDAY;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
             /*빨리찾기 기능 구현*/
         }else if(v.getId() == R.id.quickBtn){
-            roatationDegree_quick += 360;
-            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotation", roatationDegree_quick).setDuration(500);
+            roatationDegree_quick += 720;
+            ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotation", roatationDegree_quick).setDuration(1000);
             rotation.setRepeatCount(Animation.ABSOLUTE);
             rotation.start();
+
+            findQuickTime();
             /*반대방향 구현*/
         }else if(v.getId() == R.id.changeDirection){
             roatationDegree_change += 180;
             ObjectAnimator rotation = ObjectAnimator.ofFloat(v,"rotationY", roatationDegree_change).setDuration(500);
             rotation.setRepeatCount(Animation.ABSOLUTE);
             rotation.start();
-        }else if(v.getId() == R.id.destination ){
 
+            if(DIRECTION_FLAG == Const.OPPOSIT){
+                DIRECTION_FLAG = Const.REVERSE;
+            }else{
+                DIRECTION_FLAG = Const.OPPOSIT;
+            }
+            changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
         }
     }
 
-    public void startThread(SchDetail schDetail,final int indx){
-        schDetail.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                changeShuttleArr(indx,Const.OPPOSIT);
-            }
-        });
+    private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+        STATION_FLAG =staionIndex;
+        DAY_FLAG = dayIndex;
+        DIRECTION_FLAG = const_direction;
+        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+        recyclerView.setAdapter(ra);
+    }
+
+    private void findQuickTime(){
+        /*Todo : 가장빠른 시간을 가져오기*/
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        STATION_FLAG = position;
+        changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
 
 }

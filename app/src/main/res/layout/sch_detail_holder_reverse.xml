@@ -6,38 +6,43 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:weightSum="12"
+        android:gravity="right"
         tools:layout_height="wrap_content"
         android:layout_height="100dp">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="right"
+            android:layout_gravity="right"
             android:orientation="vertical"
             android:layout_weight="9"
             android:layout_marginRight="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:minWidth="180dp"
+                android:gravity="right"
                 android:id="@+id/textSchduleFirst_reverse"
                 android:text="textSchduleFirst"
                 android:textColor="#e16175"
                 android:padding="5dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:id="@+id/textSchduleSecond_reverse"
                 android:text="textSchduleSecond"
                 android:textColor="#e16175"
                 android:padding="5dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:id="@+id/textSchduleThird_reverse"
                 android:text="textSchduleThird"
                 android:textColor="#e16175"
@@ -48,6 +53,7 @@
         <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="60dp"
+            android:layout_weight="1"
             android:gravity="center_horizontal">
 
             <ImageView
@@ -69,18 +75,17 @@
 
         <LinearLayout
             android:layout_width="50dp"
-            android:layout_weight="2"
             android:orientation="vertical"
-            android:weightSum="5"
+            android:layout_gravity="right"
+            android:layout_weight="1"
             android:layout_height="100dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/pivotTime_reverse"
                 android:text="time"
                 android:textColor="#e16175"
                 android:gravity="bottom|center"
-                android:layout_weight="0.5"
-                android:paddingLeft="10dp"/>
+                android:paddingRight="10dp"/>
         </LinearLayout>
 </LinearLayout>

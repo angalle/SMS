@@ -37,7 +37,8 @@
                 <ImageView
                     android:layout_height="match_parent"
                     android:src="@drawable/weekbar_select"
-                    android:layout_width="100dp"
+                    android:layout_width="92dp"
+
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:layout_centerVertical="true"
@@ -183,14 +184,38 @@
             </LinearLayout>
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            >
 
-        <ImageView
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/quick_bakcground"
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:adjustViewBounds="false" />
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/quick_btn"
+                android:id="@+id/quickBtn"
+                android:layout_centerVertical="true"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="false"
+                android:paddingBottom="5dp" />
+
+        </RelativeLayout>
+        <!--<ImageView
             android:layout_centerHorizontal="true"
             android:src="@drawable/quick_btn"
             android:id="@+id/quickBtn"
             android:layout_height="80dp"
             android:layout_width="80dp"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true" />-->
     </RelativeLayout>
 
 </LinearLayout>

@@ -4,52 +4,63 @@
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:padding="5dp"
     android:gravity="center"
+    android:background="#f1f1f2"
     android:weightSum="5">
 
-         <TextView
+     <TextView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:id="@+id/detail_one"
-        android:textSize="20dp"
+        android:gravity="center"
+        android:id="@+id/entry_one"
+        android:textSize="15dp"
+        android:textColor="#000000"
         android:text="10:00"
         android:layout_weight="1"/>
 
-         <TextView
+     <TextView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-         android:id="@+id/detail_two"
-        android:textSize="20dp"
+        android:gravity="center"
+        android:id="@+id/entry_two"
+        android:textColor="#000000"
+        android:textSize="15dp"
         android:text="10:00"
         android:layout_weight="1"/>
 
-        <TextView
+    <TextView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:id="@+id/detail_three"
-        android:textSize="20dp"
+        android:id="@+id/entry_three"
+        android:gravity="center"
+            android:textColor="#000000"
+        android:textSize="15dp"
         android:text="10:00"
         android:layout_weight="1"/>
 
-        <TextView
+    <TextView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:id="@+id/detail_four"
-        android:textSize="20dp"
+        android:id="@+id/entry_four"
+        android:gravity="center"
+            android:textColor="#000000"
+        android:textSize="15dp"
         android:text="10:00"
         android:layout_weight="1"/>
 
-        <TextView
+    <TextView
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:id="@+id/detail_five"
-        android:textSize="20dp"
+        android:id="@+id/entry_five"
+            android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="15dp"
         android:text="10:00"
         android:layout_weight="1"/>
 </LinearLayout>

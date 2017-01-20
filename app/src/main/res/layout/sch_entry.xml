@@ -116,7 +116,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/detail_btn"
                     android:adjustViewBounds="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/detail_btn"/>
             </LinearLayout>
 
@@ -138,14 +138,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/sch_entry_list"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
         </android.support.v7.widget.RecyclerView>
 
