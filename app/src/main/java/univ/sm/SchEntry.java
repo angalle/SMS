@@ -7,9 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +38,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
     RecyclerView recyclerView;
     EntryRecyclerAdapter ra;
 
+    LinearLayout animationBox;
     ArrayList<int[]> STATION;
     /*TERMINAL_C // ONYANG_C*/
     int STATION_FLAG = Const.CHEONANSTATION_C;
@@ -76,6 +83,13 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
             moveImageBar(v);
         } else if (v.getId() == R.id.detail_btn) {
             /*Todo : 애니매이션..................구현..............................................*/
+            ViewGroup.LayoutParams params = animationBox.getLayoutParams();
+            // Changes the height and width to the specified *pixels*
+            params.height = 600;
+            //params.width = 100;
+            animationBox.setLayoutParams(params);
+            //Animation ani =
+            //animationBox.setAnimation();
         }
     }
     /*주말선택의 빨간바를 이동하는 함수*/
@@ -109,6 +123,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         schDetailSunDay = (TextView) findViewById(R.id.sch_entry_sunDay);
         detail_btn = (ImageView) findViewById(R.id.detail_btn);
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
+        animationBox = (LinearLayout) findViewById(R.id.animationBox);
         /* 각 버튼 마다 이벤트 리스너*/
         schDetailWeekDay.setOnClickListener(this);
         schDetailSatureDay.setOnClickListener(this);
