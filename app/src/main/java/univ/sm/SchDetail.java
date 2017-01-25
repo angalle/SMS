@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -195,6 +196,20 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
     private void findQuickTime(){
         /*Todo : 가장빠른 시간을 가져오기*/
+        //recyclerView.getChildAt(ra.getMostFastIndex()).setBackgroundColor(Color.parseColor("#f7f7f7"));
+        //recyclerView.getChildAt(ra.getMostFastIndex() - 4).setBackgroundColor(Color.parseColor("#f7f7f7"));
+        recyclerView.smoothScrollToPosition(ra.getMostFastIndex());
+
+        System.out.println("tt::::::"+ra.getItemId(ra.getMostFastIndex()));
+        System.out.println("tt::::::"+ra.getMostFastIndex());
+
+
+        recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
+        //recyclerView.findViewHolderForItemId(ra.getItemId(ra.getMostFastIndex())).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));;
+
+
+        //recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
+        /*recyclerView.getChildAt(0).setBackgroundColor(Color.parseColor("#f7f7f7"));*/
     }
 
     @Override

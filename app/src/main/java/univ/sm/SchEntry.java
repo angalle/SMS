@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.github.aakira.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
@@ -31,14 +35,19 @@ import univ.sm.data.Shuttle;
  */
 
 public class SchEntry extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
-    TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay;
-    ImageView schDetailTopBar,  detail_btn;
+    TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang;
+    ImageView schDetailTopBar,  detail_btn, top_btn;
     Context context;
     ArrayList<Shuttle>[] changeTemp;
     RecyclerView recyclerView;
     EntryRecyclerAdapter ra;
 
-    LinearLayout animationBox;
+    //LinearLayout animationBox;
+    int originHeight;
+    boolean openFlag = false;
+
+    ExpandableLayout expandableLayout;
+
     ArrayList<int[]> STATION;
     /*TERMINAL_C // ONYANG_C*/
     int STATION_FLAG = Const.CHEONANSTATION_C;
@@ -51,6 +60,8 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_entry);
         initView();
+
+
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
 
@@ -82,15 +93,27 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             moveImageBar(v);
         } else if (v.getId() == R.id.detail_btn) {
-            /*Todo : 애니매이션..................구현..............................................*/
-            ViewGroup.LayoutParams params = animationBox.getLayoutParams();
-            // Changes the height and width to the specified *pixels*
-            params.height = 600;
-            //params.width = 100;
-            animationBox.setLayoutParams(params);
-            //Animation ani =
-            //animationBox.setAnimation();
+            if(openFlag){
+                expandableLayout.collapse();
+                openFlag = false;
+            }else if(!openFlag){
+                expandableLayout.expand();
+                openFlag = true;
+            }
+        }else if (v.getId() == R.id.KTX) {
+            STATION_FLAG = Const.CHEONANSTATION_C;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+        } else if (v.getId() == R.id.Terminal) {
+            STATION_FLAG = Const.TERMINAL_C;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+        } else if (v.getId() == R.id.Onyang) {
+            STATION_FLAG = Const.ONYANG_C;
+            changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+        } else if(v.getId() == R.id.top_btn){
+            recyclerView.scrollToPosition(0);
         }
+
+
     }
     /*주말선택의 빨간바를 이동하는 함수*/
     private void moveImageBar(View v){
@@ -123,12 +146,23 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         schDetailSunDay = (TextView) findViewById(R.id.sch_entry_sunDay);
         detail_btn = (ImageView) findViewById(R.id.detail_btn);
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
-        animationBox = (LinearLayout) findViewById(R.id.animationBox);
+        top_btn = (ImageView) findViewById(R.id.top_btn);
+
+        KTX = (TextView) findViewById(R.id.KTX);
+        Terminal = (TextView) findViewById(R.id.Terminal);
+        Onyang = (TextView) findViewById(R.id.Onyang);
+        //animationBox = (LinearLayout) findViewById(R.id.animationBox);
+        expandableLayout = (ExpandableLayout)findViewById(R.id.expandableLayout);
         /* 각 버튼 마다 이벤트 리스너*/
         schDetailWeekDay.setOnClickListener(this);
         schDetailSatureDay.setOnClickListener(this);
         schDetailSunDay.setOnClickListener(this);
         detail_btn.setOnClickListener(this);
+        top_btn.setOnClickListener(this);
+
+        KTX.setOnClickListener(this);
+        Terminal.setOnClickListener(this);
+        Onyang.setOnClickListener(this);
 
         /* 기본좌표 재 설정 / xml 상에서 정확한 좌표를 표시 할 수 없음*/
         schDetailTopBar = (ImageView) findViewById(R.id.sch_entry_top_bar);
@@ -137,6 +171,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     public void onGlobalLayout() {
+        //originHeight = animationBox.getHeight();
         schDetailTopBar.setX(schDetailWeekDay.getX());
         schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
         removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
@@ -148,5 +183,9 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         DIRECTION_FLAG = const_direction;
         ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
         recyclerView.setAdapter(ra);
+
+        //접혔다 폈다하는 레이아웃 동작/변수
+        expandableLayout.collapse();
+        openFlag = false;
     }
 }

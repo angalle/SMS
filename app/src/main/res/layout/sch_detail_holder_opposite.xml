@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:weightSum="12"
+        android:id="@+id/background_opposite"
         tools:layout_height="wrap_content"
         android:layout_height="100dp">
 
@@ -58,12 +59,11 @@
             android:layout_height="match_parent"
             android:gravity="left"
             android:orientation="vertical"
-            android:paddingLeft="0dp"
             android:layout_weight="9"
             android:layout_marginLeft="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:id="@+id/textSchduleFirst_opposite"
@@ -72,7 +72,7 @@
                 android:padding="5dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textSchduleSecond_opposite"
                 android:text="textSchduleSecond"
@@ -80,7 +80,7 @@
                 android:padding="5dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textSchduleThird_opposite"
                 android:text="textSchduleThird"

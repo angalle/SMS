@@ -7,6 +7,7 @@
         android:orientation="horizontal"
         android:weightSum="12"
         android:gravity="right"
+        android:id="@+id/background_reverse"
         tools:layout_height="wrap_content"
         android:layout_height="100dp">
 

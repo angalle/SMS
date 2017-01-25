@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.4"
+        android:layout_weight="6.2"
         android:layout_gravity="center_vertical">
 
         <ImageView
@@ -37,8 +37,8 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/weekbar_select"
                     android:layout_width="100dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_centerVertical="true"
                     android:id="@+id/sch_entry_top_bar"
                     android:adjustViewBounds="true" />
@@ -86,34 +86,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.9"
+        android:layout_weight="1.5"
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         android:background="#FFFFFF"
         android:layout_marginRight="20dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3.1"
-            android:orientation="horizontal"
-            android:background="@drawable/sch_header"
-            android:id="@+id/animationBox"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/titlelayoutcorner"
             android:gravity="center_vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AsanCampus"
-                    android:textSize="25dp"
+                    android:text="Asan\nCampus"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:paddingLeft="20dp"/>
+                    android:paddingLeft="30dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="right|center_vertical">
 
@@ -126,70 +127,85 @@
                         android:id="@+id/detail_btn"/>
                 </LinearLayout>
             </LinearLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/expandableLayout"
+                android:padding="5dp"
+                android:layout_weight="0">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/layoutcorner"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#58595b"
+                        android:textStyle="bold"
+                        android:id="@+id/KTX"
+                        android:text="@string/KTX"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#58595b"
+                        android:textStyle="bold"
+                        android:id="@+id/Terminal"
+                        android:text="@string/Terminal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#58595b"
+                        android:textStyle="bold"
+                        android:id="@+id/Onyang"
+                        android:text="@string/Onyang"/>
 
+                </LinearLayout>
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:background="#4fb2b3"
-            android:visibility="gone"
-            android:gravity="center"
-            android:padding="10dp">
 
-            <TextView
+
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="@string/KTX"/>
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="@string/Terminal"/>
+                android:src="@drawable/sch_detail_cheonan"
+                android:adjustViewBounds="false"
+                android:layout_gravity="center_horizontal" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="@string/Onyang"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/sch_entry_list"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
-        </LinearLayout>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/sch_detail_cheonan"
-            android:adjustViewBounds="false"
-            android:layout_gravity="center_horizontal" />
-
+            </android.support.v7.widget.RecyclerView>
     </LinearLayout>
     <!-- center -->
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
+        android:layout_weight="1.7"
         android:orientation="vertical"
         android:background="#FFFFFF"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/sch_entry_list"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
 
-        </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
     <!--    footer  -->
@@ -206,6 +222,14 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="30dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#FFFFFF"
+                    android:layout_height="30dp">
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -219,6 +243,7 @@
         <ImageView
             android:layout_centerHorizontal="true"
             android:src="@drawable/top_btn"
+            android:id="@+id/top_btn"
             android:layout_height="80dp"
             android:layout_width="80dp" />
     </RelativeLayout>
