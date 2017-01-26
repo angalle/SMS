@@ -1,29 +1,49 @@
 package univ.sm;
 
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.IconPagerAdapter;
+
 import java.util.Random;
+
+import univ.sm.data.ModelObject;
+import univ.sm.data.TestFragment;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
 public class DialogViewAdapter extends PagerAdapter {
+    private Context mContext;
 
-    private final Random random = new Random();
-    private int mSize;
-    public DialogViewAdapter() {
-        this.mSize = 3;
+    public DialogViewAdapter(Context context) {
+        mContext = context;
     }
-    public DialogViewAdapter(int mSize) {
-        this.mSize = mSize;
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        ModelObject modelObject = ModelObject.values()[position];
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), container, false);
+        container.addView(layout);
+        return layout;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
     }
 
     @Override
     public int getCount() {
-        return mSize;
+        return ModelObject.values().length;
     }
 
     @Override
@@ -32,24 +52,8 @@ public class DialogViewAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-       container.removeView((View) object);
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        return super.instantiateItem(container, position);
-    }
-
-    public void addItem() {
-        mSize++;
-        notifyDataSetChanged();
-    }
-
-    public void removeItem() {
-        mSize--;
-        mSize = mSize < 0 ? 0 : mSize;
-
-        notifyDataSetChanged();
+    public CharSequence getPageTitle(int position) {
+        ModelObject customPagerEnum = ModelObject.values()[position];
+        return customPagerEnum.getTitleResId();
     }
 }
