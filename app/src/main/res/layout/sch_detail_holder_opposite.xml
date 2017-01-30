@@ -11,8 +11,8 @@
         android:layout_height="100dp">
 
         <LinearLayout
-            android:layout_width="50dp"
-            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_weight="0.1"
             android:orientation="vertical"
             android:weightSum="5"
             android:layout_height="100dp">
@@ -20,10 +20,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/pivotTime_opposite"
+                android:textSize="18dp"
                 android:text="time"
                 android:textColor="#e16175"
-                android:gravity="bottom|center"
+                android:gravity="top|center"
                 android:layout_weight="0.5"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"/>
         </LinearLayout>
 
@@ -48,7 +50,7 @@
                     android:text="1"
                     android:textColor="#FFFFFF"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center" />
             </RelativeLayout>
 
@@ -59,12 +61,13 @@
             android:layout_height="match_parent"
             android:gravity="left"
             android:orientation="vertical"
-            android:layout_weight="9"
+            android:layout_weight="11"
             android:layout_marginLeft="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:gravity="left"
                 android:id="@+id/textSchduleFirst_opposite"
                 android:text="textSchduleFirst"

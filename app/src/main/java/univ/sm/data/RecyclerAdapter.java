@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -61,6 +64,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Shuttle item = items.get(position+1);
         if(position == 0){
@@ -72,14 +80,45 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             item = items.get(position+1);
         }
         holder.indx.setText(item.getNo());
-        holder.pivotTime.setText(item.getB()[0]);
+        String tempPivotTime="";
+        if(item.getB()[0].length() < 5){
+            tempPivotTime = item.getB()[0];
+        }else{
+            tempPivotTime = item.getB()[0].substring(0,5);
+        }
+        holder.pivotTime.setText(tempPivotTime);
+
+        DateFormat df = new SimpleDateFormat("H:mm");
+        String tempMiddleTime="";
+        if("10분".equals(item.getB()[1])){
+            try {
+                Date date = df.parse(item.getB()[0]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.MINUTE,10);
+                tempMiddleTime = df.format(cal.getTime());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }else if("10분 ".equals(item.getB()[1])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }else if(" 10분 ".equals(item.getB()[1])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }else if("10분".equals(item.getB()[1])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }else{
+            tempMiddleTime = item.getB()[1];
+        }
+
         if(directionFlag == 0){
             holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
-            holder.textSchduleSecond.setText(item.getB()[1]+" "+middleTitle);
+            holder.textSchduleSecond.setText(tempMiddleTime+" "+middleTitle);
             holder.textSchduleThird.setText(item.getB()[2]+" "+endTitle);
         }else{
             holder.textSchduleFirst.setText(startTitle+" "+item.getB()[0]);
-            holder.textSchduleSecond.setText(middleTitle+" "+item.getB()[1]);
+            holder.textSchduleSecond.setText(middleTitle+" "+tempMiddleTime);
             holder.textSchduleThird.setText(endTitle+" "+item.getB()[2]);
         }
     }
@@ -130,12 +169,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         for(int i=0; i < temp.size();i++){
 
             if(compare_time > temp.get(i)){
-                System.out.println("compare_time:::::"+compare_time+"temp.get("+i+")"+temp.get(i));
                 index = i;
                 //break;
             }
         }
-        System.out.println("index:::::"+index);
         return index;
     }
     /*스트링형을 인트형으로 변환한 배열 반환*/

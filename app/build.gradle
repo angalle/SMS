@@ -46,6 +46,7 @@ dependencies {
 
     //font
     compile 'com.tsengvn:Typekit:1.0.0'
+    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
 
     //expandable layout
     compile 'com.github.aakira:expandable-layout:1.6.0@aar'

@@ -202,9 +202,13 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
         System.out.println("tt::::::"+ra.getItemId(ra.getMostFastIndex()));
         System.out.println("tt::::::"+ra.getMostFastIndex());
+        System.out.println("tt0::::::"+recyclerView.getChildAt(0).getId());
+        System.out.println("tt1::::::"+recyclerView.getChildAt(2).getId());
+        System.out.println("tt2::::::"+recyclerView.getChildAt(3).getId());
 
 
-        recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
+        //recyclerView.getLayoutManager().findViewByPosition(0).setBackgroundColor(Color.parseColor("#f7f7f7"));
+        //recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
         //recyclerView.findViewHolderForItemId(ra.getItemId(ra.getMostFastIndex())).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));;
 
 

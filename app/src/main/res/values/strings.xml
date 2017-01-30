@@ -25,4 +25,6 @@
     <string name="KTX">KTX station</string>
     <string name="Terminal">Terminal station</string>
     <string name="Onyang">Onyang station</string>
+
+    <string name="AsanCampus">Asan\nCampus</string>
 </resources>

@@ -36,7 +36,7 @@ import univ.sm.data.Shuttle;
 
 public class SchEntry extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
     TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang;
-    ImageView schDetailTopBar,  detail_btn, top_btn;
+    ImageView schDetailTopBar,  detail_btn, top_btn, imgDestination;
     Context context;
     ArrayList<Shuttle>[] changeTemp;
     RecyclerView recyclerView;
@@ -102,12 +102,15 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
             }
         }else if (v.getId() == R.id.KTX) {
             STATION_FLAG = Const.CHEONANSTATION_C;
+            imgDestination.setImageResource(R.drawable.sch_detail_cheonan);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
         } else if (v.getId() == R.id.Terminal) {
             STATION_FLAG = Const.TERMINAL_C;
+            imgDestination.setImageResource(R.drawable.sch_detail_terminal);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
         } else if (v.getId() == R.id.Onyang) {
             STATION_FLAG = Const.ONYANG_C;
+            imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
         } else if(v.getId() == R.id.top_btn){
             recyclerView.scrollToPosition(0);
@@ -147,6 +150,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         detail_btn = (ImageView) findViewById(R.id.detail_btn);
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
         top_btn = (ImageView) findViewById(R.id.top_btn);
+        imgDestination = (ImageView) findViewById(R.id.imgDestination);
 
         KTX = (TextView) findViewById(R.id.KTX);
         Terminal = (TextView) findViewById(R.id.Terminal);
@@ -159,6 +163,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         schDetailSunDay.setOnClickListener(this);
         detail_btn.setOnClickListener(this);
         top_btn.setOnClickListener(this);
+
 
         KTX.setOnClickListener(this);
         Terminal.setOnClickListener(this);

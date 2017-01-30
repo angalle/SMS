@@ -40,11 +40,16 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Shuttle item = items.get(position+1);
-        holder.entry_one.setText(item.getB()[0]);
-        holder.entry_two.setText(item.getB()[1]);
-        holder.entry_three.setText(item.getB()[2]);
-        holder.entry_four.setText(item.getB()[3]);
-        holder.entry_five.setText(item.getB()[4]);
+        String[] tempTime = new String[5];
+        for(int i =0; i<5; i++){
+            tempTime[i] = item.getB()[i].replace("(금Ⅹ)","\n(금Ⅹ)");
+
+        }
+        holder.entry_one.setText(tempTime[0]);
+        holder.entry_two.setText(tempTime[1]);
+        holder.entry_three.setText(tempTime[2]);
+        holder.entry_four.setText(tempTime[3]);
+        holder.entry_five.setText(tempTime[4]);
 
     }
 

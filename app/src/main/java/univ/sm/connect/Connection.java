@@ -105,25 +105,25 @@ public class Connection {
 					if (list.get(y).charAt(i) == ' ') {
 						switch (arryrows) {
 						case 0:
-							s.No = test;
+							s.No = filter(test);
 							break;
 						case 1:
-							s.b[0] = test;
+							s.b[0] = filter(test);
 							break;
 						case 2:
-							s.b[1] = test;
+							s.b[1] = filter(test);
 							break;
 						case 3:
-							s.b[2] = test;
+							s.b[2] = filter(test);
 							break;
 						case 4:
-							s.b[3] = test;
+							s.b[3] = filter(test);
 							break;
 						case 5:
-							s.b[4] = test;
+							s.b[4] = filter(test);
 							break;
 						case 6:
-							s.b[5] = test;
+							s.b[5] = filter(test);
 							break;
 						}
 						test = "";
@@ -179,5 +179,10 @@ public class Connection {
 
 		}
 		return info;
+	}
+
+	private String filter(String str){
+		str = str.replace("::",":");
+		return str;
 	}
 }
