@@ -81,46 +81,61 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
         holder.indx.setText(item.getNo());
         String tempPivotTime="";
-        if(item.getB()[0].length() < 5){
-            tempPivotTime = item.getB()[0];
+
+        String tempMiddleTime="";
+        if(directionFlag == 0){
+            tempPivotTime = splite_5Length(item,0); //변수의 길이를 5길이까지 검사해서 자르는 메소드
+            tempMiddleTime = filter_10Min(item,1);   //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }else{
-            tempPivotTime = item.getB()[0].substring(0,5);
+            tempPivotTime = splite_5Length(item,2); //변수의 길이를 5길이까지 검사해서 자르는 메소드
+            tempMiddleTime = filter_10Min(item,3);   //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }
         holder.pivotTime.setText(tempPivotTime);
-
-        DateFormat df = new SimpleDateFormat("H:mm");
-        String tempMiddleTime="";
-        if("10분".equals(item.getB()[1])){
-            try {
-                Date date = df.parse(item.getB()[0]);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-                cal.add(Calendar.MINUTE,10);
-                tempMiddleTime = df.format(cal.getTime());
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        }else if("10분 ".equals(item.getB()[1])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }else if(" 10분 ".equals(item.getB()[1])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }else if("10분".equals(item.getB()[1])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }else{
-            tempMiddleTime = item.getB()[1];
-        }
-
         if(directionFlag == 0){
             holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
             holder.textSchduleSecond.setText(tempMiddleTime+" "+middleTitle);
             holder.textSchduleThird.setText(item.getB()[2]+" "+endTitle);
         }else{
-            holder.textSchduleFirst.setText(startTitle+" "+item.getB()[0]);
+            holder.textSchduleFirst.setText(endTitle+" "+item.getB()[2]);
             holder.textSchduleSecond.setText(middleTitle+" "+tempMiddleTime);
-            holder.textSchduleThird.setText(endTitle+" "+item.getB()[2]);
+            holder.textSchduleThird.setText(startTitle+" "+item.getB()[4]);
         }
+    }
+
+    public String filter_10Min(Shuttle item,int middleIndex){
+        String tempMiddleTime = "";
+        DateFormat df = new SimpleDateFormat("H:mm");
+        if("10분".equals(item.getB()[middleIndex])){
+            try {
+                Date date = df.parse(item.getB()[middleIndex-1]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.MINUTE,10);
+                tempMiddleTime = df.format(cal.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }/*else if("10분 ".equals(item.getB()[middleIndex])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }else if(" 10분 ".equals(item.getB()[middleIndex])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }else if("10분".equals(item.getB()[middleIndex])){
+            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
+        }*/else{
+            tempMiddleTime = item.getB()[middleIndex];
+        }
+        return tempMiddleTime;
+    }
+
+    public String splite_5Length(Shuttle item,int findIndex){
+        String tempPivotTime="";
+        if(item.getB()[findIndex].length() < 5){
+            tempPivotTime = item.getB()[findIndex];
+        }else{
+            tempPivotTime = item.getB()[findIndex].substring(0,5);
+        }
+        return tempPivotTime;
     }
 
     @Override
@@ -164,12 +179,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("HH:mm");
         //비교할 대상 str
-        int compare_time = 1250;/*Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));*/
+        int compare_time = Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));
         int index=0;
         for(int i=0; i < temp.size();i++){
 
             if(compare_time > temp.get(i)){
-                index = i;
+                index = (i == temp.size()-1) ? i : index+1;
+                //index = i;
                 //break;
             }
         }
