@@ -3,10 +3,12 @@ package univ.sm;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,22 +23,27 @@ public class Splash extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
+
+
         Thread th = new Thread(){
             @Override
             public void run() {
-                try {
-                    DataSetting();
-                    sleep(5000);
-                    Intent next = new Intent(Splash.this, MainActivity.class);
-                    startActivity(next);
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                super.run();
+                DataSetting();
             }
         };
         th.start();
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent next = new Intent(Splash.this, MainActivity.class);
+                startActivity(next);
+                finish();
+            }
+        }, 5000);
+
+
 
     }
 
@@ -58,6 +65,7 @@ public class Splash extends Activity {
                 i++;
             }
         }catch (Exception e){
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

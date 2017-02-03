@@ -199,12 +199,12 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         //recyclerView.getChildAt(ra.getMostFastIndex()).setBackgroundColor(Color.parseColor("#f7f7f7"));
         //recyclerView.getChildAt(ra.getMostFastIndex() - 4).setBackgroundColor(Color.parseColor("#f7f7f7"));
         recyclerView.smoothScrollToPosition(ra.getMostFastIndex());
-        recyclerView.setVerticalScrollbarPosition(ra.getMostFastIndex());
-        System.out.println("tt::::::"+ra.getItemId(ra.getMostFastIndex()));
-        System.out.println("tt::::::"+ra.getMostFastIndex());
-        System.out.println("tt0::::::"+recyclerView.getChildAt(0).getId());
-        System.out.println("tt1::::::"+recyclerView.getChildAt(2).getId());
-        System.out.println("tt2::::::"+recyclerView.getChildAt(3).getId());
+        //recyclerView.setVerticalScrollbarPosition(ra.getMostFastIndex());
+        //System.out.println("tt::::::"+ra.getItemId(ra.getMostFastIndex()));
+        //System.out.println("tt::::::"+ra.getMostFastIndex());
+        //System.out.println("tt0::::::"+recyclerView.getChildAt(0).getId());
+        //System.out.println("tt1::::::"+recyclerView.getChildAt(2).getId());
+        //System.out.println("tt2::::::"+recyclerView.getChildAt(3).getId());
 
 
         //recyclerView.getLayoutManager().findViewByPosition(0).setBackgroundColor(Color.parseColor("#f7f7f7"));

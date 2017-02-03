@@ -4,7 +4,7 @@ public class SplashData {
 
 	public static String register_GCM_AWS = "http://52.79.137.125:40001/register";
 
-	public static String ip = "http://52.78.113.18:40001/shuttle?where=";
+	public static String ip = "http://52.78.113.18:40002/shuttle?where=";
 	public static String bus_cheonanasan = ip + "cheonanasan"; // 0
 	public static String bus_terminal = ip + "terminal"; // 1
 	public static String bus_onyang = ip + "onyang"; // 2
