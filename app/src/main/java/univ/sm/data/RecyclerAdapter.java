@@ -1,6 +1,7 @@
 package univ.sm.data;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,16 +80,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             endTitle=item.getB()[2];
             item = items.get(position+1);
         }
-        holder.indx.setText(item.getNo());
+        //holder.indx.setText(item.getNo());
+        holder.indx.setText((position+1)+"");
         String tempPivotTime="";
 
         String tempMiddleTime="";
         if(directionFlag == 0){
-            tempPivotTime = splite_5Length(item,0); //변수의 길이를 5길이까지 검사해서 자르는 메소드
-            tempMiddleTime = filter_10Min(item,1);   //중간 인덱스의 "10분"스트링값을 치환하는 메소드
+            tempPivotTime = splite_5Length(item,0);     //변수의 길이를 5길이까지 검사해서 자르는 메소드
+            tempMiddleTime = filter_10Min(item,1);      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }else{
-            tempPivotTime = splite_5Length(item,2); //변수의 길이를 5길이까지 검사해서 자르는 메소드
-            tempMiddleTime = filter_10Min(item,3);   //중간 인덱스의 "10분"스트링값을 치환하는 메소드
+            tempPivotTime = splite_5Length(item,2);     //변수의 길이를 5길이까지 검사해서 자르는 메소드
+            tempMiddleTime = filter_10Min(item,3);      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }
         holder.pivotTime.setText(tempPivotTime);
         if(directionFlag == 0){
@@ -116,13 +118,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 e.printStackTrace();
             }
 
-        }/*else if("10분 ".equals(item.getB()[middleIndex])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }else if(" 10분 ".equals(item.getB()[middleIndex])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }else if("10분".equals(item.getB()[middleIndex])){
-            tempMiddleTime = (Integer.parseInt(item.getB()[0])+10) + "";
-        }*/else{
+        }else{
             tempMiddleTime = item.getB()[middleIndex];
         }
         return tempMiddleTime;
@@ -164,40 +160,58 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 indx=(TextView)itemView.findViewById(R.id.indx_reverse);
             }
         }
+
+        public void setBackgroundColor(){
+            if(directionFlag == 0){
+                background_opposite.setBackgroundColor(Color.parseColor("#f7f7f7"));
+            }else{
+                background_reverse.setBackgroundColor(Color.parseColor("#f7f7f7"));
+            }
+        }
     }
+
     public void clear(){
         items.clear();
         notifyDataSetChanged();
     }
+
     public void addAll(ArrayList<Shuttle> list){
         items.addAll(list);
         notifyDataSetChanged();
     }
 
     public int getMostFastIndex() {
-        ArrayList<Integer> temp = getArray_String2Integer();
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("HH:mm");
         //비교할 대상 str
-        int compare_time = 1250/*Integer.parseInt((dayTime.format(new Date(time))).replace(":",""))*/;
-        int index=0;
-        for(int i=0; i < temp.size();i++){
+        int compare_time = Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));
+        int index=0,startIndex=0;
+        Iterator<String> tempString = compareString.iterator();
 
-            if(compare_time > temp.get(i)){
-                index = (i == temp.size()-1) ? i : index+1;
-                //index = i;
-                //break;
+        /*가장 가까운 시간의 인덱스를 가져오는 방법*/
+        while(tempString.hasNext()){
+            String tempData = tempString.next().replace(":","");
+            if("*".equals(tempData)){
+                startIndex++;
+                continue;
+            }
+
+            if(compare_time > Integer.parseInt(tempData)){
+                index = (startIndex >= compareString.size()) ? compareString.size()-1 : startIndex+1;
+            }
+            startIndex++;
+        }
+
+        /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
+        while(true){
+            if("*".equals(compareString.get(index))) index++;
+            else {
+                //index++;
+                break;
             }
         }
+        System.out.println("index::::"+index);
         return index;
     }
-    /*스트링형을 인트형으로 변환한 배열 반환*/
-    public ArrayList<Integer> getArray_String2Integer() {
-        ArrayList<Integer> temp = new ArrayList<Integer>();
-        Iterator<String> tempString = compareString.iterator();
-        while(tempString.hasNext()){
-            temp.add(Integer.parseInt(tempString.next().replace(":","")));
-        }
-        return temp;
-    }
+
 }
