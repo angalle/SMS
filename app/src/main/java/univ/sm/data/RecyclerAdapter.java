@@ -107,17 +107,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public String filter_10Min(Shuttle item,int middleIndex){
         String tempMiddleTime = "";
         DateFormat df = new SimpleDateFormat("H:mm");
-        if("10분".equals(item.getB()[middleIndex])){
+        if("10분".equals(item.getB()[middleIndex])) {
             try {
-                Date date = df.parse(item.getB()[middleIndex-1]);
+                Date date = df.parse(item.getB()[middleIndex - 1]);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                cal.add(Calendar.MINUTE,10);
+                cal.add(Calendar.MINUTE, 10);
                 tempMiddleTime = df.format(cal.getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
+        }else if("15분".equals(item.getB()[middleIndex])) {
+            try {
+                Date date = df.parse(item.getB()[middleIndex - 1]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.MINUTE, 15);
+                tempMiddleTime = df.format(cal.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }else{
             tempMiddleTime = item.getB()[middleIndex];
         }
@@ -197,11 +206,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
 
             if(compare_time > Integer.parseInt(tempData)){
-                index = (startIndex >= compareString.size()) ? compareString.size()-1 : startIndex+1;
+                index = startIndex;
             }
             startIndex++;
         }
-
         /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
         while(true){
             if("*".equals(compareString.get(index))) index++;

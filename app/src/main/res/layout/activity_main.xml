@@ -20,8 +20,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_weight="2.3"
         android:weightSum="3"
         android:background="#f1f1f2"
@@ -31,8 +31,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
@@ -41,17 +41,17 @@
 
             <ImageView
                 android:src="@drawable/quick_menu_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:id="@+id/imageView"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="false"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_weight="1"
+                android:layout_weight="0.3"
                 android:text="@string/quick_menu_title"
                 android:textColor="#58595b"
                 android:textSize="11sp" />
@@ -61,8 +61,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
@@ -72,14 +72,14 @@
             <ImageView
                 android:src="@drawable/full_menu_btn"
                 android:layout_weight="4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="false"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_weight="1"
+                android:layout_weight="0.3"
                 android:text="@string/full_menu_title"
                 android:textColor="#58595b"
                 android:textSize="11sp" />
@@ -88,7 +88,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingRight="0dp"
+            android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:gravity="center"
             android:orientation="vertical"
@@ -98,17 +98,20 @@
             <ImageView
                 android:src="@drawable/question_menu_btn"
                 android:layout_weight="4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:keepScreenOn="false" />
+
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_weight="1"
+                android:layout_weight="0.3"
                 android:text="@string/question_menu_title"
                 android:textColor="#58595b"
-                android:textSize="11sp" />
+                android:textSize="10dp"
+                android:id="@+id/textView" />
         </LinearLayout>
     </LinearLayout>
 
