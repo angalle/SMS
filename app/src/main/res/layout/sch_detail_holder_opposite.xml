@@ -4,11 +4,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:weightSum="12"
         android:id="@+id/background_opposite"
-        tools:layout_height="wrap_content"
-        android:layout_height="100dp">
+        tools:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="60dp"

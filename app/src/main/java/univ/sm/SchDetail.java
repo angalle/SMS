@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.logging.Log;
 
@@ -80,6 +82,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         STATION.add(Const.CHEONANSTATION);
         STATION.add(Const.TERMINAL);
         STATION.add(Const.ONYANG);
+        /*STATION.add(Const.CHEONANCAMPUS);*/
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -187,33 +190,35 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     }
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
-        STATION_FLAG =staionIndex;
+        STATION_FLAG = staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;
-        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
-        System.out.println("changeTemp:::::"+changeTemp);
-        recyclerView.setAdapter(ra);
+
+        if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
+            Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
+        }else{
+            ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+            recyclerView.setAdapter(ra);
+        }
     }
 
-    private void findQuickTime(){
+    private void findQuickTime() {
         /*Todo : 가장빠른 시간을 가져오기*/
         //recyclerView.getChildAt(ra.getMostFastIndex()).setBackgroundColor(Color.parseColor("#f7f7f7"));
         //recyclerView.getChildAt(ra.getMostFastIndex() - 4).setBackgroundColor(Color.parseColor("#f7f7f7"));
-        recyclerView.smoothScrollToPosition(ra.getMostFastIndex());
-        //((RecyclerAdapter.ViewHolder)recyclerView.findViewHolderForItemId(ra.getItemId(ra.getMostFastIndex()))).setBackgroundColor();
-        //recyclerView.getLayoutManager().findViewByPosition(2).setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.getLayoutManager().findViewByPosition(ra.getMostFastIndex())
-        //recyclerView.setVerticalScrollbarPosition(ra.getMostFastIndex());
-        //recyclerView.findViewHolderForItemId(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.getLayoutManager().findViewByPosition(0).setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.findViewHolderForItemId(ra.getItemId(ra.getMostFastIndex())).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));;
+        //recyclerView.swapAdapter(ra, true);
+        int index = ra.getMostFastIndex();
+        recyclerView.scrollToPosition(index);
+        Toast.makeText(getApplicationContext(),"가장 빠른 버스는 "+(index+1)+"번 입니다.",Toast.LENGTH_SHORT).show();
 
-        //recyclerView.findViewHolderForAdapterPosition(ra.getMostFastIndex()).itemView.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        /*recyclerView.getChildAt(0).setBackgroundColor(Color.parseColor("#f7f7f7"));*/
+        //RecyclerAdapter.ViewHolder holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
+        //holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
+        //System.out.print(holder.itemView);
+        //System.out.print(holder.getAdapterPosition());
+
+        //holder.getBackground_opposite().setBackgroundColor(Color.parseColor("#f7f7f7"));
+        //holder.getBackground_opposite().performClick();
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         STATION_FLAG = position;

@@ -18,9 +18,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import butterknife.OnClick;
 import univ.sm.R;
 
 import static android.R.id.list;
+import static univ.sm.R.id.background_opposite;
 
 /**
  * Created by uaer on 2017-01-13.
@@ -29,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     Context context;
     ArrayList<Shuttle> items;
     ArrayList<String> compareString;
-
+    ViewHolder vholder;
     public void setItems(ArrayList<Shuttle> items) {
         this.items = items;
     }
@@ -61,7 +63,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],null);
-        return new ViewHolder(v);
+        vholder = new ViewHolder(v);
+        return vholder;
     }
 
     @Override
@@ -71,6 +74,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+
+
         Shuttle item = items.get(position+1);
         if(position == 0){
             item = items.get(0);
@@ -148,7 +154,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return this.items.size()-1;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView pivotTime,textSchduleFirst,textSchduleSecond,textSchduleThird,indx;
         LinearLayout background_reverse,background_opposite;
         public ViewHolder(View itemView) {
@@ -171,6 +177,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
 
         public void setBackgroundColor(){
+            if(directionFlag == 0){
+                background_opposite.setBackgroundColor(Color.parseColor("#f7f7f7"));
+            }else{
+                background_reverse.setBackgroundColor(Color.parseColor("#f7f7f7"));
+            }
+        }
+
+        public LinearLayout getBackground_opposite() {
+            return background_opposite;
+        }
+
+        public LinearLayout getBackground_reverse() {
+            return background_reverse;
+        }
+
+        @Override
+        public void onClick(View v) {
             if(directionFlag == 0){
                 background_opposite.setBackgroundColor(Color.parseColor("#f7f7f7"));
             }else{
@@ -206,20 +229,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
 
             if(compare_time > Integer.parseInt(tempData)){
+                System.out.println(Integer.parseInt(tempData));
                 index = startIndex;
             }
+
+
             startIndex++;
         }
+
+        System.out.println(startIndex);
+        System.out.println(index);
         /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
         while(true){
             if("*".equals(compareString.get(index))) index++;
             else {
-                //index++;
+                index++;
                 break;
             }
         }
         System.out.println("index::::"+index);
         return index;
+        //return 0;
     }
 
 }
