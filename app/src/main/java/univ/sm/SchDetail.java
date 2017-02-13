@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,6 +129,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         /*리스트뷰*/
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
 
+        /*Spinner*/
         destination = (Spinner) findViewById(R.id.destination);
         destination.setOnItemSelectedListener(this);
         ArrayAdapter<?> a8Adapter = ArrayAdapter.createFromResource(
@@ -217,8 +219,9 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         //recyclerView.swapAdapter(ra, true);
         int index = ra.getMostFastIndex();
         recyclerView.scrollToPosition(index);
-        Toast.makeText(getApplicationContext(),"가장 빠른 버스는 "+(index+1)+"번 입니다.",Toast.LENGTH_SHORT).show();
-
+        Toast toast = Toast.makeText(getApplicationContext(),"가장 빠른 버스는 "+(index+1)+"번 입니다.",Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
         //RecyclerAdapter.ViewHolder holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
         //holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
         //System.out.print(holder.itemView);
