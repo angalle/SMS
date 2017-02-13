@@ -216,7 +216,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("HH:mm");
         //비교할 대상 str
-        int compare_time = Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));
+        int compare_time = 2100/*Integer.parseInt((dayTime.format(new Date(time))).replace(":",""))*/;
         int index=0,startIndex=0;
         Iterator<String> tempString = compareString.iterator();
 
@@ -237,8 +237,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             startIndex++;
         }
 
-        System.out.println(startIndex);
-        System.out.println(index);
+        //System.out.println(startIndex);
+        //System.out.println(index);
         /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
         while(true){
             if("*".equals(compareString.get(index))) index++;
@@ -247,7 +247,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 break;
             }
         }
-        System.out.println("index::::"+index);
+        //System.out.println("index::::"+index);
         return index;
         //return 0;
     }

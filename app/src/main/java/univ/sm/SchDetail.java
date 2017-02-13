@@ -23,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -105,7 +106,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         schDetailWeekDay = (TextView) findViewById(R.id.sch_detail_weekDay);
         schDetailSatureDay = (TextView) findViewById(R.id.sch_detail_satureDay);
         schDetailSunDay = (TextView) findViewById(R.id.sch_detail_sunDay);
-        destination = (Spinner) findViewById(R.id.destination);
+
 
         /* 역방향 기능 빨리찾기 기능 */
         quickBtn = (ImageView) findViewById(R.id.quickBtn);
@@ -118,7 +119,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         schDetailSatureDay.setOnClickListener(this);
         schDetailSunDay.setOnClickListener(this);
         //destination.setOnClickListener(this);
-        destination.setOnItemSelectedListener(this);
+
 
         /* 기본좌표 재 설정 / xml 상에서 정확한 좌표를 표시 할 수 없음*/
         schDetailTopBar = (ImageView) findViewById(R.id.sch_detail_top_bar);
@@ -126,6 +127,13 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
 
         /*리스트뷰*/
         recyclerView = (RecyclerView) findViewById(R.id.sch_entry_list);
+
+        destination = (Spinner) findViewById(R.id.destination);
+        destination.setOnItemSelectedListener(this);
+        ArrayAdapter<?> a8Adapter = ArrayAdapter.createFromResource(
+                this, R.array.destination, R.layout.spinner_item);
+        a8Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        destination.setAdapter(a8Adapter);
     }
 
     /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
