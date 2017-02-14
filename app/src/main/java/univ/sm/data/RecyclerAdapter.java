@@ -216,7 +216,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("HH:mm");
         //비교할 대상 str
-        int compare_time = 2100/*Integer.parseInt((dayTime.format(new Date(time))).replace(":",""))*/;
+        int compare_time = Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));
         int index=0,startIndex=0;
         Iterator<String> tempString = compareString.iterator();
 
