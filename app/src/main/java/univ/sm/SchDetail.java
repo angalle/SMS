@@ -201,7 +201,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         //recyclerView.smoothScrollBy();
         int index = ra.getMostFastIndex();
         recyclerView.scrollToPosition(index);
-        Toast.makeText(getApplicationContext(),"가장 빠른시간은 "+index+"번 입니다.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"가장 빠른시간은 "+(index+1)+"번 입니다.",Toast.LENGTH_SHORT).show();
         //System.out.println("index1::::"+recyclerView.findViewHolderForAdapterPosition(index).itemView.getHeight());
         //System.out.println("index2::::"+recyclerView.findViewHolderForLayoutPosition(index).itemView.getHeight());
         //System.out.println("index3::::"+recyclerView.findViewHolderForPosition(index).itemView.getHeight());
