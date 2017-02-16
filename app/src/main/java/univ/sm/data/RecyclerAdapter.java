@@ -62,7 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],parent,false);
         vholder = new ViewHolder(v);
         return vholder;
     }
