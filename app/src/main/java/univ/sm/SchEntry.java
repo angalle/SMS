@@ -189,8 +189,14 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
         recyclerView.setAdapter(ra);
 
-        //접혔다 폈다하는 레이아웃 동작/변수
-        expandableLayout.collapse();
-        openFlag = false;
+        if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
+            Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
+        }else{
+            ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+            recyclerView.setAdapter(ra);
+            //접혔다 폈다하는 레이아웃 동작/변수
+            expandableLayout.collapse();
+            openFlag = false;
+        }
     }
 }
