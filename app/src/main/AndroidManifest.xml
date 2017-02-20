@@ -31,6 +31,14 @@
                     android:theme="@style/Theme.AppCompat.NoActionBar"
                     android:screenOrientation="portrait"
             />
+        <activity android:name=".SchEntryFake"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".SchDetailFake"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
     <!--**********************************************************************-->
     <!-- *********************안드로이드 fabric 관련 설정 ********************-->
     <!--**********************************************************************-->

@@ -56,7 +56,7 @@ public class AppInfo extends Dialog {
         NUM_PAGES =IMAGES.length;
 
         // Auto start of viewpager
-        final Handler handler = new Handler();
+       /* final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
                 if (currentPage == NUM_PAGES) {
@@ -71,7 +71,7 @@ public class AppInfo extends Dialog {
             public void run() {
                 handler.post(Update);
             }
-        }, 3000, 3000);
+        }, 3000, 3000);*/
 
         // Pager listener over indicator
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -79,7 +79,6 @@ public class AppInfo extends Dialog {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-
             }
 
             @Override

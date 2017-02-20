@@ -6,6 +6,10 @@ import java.util.ArrayList;
  * Created by uaer on 2017-01-13.
  */
 public class Const {
+    static public String SHARED_LIMETE_LAYOUT = "LIMITE_INTRO_LAYOUT";
+    static public String CAN_U_FIRST_1 = "CAN_U_FIRST_1";
+    static public String CAN_U_FIRST_2 = "CAN_U_FIRST_2";
+    static public String NO = "NO";
 
     static public int OPPOSIT = 0;
     static public int REVERSE = 1;
