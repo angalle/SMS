@@ -29,7 +29,7 @@ public class DialogViewAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View layout = (ViewGroup) inflater.inflate(R.layout.sch_detail_fake, container, false);
-        final ImageView imageView = (ImageView) layout.findViewById(R.id.image);
+        final ImageView imageView = (ImageView) layout.findViewById(R.id.imageTT1);
         imageView.setImageResource(IMAGES.get(position));
         container.addView(layout, 0);
 

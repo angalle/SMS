@@ -30,10 +30,18 @@ import univ.sm.data.Shuttle;
 public class SchEntryFake extends AppCompatActivity{
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
+    ImageView image;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_entry_fake);
+        image = (ImageView)findViewById(R.id.imageTT2);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
