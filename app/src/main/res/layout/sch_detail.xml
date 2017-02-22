@@ -121,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:background="#4fb2b3"
+                android:popupBackground="#4fb2b3"
                 android:id="@+id/destination"
                 android:entries="@array/destination">
             </Spinner>

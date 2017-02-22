@@ -11,6 +11,11 @@ public class Const {
     static public String CAN_U_FIRST_2 = "CAN_U_FIRST_2";
     static public String NO = "NO";
 
+    static public String CHEONANSTATION_STR = "Cheonan\nStation";
+    static public String TERMINALSTATION_STR = "Terminal\nStation";
+    static public String ONYANGSTATION_STR = "Onyang\nStation";
+
+
     static public int OPPOSIT = 0;
     static public int REVERSE = 1;
 
