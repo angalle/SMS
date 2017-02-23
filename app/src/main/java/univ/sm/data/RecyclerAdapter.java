@@ -74,9 +74,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-
-
         Shuttle item = items.get(position+1);
         if(position == 0){
             item = items.get(0);
@@ -232,13 +229,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 System.out.println(Integer.parseInt(tempData));
                 index = startIndex;
             }
-
-
             startIndex++;
         }
 
-        //System.out.println(startIndex);
-        //System.out.println(index);
         /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
         while(true){
             if("*".equals(compareString.get(index))) index++;
@@ -247,9 +240,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 break;
             }
         }
-        //System.out.println("index::::"+index);
         return index;
-        //return 0;
     }
 
 }

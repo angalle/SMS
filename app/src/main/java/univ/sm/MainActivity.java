@@ -8,21 +8,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import univ.sm.data.Const;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends CommonActivity implements View.OnClickListener{
     LinearLayout sch_detail_btn,            //  상세 스케줄 버튼
                  sch_entry_btn,             //  전체정보 뿌려주는 버튼
                  app_info_btn;              //  앱 정보 버튼
 
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         else if(v.getId() == R.id.app_info_btn){
-            final AppInfo dialog = new AppInfo(this);
+            /*final AppInfo dialog = new AppInfo(this);
             dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
                 public void onShow(DialogInterface dialog) {
@@ -83,7 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //사라질때 하는 효과
                 }
             });
-            dialog.show();
+            dialog.show();*/
+            intent.setClass(MainActivity.this,InfoActivity.class);
+            startActivity(intent);
         }
     }
+
+
 }

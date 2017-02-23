@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
@@ -21,17 +25,33 @@ import univ.sm.data.SplashData;
 
 public class Splash extends Activity {
     public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
+    public InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.splash);
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+        requestNewInterstitial();
 
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(getApplicationContext(),"erroCode"+errorCode,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Thread th = new Thread(){
             @Override
             public void run() {
+
                 DataSetting();
             }
         };
@@ -41,6 +61,7 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Intent next = new Intent(Splash.this, MainActivity.class);
                 startActivity(next);
                 finish();
@@ -75,4 +96,12 @@ public class Splash extends Activity {
         return true;
     }
 
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
 }
