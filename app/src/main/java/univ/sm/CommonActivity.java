@@ -13,13 +13,10 @@ import com.google.android.gms.ads.InterstitialAd;
 
 public class CommonActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onPause() {
         super.onPause();
 
     }
-
 
 }

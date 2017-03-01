@@ -12,7 +12,7 @@
         android:layout_width="60dp"
         android:orientation="vertical"
         android:weightSum="5"
-    android:layout_height="100dp">
+        android:layout_height="100dp">
         <TextView
             android:id="@+id/pivotTime_opposite"
             android:layout_width="wrap_content"
@@ -36,8 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/line_point_s" />
-
+            android:id="@+id/detail_line_opp"/>
+        <!--android:src="@drawable/line_point_s"-->
         <TextView
             android:id="@+id/indx_opposite"
             android:layout_width="match_parent"

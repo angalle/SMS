@@ -59,8 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/line_point_s" />
-
+            android:id="@+id/detail_line_rev"/>
+        <!--android:src="@drawable/line_point_s"-->
         <TextView
             android:id="@+id/indx_reverse"
             android:layout_width="match_parent"
