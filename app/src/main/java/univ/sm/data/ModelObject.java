@@ -7,10 +7,10 @@ import univ.sm.R;
  */
 public enum ModelObject {
 
-    RED("test", R.layout.view_question_1),
-    BLUE("test", R.layout.view_question_2),
-    GREEN("test", R.layout.view_question_3),
-    WHITE("test", R.layout.view_question_4);
+    RED("test", R.drawable.question_1),
+    BLUE("test", R.drawable.question_2),
+    GREEN("test", R.drawable.question_3),
+    WHITE("test", R.drawable.question_4);
 
     private String mTitleResId;
     private int mLayoutResId;

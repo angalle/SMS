@@ -35,7 +35,7 @@ import univ.sm.data.Shuttle;
  */
 
 public class SchEntry extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
-    TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang;
+    TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang, destination_title;
     ImageView schDetailTopBar,  detail_btn, top_btn, imgDestination;
     Context context;
     ArrayList<Shuttle>[] changeTemp;
@@ -104,14 +104,17 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
             STATION_FLAG = Const.CHEONANSTATION_C;
             imgDestination.setImageResource(R.drawable.sch_detail_cheonan);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+            destination_title.setText(Const.CHEONANSTATION_STR);
         } else if (v.getId() == R.id.Terminal) {
             STATION_FLAG = Const.TERMINAL_C;
             imgDestination.setImageResource(R.drawable.sch_detail_terminal);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+            destination_title.setText(Const.TERMINALSTATION_STR);
         } else if (v.getId() == R.id.Onyang) {
             STATION_FLAG = Const.ONYANG_C;
             imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
+            destination_title.setText(Const.ONYANGSTATION_STR);
         } else if(v.getId() == R.id.top_btn){
             recyclerView.scrollToPosition(0);
         }
@@ -144,6 +147,7 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
 
     private void initView(){
         /*주말/토요일/일요일 텍스트 이벤트*/
+        destination_title = (TextView) findViewById(R.id.destination_title);
         schDetailWeekDay = (TextView) findViewById(R.id.sch_entry_weekDay);
         schDetailSatureDay = (TextView) findViewById(R.id.sch_entry_satureDay);
         schDetailSunDay = (TextView) findViewById(R.id.sch_entry_sunDay);
@@ -189,8 +193,14 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
         recyclerView.setAdapter(ra);
 
-        //접혔다 폈다하는 레이아웃 동작/변수
-        expandableLayout.collapse();
-        openFlag = false;
+        if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
+            Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
+        }else{
+            ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+            recyclerView.setAdapter(ra);
+            //접혔다 폈다하는 레이아웃 동작/변수
+            expandableLayout.collapse();
+            openFlag = false;
+        }
     }
 }

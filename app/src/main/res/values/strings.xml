@@ -22,9 +22,11 @@
 
 
     <!--        일정 타이틀      -->
-    <string name="KTX">KTX station</string>
-    <string name="Terminal">Terminal station</string>
-    <string name="Onyang">Onyang station</string>
+    <string name="KTX">Cheonan Station</string>
+    <string name="Terminal">Terminal Station</string>
+    <string name="Onyang">Onyang Station</string>
 
     <string name="AsanCampus">Asan\nCampus</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
 </resources>

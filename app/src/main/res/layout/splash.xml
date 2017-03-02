@@ -9,5 +9,5 @@
         android:layout_height="match_parent"
         android:src="@drawable/splash_blue"
         android:id="@+id/imageView2"
-        android:scaleType="center" />
+        android:scaleType="fitXY" />
 </LinearLayout>

@@ -1,51 +1,29 @@
 package univ.sm;
 
 import android.animation.ObjectAnimator;
-import android.animation.TimeInterpolator;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.commons.logging.Log;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Logger;
 
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.Shuttle;
-import univ.sm.data.SplashData;
-
-import static univ.sm.Splash.positionShuttleArr;
 
 /**
  * Created by heesun on 2016-12-13.
@@ -55,7 +33,9 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     ImageView schDetailTopBar,  quickBtn,   changeDirection;
     TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay;
     Spinner destination;
+
     RecyclerView recyclerView;
+
     int roatationDegree_quick = 0;
     int roatationDegree_change = 0;
     Context context;
@@ -68,7 +48,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     int STATION_FLAG = Const.CHEONANSTATION_C;
     /*SATURDAY // SUNDAY*/
     int DAY_FLAG = Const.WEEKDAY;
-    /* OPPOSIT REVERSE*/
+    /* OPPOSIT // REVERSE*/
     int DIRECTION_FLAG = Const.OPPOSIT;
 
     @Override
@@ -91,6 +71,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
         recyclerView.setAdapter(ra);
     }
+
     /*주말선택의 빨간바를 이동하는 함수*/
     private void moveImageBar(View v){
         /* 이동해야할 x좌표 */
@@ -213,22 +194,16 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     }
 
     private void findQuickTime() {
-        /*Todo : 가장빠른 시간을 가져오기*/
-        //recyclerView.getChildAt(ra.getMostFastIndex()).setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.getChildAt(ra.getMostFastIndex() - 4).setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //recyclerView.swapAdapter(ra, true);
+        /*Todo : 가장빠른 시간을 가져오기 -  미해결 이슈 : 인덱스의 view의 색상을 변경해야 하는 이슈*/
         int index = ra.getMostFastIndex();
-        recyclerView.scrollToPosition(index);
-        Toast toast = Toast.makeText(getApplicationContext(),"가장 빠른 버스는 "+(index+1)+"번 입니다.",Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER,0,0);
-        toast.show();
-        //RecyclerAdapter.ViewHolder holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
-        //holder = (RecyclerAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(index);
-        //System.out.print(holder.itemView);
-        //System.out.print(holder.getAdapterPosition());
+        if(index >= ra.getItemCount()) {
+            recyclerView.smoothScrollToPosition(0);
+            Toast.makeText(getApplicationContext(), "막차시간이 끝났습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            recyclerView.smoothScrollToPosition(index);
+            Toast.makeText(getApplicationContext(), "가장 빠른시간은 " + (index + 1) + "번 입니다.", Toast.LENGTH_SHORT).show();
+        }
 
-        //holder.getBackground_opposite().setBackgroundColor(Color.parseColor("#f7f7f7"));
-        //holder.getBackground_opposite().performClick();
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

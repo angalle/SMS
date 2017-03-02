@@ -33,7 +33,7 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sch_entry_holder,null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sch_entry_holder,parent,false);
         return new ViewHolder(v);
     }
 

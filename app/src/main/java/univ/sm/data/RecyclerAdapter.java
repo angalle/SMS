@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(directionLayout[directionFlag],parent,false);
         vholder = new ViewHolder(v);
         return vholder;
     }
@@ -74,9 +75,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-
-
         Shuttle item = items.get(position+1);
         if(position == 0){
             item = items.get(0);
@@ -99,6 +97,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             tempMiddleTime = filter_10Min(item,3);      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }
         holder.pivotTime.setText(tempPivotTime);
+        holder.detail_line.setImageResource(R.drawable.line_point_s);
         if(directionFlag == 0){
             holder.textSchduleFirst.setText(item.getB()[0]+" "+startTitle);
             holder.textSchduleSecond.setText(tempMiddleTime+" "+middleTitle);
@@ -156,6 +155,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView pivotTime,textSchduleFirst,textSchduleSecond,textSchduleThird,indx;
+        ImageView detail_line;
         LinearLayout background_reverse,background_opposite;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -166,6 +166,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 textSchduleSecond=(TextView)itemView.findViewById(R.id.textSchduleSecond_opposite);
                 textSchduleThird=(TextView)itemView.findViewById(R.id.textSchduleThird_opposite);
                 indx=(TextView)itemView.findViewById(R.id.indx_opposite);
+                detail_line=(ImageView)itemView.findViewById(R.id.detail_line_opp);
             }else{
                 background_reverse=(LinearLayout)itemView.findViewById(R.id.background_reverse);
                 pivotTime=(TextView)itemView.findViewById(R.id.pivotTime_reverse);
@@ -173,6 +174,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 textSchduleSecond=(TextView)itemView.findViewById(R.id.textSchduleSecond_reverse);
                 textSchduleThird=(TextView)itemView.findViewById(R.id.textSchduleThird_reverse);
                 indx=(TextView)itemView.findViewById(R.id.indx_reverse);
+                detail_line=(ImageView)itemView.findViewById(R.id.detail_line_rev);
             }
         }
 
@@ -216,7 +218,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("HH:mm");
         //비교할 대상 str
-        int compare_time = 2100/*Integer.parseInt((dayTime.format(new Date(time))).replace(":",""))*/;
+        int compare_time = Integer.parseInt((dayTime.format(new Date(time))).replace(":",""));
         int index=0,startIndex=0;
         Iterator<String> tempString = compareString.iterator();
 
@@ -228,28 +230,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 continue;
             }
 
-            if(compare_time > Integer.parseInt(tempData)){
+            if(compare_time < Integer.parseInt(tempData)){
                 System.out.println(Integer.parseInt(tempData));
                 index = startIndex;
+                break;
             }
-
-
             startIndex++;
         }
 
-        //System.out.println(startIndex);
-        //System.out.println(index);
         /*다음 인덱스에 시간이 아닌 * 이 나올때의 인덱스 처리*/
-        while(true){
+        /*while(true){
             if("*".equals(compareString.get(index))) index++;
             else {
                 index++;
                 break;
             }
-        }
-        //System.out.println("index::::"+index);
+        }*/
         return index;
-        //return 0;
     }
 
 }

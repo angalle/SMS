@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -43,6 +44,7 @@
                 android:src="@drawable/quick_menu_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="3dp"
                 android:layout_weight="4"
                 android:id="@+id/imageView"
                 android:adjustViewBounds="false"/>
@@ -50,8 +52,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_weight="0.3"
+                android:gravity="center"
                 android:text="@string/quick_menu_title"
                 android:textColor="#58595b"
                 android:textSize="11sp" />
@@ -64,7 +65,7 @@
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:orientation="vertical"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_weight="1"
             android:weightSum="5"
             android:id="@+id/sch_entry_btn">
@@ -74,12 +75,12 @@
                 android:layout_weight="4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="3dp"
                 android:adjustViewBounds="false"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_weight="0.3"
+                android:gravity="center"
                 android:text="@string/full_menu_title"
                 android:textColor="#58595b"
                 android:textSize="11sp" />
@@ -100,14 +101,14 @@
                 android:layout_weight="4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="3dp"
                 android:adjustViewBounds="true"
                 android:keepScreenOn="false" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_weight="0.3"
+                android:gravity="center"
                 android:text="@string/question_menu_title"
                 android:textColor="#58595b"
                 android:textSize="10dp"
@@ -116,13 +117,20 @@
     </LinearLayout>
 
     <!-- footer -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:gravity="right"
-        android:textColor="#FFFFFF"
-        android:text="@string/app_full_name"/>
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:gravity="right"
+            android:textColor="#FFFFFF"
+            android:text="@string/app_full_name"/>
+    </RelativeLayout>
+
+
+
 </LinearLayout>

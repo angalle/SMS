@@ -11,24 +11,47 @@
 
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity android:name=".MainActivity"
                    android:theme="@style/Theme.AppCompat.NoActionBar"
+                    android:screenOrientation="portrait"
             />
         <activity android:name=".SchDetail"
                   android:theme="@style/Theme.AppCompat.NoActionBar"
+                    android:screenOrientation="portrait"
             />
         <activity android:name=".SchEntry"
                     android:theme="@style/Theme.AppCompat.NoActionBar"
+                    android:screenOrientation="portrait"
             />
-
+        <activity android:name=".SchEntryFake"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".SchDetailFake"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".InfoActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+    <!--**********************************************************************-->
+    <!-- *********************안드로이드 fabric 관련 설정 ********************-->
+    <!--**********************************************************************-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7365512e57e6dbdb0494c156c3718b50c67a60db" />
+    <!--**********************************************************************-->
+    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+    <!--**********************************************************************-->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" >
@@ -64,12 +87,17 @@
             android:name="univ.sm.gcm.RegistrationIntentService"
             android:exported="false">
         </service>
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="7365512e57e6dbdb0494c156c3718b50c67a60db" />
+    <!--**********************************************************************-->
+    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+    <!--**********************************************************************-->
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
     </application>
 
+    <!--**********************************************************************-->
+    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+    <!--**********************************************************************-->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -84,5 +112,7 @@
 
     <uses-permission
         android:name="shuttlebusm.univ.sunmoon.permission.C2D_MESSAGE" />
-
+    <!--**********************************************************************-->
+    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+    <!--**********************************************************************-->
 </manifest>

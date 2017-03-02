@@ -8,9 +8,11 @@
     android:background="#f1f1f2">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageTT2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:src="@drawable/question_2"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/question_6"/>
 
 </LinearLayout>

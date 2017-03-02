@@ -2,22 +2,13 @@ package univ.sm;
 
 import android.content.Context;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.viewpagerindicator.IconPagerAdapter;
-
 import java.util.ArrayList;
-import java.util.Random;
-
-import univ.sm.data.ModelObject;
-import univ.sm.data.TestFragment;
 
 /**
  * Created by heesun on 2016-12-13.
@@ -37,8 +28,8 @@ public class DialogViewAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View layout = (ViewGroup) inflater.inflate(R.layout.view_question_1, container, false);
-        final ImageView imageView = (ImageView) layout.findViewById(R.id.image);
+        View layout = (ViewGroup) inflater.inflate(R.layout.sch_detail_fake, container, false);
+        final ImageView imageView = (ImageView) layout.findViewById(R.id.imageTT1);
         imageView.setImageResource(IMAGES.get(position));
         container.addView(layout, 0);
 

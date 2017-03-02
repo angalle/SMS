@@ -1,26 +1,23 @@
 package univ.sm;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.FragmentManager;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.view.Window;
 import android.widget.RadioGroup;
 
 import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import butterknife.ButterKnife;
+/**
+ * Created by heesun on 2017-02-23.
+ * 물음표페이지 2번재 구현 방법.
+ * 액티비티 띄워서 풀화면으로 구현.
+ * 일단 사용 안함.
+ */
 
-public class AppInfo extends Dialog {
-
+public class InfoActivity extends CommonActivity {
     RadioGroup mPageGroup;
     ViewPager pager;
     private static int currentPage = 0;
@@ -28,27 +25,21 @@ public class AppInfo extends Dialog {
     private static final Integer[] IMAGES= {R.drawable.question_1,R.drawable.question_2,R.drawable.question_3,R.drawable.question_4};
     private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
     Context context;
-    public AppInfo(Context context) {
-        super(context);
-        this.context = context;
-    }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.view_question);
 
         for(int i=0;i<IMAGES.length;i++)
             ImagesArray.add(IMAGES[i]);
 
         pager = (ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(new DialogViewAdapter(getContext(),ImagesArray));
+        pager.setAdapter(new DialogViewAdapter(getApplicationContext(),ImagesArray));
 
         CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(pager);
 
-        final float density = context.getResources().getDisplayMetrics().density;
+        final float density = getApplicationContext().getResources().getDisplayMetrics().density;
 
         //Set circle indicator radius
         indicator.setRadius(5 * density);
@@ -77,4 +68,3 @@ public class AppInfo extends Dialog {
 
     }
 }
-
