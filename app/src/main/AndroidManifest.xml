@@ -43,6 +43,14 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".BoardActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".NewPostingPage"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            />
     <!--**********************************************************************-->
     <!-- *********************안드로이드 fabric 관련 설정 ********************-->
     <!--**********************************************************************-->
