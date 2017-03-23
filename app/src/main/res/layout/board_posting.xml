@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1.5"
+        android:background="@drawable/backgroundlayoutcorner"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/titlelayoutcorner"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <!--title-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/destination_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="10dp"
+                    android:text="Can you join us? "
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/posting_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/detail_btn" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your name"
+            android:textColor="#eeb8b8" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="something..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I don't know what i shoud do..."
+            android:textColor="#eeb8b8" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:hint="something..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2" />
+        <!-- &lt;!&ndash;댓글영역&ndash;&gt;
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:gravity="bottom"
+                 android:orientation="vertical">
+
+                 <android.support.v7.widget.RecyclerView
+                     android:id="@+id/commentRecyclerView"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:paddingTop="5dp" />
+
+             </LinearLayout>
+
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:gravity="bottom">
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="50dp"
+                     android:background="@drawable/transparent_background"></LinearLayout>
+             </LinearLayout>
+         </RelativeLayout>-->
+
+    </LinearLayout>
+
+
+    <!--    footer  -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#eeb8b8"
+            android:orientation="vertical"></LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

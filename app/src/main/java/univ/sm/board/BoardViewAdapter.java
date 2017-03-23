@@ -1,4 +1,4 @@
-package univ.sm;
+package univ.sm.board;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +9,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
-    private List<String> mItems = new ArrayList<>();
+import univ.sm.R;
+
+public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder>{
+    private List<String> mItems = new ArrayList<>();    //List<Board> items = new ArrayList<>;
 
     public BoardViewAdapter(List<String> mItems) {
         this.mItems = mItems;
@@ -28,22 +30,29 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         holder.onBindView(mItems.get(position));
     }
 
+    public void add(String data) {
+        mItems.add(data);
+        notifyDataSetChanged();
 
-//    public void setItems(List<String> items) {
-//        mItems.clear();
-//        mItems.addAll(items);
-//    }
+    }
+
+    public void remove(int index) {
+        mItems.remove(index);
+    }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mItems.size();
     }
+
 
 
     public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
         public BaseViewHolder(View itemView) {
             super(itemView);
         }
+
         public abstract void onBindView(ITEM item);
     }
 
@@ -53,11 +62,18 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         private ViewHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.text1);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         @Override
         public void onBindView(String item) {
-            mTextView.setText( "What is this? " + item);
+            mTextView.setText("What is this? " + item);
         }
     }
+
 }
