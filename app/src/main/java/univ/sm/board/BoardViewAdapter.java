@@ -1,6 +1,7 @@
 package univ.sm.board;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import univ.sm.R;
 
-public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder>{
+public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
     private List<String> mItems = new ArrayList<>();    //List<Board> items = new ArrayList<>;
 
     public BoardViewAdapter(List<String> mItems) {
@@ -47,7 +48,6 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     }
 
 
-
     public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
         public BaseViewHolder(View itemView) {
             super(itemView);
@@ -65,7 +65,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Log.e("click", "click....^_^");
                 }
             });
         }
