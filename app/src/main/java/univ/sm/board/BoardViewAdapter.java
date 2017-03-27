@@ -14,7 +14,6 @@ import univ.sm.R;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
     private List<String> mItems = new ArrayList<>();    //List<Board> items = new ArrayList<>;
-
     public BoardViewAdapter(List<String> mItems) {
         this.mItems = mItems;
 
@@ -65,14 +64,16 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("click", "click....^_^");
+                    Log.e("click", "click....^_^   :"  +  getLayoutPosition());
+                    // TODO 디테일 페이지 ( position)
+
                 }
             });
         }
 
         @Override
         public void onBindView(String item) {
-            mTextView.setText("What is this? " + item);
+            mTextView.setText("What is this? ");
         }
     }
 

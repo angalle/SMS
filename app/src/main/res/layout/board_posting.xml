@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/posting_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1f1f2"
@@ -121,7 +122,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="#eeb8b8"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/upload_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록" />
+        </LinearLayout>
 
     </RelativeLayout>
 
