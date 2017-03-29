@@ -3,7 +3,8 @@ package univ.sm.board;
 import java.sql.Time;
 
 /**
- * Created by SooJeong on 2017-03-24.
+ * 게시글 data 객체
+ * Created by kwonsoojeong on 2017-03-24.
  */
 
 public class Board {
@@ -17,9 +18,9 @@ public class Board {
     private String destination;        //목적지
     private String destination_detail;  //목적지설명
     private String reg_id;               //gcm(push) 기기값
-    private Boolean use_flag;            //사용flag Y/N
+    private Boolean use_flag;            //사용 flag Y/N
     private int passenger_num;        //총 인원
-    private Time wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value에 추가를 해줄까 ...
+    private Time wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
     private String insert_time;     //등록시간
     private String insert_date;        //등록날짜
 

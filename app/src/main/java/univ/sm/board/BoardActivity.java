@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import univ.sm.R;
 
 /**
- * Created by YAP on 2017-03-02.
+ * 게시판 리스트 페이지
+ * 데이터 불러오기, 새글올리기, 새로고침
+ * Created by kwonsoojeong on 2017-03-02.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class BoardActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -39,7 +42,7 @@ public class BoardActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        BoardViewAdapter boardViewAdapter = new BoardViewAdapter(stringArrayList);
+        BoardViewAdapter boardViewAdapter = new BoardViewAdapter(stringArrayList,getApplicationContext());
         mRecyclerView.setAdapter(boardViewAdapter);
 
         new_btn = (Button) findViewById(R.id.new_btn);

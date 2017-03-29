@@ -13,7 +13,8 @@ import android.widget.LinearLayout;
 import univ.sm.R;
 
 /**
- * Created by YAP on 2017-03-22.
+ * 새 글 등록 페이지
+ * Created by soojeong on 2017-03-22.
  */
 
 public class NewPostingPage extends AppCompatActivity implements View.OnClickListener{

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Board 데이터 객체 관리용
+ * 서버통신 및 데이터 파싱..등등
  * Created by SooJeong on 2017-03-24.
  */
 
