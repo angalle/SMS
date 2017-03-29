@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,7 +32,7 @@ public class BoardActivity extends AppCompatActivity {
 
         stringArrayList = new ArrayList<>();
 
-        //파싱해서 객체만들어서 뷰에뿌릴 리스트 add
+        //todo 파싱해서 객체만들어서 뷰에뿌릴 리스트 add
         stringArrayList.add("test1");
         stringArrayList.add("test2");
         stringArrayList.add("test3");

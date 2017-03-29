@@ -17,7 +17,6 @@ import univ.sm.R;
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
     private List<String> mItems = new ArrayList<>();    //List<Board> items = new ArrayList<>;
     private Context context ;
-    private int position_int;
     public BoardViewAdapter(List<String> mItems, Context context) {
         this.mItems = mItems;
         this.context = context;
@@ -31,11 +30,11 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
-        position_int = position;
         holder.onBindView(mItems.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.e("권수정", "list click....:"  +  position_int);
                 // 디테일 페이지로 이동
                 Intent boardIntent = new Intent();
@@ -45,7 +44,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                 context.startActivity(boardIntent);
 
             }
-        });
+        });*/
     }
 
     public void add(String data) {
@@ -79,16 +78,18 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         private ViewHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.text1);
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("click", "click....^_^   :"  +  getLayoutPosition());
-                    // TODO 디테일 페이지 ( position)
+                    Log.e("권수정", "click....^_^   :"  +  getLayoutPosition());
+                    // 디테일 페이지로 이동
                     Intent boardIntent = new Intent();
                     boardIntent.setClass(context,BoardDetailPage.class);
+                    boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    boardIntent.putExtra("position",getLayoutPosition());
                     context.startActivity(boardIntent);
                 }
-            });*/
+            });
         }
 
         @Override

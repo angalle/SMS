@@ -35,12 +35,13 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
             case  R.id.upload_btn:
                 //TODO : Post
                 Log.i("권수정","click upload button!");
+                finish();
                 break;
             case R.id.posting_layout:
                 /**todo 바탕 클릭시 키보드 숨기기 ..... 현재 동작안함 원인 모르겟음*/
                 View view = this.getCurrentFocus();
                 if (view != null) {
-                    Log.i("권수정","내려가");
+                    Log.i("권수정","키보드 내려가");
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 }

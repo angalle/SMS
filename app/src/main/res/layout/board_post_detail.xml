@@ -57,6 +57,7 @@
             android:textColor="#eeb8b8" />
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="something..."
@@ -69,6 +70,7 @@
             android:textColor="#eeb8b8" />
 
         <TextView
+            android:id="@+id/post_body"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:hint="something..."
@@ -122,7 +124,21 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="#eeb8b8"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <Button
+                android:id="@+id/comment_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="comment"/>
+            <Button
+                android:id="@+id/close_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="close"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
