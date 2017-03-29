@@ -11,64 +11,67 @@
 
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
-                   android:theme="@style/Theme.AppCompat.NoActionBar"
-                    android:screenOrientation="portrait"
-            />
-        <activity android:name=".SchDetail"
-                  android:theme="@style/Theme.AppCompat.NoActionBar"
-                    android:screenOrientation="portrait"
-            />
-        <activity android:name=".SchEntry"
-                    android:theme="@style/Theme.AppCompat.NoActionBar"
-                    android:screenOrientation="portrait"
-            />
-        <activity android:name=".SchEntryFake"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".SchDetailFake"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SchDetail"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".InfoActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SchEntry"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".board.BoardActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SchEntryFake"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".board.NewPostingPage"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SchDetailFake"
             android:screenOrientation="portrait"
-            />
-    <!--**********************************************************************-->
-    <!-- *********************안드로이드 fabric 관련 설정 ********************-->
-    <!--**********************************************************************-->
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".InfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".board.BoardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".board.NewPostingPage"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".board.BoardDetailPage"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!--**********************************************************************-->
+        <!-- *********************안드로이드 fabric 관련 설정 ********************-->
+        <!--**********************************************************************-->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7365512e57e6dbdb0494c156c3718b50c67a60db" />
-    <!--**********************************************************************-->
-    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
-    <!--**********************************************************************-->
+        <!--**********************************************************************-->
+        <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+        <!--**********************************************************************-->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" >
-        </meta-data>
+            android:value="@integer/google_play_services_version"></meta-data>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="shuttlebusm.univ.sunmoon" />
@@ -77,7 +80,7 @@
 
         <service
             android:name="univ.sm.gcm.MyGcmListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -87,18 +90,18 @@
             android:name="univ.sm.gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
 
         <service
             android:name="univ.sm.gcm.RegistrationIntentService"
-            android:exported="false">
-        </service>
-    <!--**********************************************************************-->
-    <!-- **********************안드로이드 gcm 관련 설정 **********************-->
-    <!--**********************************************************************-->
-        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:exported="false"></service>
+        <!--**********************************************************************-->
+        <!-- **********************안드로이드 gcm 관련 설정 **********************-->
+        <!--**********************************************************************-->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
     </application>
@@ -118,8 +121,7 @@
         android:name="shuttlebusm.univ.sunmoon.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission
-        android:name="shuttlebusm.univ.sunmoon.permission.C2D_MESSAGE" />
+    <uses-permission android:name="shuttlebusm.univ.sunmoon.permission.C2D_MESSAGE" />
     <!--**********************************************************************-->
     <!-- **********************안드로이드 gcm 관련 설정 **********************-->
     <!--**********************************************************************-->
