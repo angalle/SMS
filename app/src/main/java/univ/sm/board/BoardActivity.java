@@ -36,6 +36,9 @@ public class BoardActivity extends AppCompatActivity {
         stringArrayList.add("test1");
         stringArrayList.add("test2");
         stringArrayList.add("test3");
+        stringArrayList.add("test3");
+        stringArrayList.add("test3");
+        stringArrayList.add("test3");
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);

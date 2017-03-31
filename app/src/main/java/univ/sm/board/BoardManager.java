@@ -19,4 +19,18 @@ public class BoardManager {
         this.boardList = boardList;
     }
 
+    public void add(){
+/*//POST PARAMETER
+WRITE_NAME			//작성자
+PASSWD				//글 비밀번호
+DEPARTMENT			//학과
+STUDENT_NO			//학번
+DEPARTURE			//출발지
+DEPARTURE_DETAIL	//출발지 설명
+DESTINATION			//목적지
+DESTINATION_DETAIL	//목적지 설명
+REG_ID				//gcm 기기 값
+PASSENGER_NUM		//총 탑승인원
+WAIT_TIME			//대기시간*/
+    }
 }

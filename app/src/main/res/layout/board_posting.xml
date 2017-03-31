@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--/*//POST PARAMETER
+WRITE_NAME			//작성자
+PASSWD				//글 비밀번호
+DEPARTMENT			//학과
+STUDENT_NO			//학번
+DEPARTURE			//출발지
+DEPARTURE_DETAIL	//출발지 설명
+DESTINATION			//목적지
+DESTINATION_DETAIL	//목적지 설명
+REG_ID				//gcm 기기 값
+PASSENGER_NUM		//총 탑승인원
+WAIT_TIME			//대기시간*/-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
     android:layout_width="match_parent"
@@ -9,8 +20,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_weight="1.5"
         android:background="@drawable/backgroundlayoutcorner"
         android:orientation="vertical">
@@ -50,65 +61,82 @@
 
             </LinearLayout>
         </LinearLayout>
+        <!--body-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WRITE_NAME"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="WRITE_NAME..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your name"
-            android:textColor="#eeb8b8" />
+            android:text="DEPARTMENT"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="something..."
+            android:layout_height="30dp"
+            android:hint="DEPARTMENT..."
             android:textColor="#555555"
-            android:textColorHint="#f1f1f2" />
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I don't know what i shoud do..."
-            android:textColor="#eeb8b8" />
+            android:text="DESTINATION"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:hint="something..."
+            android:layout_height="30dp"
+            android:hint="DESTINATION..."
             android:textColor="#555555"
-            android:textColorHint="#f1f1f2" />
-        <!-- &lt;!&ndash;댓글영역&ndash;&gt;
-         <RelativeLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
 
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:gravity="bottom"
-                 android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PASSENGER_NUM"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
 
-                 <android.support.v7.widget.RecyclerView
-                     android:id="@+id/commentRecyclerView"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:layout_marginLeft="10dp"
-                     android:layout_marginRight="10dp"
-                     android:paddingTop="5dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="PASSENGER_NUM..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
 
-             </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메모?"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="메모로쓸까?..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
 
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:gravity="bottom">
-
-                 <LinearLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="50dp"
-                     android:background="@drawable/transparent_background"></LinearLayout>
-             </LinearLayout>
-         </RelativeLayout>-->
 
     </LinearLayout>
 
@@ -121,8 +149,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="#eeb8b8"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="PASSWD"
+                android:textColor="#555555" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:hint="PASSWD..."
+                android:textColor="#555555"
+                android:textColorHint="#f1f1f2" />
 
             <Button
                 android:id="@+id/upload_btn"

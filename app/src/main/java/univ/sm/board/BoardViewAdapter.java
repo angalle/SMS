@@ -31,20 +31,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBindView(mItems.get(position));
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Log.e("권수정", "list click....:"  +  position_int);
-                // 디테일 페이지로 이동
-                Intent boardIntent = new Intent();
-                boardIntent.setClass(context,BoardDetailPage.class);
-                boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                boardIntent.putExtra("position",position_int);
-                context.startActivity(boardIntent);
-
-            }
-        });*/
     }
 
     public void add(String data) {
