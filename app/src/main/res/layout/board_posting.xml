@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--/*//POST PARAMETER
+<?xml version="1.0" encoding="utf-8"?><!--/*//POST PARAMETER
 WRITE_NAME			//작성자
 PASSWD				//글 비밀번호
 DEPARTMENT			//학과
@@ -74,6 +73,7 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/writename_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:hint="WRITE_NAME..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
@@ -90,6 +90,7 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/departure_edit"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:background="@null"
             android:hint="DEPARTURE..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
@@ -106,6 +107,7 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/destination_edit"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:background="@null"
             android:hint="DESTINATION..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
@@ -122,26 +124,11 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/passengerNum_edit"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:background="@null"
             android:hint="PASSENGER_NUM..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
             android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="메모?"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="메모로쓸까?..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp"
-            android:id="@+id/editText" />
 
         <TextView
             android:layout_width="match_parent"
@@ -154,10 +141,12 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/department_std_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:hint="DEPARTMENT..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
             android:textSize="10sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,7 +158,25 @@ WAIT_TIME			//대기시간*/-->
             android:id="@+id/studentNo_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:hint="STUDENT_NO..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WAIT_TIME"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/wait_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="WAIT_TIME..."
             android:textColor="#555555"
             android:textColorHint="#f1f1f2"
             android:textSize="10sp" />
@@ -200,6 +207,7 @@ WAIT_TIME			//대기시간*/-->
                 android:id="@+id/passwd_edit"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:hint="PASSWD..."
                 android:textColor="#555555"
                 android:textColorHint="#f1f1f2"
