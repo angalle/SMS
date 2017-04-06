@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?><!--/*//POST PARAMETER
+WRITE_NAME			//작성자
+PASSWD				//글 비밀번호
+DEPARTMENT			//학과
+STUDENT_NO			//학번
+DEPARTURE			//출발지
+DEPARTURE_DETAIL	//출발지 설명
+DESTINATION			//목적지
+DESTINATION_DETAIL	//목적지 설명
+REG_ID				//gcm 기기 값
+PASSENGER_NUM		//총 탑승인원
+WAIT_TIME			//대기시간*/-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/posting_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1.5"
+        android:background="@drawable/backgroundlayoutcorner"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/titlelayoutcorner"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <!--title-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/destination_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="10dp"
+                    android:text="Can you join us? "
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/posting_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/detail_btn" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--body-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WRITE_NAME"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/writename_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="WRITE_NAME..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEPARTURE"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/departure_edit"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:hint="DEPARTURE..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DESTINATION"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/destination_edit"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:hint="DESTINATION..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PASSENGER_NUM"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/passengerNum_edit"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:hint="PASSENGER_NUM..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="학과"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/department_std_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="DEPARTMENT..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="학번"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/studentNo_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="STUDENT_NO..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WAIT_TIME"
+            android:textColor="#eeb8b8"
+            android:textSize="10sp" />
+
+        <!--todo 스피너로 변경할 것 10~30분-->
+        <EditText
+            android:id="@+id/wait_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="WAIT_TIME..."
+            android:textColor="#555555"
+            android:textColorHint="#f1f1f2"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!--    footer  -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#eeb8b8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PASSWD"
+                android:textColor="#555555"
+                android:textSize="10sp" />
+
+            <EditText
+                android:id="@+id/passwd_edit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="PASSWD..."
+                android:textColor="#555555"
+                android:textColorHint="#f1f1f2"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/upload_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

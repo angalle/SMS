@@ -1,22 +1,17 @@
 package univ.sm;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import univ.sm.board.BoardActivity;
 import univ.sm.data.Const;
 
 public class MainActivity extends CommonActivity implements View.OnClickListener{
@@ -50,9 +45,14 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         app_info_btn.setOnClickListener(this);
 
         g_limit_v = getSharedPreferences(Const.SHARED_LIMETE_LAYOUT,MODE_PRIVATE);
+
+        /** 추가 기능-버튼 클릭시 게시판 */
+        ImageView mainImageView = (ImageView) findViewById(R.id.mainImgview);
+        mainImageView.setOnClickListener(this);
+
     }
 
-    @Override
+   @Override
     public void onClick(View v) {
         Intent intent = new Intent();
         Intent fake = new Intent();
@@ -89,6 +89,10 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             });
             dialog.show();*/
             intent.setClass(MainActivity.this,InfoActivity.class);
+            startActivity(intent);
+        }
+       else if(v.getId() == R.id.mainImgview){
+            intent.setClass(MainActivity.this, BoardActivity.class);
             startActivity(intent);
         }
     }
