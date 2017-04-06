@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--"CALL_BOARD_NO" 인덱스,
+      "WRITE_NAME" 글쓴이,"PASSWD": 비밀번호 "DEPARTMENT": "00001", "STUDENT_NO": "2010244060",
+      "DEPARTURE_DETAIL": "아산역 셔틀장",
+      "DESTINATION": "선문대",
+      "DESTINATION_DETAIL": "선문대 기숙사",
+      "REG_ID": "REGISTE IDENTITY",
+      "PASSENGER_NUM": "4",
+      "WAIT_TIME": "210915"-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,48 +39,60 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:paddingLeft="30dp"
                     android:paddingTop="10dp"
-                    android:text="Can you join us? "
+                    android:text="title"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/posting_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/detail_btn" />
-
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="출발지  >> "
+                android:textColor="#555555" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="도착지"
+                android:textColor="#555555" />
+
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your name"
+            android:text="글쓴이 정보"
             android:textColor="#eeb8b8" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="something..."
+            android:layout_height="wrap_content"
+            android:hint="학과..."
             android:textColor="#555555" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I don't know what i shoud do..."
-            android:textColor="#eeb8b8" />
-
-        <TextView
-            android:id="@+id/post_body"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:hint="something..."
+            android:hint="학번..."
             android:textColor="#555555" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeb8b8"
+            android:layout_margin="10dp" />
 
         <TextView
             android:layout_width="match_parent"

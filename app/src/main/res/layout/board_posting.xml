@@ -171,6 +171,7 @@ WAIT_TIME			//대기시간*/-->
             android:textColor="#eeb8b8"
             android:textSize="10sp" />
 
+        <!--todo 스피너로 변경할 것 10~30분-->
         <EditText
             android:id="@+id/wait_edit"
             android:layout_width="match_parent"
