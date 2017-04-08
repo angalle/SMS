@@ -112,7 +112,12 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
             destination_title.setText(Const.TERMINALSTATION_STR);
         } else if (v.getId() == R.id.Onyang) {
             STATION_FLAG = Const.ONYANG_C;
-            imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
+            /* 온양시간은 동적*/
+            if(changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]].get(1).getB()[4].contains(":"))
+                imgDestination.setImageResource(R.drawable.sch_detail_onyang);
+            else
+                imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
+
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.ONYANGSTATION_STR);
         } else if(v.getId() == R.id.top_btn){
