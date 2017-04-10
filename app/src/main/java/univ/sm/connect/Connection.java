@@ -81,7 +81,7 @@ public class Connection {
 			busarr.add(st);
 			ShuttleArr = busArrayMake(busarr.size(), busarr);
 		} catch (Exception e) {
-			Log.i("internet connecting fail", ""+e.toString());
+			Log.i("httpConnect","internet connecting fail"+e.toString());
 			Shuttle s = new Shuttle(); // 초기화는 그대로
 			ShuttleArr.add(s);
 		}
@@ -175,7 +175,7 @@ public class Connection {
 			}
 
 		} catch (Exception e) {
-			Log.i("internet connecting fail", "connecting fail");
+//			Log.i("internet connecting fail", "connecting fail");
 
 		}
 		return info;

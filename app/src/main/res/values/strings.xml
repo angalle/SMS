@@ -29,4 +29,15 @@
     <string name="AsanCampus">Asan\nCampus</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
+
+
+    <!--        board 관련        -->
+    <string-array name="wait_time_array">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
 </resources>

@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
 
@@ -33,7 +36,7 @@ import univ.sm.connect.LoopjConnection;
         PASSENGER_NUM        //총 탑승인원
         WAIT_TIME            //대기시간*/
 
-public class NewPostingPage extends AppCompatActivity implements View.OnClickListener {
+public class NewPostingPage extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private EditText writeName;
     private EditText department;
     private EditText studentNo;
@@ -41,6 +44,7 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
     private EditText destination;
     private EditText passengerNum;
     private EditText passwd;
+    private String waitTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +63,11 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
         destination = (EditText) findViewById(R.id.destination_edit);
         passengerNum = (EditText) findViewById(R.id.passengerNum_edit);
         passwd = (EditText) findViewById(R.id.passwd_edit);
-
+        Spinner waitTimeSpinner = (Spinner) findViewById(R.id.wait_time_spinner);
+        ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(this, R.array.wait_time_array, R.layout.support_simple_spinner_dropdown_item);
+        waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        waitTimeSpinner.setAdapter(waiteAdapter);
+        waitTimeSpinner.setOnItemSelectedListener(this);
 
     }
 
@@ -68,8 +76,8 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.upload_btn:
-                //TODO : Post
-                LoopjConnection connection = new LoopjConnection();
+                //TODO : null 확인하기
+                LoopjConnection connection = LoopjConnection.getInstance();
                 RequestParams params = new RequestParams();
                 params.put("WRITE_NAME", writeName.getText());
                 params.put("PASSWD", passwd.getText());
@@ -77,6 +85,7 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
                 params.put("DEPARTURE", departure.getText());
                 params.put("DESTINATION", destination.getText());
                 params.put("PASSENGER_NUM", passengerNum.getText());
+                params.put("WAIT_TIME",waitTime);
 
                 connection.addPosting(params);
 
@@ -93,6 +102,20 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
         }
+
+    }
+    /** 스피너 선택 이벤트를 위한 메소드*/
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        if(view.getId() == R.id.wait_time_spinner){
+            waitTime = (String) parent.getItemAtPosition(position);
+            Log.e("권수정", "waitTime : " + waitTime);
+
+//        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

@@ -20,14 +20,14 @@ public class Board {
     private String reg_id;               //gcm(push) 기기값
     private Boolean use_flag;            //사용 flag Y/N
     private int passenger_num;        //총 인원
-    private Time wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
+    private String wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
     private String insert_time;     //등록시간
     private String insert_date;        //등록날짜
 
     public Board(String board_no, String write_name, String passwd, String department,
                  String student_no, String departure, String departure_detail, String destination,
-                 String destination_detail, String reg_id, Boolean use_flag, int passenger_num,
-                 Time wait_time, String insert_time, String insert_date) {
+                 String destination_detail, String reg_id, String use_flag, String passenger_num,
+                 String wait_time, String insert_time, String insert_date) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -39,8 +39,11 @@ public class Board {
         this.destination = destination;
         this.destination_detail = destination_detail;
         this.reg_id = reg_id;
-        this.use_flag = use_flag;
-        this.passenger_num = passenger_num;
+        if(use_flag.equals("Y")){
+            this.use_flag = true;
+        }
+        this.use_flag = false;
+        this.passenger_num = Integer.parseInt(passenger_num);
         this.wait_time = wait_time;
         this.insert_time = insert_time;
         this.insert_date = insert_date;
@@ -142,11 +145,11 @@ public class Board {
         this.passenger_num = passenger_num;
     }
 
-    public Time getWait_time() {
+    public String getWait_time() {
         return wait_time;
     }
 
-    public void setWait_time(Time wait_time) {
+    public void setWait_time(String wait_time) {
         this.wait_time = wait_time;
     }
 

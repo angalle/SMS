@@ -27,8 +27,8 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         Intent i = getIntent();
         position = i.getIntExtra("position", 0);
 
-        TextView textView_post_body = (TextView) findViewById(R.id.post_body);
-        textView_post_body.setText("Hello, This posting is " + (position+1) );
+//        TextView textView_post_body = (TextView) findViewById(R.id.post_body);
+//        textView_post_body.setText("Hello, This posting is " + (position+1) );
 
         Button close_btn = (Button) findViewById(R.id.close_btn);
         close_btn.setOnClickListener(this);

@@ -9,16 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
-    private List<String> mItems = new ArrayList<>();    //List<Board> items = new ArrayList<>;
-    private Context context ;
-    public BoardViewAdapter(List<String> mItems, Context context) {
-        this.mItems = mItems;
+    private List<Board> boardArrayList = new ArrayList<>();    //List<Board> items = new ArrayList<>;
+    private Context context;
+
+    public BoardViewAdapter(List<Board> mItems, Context context) {
+        this.boardArrayList = mItems;
         this.context = context;
     }
 
@@ -30,24 +33,24 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.onBindView(mItems.get(position));
+        holder.onBindView(boardArrayList.get(position));
 
     }
 
-    public void add(String data) {
-        mItems.add(data);
+    public void add(Board data) {
+        boardArrayList.add(data);
         notifyDataSetChanged();
 
     }
 
     public void remove(int index) {
-        mItems.remove(index);
+        boardArrayList.remove(index);
     }
 
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return boardArrayList.size();
     }
 
 
@@ -59,29 +62,34 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         public abstract void onBindView(ITEM item);
     }
 
-    public class ViewHolder extends BaseViewHolder<String> {
-        private TextView mTextView;
+    public class ViewHolder extends BaseViewHolder<Board> {
 
         private ViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.text1);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("권수정", "click....^_^   :"  +  getLayoutPosition());
+                    Log.e("권수정", "click....^_^   :" + getLayoutPosition());
                     // 디테일 페이지로 이동
                     Intent boardIntent = new Intent();
-                    boardIntent.setClass(context,BoardDetailPage.class);
+                    boardIntent.setClass(context, BoardDetailPage.class);
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    boardIntent.putExtra("position",getLayoutPosition());
+                    boardIntent.putExtra("position", getLayoutPosition());
                     context.startActivity(boardIntent);
                 }
             });
         }
 
         @Override
-        public void onBindView(String item) {
-            mTextView.setText("What is this? ");
+        public void onBindView(Board item) {
+            TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
+            TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
+            TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
+            TextView name = (TextView) itemView.findViewById(R.id.name);
+            DEPARTURE.setText(item.getDeparture());
+            DESTINATION.setText(item.getDestination());
+            PASSENGER_NUM.setText(item.getPassenger_num());
+            name.setText(item.getWrite_name());
         }
     }
 

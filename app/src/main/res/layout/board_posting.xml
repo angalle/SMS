@@ -46,7 +46,7 @@ WAIT_TIME			//대기시간*/-->
                     android:paddingBottom="5dp"
                     android:paddingLeft="30dp"
                     android:paddingTop="10dp"
-                    android:text="Can you join us? "
+                    android:text="일단 타!"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -61,126 +61,166 @@ WAIT_TIME			//대기시간*/-->
 
             </LinearLayout>
         </LinearLayout>
-        <!--body-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="WRITE_NAME"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/writename_edit"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="WRITE_NAME..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DEPARTURE"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--body-->
 
-        <EditText
-            android:id="@+id/departure_edit"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:hint="DEPARTURE..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DESTINATION"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="출발지"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/destination_edit"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:hint="DESTINATION..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+                <EditText
+                    android:id="@+id/departure_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="DEPARTURE..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
+                <EditText
+                    android:id="@+id/departure_detail_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="DEPARTURE...detail"
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PASSENGER_NUM"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="목적지"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/passengerNum_edit"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:hint="PASSENGER_NUM..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+                <EditText
+                    android:id="@+id/destination_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="DESTINATION..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="학과"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+                <EditText
+                    android:id="@+id/destination_detail_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="DESTINATION...detail"
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/department_std_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="DEPARTMENT..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="모집 인원"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="학번"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+                <EditText
+                    android:id="@+id/passengerNum_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="PASSENGER_NUM..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/studentNo_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="STUDENT_NO..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="대기 시간"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
+                <Spinner
+                    android:id="@+id/wait_time_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#aaaaaa"
+                    >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="WAIT_TIME"
-            android:textColor="#eeb8b8"
-            android:textSize="10sp" />
+                </Spinner>
 
-        <!--todo 스피너로 변경할 것 10~30분-->
-        <EditText
-            android:id="@+id/wait_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="WAIT_TIME..."
-            android:textColor="#555555"
-            android:textColorHint="#f1f1f2"
-            android:textSize="10sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="~~~~~~~User info~~~~~~~"
+                    android:textColor="#eeb8b8"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WRITE_NAME"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
+
+                <EditText
+                    android:id="@+id/writename_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="WRITE_NAME..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="학과"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
+
+
+                <EditText
+                    android:id="@+id/department_std_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="DEPARTMENT..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="학번"
+                    android:textColor="#eeb8b8"
+                    android:textSize="10sp" />
+
+                <EditText
+                    android:id="@+id/studentNo_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:hint="STUDENT_NO..."
+                    android:textColor="#555555"
+                    android:textColorHint="#f1f1f2"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
     <!--    footer  -->
@@ -207,7 +247,7 @@ WAIT_TIME			//대기시간*/-->
             <EditText
                 android:id="@+id/passwd_edit"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:background="@null"
                 android:hint="PASSWD..."
                 android:textColor="#555555"
