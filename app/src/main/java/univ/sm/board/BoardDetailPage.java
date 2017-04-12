@@ -18,7 +18,7 @@ import univ.sm.R;
 
 public class BoardDetailPage extends AppCompatActivity implements View.OnClickListener{
     int position;
-
+    int board_no;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,16 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
 
         Intent i = getIntent();
         position = i.getIntExtra("position", 0);
+        board_no = i.getIntExtra("board_no",0);
+
+        Board board= BoardManager.getBoardArrayList().get(position);
+        if(board.getBoard_no().equals(board_no)){
+//            board.get
+            //todo board detail layout setting..
+        }
+
+
+
 
 //        TextView textView_post_body = (TextView) findViewById(R.id.post_body);
 //        textView_post_body.setText("Hello, This posting is " + (position+1) );

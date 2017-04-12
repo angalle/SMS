@@ -1,5 +1,11 @@
 package univ.sm.board;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +16,48 @@ import java.util.List;
  */
 
 public class BoardManager {
-    List<Board> boardList = new ArrayList<>();
 
-    public BoardManager(String Data) {
+    private static ArrayList<Board> boardArrayList;
 
-        //TODO data load  -> Board 객체 생성 및 List 추가
+    public BoardManager(JSONObject data) {
+
+        //Board 객체 생성 및 List 추가
         ArrayList<Board> boardList = new ArrayList<>();
-        this.boardList = boardList;
+
+        try {
+            JSONObject jsonObject = data;
+            JSONArray callvanArray = jsonObject.getJSONArray("callvan");
+            Log.e("권수정", "callvanArray : " + callvanArray);
+            for (int i = 0; i < callvanArray.length(); i++) {
+                JSONObject jsonBaord = callvanArray.getJSONObject(i);
+                Log.e("권수정", "jsonBaord : " + jsonBaord);
+                Log.e("권수정", "jsonBaord.getString(\"CALL_BOARD_NO\") : " + jsonBaord.getString("CALL_BOARD_NO"));
+
+                Board board = new Board(jsonBaord.getString("CALL_BOARD_NO"), jsonBaord.getString("WRITE_NAME"),
+                        jsonBaord.getString("PASSWD"), jsonBaord.getString("DEPARTMENT"),
+                        jsonBaord.getString("STUDENT_NO"), jsonBaord.getString("DEPARTURE"),
+                        jsonBaord.getString("DEPARTURE_DETAIL"), jsonBaord.getString("DESTINATION"),
+                        jsonBaord.getString("DESTINATION_DETAIL"), jsonBaord.getString("REG_ID"),
+                        jsonBaord.getString("USE_FLAG"), jsonBaord.getString("PASSENGER_NUM"),
+                        jsonBaord.getString("WAIT_TIME"), jsonBaord.getString("INSERT_TIME"), jsonBaord.getString("INSERT_DATE"));
+
+                boardList.add(board);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.boardArrayList = boardList;
     }
 
-    public void add(){
+    public static ArrayList<Board> getBoardArrayList() {
+        if (boardArrayList == null) {
+            Log.e("board", "boardArrayList is null");
+        }
+        return boardArrayList;
+    }
+
+    public void add() {
 /*//POST PARAMETER
 WRITE_NAME			//작성자
 PASSWD				//글 비밀번호
@@ -33,4 +71,6 @@ REG_ID				//gcm 기기 값
 PASSENGER_NUM		//총 탑승인원
 WAIT_TIME			//대기시간*/
     }
+
+
 }

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import univ.sm.board.Board;
+import univ.sm.board.BoardManager;
 
 /**
  * board 통신부분
@@ -25,8 +26,10 @@ import univ.sm.board.Board;
 
 public class LoopjConnection {
     private static LoopjConnection instance;
+    private JSONObject result;
+
     public static LoopjConnection getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new LoopjConnection();
         }
         return instance;
@@ -37,24 +40,25 @@ public class LoopjConnection {
     private static String url = "http://52.78.113.18:40000";
     private static String getBoardListUrl = "/selectcallvan";
     private static String addPostingUrl = "/insertcallvan";
-    ArrayList<Board> boardArrayList = new ArrayList<>();
 
 
     /**
      * 콜벤 게시판 목록 호출하기
      *
-     * @return
+     * @return JSONObject
      */
-    public  ArrayList<Board> getBoardList() {
+    public JSONObject getBoardList() {
 
-        syncHttpClient.post(url+getBoardListUrl, new JsonHttpResponseHandler(){
-          @Override
-          public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-              super.onSuccess(statusCode, headers, response);
-              Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvan , status : " + statusCode + ", //onSuccess");
-              Log.e("권수정", "result : " + response );
+        syncHttpClient.post(url + getBoardListUrl, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvan , status : " + statusCode + ", //onSuccess");
+                Log.e("권수정", "result : " + response);
+                result = response;
+                BoardManager boardManager = new BoardManager(response);
+              /*try {
               JSONObject jsonObject = response;
-              try {
                   JSONArray callvanArray= jsonObject.getJSONArray("callvan");
                   Log.e("권수정", "callvanArray : " + callvanArray );
                   for(int i = 0; i < callvanArray.length(); i ++){
@@ -74,16 +78,16 @@ public class LoopjConnection {
                   }
               } catch (JSONException e) {
                   e.printStackTrace();
-              }
+              }*/
 
-          }
+            }
 
-          @Override
-          public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-              super.onFailure(statusCode, headers, throwable, errorResponse);
-          }
-      });
-        return boardArrayList;
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+        return result;
     }
 
     /*RequestParams params = new RequestParams();
@@ -103,10 +107,10 @@ PASSENGER_NUM		//총 탑승인원
 WAIT_TIME			//대기시간*/
 
     public void addPosting(RequestParams params) {
-        client.post(url+ addPostingUrl, params, new AsyncHttpResponseHandler() {
+        client.post(url + addPostingUrl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvan , status : " + statusCode + ", responseBody : "+responseBody.toString()+", //onSuccess");
+                Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvan , status : " + statusCode + ", responseBody : " + responseBody.toString() + ", //onSuccess");
             }
 
             @Override

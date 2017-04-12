@@ -34,6 +34,19 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBindView(boardArrayList.get(position));
+        /*itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("권수정", "click....^_^   :" + getLayoutPosition());
+                // 디테일 페이지로 이동
+                Intent boardIntent = new Intent();
+                boardIntent.setClass(context, BoardDetailPage.class);
+                boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                boardIntent.putExtra("position", getLayoutPosition());
+                context.startActivity(boardIntent);
+
+            }
+        });*/
 
     }
 
@@ -75,7 +88,11 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                     boardIntent.setClass(context, BoardDetailPage.class);
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     boardIntent.putExtra("position", getLayoutPosition());
+                    boardIntent.putExtra("board_no",boardArrayList.get(getLayoutPosition()).getBoard_no());
                     context.startActivity(boardIntent);
+
+
+
                 }
             });
         }
@@ -88,7 +105,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
             TextView name = (TextView) itemView.findViewById(R.id.name);
             DEPARTURE.setText(item.getDeparture());
             DESTINATION.setText(item.getDestination());
-            PASSENGER_NUM.setText(item.getPassenger_num());
+            PASSENGER_NUM.setText(""+item.getPassenger_num());
             name.setText(item.getWrite_name());
         }
     }

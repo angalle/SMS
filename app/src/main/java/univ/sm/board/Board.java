@@ -23,6 +23,7 @@ public class Board {
     private String wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
     private String insert_time;     //등록시간
     private String insert_date;        //등록날짜
+   // private BoardComment boardComment; //댓글
 
     public Board(String board_no, String write_name, String passwd, String department,
                  String student_no, String departure, String departure_detail, String destination,

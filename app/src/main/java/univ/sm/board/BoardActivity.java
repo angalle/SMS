@@ -33,28 +33,40 @@ public class BoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.board_list);
+
         pd = new ProgressDialog(BoardActivity.this);
 
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            protected void onPreExecute() {
+                super.onPreExecute();
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 pd.setMessage("로딩...");
                 pd.show();
             }
+
             @Override
             protected Void doInBackground(Void... params) {
                 /** CallVan board data download */
                 LoopjConnection connection = LoopjConnection.getInstance();
-                boardArrayList = connection.getBoardList();
-                Log.e("권수정", "boardArrayList.size() : " + boardArrayList.size());
+                connection.getBoardList();
                 return null;
             }
-        };
 
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                pd.dismiss();
+                setLayout();
+            }
+        }.execute(null, null, null);
+    }
 
+    private void setLayout() {
+        //SET UI
+        setContentView(R.layout.board_list);
+        boardArrayList = BoardManager.getBoardArrayList();
+        Log.i("권수정", "boardArrayList : " + boardArrayList.size());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -70,14 +82,5 @@ public class BoardActivity extends AppCompatActivity {
                 startActivity(go);
             }
         });
-
-
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
 }
