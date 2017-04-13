@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ public class Splash extends Activity {
             @Override
             public void onAdLoaded() {
                 mInterstitialAd.show();
+
             }
 
             @Override
@@ -103,5 +105,15 @@ public class Splash extends Activity {
                 .build();
 
         mInterstitialAd.loadAd(adRequest);
+
     }*/
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
 }

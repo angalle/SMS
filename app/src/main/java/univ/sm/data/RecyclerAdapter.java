@@ -56,9 +56,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.items = items;
         this.directionFlag = directionFlag;
         compareString = new ArrayList<String>();
-        for(int i=1; i<items.size();i++){
-            compareString.add(items.get(i).getB()[0]);
+        if(directionFlag == 0){
+            for(int i=1; i<items.size();i++){
+                compareString.add(items.get(i).getB()[0]);
+            }
+        }else{
+            for(int i=1; i<items.size();i++){
+                compareString.add(items.get(i).getB()[2]);
+            }
         }
+
     }
 
     @Override
@@ -230,7 +237,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 continue;
             }
 
-            if(compare_time < Integer.parseInt(tempData)){
+            if(compare_time < Integer.parseInt(tempData.replace("(금Ⅹ)",""))){
                 System.out.println(Integer.parseInt(tempData));
                 index = startIndex;
                 break;

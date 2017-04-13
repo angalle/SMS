@@ -43,8 +43,8 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
         String[] tempTime = new String[5];
         for(int i =0; i<5; i++){
             tempTime[i] = item.getB()[i].replace("(금Ⅹ)","\n(금Ⅹ)");
-
         }
+
         holder.entry_one.setText(tempTime[0]);
         holder.entry_two.setText(tempTime[1]);
         holder.entry_three.setText(tempTime[2]);
