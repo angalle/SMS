@@ -1,6 +1,5 @@
 package univ.sm.board;
 
-import java.sql.Time;
 
 /**
  * 게시글 data 객체
@@ -19,7 +18,7 @@ public class Board {
     private String destination_detail;  //목적지설명
     private String reg_id;               //gcm(push) 기기값
     private Boolean use_flag;            //사용 flag Y/N
-    private int passenger_num;        //총 인원
+    private String passenger_num;        //총 인원
     private String wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
     private String insert_time;     //등록시간
     private String insert_date;        //등록날짜
@@ -44,7 +43,7 @@ public class Board {
             this.use_flag = true;
         }
         this.use_flag = false;
-        this.passenger_num = Integer.parseInt(passenger_num);
+        this.passenger_num = passenger_num;
         this.wait_time = wait_time;
         this.insert_time = insert_time;
         this.insert_date = insert_date;
@@ -138,11 +137,11 @@ public class Board {
         this.use_flag = use_flag;
     }
 
-    public int getPassenger_num() {
+    public String getPassenger_num() {
         return passenger_num;
     }
 
-    public void setPassenger_num(int passenger_num) {
+    public void setPassenger_num(String passenger_num) {
         this.passenger_num = passenger_num;
     }
 

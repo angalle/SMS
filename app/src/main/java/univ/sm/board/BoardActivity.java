@@ -40,6 +40,8 @@ public class BoardActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                //SET UI
+                setContentView(R.layout.board_list);
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 pd.setMessage("로딩...");
                 pd.show();
@@ -63,11 +65,8 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void setLayout() {
-        //SET UI
-        setContentView(R.layout.board_list);
         boardArrayList = BoardManager.getBoardArrayList();
         Log.i("권수정", "boardArrayList : " + boardArrayList.size());
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);

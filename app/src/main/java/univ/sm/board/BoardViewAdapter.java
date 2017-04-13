@@ -34,32 +34,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         holder.onBindView(boardArrayList.get(position));
-        /*itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("권수정", "click....^_^   :" + getLayoutPosition());
-                // 디테일 페이지로 이동
-                Intent boardIntent = new Intent();
-                boardIntent.setClass(context, BoardDetailPage.class);
-                boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                boardIntent.putExtra("position", getLayoutPosition());
-                context.startActivity(boardIntent);
-
-            }
-        });*/
-
     }
-
-    public void add(Board data) {
-        boardArrayList.add(data);
-        notifyDataSetChanged();
-
-    }
-
-    public void remove(int index) {
-        boardArrayList.remove(index);
-    }
-
 
     @Override
     public int getItemCount() {
@@ -90,8 +65,6 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                     boardIntent.putExtra("position", getLayoutPosition());
                     boardIntent.putExtra("board_no",boardArrayList.get(getLayoutPosition()).getBoard_no());
                     context.startActivity(boardIntent);
-
-
 
                 }
             });
