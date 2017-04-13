@@ -26,14 +26,14 @@ import univ.sm.data.SplashData;
 
 public class Splash extends Activity {
     public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
-    public InterstitialAd mInterstitialAd;
+//    public InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.splash);
 
-        mInterstitialAd = new InterstitialAd(this);
+       /* mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
         requestNewInterstitial();
 
@@ -48,7 +48,7 @@ public class Splash extends Activity {
             public void onAdFailedToLoad(int errorCode) {
                 Toast.makeText(getApplicationContext(),"erroCode"+errorCode,Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         Thread th = new Thread(){
             @Override
@@ -98,13 +98,16 @@ public class Splash extends Activity {
         return true;
     }
 
-    private void requestNewInterstitial() {
+    /*private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
 
                 .build();
 
         mInterstitialAd.loadAd(adRequest);
+
+    }*/
+
     }
 
     @Override
@@ -112,4 +115,5 @@ public class Splash extends Activity {
         super.onBackPressed();
 
     }
+
 }

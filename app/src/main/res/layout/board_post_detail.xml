@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--"CALL_BOARD_NO" 인덱스,
-      "WRITE_NAME" 글쓴이,"PASSWD": 비밀번호 "DEPARTMENT": "00001", "STUDENT_NO": "2010244060",
-      "DEPARTURE_DETAIL": "아산역 셔틀장",
-      "DESTINATION": "선문대",
-      "DESTINATION_DETAIL": "선문대 기숙사",
-      "REG_ID": "REGISTE IDENTITY",
-      "PASSENGER_NUM": "4",
-      "WAIT_TIME": "210915"-->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -51,48 +44,155 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="출발지  >> "
+                android:text="글쓴이 : "
+                android:textColor="#eeb8b8" />
+
+            <TextView
+                android:id="@+id/WRITE_NAME_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="이름..."
                 android:textColor="#555555" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="도착지"
+                android:text="학과 : "
+                android:textColor="#eeb8b8" />
+
+            <TextView
+                android:id="@+id/DEPARTMENT_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="학과..."
                 android:textColor="#555555" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학번 : "
+                android:textColor="#eeb8b8" />
+
+            <TextView
+                android:id="@+id/STUDENT_NO_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="학번..."
+                android:textColor="#555555" />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="글쓴이 정보"
-            android:textColor="#eeb8b8" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="학과..."
-            android:textColor="#555555" />
+            <TextView
+                android:id="@+id/DEPARTURE_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="출발지"
+                android:textColor="#555555"
+                android:textSize="20sp" />
 
-        <TextView
+            <TextView
+                android:id="@+id/DEPARTURE_DETAIL_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="출발지 설명"
+                android:textColor="#555555"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/DESTINATION_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="도착지"
+                android:textColor="#555555"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/DESTINATION_DETAIL_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="도착지 설명"
+                android:textColor="#555555"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="학번..."
-            android:textColor="#555555" />
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모집 인원 : "
+                android:textColor="#eeb8b8" />
+
+            <TextView
+                android:id="@+id/PASSENGER_NUM_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView3"
+                android:layout_toRightOf="@+id/textView3"
+                android:paddingLeft="5dp"
+                android:paddingRight="20dp"
+                android:text="5명"
+                android:textColor="#555555" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/WAIT_TIME_view"
+                android:layout_toStartOf="@+id/WAIT_TIME_view"
+                android:text="시간 정보 : "
+                android:textColor="#eeb8b8" />
+
+            <TextView
+                android:id="@+id/WAIT_TIME_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:hint="몇분남음음..."
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#555555" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#eeb8b8"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:background="#eeb8b8" />
 
         <TextView
             android:layout_width="match_parent"
@@ -107,29 +207,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/commentRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:paddingTop="5dp" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/transparent_background"></LinearLayout>
-            </LinearLayout>
         </RelativeLayout>
 
     </LinearLayout>

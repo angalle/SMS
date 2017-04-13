@@ -34,6 +34,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/DEPARTURE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -60,6 +61,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/DESTINATION"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -78,7 +80,7 @@
         android:paddingBottom="5dp">
 
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -87,6 +89,7 @@
             android:textSize="13sp" />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -95,6 +98,7 @@
             android:textSize="13sp" />
 
         <TextView
+            android:id="@+id/passengerNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
