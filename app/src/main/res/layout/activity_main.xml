@@ -25,7 +25,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_weight="2.3"
-        android:weightSum="3"
+        android:weightSum="4"
         android:background="#f1f1f2"
         android:gravity="center"
         android:orientation="horizontal">
@@ -114,6 +114,33 @@
                 android:textColor="#58595b"
                 android:textSize="10dp"
                 android:id="@+id/textView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:weightSum="5"
+            android:id="@+id/callboard_menu_btn">
+
+            <ImageView
+                android:src="@drawable/call_menu_btn"
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+                android:adjustViewBounds="false"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/full_menu_title"
+                android:textColor="#58595b"
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 

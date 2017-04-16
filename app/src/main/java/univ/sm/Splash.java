@@ -108,7 +108,7 @@ public class Splash extends Activity {
 
     }*/
 
-    }
+
 
     @Override
     public void onBackPressed() {
