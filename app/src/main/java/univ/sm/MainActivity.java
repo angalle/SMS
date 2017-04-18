@@ -44,6 +44,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         sch_entry_btn = (LinearLayout) findViewById(R.id.sch_entry_btn);
         app_info_btn = (LinearLayout) findViewById(R.id.app_info_btn);
 
+        /** 추가 기능-버튼 클릭시 게시판 */
         LinearLayout mainImageView = (LinearLayout) findViewById(R.id.callboard_menu_btn);
         mainImageView.setOnClickListener(this);
 
@@ -52,8 +53,6 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         app_info_btn.setOnClickListener(this);
 
         g_limit_v = getSharedPreferences(Const.SHARED_LIMETE_LAYOUT, MODE_PRIVATE);
-
-        /** 추가 기능-버튼 클릭시 게시판 */
 
 
     }
@@ -94,11 +93,9 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             dialog.show();*/
             intent.setClass(MainActivity.this, InfoActivity.class);
             startActivity(intent);
-        } else if (v.getId() == R.id.mainImgview) {
+        } else if (v.getId() == R.id.callboard_menu_btn) {
             intent.setClass(MainActivity.this, BoardActivity.class);
             startActivity(intent);
         }
     }
-
-
 }
