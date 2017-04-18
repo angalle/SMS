@@ -6,7 +6,7 @@ package univ.sm.board;
  * Created by kwonsoojeong on 2017-03-24.
  */
 
-public class Board {
+public class Post {
     private String board_no;    //게시글 번호 CALL_BOARD_NO
     private String write_name;            //작성자 명
     private String passwd;                //비밀번호
@@ -24,10 +24,10 @@ public class Board {
     private String insert_date;        //등록날짜
    // private BoardComment boardComment; //댓글
 
-    public Board(String board_no, String write_name, String passwd, String department,
-                 String student_no, String departure, String departure_detail, String destination,
-                 String destination_detail, String reg_id, String use_flag, String passenger_num,
-                 String wait_time, String insert_time, String insert_date) {
+    public Post(String board_no, String write_name, String passwd, String department,
+                String student_no, String departure, String departure_detail, String destination,
+                String destination_detail, String reg_id, String use_flag, String passenger_num,
+                String wait_time, String insert_time, String insert_date) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -49,6 +49,31 @@ public class Board {
         this.insert_date = insert_date;
     }
 
+    /**
+     * 게시글 Detailpage 에서 새로고침시 사용
+     * 게시글 새로고침하기
+     * @param newPost
+     */
+    public void refreshPost(Post newPost){
+        this.board_no = newPost.board_no;
+        this.write_name = newPost.write_name;
+        this.passwd = newPost.passwd;
+        this.department = newPost.department;
+        this.student_no = newPost.student_no;
+        this.departure = newPost.departure;
+        this.departure_detail = newPost.departure_detail;
+        this.destination = newPost.destination;
+        this.destination_detail = newPost.destination_detail;
+//        this.reg_id = newPost.reg_id;
+        if(newPost.use_flag.equals("Y")){
+            this.use_flag = true;
+        }
+        this.use_flag = false;
+        this.passenger_num = newPost.passenger_num;
+        this.wait_time = newPost.wait_time;
+        this.insert_time = newPost.insert_time;
+        this.insert_date = newPost.insert_date;
+    }
     public String getBoard_no() {
         return board_no;
     }

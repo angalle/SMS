@@ -3,25 +3,23 @@ package univ.sm.board;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
+import univ.sm.connect.LoopjConnection;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
-    private List<Board> boardArrayList = new ArrayList<>();    //List<Board> items = new ArrayList<>;
+    private List<Post> postArrayList = new ArrayList<>();    //List<Post> items = new ArrayList<>;
     private Context context;
 
-    public BoardViewAdapter(List<Board> mItems, Context context) {
-        this.boardArrayList = mItems;
+    public BoardViewAdapter(List<Post> mItems, Context context) {
+        this.postArrayList = mItems;
         this.context = context;
     }
 
@@ -33,14 +31,20 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.onBindView(boardArrayList.get(position));
+        holder.onBindView(postArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return boardArrayList.size();
+        return postArrayList.size();
     }
 
+    public void setBoardArrayList(){
+        //어뎁터 board 리스트 새로 받아오기
+        LoopjConnection connection = LoopjConnection.getInstance();
+        connection.getBoardList();
+        postArrayList = BoardManager.getPostArrayList();
+    }
 
     public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
         public BaseViewHolder(View itemView) {
@@ -50,20 +54,19 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         public abstract void onBindView(ITEM item);
     }
 
-    public class ViewHolder extends BaseViewHolder<Board> {
+    public class ViewHolder extends BaseViewHolder<Post> {
 
         private ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("권수정", "click....^_^   :" + getLayoutPosition());
                     // 디테일 페이지로 이동
                     Intent boardIntent = new Intent();
                     boardIntent.setClass(context, BoardDetailPage.class);
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     boardIntent.putExtra("position", getLayoutPosition());
-                    boardIntent.putExtra("board_no",boardArrayList.get(getLayoutPosition()).getBoard_no());
+                    boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
                     context.startActivity(boardIntent);
 
                 }
@@ -71,7 +74,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         }
 
         @Override
-        public void onBindView(Board item) {
+        public void onBindView(Post item) {
             TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
             TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
             TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);

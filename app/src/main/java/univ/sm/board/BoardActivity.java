@@ -27,24 +27,17 @@ public class BoardActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private Button new_btn;
-    private ArrayList<Board> boardArrayList = new ArrayList<>();
-    private ProgressDialog pd;
+    private ArrayList<Post> postArrayList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        pd = new ProgressDialog(BoardActivity.this);
-
+    protected void onResume() {
+        super.onResume();
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
                 //SET UI
                 setContentView(R.layout.board_list);
-                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pd.setMessage("로딩...");
-                pd.show();
             }
 
             @Override
@@ -58,19 +51,17 @@ public class BoardActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                pd.dismiss();
                 setLayout();
             }
         }.execute(null, null, null);
     }
 
     private void setLayout() {
-        boardArrayList = BoardManager.getBoardArrayList();
-        Log.i("권수정", "boardArrayList : " + boardArrayList.size());
+        postArrayList = BoardManager.getPostArrayList();
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        BoardViewAdapter boardViewAdapter = new BoardViewAdapter(boardArrayList, getApplicationContext());
+        BoardViewAdapter boardViewAdapter = new BoardViewAdapter(postArrayList, getApplicationContext());
         mRecyclerView.setAdapter(boardViewAdapter);
 
         new_btn = (Button) findViewById(R.id.new_btn);

@@ -19,7 +19,7 @@
     <string name="quick_menu_title">빠른 버스 보기</string>
     <string name="full_menu_title">버스시간표 보기</string>
     <string name="question_menu_title">공지사항 ＆ 사용방법</string>
-
+    <string name="call_menu_title">콜벤 같이 타기</string>
 
     <!--        일정 타이틀      -->
     <string name="KTX">Cheonan Station</string>
@@ -31,7 +31,7 @@
     <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
 
 
-    <!--        board 관련        -->
+    <!--        post 관련        -->
     <string-array name="wait_time_array">
         <item>5</item>
         <item>10</item>

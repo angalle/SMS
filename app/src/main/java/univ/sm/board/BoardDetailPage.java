@@ -2,7 +2,6 @@ package univ.sm.board;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.BaseObj;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -44,20 +43,23 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         position = intent.getExtras().getInt("position");
         board_no = intent.getExtras().getString("board_no");
 
+        //todo 디테일 페이지 데이터 받아오기 (post + 댓글)
+//         LoopjConnection.getInstance().getonePost(new RequestParams("CALL_BOARD_NO",board_no));
+//        BoardManager.refreshPost(position,/*jsonobject*/);
 
-        //todo 디테일 페이지를 새로고침하게되면 어떻게 해야될까?... 보드 하나만 받아와야하나? or 보드리스트를 다시받아온다?
+//todo 디테일 페이지를 새로고침
 
-        Board board = BoardManager.getBoardArrayList().get(position);
-        if (board.getBoard_no().equals(board_no)) {
-            WRITE_NAME_view.setText(board.getWrite_name());
-            DEPARTMENT_view.setText(board.getDepartment());
-            STUDENT_NO_view.setText(board.getStudent_no());
-            DEPARTURE_view.setText(board.getDeparture());
-            DEPARTURE_DETAIL_view.setText(board.getDeparture_detail());
-            DESTINATION_view.setText(board.getDestination());
-            DESTINATION_DETAIL_view.setText(board.getDestination_detail());
-            PASSENGER_NUM_view.setText(board.getPassenger_num() + "명");
-            WAIT_TIME_view.setText(board.getWait_time());
+        Post post = BoardManager.getPostArrayList().get(position);
+        if (post.getBoard_no().equals(board_no)) {
+            WRITE_NAME_view.setText(post.getWrite_name());
+            DEPARTMENT_view.setText(post.getDepartment());
+            STUDENT_NO_view.setText(post.getStudent_no());
+            DEPARTURE_view.setText(post.getDeparture());
+            DEPARTURE_DETAIL_view.setText(post.getDeparture_detail());
+            DESTINATION_view.setText(post.getDestination());
+            DESTINATION_DETAIL_view.setText(post.getDestination_detail());
+            PASSENGER_NUM_view.setText(post.getPassenger_num() + "명");
+            WAIT_TIME_view.setText(post.getWait_time());
         }
 
     }
