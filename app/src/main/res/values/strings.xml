@@ -29,6 +29,9 @@
     <string name="AsanCampus">Asan\nCampus</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
+    <string name="BoardTitle">게시물 목록</string>
+    <string name="WRITER">작성자</string>
+    <string name="DEPARTMENT">학과</string>
 
 
     <!--        post 관련        -->

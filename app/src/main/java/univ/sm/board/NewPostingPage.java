@@ -1,6 +1,7 @@
 package univ.sm.board;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,8 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_posting);
+        SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
+        Log.e("::::::", "::::::::::" + sp.getString("reg-id", ""));
         //set click Listener
         Button upload_btn = (Button) findViewById(R.id.upload_btn);
         LinearLayout postingLayout = (LinearLayout) findViewById(R.id.posting_layout);

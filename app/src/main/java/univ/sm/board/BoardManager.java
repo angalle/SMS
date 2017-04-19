@@ -79,7 +79,7 @@ public class BoardManager {
                     jsonPost.getString("DEPARTURE_DETAIL"), jsonPost.getString("DESTINATION"),
                     jsonPost.getString("DESTINATION_DETAIL"), jsonPost.getString("REG_ID"),
                     jsonPost.getString("USE_FLAG"), jsonPost.getString("PASSENGER_NUM"),
-                    jsonPost.getString("WAIT_TIME"), jsonPost.getString("INSERT_TIME"), jsonPost.getString("INSERT_DATE"));
+                    jsonPost.getString("WAIT_TIME"), jsonPost.getString("INSERT_TIME"), jsonPost.getString("INSERT_DATE"), jsonPost.getString("REMAIN_TIME"));
 
             //todo 댓글 리스트도 추가해서 Post 만들어야함
 

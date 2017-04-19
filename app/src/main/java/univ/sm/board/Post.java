@@ -22,12 +22,15 @@ public class Post {
     private String wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
     private String insert_time;     //등록시간
     private String insert_date;        //등록날짜
-   // private BoardComment boardComment; //댓글
+    private String remain_time;        //등록날짜
+
+
+    // private BoardComment boardComment; //댓글
 
     public Post(String board_no, String write_name, String passwd, String department,
                 String student_no, String departure, String departure_detail, String destination,
                 String destination_detail, String reg_id, String use_flag, String passenger_num,
-                String wait_time, String insert_time, String insert_date) {
+                String wait_time, String insert_time, String insert_date, String remain_time) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -47,6 +50,7 @@ public class Post {
         this.wait_time = wait_time;
         this.insert_time = insert_time;
         this.insert_date = insert_date;
+        this.remain_time = remain_time;
     }
 
     /**
@@ -73,6 +77,7 @@ public class Post {
         this.wait_time = newPost.wait_time;
         this.insert_time = newPost.insert_time;
         this.insert_date = newPost.insert_date;
+        this.remain_time = remain_time;
     }
     public String getBoard_no() {
         return board_no;
@@ -192,5 +197,12 @@ public class Post {
 
     public void setInsert_date(String insert_date) {
         this.insert_date = insert_date;
+    }
+    public String getRemain_time() {
+        return remain_time;
+    }
+
+    public void setRemain_time(String remain_time) {
+        this.remain_time = remain_time;
     }
 }
