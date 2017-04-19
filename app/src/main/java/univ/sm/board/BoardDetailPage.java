@@ -39,6 +39,9 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         Button close_btn = (Button) findViewById(R.id.close_btn);
         close_btn.setOnClickListener(this);
 
+        Button comment_btn = (Button) findViewById(R.id.comment_btn);
+        comment_btn.setOnClickListener(this);
+
         Intent intent = getIntent();
         position = intent.getExtras().getInt("position");
         board_no = intent.getExtras().getString("board_no");
@@ -68,7 +71,9 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.comment_btn:
-                //키보드 up, add text;
+                Intent commentPage = new Intent();
+                commentPage.setClass(BoardDetailPage.this, BoardActivity.class);
+                startActivity(commentPage);
                 break;
             case R.id.close_btn:
                 finish();
