@@ -19,8 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/board_title"
-        android:background="#f0a0a0"
-        />
+        android:background="#f0a0a0" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -41,10 +40,17 @@
         android:gravity="right">
 
         <Button
+            android:id="@+id/refresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh List" />
+
+        <Button
             android:id="@+id/new_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="new posting" />
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -26,8 +26,9 @@ import univ.sm.connect.LoopjConnection;
 public class BoardActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private Button new_btn;
+    private Button new_btn, refresh_btn;
     private ArrayList<Post> postArrayList = new ArrayList<>();
+    BoardViewAdapter boardViewAdapter;
 
     @Override
     protected void onResume() {
@@ -61,10 +62,32 @@ public class BoardActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        BoardViewAdapter boardViewAdapter = new BoardViewAdapter(postArrayList, getApplicationContext());
+        boardViewAdapter = new BoardViewAdapter(postArrayList, getApplicationContext());
         mRecyclerView.setAdapter(boardViewAdapter);
 
+        refresh_btn = (Button) findViewById(R.id.refresh_btn);
         new_btn = (Button) findViewById(R.id.new_btn);
+        refresh_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        /** CallVan board data download */
+                        LoopjConnection connection = LoopjConnection.getInstance();
+                        connection.getBoardList();
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        boardViewAdapter.setBoardArrayList(BoardManager.getPostArrayList());
+                        boardViewAdapter.notifyDataSetChanged();
+                    }
+                }.execute(null, null, null);
+            }
+        });
         new_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,5 +95,6 @@ public class BoardActivity extends AppCompatActivity {
                 startActivity(go);
             }
         });
+
     }
 }

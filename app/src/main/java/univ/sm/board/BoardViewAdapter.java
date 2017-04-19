@@ -39,11 +39,11 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         return postArrayList.size();
     }
 
-    public void setBoardArrayList(){
+    public void setBoardArrayList(List<Post> boardArrayList){
         //어뎁터 board 리스트 새로 받아오기
-        LoopjConnection connection = LoopjConnection.getInstance();
-        connection.getBoardList();
-        postArrayList = BoardManager.getPostArrayList();
+        postArrayList.clear();
+        postArrayList.addAll(boardArrayList);
+        notifyDataSetChanged();
     }
 
     public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
