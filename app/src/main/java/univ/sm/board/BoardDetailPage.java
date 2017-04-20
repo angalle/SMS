@@ -1,9 +1,11 @@
 package univ.sm.board;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +41,9 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         Button close_btn = (Button) findViewById(R.id.close_btn);
         close_btn.setOnClickListener(this);
 
+        Button comment_btn = (Button) findViewById(R.id.comment_btn);
+        comment_btn.setOnClickListener(this);
+
         Intent intent = getIntent();
         position = intent.getExtras().getInt("position");
         board_no = intent.getExtras().getString("board_no");
@@ -68,7 +73,9 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.comment_btn:
-                //키보드 up, add text;
+                Intent commentPage = new Intent();
+                commentPage.setClass(BoardDetailPage.this, BoardActivity.class);
+                startActivity(commentPage);
                 break;
             case R.id.close_btn:
                 finish();

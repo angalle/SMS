@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,38 +28,45 @@ import univ.sm.connect.LoopjConnection;
 public class BoardActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private Button new_btn, refresh_btn;
+    private TextView new_btn;
+    private ImageView refresh_btn;
     private ArrayList<Post> postArrayList = new ArrayList<>();
     BoardViewAdapter boardViewAdapter;
 
     @Override
     protected void onResume() {
         super.onResume();
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                //SET UI
-                setContentView(R.layout.board_list);
-            }
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                /** CallVan board data download */
-                LoopjConnection connection = LoopjConnection.getInstance();
-                connection.getBoardList();
-                return null;
-            }
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    //SET UI
+                    setContentView(R.layout.board_list);
+                }
 
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                setLayout();
-            }
-        }.execute(null, null, null);
+                @Override
+                protected Void doInBackground(Void... params) {
+                    /** CallVan board data download */
+                    LoopjConnection connection = LoopjConnection.getInstance();
+                    connection.getBoardList();
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    try {
+                        setLayout();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }.execute(null, null, null);
+
     }
 
-    private void setLayout() {
+    private void setLayout() throws Exception{
         postArrayList = BoardManager.getPostArrayList();
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -65,8 +74,8 @@ public class BoardActivity extends AppCompatActivity {
         boardViewAdapter = new BoardViewAdapter(postArrayList, getApplicationContext());
         mRecyclerView.setAdapter(boardViewAdapter);
 
-        refresh_btn = (Button) findViewById(R.id.refresh_btn);
-        new_btn = (Button) findViewById(R.id.new_btn);
+        refresh_btn = (ImageView) findViewById(R.id.refresh_btn);
+        new_btn = (TextView) findViewById(R.id.new_btn);
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

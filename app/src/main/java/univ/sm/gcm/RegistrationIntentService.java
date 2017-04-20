@@ -78,6 +78,11 @@ public class RegistrationIntentService extends IntentService{
 
 	private void sendRegistrationToServer(String regid) {
 		// TODO Auto-generated method stub
+        SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
+        SharedPreferences.Editor spe = sp.edit();
+        Log.e("::::::::::::",":::::::"+regid);
+        spe.putString("reg-id",regid);
+        spe.commit();
 		GCMConnection gcmCon = new GCMConnection(regid);
 
 		//gcmCon.HttpPostConnect(SplashData.addrSM);

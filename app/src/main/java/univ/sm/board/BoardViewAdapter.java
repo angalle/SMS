@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import univ.sm.R;
@@ -78,11 +81,14 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
             TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
             TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
             TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
-            TextView name = (TextView) itemView.findViewById(R.id.name);
+            TextView WRITE_NAME = (TextView) itemView.findViewById(R.id.name);
+            TextView WAIT_TIME = (TextView) itemView.findViewById(R.id.waitTime);
+
+            WAIT_TIME.setText(item.getRemain_time());
             DEPARTURE.setText(item.getDeparture());
             DESTINATION.setText(item.getDestination());
-            PASSENGER_NUM.setText(""+item.getPassenger_num());
-            name.setText(item.getWrite_name());
+            PASSENGER_NUM.setText("총 "+item.getPassenger_num());
+            WRITE_NAME.setText(item.getWrite_name());
         }
     }
 
