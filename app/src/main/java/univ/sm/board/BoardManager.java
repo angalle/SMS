@@ -87,7 +87,7 @@ public class BoardManager {
                     jsonPost.getString("USE_FLAG"), jsonPost.getString("PASSENGER_NUM"),
                     jsonPost.getString("WAIT_TIME"), jsonPost.getString("INSERT_TIME"), jsonPost.getString("INSERT_DATE"), jsonPost.getString("REMAIN_TIME"));
 
-            //todo 댓글 리스트도 추가해서 Post 만들어야함
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class BoardManager {
                     postjson.getString("WAIT_TIME"), postjson.getString("INSERT_TIME"),
                     postjson.getString("INSERT_DATE"), postjson.getString("REMAIN_TIME"),commentsList);
 
-            //todo 댓글 리스트도 추가해서 Post 만들어야함
+            //댓글 리스트 추가해서 Post 만들기
 
         } catch (JSONException e) {
             e.printStackTrace();

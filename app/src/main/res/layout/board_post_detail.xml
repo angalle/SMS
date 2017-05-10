@@ -230,25 +230,69 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/comment_info_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_passwd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/comment_info_ok_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#eeb8b8"
+                android:text="OK" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/comment_info_Layout"
             android:background="#eeb8b8"
             android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/comment_popup_btn"/>
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_editText"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:hint="댓글을 입력하세요" />
 
             <Button
                 android:id="@+id/comment_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="comment" />
+                android:layout_height="match_parent"
+                android:text="OK" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/close_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="close" />
+                android:text="close" />-->
         </LinearLayout>
 
     </RelativeLayout>
