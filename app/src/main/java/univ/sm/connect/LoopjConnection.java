@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import univ.sm.board.BoardManager;
+import univ.sm.board.Post;
 
 /**
  * board 통신부분
@@ -20,7 +21,8 @@ import univ.sm.board.BoardManager;
 
 public class LoopjConnection {
     private static LoopjConnection instance;
-    private JSONObject result;
+//    private JSONObject result;
+    private Object result;
 
     public static LoopjConnection getInstance() {
         if (instance == null) {
@@ -34,8 +36,9 @@ public class LoopjConnection {
     private static String boardUrl = "http://52.78.113.18:40000";
     private static String getBoardListUrl = "/selectcallvan";
     private static String addPostingUrl = "/insertcallvan";
-    private static String getonepostUrl = "/selectcallvaninfo'";
-
+    private static String getonepostUrl = "/selectcallvaninfo";
+    private static String addCommentUrl = "/insertcallvancomment";
+    private BoardManager boardManager;
 
 
     /*RequestParams params = new RequestParams();
@@ -80,7 +83,7 @@ public class LoopjConnection {
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvan , status : " + statusCode + ", //onSuccess");
                 Log.e("권수정", "result : " + response);
                 result = response;
-                BoardManager boardManager = new BoardManager(response);
+                boardManager = new BoardManager(response);
             }
 
             @Override
@@ -88,7 +91,7 @@ public class LoopjConnection {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
-        return result;
+        return (JSONObject) result;
     }
     /*{
   "CALLVAN_INFO": [
@@ -115,6 +118,7 @@ public class LoopjConnection {
 
     /*RequestParams params = new RequestParams();
     params.put("CALL_BOARD_NO", "ANONY2017041800042");*/
+
     /**
      * 게시글 한개 불러오기
      * 게시판 + 댓글 포함
@@ -122,21 +126,54 @@ public class LoopjConnection {
      * @param postNo (CALL_BOARD_NO : ex. ANONY2017041800042)
      * @return
      */
-    public String getonePost(RequestParams postNo) {
-        String result = "";
+    public Post getonePost(RequestParams postNo) {
         client.post(boardUrl + getonepostUrl, postNo, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvaninfo , status : " + statusCode + ", //onSuccess");
+                Log.e("LoopjConnect", "response  : " + response);
+
+               result = BoardManager.json2PostWithComment(response);
+//todo test필요
+
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvaninfo , status : " + statusCode + ", //onFailure");
+                result = null;
             }
         });
-        return result;
+        return (Post) result;
     }
+
+    /*
+    //PARAMETER
+    var CALL_BOARD_NO              //해당글의 INDEX
+    var COMMENT_LEVEL             // 댓글의 댓글레벨
+    var CONTENTS                         // 내용
+    var REG_ID                                // 댓글 남긴사람의 기기값
+    var WRITE_NAME                      // 작성자이름
+    var DEPARTMENT                      // 학과
+    var BEFORE_COMMENT_NO    // 이전 댓글 INDEX - 이전 인덱스를 찾아서 레벨로 댓글의 댓글기능 구성
+    var SEND_REG_ID    	             // 타겟이 될 사람의 기기값
+    // 탑승 신청시 -  글쓴이의 기기값
+    // 글쓴이가 답변남길시 - 해당 댓글남긴사람의 기기값.*/
+    public void addComment(RequestParams params) {
+        client.post(boardUrl + addCommentUrl, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvancomment , status : " + statusCode + ", //onSuccess");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvancomment , status : " + statusCode + ", //onFailure");
+            }
+        });
+    }
+
+
 }

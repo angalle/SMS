@@ -1,6 +1,10 @@
 package univ.sm.board;
 
 
+import java.util.ArrayList;
+
+import univ.sm.data.Comment;
+
 /**
  * 게시글 data 객체
  * Created by kwonsoojeong on 2017-03-24.
@@ -24,8 +28,7 @@ public class Post {
     private String insert_date;        //등록날짜
     private String remain_time;        //등록날짜
 
-
-    // private BoardComment boardComment; //댓글
+    private ArrayList<Comment> commentList; //댓글리스트
 
     public Post(String board_no, String write_name, String passwd, String department,
                 String student_no, String departure, String departure_detail, String destination,
@@ -42,7 +45,7 @@ public class Post {
         this.destination = destination;
         this.destination_detail = destination_detail;
         this.reg_id = reg_id;
-        if(use_flag.equals("Y")){
+        if (use_flag.equals("Y")) {
             this.use_flag = true;
         }
         this.use_flag = false;
@@ -51,14 +54,44 @@ public class Post {
         this.insert_time = insert_time;
         this.insert_date = insert_date;
         this.remain_time = remain_time;
+
     }
+
+    public Post(String board_no, String write_name, String passwd, String department,
+                String student_no, String departure, String departure_detail, String destination,
+                String destination_detail, String reg_id, String use_flag, String passenger_num,
+                String wait_time, String insert_time, String insert_date, String remain_time, ArrayList<Comment> commentList) {
+
+        this.board_no = board_no;
+        this.write_name = write_name;
+        this.passwd = passwd;
+        this.department = department;
+        this.student_no = student_no;
+        this.departure = departure;
+        this.departure_detail = departure_detail;
+        this.destination = destination;
+        this.destination_detail = destination_detail;
+        this.reg_id = reg_id;
+        if (use_flag.equals("Y")) {
+            this.use_flag = true;
+        }
+        this.use_flag = false;
+        this.passenger_num = passenger_num;
+        this.wait_time = wait_time;
+        this.insert_time = insert_time;
+        this.insert_date = insert_date;
+        this.remain_time = remain_time;
+        this.commentList = commentList;
+    }
+
 
     /**
      * 게시글 Detailpage 에서 새로고침시 사용
      * 게시글 새로고침하기
+     *
      * @param newPost
      */
-    public void refreshPost(Post newPost){
+    public void refreshPost(Post newPost) {
         this.board_no = newPost.board_no;
         this.write_name = newPost.write_name;
         this.passwd = newPost.passwd;
@@ -69,7 +102,7 @@ public class Post {
         this.destination = newPost.destination;
         this.destination_detail = newPost.destination_detail;
 //        this.reg_id = newPost.reg_id;
-        if(newPost.use_flag.equals("Y")){
+        if (newPost.use_flag.equals("Y")) {
             this.use_flag = true;
         }
         this.use_flag = false;
@@ -79,6 +112,7 @@ public class Post {
         this.insert_date = newPost.insert_date;
         this.remain_time = remain_time;
     }
+
     public String getBoard_no() {
         return board_no;
     }
@@ -198,6 +232,7 @@ public class Post {
     public void setInsert_date(String insert_date) {
         this.insert_date = insert_date;
     }
+
     public String getRemain_time() {
         return remain_time;
     }
