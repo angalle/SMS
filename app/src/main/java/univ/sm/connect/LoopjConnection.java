@@ -1,5 +1,6 @@
 package univ.sm.connect;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -21,15 +22,20 @@ import univ.sm.board.Post;
 
 public class LoopjConnection {
     private static LoopjConnection instance;
-//    private JSONObject result;
-    private Object result;
 
-    public static LoopjConnection getInstance() {
+      //    private JSONObject result;
+    private Object result;
+    private Post postResult;
+    private static Context mContext;
+
+    public static LoopjConnection getInstance(Context context) {
         if (instance == null) {
             instance = new LoopjConnection();
         }
+        mContext = context;
         return instance;
     }
+
 
     private AsyncHttpClient client = new AsyncHttpClient();
     private SyncHttpClient syncHttpClient = new SyncHttpClient();
@@ -126,16 +132,17 @@ public class LoopjConnection {
      * @param postNo (CALL_BOARD_NO : ex. ANONY2017041800042)
      * @return
      */
-    public Post getonePost(RequestParams postNo) {
-        client.post(boardUrl + getonepostUrl, postNo, new JsonHttpResponseHandler() {
+    public Post getOnePost(RequestParams postNo) {
+
+        syncHttpClient.post(boardUrl + getonepostUrl, postNo, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvaninfo , status : " + statusCode + ", //onSuccess");
                 Log.e("LoopjConnect", "response  : " + response);
 
-               result = BoardManager.json2PostWithComment(response);
-//todo test필요
+                postResult = BoardManager.json2PostWithComment(response);
+
 
             }
 
@@ -143,10 +150,10 @@ public class LoopjConnection {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvaninfo , status : " + statusCode + ", //onFailure");
-                result = null;
+                postResult = null;
             }
         });
-        return (Post) result;
+        return postResult;
     }
 
     /*

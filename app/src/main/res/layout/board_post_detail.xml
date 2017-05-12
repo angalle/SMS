@@ -188,38 +188,42 @@
                 android:textColor="#555555" />
         </RelativeLayout>
 
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#eeeeee"
+            android:gravity="center"
+            android:text="댓글"
+            android:textColor="#434343" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:background="#eeb8b8" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="댓글"
-            android:textColor="#eeb8b8" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/commentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="5dp" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/commentRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:paddingTop="5dp" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </RelativeLayout>
 
     </LinearLayout>
 
@@ -271,9 +275,9 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.AppCompatImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/comment_popup_btn"/>
+                android:id="@+id/comment_popup_btn"
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/comment_editText"
@@ -288,11 +292,6 @@
                 android:layout_height="match_parent"
                 android:text="OK" />
 
-            <!--<Button
-                android:id="@+id/close_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="close" />-->
         </LinearLayout>
 
     </RelativeLayout>

@@ -87,7 +87,7 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(this, "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
                     break;
                 }*/
-                LoopjConnection connection = LoopjConnection.getInstance();
+                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 RequestParams params = new RequestParams();
                 params.put("WRITE_NAME", writeName.getText());
                 params.put("PASSWD", passwd.getText());

@@ -1,5 +1,6 @@
 package univ.sm.board;
 
+import android.nfc.Tag;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ import univ.sm.data.Comment;
 
 public class BoardManager {
 
+    private static final String TAG = "BoardManager";
     private static ArrayList<Post> postArrayList;
 
     public BoardManager(JSONObject data) {
@@ -105,7 +107,9 @@ public class BoardManager {
         Post post = null;
 
         try {
-            JSONObject postjson = jsonPost.getJSONObject("CALLVAN_INFO");
+            JSONArray postsJsonArray = jsonPost.getJSONArray("CALLVAN_INFO");
+            JSONObject postJson = postsJsonArray.getJSONObject(0);
+            Log.i(TAG, "postJson : " +postJson);
             JSONArray commentsArrayJson = jsonPost.getJSONArray("COMMENTS");
 
             ArrayList<Comment> commentsList = new ArrayList<>();
@@ -124,15 +128,16 @@ public class BoardManager {
             }
 
 
-            post = new Post(postjson.getString("CALL_BOARD_NO"), postjson.getString("WRITE_NAME"),
-                    postjson.getString("PASSWD"), postjson.getString("DEPARTMENT"),
-                    postjson.getString("STUDENT_NO"), postjson.getString("DEPARTURE"),
-                    postjson.getString("DEPARTURE_DETAIL"), postjson.getString("DESTINATION"),
-                    postjson.getString("DESTINATION_DETAIL"), postjson.getString("REG_ID"),
-                    postjson.getString("USE_FLAG"), postjson.getString("PASSENGER_NUM"),
-                    postjson.getString("WAIT_TIME"), postjson.getString("INSERT_TIME"),
-                    postjson.getString("INSERT_DATE"), postjson.getString("REMAIN_TIME"),commentsList);
+            post = new Post(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
+                    postJson.getString("PASSWD"), postJson.getString("DEPARTMENT"),
+                    postJson.getString("STUDENT_NO"), /*postJson.getString("DEPARTURE")*/ null,
+                    postJson.getString("DEPARTURE_DETAIL"), postJson.getString("DESTINATION"),
+                    postJson.getString("DESTINATION_DETAIL"), postJson.getString("REG_ID"),
+                    postJson.getString("USE_FLAG"), postJson.getString("PASSENGER_NUM"),
+                    postJson.getString("WAIT_TIME"), postJson.getString("INSERT_TIME"),
+                    postJson.getString("INSERT_DATE"),/* postJson.getString("REMAIN_TIME")*/ null ,commentsList);
 
+            Log.i(TAG,"json2PostWithComment : post.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
             //댓글 리스트 추가해서 Post 만들기
 
         } catch (JSONException e) {
