@@ -59,7 +59,7 @@ public class NewPostingPage extends AppCompatActivity implements View.OnClickLis
         LinearLayout postingLayout = (LinearLayout) findViewById(R.id.posting_layout);
         upload_btn.setOnClickListener(this);
         postingLayout.setOnClickListener(this);
-        //post parametars..
+        //mPost parametars..
         writeName = (EditText) findViewById(R.id.writename_edit);
         department = (EditText) findViewById(R.id.department_std_edit); //학과
         studentNo = (EditText) findViewById(R.id.studentNo_edit);

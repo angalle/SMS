@@ -51,7 +51,7 @@ public class BoardManager {
     }
 
     /**
-     * post 바꿔치기
+     * mPost 바꿔치기
      *
      * @param i       바꿀 Post 의 인덱스
      * @param newPost 새로운 내용의 Post
@@ -62,7 +62,7 @@ public class BoardManager {
     }
 
     /**
-     * post 바꿔치기
+     * mPost 바꿔치기
      *
      * @param i        바꿀 Post 의 인덱스
      * @param jsonPost 새로운 내용의 JSONObject
@@ -75,7 +75,7 @@ public class BoardManager {
      * JSONObject-> Post 객체로 바꾸기
      *
      * @param jsonPost JSONObject
-     * @return post
+     * @return mPost
      */
     private static Post json2Post(JSONObject jsonPost) {
         Post post = null;
@@ -98,7 +98,7 @@ public class BoardManager {
     }
 
     /***
-     * comment 가 포함되어 있는 post 객체를 생성한다.
+     * comment 가 포함되어 있는 mPost 객체를 생성한다.
      *
      * @param jsonPost
      * @return
@@ -137,7 +137,7 @@ public class BoardManager {
                     postJson.getString("WAIT_TIME"), postJson.getString("INSERT_TIME"),
                     postJson.getString("INSERT_DATE"),/* postJson.getString("REMAIN_TIME")*/ null ,commentsList);
 
-            Log.i(TAG,"json2PostWithComment : post.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
+            Log.i(TAG,"json2PostWithComment : mPost.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
             //댓글 리스트 추가해서 Post 만들기
 
         } catch (JSONException e) {

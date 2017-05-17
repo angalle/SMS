@@ -33,15 +33,17 @@ import univ.sm.data.Comment;
 public class BoardDetailPage extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "BoardDetailPage";
 
-    int position;
-    Post post;
-    String board_no;
-    TextView WRITE_NAME_view, DEPARTMENT_view, STUDENT_NO_view, DEPARTURE_view, DEPARTURE_DETAIL_view, DESTINATION_view, DESTINATION_DETAIL_view, PASSENGER_NUM_view, WAIT_TIME_view;
-    EditText comment_editText, comment_name_editText, comment_passwd_edittext;
-    ImageButton comment_popup_btn;
-    Button comment_btn, comment_info_ok_btn;
-    LinearLayout comment_info_layout;
-    RequestParams comment_params = new RequestParams();
+    private int position;
+    private Post mPost;
+    private String board_no;
+    private TextView WRITE_NAME_view, DEPARTMENT_view, STUDENT_NO_view, DEPARTURE_view, DEPARTURE_DETAIL_view, DESTINATION_view, DESTINATION_DETAIL_view, PASSENGER_NUM_view, WAIT_TIME_view;
+    private RecyclerView commentRCV;
+    private ArrayList<Comment> mCommentsList;
+    private EditText comment_editText, comment_name_editText, comment_passwd_editText;
+    private ImageButton comment_popup_btn;
+    private Button comment_btn, comment_info_ok_btn;
+    private LinearLayout comment_info_layout;
+    private RequestParams comment_params = new RequestParams();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
 
             @Override
             protected Void doInBackground(Void... params) {
-                /** CallVan post + comment data download */
+                /** CallVan mPost + comment data download */
                 downloadData();
                 return null;
             }
@@ -72,14 +74,11 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     }
 
     private void downloadData() {
-//        post = BoardManager.getPostArrayList().get(position);
 
-        //todo 디테일 페이지 데이터 받아오기 (post + 댓글)
-        /** board 넘버로 댓글까지 받아오는 api사용.. 앞선 데이터대신에 아래의 것을 사용해야함,*/
+        //디테일 페이지 데이터 받아오기 (mPost + 댓글)
         Log.i(TAG, "CALL_BOARD_NO : " + board_no + ", position : " + position);
-//        post = LoopjConnection.getInstance(getApplicationContext()).getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
         LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
-        post = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
+        mPost = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
 
     }
 
@@ -99,22 +98,21 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
 
 
         /** board comment 구성*/
-        //todo 댓글 리사이클 뷰에 어뎁터 설정해서 달기..
-        RecyclerView commentRCV = (RecyclerView) findViewById(R.id.commentRecyclerView);
+        commentRCV = (RecyclerView) findViewById(R.id.commentRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         commentRCV.setLayoutManager(layoutManager);
 
-        ArrayList<Comment> commentsList = new ArrayList<>();
+        mCommentsList = mPost.getCommentsList();
         Comment comment = new Comment("1", "1", "1", "I want to join you", "id", "name", "doc", "f", "0", "d", "a");
-        commentsList.add(comment);
+        mCommentsList.add(comment);
 
-        BoardCommentListAdapter commentListAdapter = new BoardCommentListAdapter(commentsList, getApplicationContext());
+        BoardCommentListAdapter commentListAdapter = new BoardCommentListAdapter(mCommentsList, getApplicationContext());
         commentRCV.setAdapter(commentListAdapter);
 
         comment_info_layout = (LinearLayout) findViewById(R.id.comment_info_Layout);
         comment_name_editText = (EditText) findViewById(R.id.comment_name);
         comment_editText = (EditText) findViewById(R.id.comment_editText);
-        comment_passwd_edittext = (EditText) findViewById(R.id.comment_passwd);
+        comment_passwd_editText = (EditText) findViewById(R.id.comment_passwd);
         comment_info_ok_btn = (Button) findViewById(R.id.comment_info_ok_btn);
         comment_info_ok_btn.setOnClickListener(this);
         comment_popup_btn = (ImageButton) findViewById(R.id.comment_popup_btn);
@@ -127,16 +125,16 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
 //todo 디테일 페이지를 새로고침
 
 
-        if (post.getBoard_no().equals(board_no)) {
-            WRITE_NAME_view.setText(post.getWrite_name());
-            DEPARTMENT_view.setText(post.getDepartment());
-            STUDENT_NO_view.setText(post.getStudent_no());
-            DEPARTURE_view.setText(post.getDeparture());
-            DEPARTURE_DETAIL_view.setText(post.getDeparture_detail());
-            DESTINATION_view.setText(post.getDestination());
-            DESTINATION_DETAIL_view.setText(post.getDestination_detail());
-            PASSENGER_NUM_view.setText(post.getPassenger_num() + "명");
-            WAIT_TIME_view.setText(post.getWait_time());
+        if (mPost.getBoard_no().equals(board_no)) {
+            WRITE_NAME_view.setText(mPost.getWrite_name());
+            DEPARTMENT_view.setText(mPost.getDepartment());
+            STUDENT_NO_view.setText(mPost.getStudent_no());
+            DEPARTURE_view.setText(mPost.getDeparture());
+            DEPARTURE_DETAIL_view.setText(mPost.getDeparture_detail());
+            DESTINATION_view.setText(mPost.getDestination());
+            DESTINATION_DETAIL_view.setText(mPost.getDestination_detail());
+            PASSENGER_NUM_view.setText(mPost.getPassenger_num() + "명");
+            WAIT_TIME_view.setText(mPost.getWait_time());
         }
     }
 
@@ -152,8 +150,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.comment_info_ok_btn:
-                comment_params.put("WRITE_NAME", comment_name_editText.getText());
-                comment_params.put("DEPARTMENT", comment_passwd_edittext.getText()); //학과에 passwd
+
 
                 if (comment_info_layout.getVisibility() == View.VISIBLE) {
                     comment_info_layout.setVisibility(View.GONE);
@@ -166,16 +163,18 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.comment_btn:
-                //커맨드 추가하기, 데이터 보내기
 
                 SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
-
+                comment_params.put("WRITE_NAME", comment_name_editText.getText());
+                comment_params.put("DEPARTMENT", comment_passwd_editText.getText()); //fixme 학과에 passwd 입력하는상태
                 comment_params.put("CALL_BOARD_NO", board_no);
                 comment_params.put("CONTENTS", comment_editText.getText());
                 comment_params.put("REG_ID", sp.getString("reg-id", ""));
 
+                comment_editText.setText(null);
                 Log.i(TAG, "comment_params.toString() : " + comment_params.toString());
-                LoopjConnection.getInstance(getApplicationContext()).addComment(comment_params);
+                LoopjConnection.getInstance(getApplicationContext()).addComment(comment_params); //전송
+
                 break;
 
         }

@@ -28,7 +28,7 @@ public class Post {
     private String insert_date;        //등록날짜
     private String remain_time;        //등록날짜
 
-    private ArrayList<Comment> commentList; //댓글리스트
+    private ArrayList<Comment> commentsList; //댓글리스트
 
     public Post(String board_no, String write_name, String passwd, String department,
                 String student_no, String departure, String departure_detail, String destination,
@@ -81,7 +81,7 @@ public class Post {
         this.insert_time = insert_time;
         this.insert_date = insert_date;
         this.remain_time = remain_time;
-        this.commentList = commentList;
+        this.commentsList = commentList;
     }
 
 
@@ -239,5 +239,13 @@ public class Post {
 
     public void setRemain_time(String remain_time) {
         this.remain_time = remain_time;
+    }
+
+    public ArrayList<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    private void setCommentsList(ArrayList<Comment> commentsList) {
+        this.commentsList = commentsList;
     }
 }
