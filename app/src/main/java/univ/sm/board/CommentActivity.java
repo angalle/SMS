@@ -33,14 +33,14 @@ public class CommentActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 //comment page preview
-                setContentView(R.layout.board_list);
+//                setContentView(R.layout.board_list);
             }
 
             @Override
             protected Void doInBackground(Void... params) {
                 /** CallVan board data download */
-                LoopjConnection connection = LoopjConnection.getInstance();
-                connection.getBoardList();
+//                LoopjConnection connection = LoopjConnection.getInstance();
+//                connection.getBoardList();
                 return null;
             }
 

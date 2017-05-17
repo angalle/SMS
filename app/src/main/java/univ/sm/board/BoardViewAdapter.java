@@ -3,6 +3,7 @@ package univ.sm.board;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
+    private static final String TAG = "BoardViewAdapter";
     private List<Post> postArrayList = new ArrayList<>();    //List<Post> items = new ArrayList<>;
     private Context context;
 
@@ -71,6 +73,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                     boardIntent.putExtra("position", getLayoutPosition());
                     boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
                     context.startActivity(boardIntent);
+                    Log.i(TAG, "position : " + getLayoutPosition() + ",  board_no : " + postArrayList.get(getLayoutPosition()).getBoard_no());
 
                 }
             });

@@ -48,7 +48,7 @@ public class BoardActivity extends AppCompatActivity {
                 @Override
                 protected Void doInBackground(Void... params) {
                     /** CallVan board data download */
-                    LoopjConnection connection = LoopjConnection.getInstance();
+                    LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                     connection.getBoardList();
                     return null;
                 }
@@ -83,7 +83,7 @@ public class BoardActivity extends AppCompatActivity {
                     @Override
                     protected Void doInBackground(Void... params) {
                         /** CallVan board data download */
-                        LoopjConnection connection = LoopjConnection.getInstance();
+                        LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                         connection.getBoardList();
                         return null;
                     }
