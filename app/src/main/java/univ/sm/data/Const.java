@@ -35,5 +35,8 @@ public class Const {
     static public int ONYANG_C = 2;
     //static public int CHEONANCAMPUS_C = 3;
 
+    static public String SHARED_GCM = "GCM";
+    static public String SHARED_REG_ID = "reg-id";
+
 
 }

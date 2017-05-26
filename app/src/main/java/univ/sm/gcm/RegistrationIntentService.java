@@ -14,6 +14,7 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import univ.sm.connect.GCMConnection;
+import univ.sm.data.Const;
 import univ.sm.data.SplashData;
 
 
@@ -78,10 +79,9 @@ public class RegistrationIntentService extends IntentService{
 
 	private void sendRegistrationToServer(String regid) {
 		// TODO Auto-generated method stub
-        SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
         SharedPreferences.Editor spe = sp.edit();
-        Log.e("::::::::::::",":::::::"+regid);
-        spe.putString("reg-id",regid);
+        spe.putString(Const.SHARED_REG_ID,regid);
         spe.commit();
 		GCMConnection gcmCon = new GCMConnection(regid);
 

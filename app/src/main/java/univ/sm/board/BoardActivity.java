@@ -1,6 +1,7 @@
 package univ.sm.board;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import java.util.Objects;
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
+import univ.sm.data.Const;
 
 /**
  * 게시판 리스트 페이지
@@ -116,7 +118,8 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 EditText passengerNum = (EditText) layout_view.findViewById(R.id.passengerNum_edit);
                 //Spinner waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
                 String waitTime = BoardPostingFragment.getWaitTime();
-
+                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+                sp.getString(Const.SHARED_REG_ID,"");
                 System.out.println("writeName::::"+"".equals(writeName.getText()));
                 System.out.println("department::::"+"".equals(department.getText()));
                 System.out.println("passengerNum::::"+passengerNum.getText());
