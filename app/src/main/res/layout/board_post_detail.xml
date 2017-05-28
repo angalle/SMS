@@ -188,38 +188,42 @@
                 android:textColor="#555555" />
         </RelativeLayout>
 
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#eeeeee"
+            android:gravity="center"
+            android:text="댓글"
+            android:textColor="#434343" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="#eeb8b8" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="댓글"
-            android:textColor="#eeb8b8" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/commentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="5dp" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/commentRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:paddingTop="5dp" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </RelativeLayout>
 
     </LinearLayout>
 
@@ -230,25 +234,79 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/comment_info_Layout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이름"
+                android:textColor="@android:color/background_dark" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="비밀번호"
+                android:textColor="@android:color/background_dark" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_passwd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/comment_info_ok_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="#eeb8b8"
+                android:text="OK" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/comment_info_Layout"
             android:background="#eeb8b8"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/comment_popup_btn"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/bottom_fullwriter_icon" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/comment_editText"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="#ffffff"
+                android:hint="댓글을 입력하세요"
+                android:textColor="@android:color/background_dark" />
 
             <Button
                 android:id="@+id/comment_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="comment" />
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:text="등록" />
 
-            <Button
-                android:id="@+id/close_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="close" />
         </LinearLayout>
 
     </RelativeLayout>
