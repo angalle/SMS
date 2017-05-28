@@ -102,7 +102,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 /*객체 초기화*/
                 bpf = new BoardPostingFragment();
                 System.out.println("refresh_btn regist btn");
-                LoopjConnection connection = LoopjConnection.getInstance();
+                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
 
                 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View layout_view = inflater.inflate(R.layout.board_posting,null);

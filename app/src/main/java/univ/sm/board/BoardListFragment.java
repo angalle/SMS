@@ -1,5 +1,6 @@
 package univ.sm.board;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,11 +27,13 @@ public class BoardListFragment extends Fragment {
     BoardViewAdapter boardViewAdapter;
     LinearLayoutManager layoutManager = null;
     Context context;
+    Activity activity;
 
     public BoardListFragment() {
         super();
          /*listView에서 뿌려질 view변수들을 초기화*/
         this.context = getContext();
+        this.activity = getActivity();
     }
 
     @Override
@@ -50,7 +53,7 @@ public class BoardListFragment extends Fragment {
     private void set_initView(View v){
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(context);
-        boardViewAdapter = new BoardViewAdapter(postArrayList, context);
+        boardViewAdapter = new BoardViewAdapter(postArrayList, getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(boardViewAdapter);
     }
@@ -67,7 +70,7 @@ public class BoardListFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 /** CallVan board data download */
-                LoopjConnection connection = LoopjConnection.getInstance();
+                LoopjConnection connection = LoopjConnection.getInstance(context);
                 connection.getBoardList();
                 return null;
             }
