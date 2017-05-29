@@ -1,16 +1,9 @@
 package univ.sm.board;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
-
-import java.util.ArrayList;
 
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
@@ -33,7 +26,7 @@ public class CommentActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 //comment page preview
-//                setContentView(R.layout.board_list);
+                setContentView(R.layout.board_main);
             }
 
             @Override

@@ -55,22 +55,8 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_detail);
+        /* view 초기화 */
         initView();
-
-        /*context = getApplicationContext();
-        changeTemp= Connection.positionShuttleArr;
-
-        STATION = new ArrayList<>();
-        *//*역 관련 상수 초기화*//*
-        STATION.add(Const.CHEONANSTATION);
-        STATION.add(Const.TERMINAL);
-        STATION.add(Const.ONYANG);
-        *//*STATION.add(Const.CHEONANCAMPUS);*//*
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
-        recyclerView.setAdapter(ra);*/
     }
 
     @Override
@@ -92,7 +78,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         recyclerView.setAdapter(ra);
     }
 
-    /*주말선택의 빨간바를 이동하는 함수*/
+    /* 주말선택의 빨간바를 이동하는 함수 */
     private void moveImageBar(View v){
         /* 이동해야할 x좌표 */
         float toX=v.getLeft();
@@ -142,6 +128,7 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
     @Override
     public void onGlobalLayout() {
+        System.out.println("test access");
         schDetailTopBar.setX(schDetailWeekDay.getX());
         schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
         removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);

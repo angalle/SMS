@@ -1,5 +1,6 @@
 package univ.sm.board;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -22,10 +23,11 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     private static final String TAG = "BoardViewAdapter";
     private List<Post> postArrayList = new ArrayList<>();    //List<Post> items = new ArrayList<>;
     private Context context;
+    private Activity activity;
 
-    public BoardViewAdapter(List<Post> mItems, Context context) {
+    public BoardViewAdapter(List<Post> mItems, Activity activity) {
         this.postArrayList = mItems;
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -68,11 +70,12 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                 public void onClick(View v) {
                     // 디테일 페이지로 이동
                     Intent boardIntent = new Intent();
-                    boardIntent.setClass(context, BoardDetailPage.class);
+                    //boardIntent.setClass(context, BoardDetailPage.class);
+                    boardIntent.setClass(activity, BoardDetailPage.class);
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     boardIntent.putExtra("position", getLayoutPosition());
                     boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
-                    context.startActivity(boardIntent);
+                    activity.startActivity(boardIntent);
                     Log.i(TAG, "position : " + getLayoutPosition() + ",  board_no : " + postArrayList.get(getLayoutPosition()).getBoard_no());
 
                 }
