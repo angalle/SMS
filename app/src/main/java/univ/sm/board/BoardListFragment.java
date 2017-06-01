@@ -29,11 +29,22 @@ public class BoardListFragment extends Fragment {
     Context context;
     Activity activity;
 
-    public BoardListFragment() {
+    public static BoardListFragment newInstatnce(){
+        BoardListFragment b = new BoardListFragment();
+        return b;
+    }
+
+    public BoardListFragment(){
         super();
-         /*listView에서 뿌려질 view변수들을 초기화*/
-        this.context = getContext();
-        this.activity = getActivity();
+        this.context = BoardActivity.context;
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof Activity){
+            context = (Activity)context;
+        }
     }
 
     @Override

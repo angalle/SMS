@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -30,6 +33,8 @@ import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
 import univ.sm.data.Const;
 
+import static univ.sm.R.id.passengerNum;
+
 /**
  * 게시판 리스트 페이지
  * 데이터 불러오기, 새글올리기, 새로고침
@@ -40,18 +45,19 @@ import univ.sm.data.Const;
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class BoardActivity extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,ViewPager.OnPageChangeListener{
+public class BoardActivity extends FragmentActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
+                                                                        ,ViewPager.OnPageChangeListener{
     private TextView board_list,board_write;
     private ImageView refresh_btn,board_selector;
     private ViewPager vp;
-    private BoardPostingFragment bpf;
-
+    public static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //기본 레이아웃 세팅
         setContentView(R.layout.board_main);
         fn_staticLayout();
+        context = getApplicationContext();
     }
 
     /* 정적 view 초기화 */
@@ -75,8 +81,6 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         vp.addOnPageChangeListener(this);
         /* 이미지 좌표 재 설정*/
         board_selector.getViewTreeObserver().addOnGlobalLayoutListener(this);
-
-
     }
 
     @Override
@@ -99,9 +103,10 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 //reason : refresh list
                 board_list.performClick();
             }else if(vp.getCurrentItem() == 1 ){
-                /*객체 초기화*/
-                bpf = new BoardPostingFragment();
-                System.out.println("refresh_btn regist btn");
+                //BoardPostingFragment ff = (BoardPostingFragment)getFragmentManager().findFragmentById(R.layout.board_posting);
+                BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.posting_layout);
+                Post post = ff.sendParentClickData();
+
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
 
                 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -115,14 +120,20 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 EditText departure_detail= (EditText) layout_view.findViewById(R.id.departure_detail_edit);
                 EditText destination = (EditText) layout_view.findViewById(R.id.destination_edit);
                 EditText destination_detail = (EditText) layout_view.findViewById(R.id.destination_detail_edit);
-                EditText passengerNum = (EditText) layout_view.findViewById(R.id.passengerNum_edit);
-                //Spinner waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
-                String waitTime = BoardPostingFragment.getWaitTime();
-                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-                sp.getString(Const.SHARED_REG_ID,"");
-                System.out.println("writeName::::"+"".equals(writeName.getText()));
-                System.out.println("department::::"+"".equals(department.getText()));
-                System.out.println("passengerNum::::"+passengerNum.getText());
+                Spinner waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
+                Spinner peopleNumSpinner = (Spinner) layout_view.findViewById(R.id.passengerNum_spinner);
+
+                waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
+                ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.wait_time_array, R.layout.support_simple_spinner_dropdown_item);
+                waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                waitTimeSpinner.setAdapter(waiteAdapter);
+
+                peopleNumSpinner = (Spinner) layout_view.findViewById(R.id.passengerNum_spinner);
+                ArrayAdapter<CharSequence> peopleAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.peopleNum_array, R.layout.support_simple_spinner_dropdown_item);
+                waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                peopleNumSpinner.setAdapter(peopleAdapter);
+
+
                 //Writing  : hs
                 //getText() : return Editable / Editable : not completely convert toString
                 //therfore make sure to method : toString();
@@ -134,30 +145,46 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 String departure_detailStr = departure_detail.getText().toString();
                 String destinationStr = destination.getText().toString();
                 String destination_detailStr = destination_detail.getText().toString();
-                String passengerNumStr = passengerNum.getText().toString();
+                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+                String regId = sp.getString(Const.SHARED_REG_ID,"");
+                String waitTime = waitTimeSpinner.getSelectedItem().toString();
+                String peopleNum = peopleNumSpinner.getSelectedItem().toString();
 
 
-                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNumStr)||
-                        "".equals(departureStr) ||"".equals(departure_detailStr) ||"".equals(destinationStr) ||"".equals(destination_detailStr) ){
+                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(peopleNum)||
+                        "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
+
                     Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
                     return ;
                 }
 
-                RequestParams params = new RequestParams();
+                /*RequestParams params = new RequestParams();
                 params.put("WRITE_NAME"         , writeNameStr);
-                params.put("PASSWD"              , passwdStr);
+                params.put("PASSWD"              , regId);
+                params.put("REG_ID"              , passwdStr);
                 params.put("STUDENT_NO"         , studentNoStr);//학번
                 params.put("DEPARTMENT"         , departmentStr);//학과
                 params.put("DEPARTURE"          , departureStr);
                 params.put("DEPARTURE_DETAIL"  , departure_detailStr);
                 params.put("DESTINATION"        , destinationStr);
                 params.put("DESTINATION_DETAIL", destination_detailStr);
-                params.put("PASSENGER_NUM"      , passengerNumStr);
-                params.put("WAIT_TIME"           , waitTime);
+                params.put("PASSENGER_NUM"      , peopleNum);
+                params.put("WAIT_TIME"           , waitTime);*/
+
+                RequestParams params = new RequestParams();
+                params.put("WRITE_NAME"         , post.getWrite_name());
+                params.put("PASSWD"              , post.getReg_id());
+                params.put("REG_ID"              , post.getReg_id());
+                params.put("STUDENT_NO"         , post.getStudent_no());//학번
+                params.put("DEPARTMENT"         , post.getDepartment());//학과
+                params.put("DEPARTURE"          , post.getDeparture());
+                params.put("DEPARTURE_DETAIL"  , post.getDeparture_detail());
+                params.put("DESTINATION"        , post.getDestination());
+                params.put("DESTINATION_DETAIL", post.getDestination_detail());
+                params.put("PASSENGER_NUM"      , post.getPassenger_num());
+                params.put("WAIT_TIME"           , post.getWait_time());
                 Log.i("권수정", "click upload button!");
                 //todo 업로드 후 화면 전환 -> 목록으로
-
-
                 connection.addPosting(params);
                 board_list.performClick();
             }
@@ -217,4 +244,6 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     public void onPageScrollStateChanged(int state) {
 
     }
+
+
 }

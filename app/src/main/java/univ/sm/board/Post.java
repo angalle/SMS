@@ -84,6 +84,10 @@ public class Post {
         this.commentsList = commentList;
     }
 
+    public Post(){
+
+    }
+
 
     /**
      * 게시글 Detailpage 에서 새로고침시 사용

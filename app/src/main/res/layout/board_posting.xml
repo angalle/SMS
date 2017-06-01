@@ -10,7 +10,7 @@ DESTINATION_DETAIL	//목적지 설명
 REG_ID				//gcm 기기 값
 PASSENGER_NUM		//총 탑승인원
 WAIT_TIME			//대기시간*/-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -106,6 +106,7 @@ WAIT_TIME			//대기시간*/-->
                                 android:id="@+id/passwd"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
+                                android:inputType="number"
                                 android:layout_height="30dp"
                                 android:background="@null"
                                 android:hint="DEPARTURE..."
@@ -315,25 +316,21 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
                                     android:text="모집 인원"
                                     android:textColor="#abdbd0"
                                     android:textStyle="bold"
                                     android:textSize="12sp" />
-
-                                <EditText
-                                    android:id="@+id/passengerNum_edit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:padding="5dp"
-                                    android:background="@null"
-                                    android:hint="PASSENGER_NUM..."
-                                    android:textColor="#555555"
-                                    android:textColorHint="#f1f1f2"
-                                    android:textStyle="bold"
-                                    android:textSize="12sp" />
+                            <Spinner
+                                android:id="@+id/passengerNum_spinner"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                >
+                            </Spinner>
                         </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -343,4 +340,4 @@ WAIT_TIME			//대기시간*/-->
 
     <!--    footer  -->
 
-</LinearLayout>
+</FrameLayout>
