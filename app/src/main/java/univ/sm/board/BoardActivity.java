@@ -47,7 +47,7 @@ import static univ.sm.R.id.passengerNum;
 @SuppressWarnings("DefaultFileTemplate")
 public class BoardActivity extends FragmentActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
                                                                         ,ViewPager.OnPageChangeListener{
-    private TextView board_list,board_write;
+    private TextView board_list,board_write,subTitle;
     private ImageView refresh_btn,board_selector;
     private ViewPager vp;
     public static Context context;
@@ -64,6 +64,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     private void fn_staticLayout() {
         /* view bind */
         board_list = (TextView)findViewById(R.id.board_list);
+        subTitle = (TextView)findViewById(R.id.subTitle);
         board_write = (TextView)findViewById(R.id.board_write);
         board_selector = (ImageView)findViewById(R.id.board_selector);
         refresh_btn = (ImageView) findViewById(R.id.refresh_btn);
@@ -86,106 +87,76 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         //// TODO: 2017-04-29  프레그먼트의 tag값을 어떻게 가져올 수 있지?
-        //int tag = (int) v.getTag();
-        System.out.println("v.getId():::"+v.getId());
+        /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
+
         if(v.getId() == R.id.board_list){
             moveImageBar(v);
             vp.setCurrentItem(0);
+            subTitle.setText(Const.LIST_TITLE);
         }
         if(v.getId() == R.id.board_write){
             moveImageBar(v);
             vp.setCurrentItem(1);
+            subTitle.setText(Const.WRITE_TITLE);
         }
         if(v.getId() == R.id.refresh_btn){
             //// TODO: 2017-04-23  메인액티비티에서 리스트 프레그먼트의 데이터를 리프레쉬 하기.
+            /*해결*/
             if(vp.getCurrentItem() == 0 ){
                 //why board_list click ?
                 //reason : refresh list
                 board_list.performClick();
             }else if(vp.getCurrentItem() == 1 ){
-                //BoardPostingFragment ff = (BoardPostingFragment)getFragmentManager().findFragmentById(R.layout.board_posting);
-                BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.posting_layout);
+                /* 애초의 취지  :  등록 폼의 데이터들이 mainActivity의 event에서 접근이 안되서 문제가 발생.*/
+                /* 경과  : interface선언, static 변수 선언 등으로 해결해 보려했으나 정방향의 문제 해결을 진행함*/
+                /* getSupportFragmentManger의 사용법*/
+                /* 보통 MainActivity의 fragment id를 넣어라 아래 코드와 같이 진행하는게 원칙.*/
+                /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
+                BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
                 Post post = ff.sendParentClickData();
+                /*생각해보면 결국 viewPager도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
-                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
-
-                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout_view = inflater.inflate(R.layout.board_posting,null);
-
-                EditText writeName = (EditText) layout_view.findViewById(R.id.writename_edit);
-                EditText passwd = (EditText) layout_view.findViewById(R.id.passwd);
-                EditText department = (EditText) layout_view.findViewById(R.id.department_std_edit); //학과
-                EditText studentNo = (EditText) layout_view.findViewById(R.id.studentNo_edit);
-                EditText departure = (EditText) layout_view.findViewById(R.id.departure_detail);
-                EditText departure_detail= (EditText) layout_view.findViewById(R.id.departure_detail_edit);
-                EditText destination = (EditText) layout_view.findViewById(R.id.destination_edit);
-                EditText destination_detail = (EditText) layout_view.findViewById(R.id.destination_detail_edit);
-                Spinner waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
-                Spinner peopleNumSpinner = (Spinner) layout_view.findViewById(R.id.passengerNum_spinner);
-
-                waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
-                ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.wait_time_array, R.layout.support_simple_spinner_dropdown_item);
-                waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                waitTimeSpinner.setAdapter(waiteAdapter);
-
-                peopleNumSpinner = (Spinner) layout_view.findViewById(R.id.passengerNum_spinner);
-                ArrayAdapter<CharSequence> peopleAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.peopleNum_array, R.layout.support_simple_spinner_dropdown_item);
-                waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                peopleNumSpinner.setAdapter(peopleAdapter);
-
-
+                // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
                 //Writing  : hs
                 //getText() : return Editable / Editable : not completely convert toString
                 //therfore make sure to method : toString();
-                String writeNameStr = writeName.getText().toString();
-                String passwdStr = passwd.getText().toString();
-                String departmentStr = department.getText().toString();
-                String studentNoStr = studentNo.getText().toString();
-                String departureStr = departure.getText().toString();
-                String departure_detailStr = departure_detail.getText().toString();
-                String destinationStr = destination.getText().toString();
-                String destination_detailStr = destination_detail.getText().toString();
+
+                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
+                String writeNameStr             = post.getWrite_name();
+                String passwdStr                = post.getPasswd();
+                String departmentStr            = post.getDepartment();
+                String studentNoStr             = post.getStudent_no();
+                String departureStr             = post.getDeparture();
+                String departure_detailStr      = post.getDeparture_detail();
+                String destinationStr           = post.getDestination();
+                String destination_detailStr    = post.getDestination_detail();
+
+                String waitTime                 = post.getWait_time();
+                String passengerNum             = post.getPassenger_num();
+
+                RequestParams params = new RequestParams();
+                params.put("WRITE_NAME"               , writeNameStr);
+                params.put("PASSWD"                      , passwdStr);
                 SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-                String regId = sp.getString(Const.SHARED_REG_ID,"");
-                String waitTime = waitTimeSpinner.getSelectedItem().toString();
-                String peopleNum = peopleNumSpinner.getSelectedItem().toString();
+                params.put("REG_ID"                       , sp.getString(Const.SHARED_REG_ID,""));
+                params.put("STUDENT_NO"                  , studentNoStr);//학번
+                params.put("DEPARTMENT"                  , departmentStr);//학과
+                params.put("DEPARTURE"                   , departmentStr);
+                params.put("DEPARTURE_DETAIL"           , departure_detailStr);
+                params.put("DESTINATION"                , destinationStr);
+                params.put("DESTINATION_DETAIL"        , destination_detailStr);
+                params.put("PASSENGER_NUM"              , passengerNum);
+                params.put("WAIT_TIME"                  , waitTime);
+                Log.i("권수정", "click upload button!");
+                //todo 업로드 후 화면 전환 -> 목록으로
 
-
-                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(peopleNum)||
+                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
                         "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
-
                     Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
                     return ;
                 }
 
-                /*RequestParams params = new RequestParams();
-                params.put("WRITE_NAME"         , writeNameStr);
-                params.put("PASSWD"              , regId);
-                params.put("REG_ID"              , passwdStr);
-                params.put("STUDENT_NO"         , studentNoStr);//학번
-                params.put("DEPARTMENT"         , departmentStr);//학과
-                params.put("DEPARTURE"          , departureStr);
-                params.put("DEPARTURE_DETAIL"  , departure_detailStr);
-                params.put("DESTINATION"        , destinationStr);
-                params.put("DESTINATION_DETAIL", destination_detailStr);
-                params.put("PASSENGER_NUM"      , peopleNum);
-                params.put("WAIT_TIME"           , waitTime);*/
-
-                RequestParams params = new RequestParams();
-                params.put("WRITE_NAME"         , post.getWrite_name());
-                params.put("PASSWD"              , post.getReg_id());
-                params.put("REG_ID"              , post.getReg_id());
-                params.put("STUDENT_NO"         , post.getStudent_no());//학번
-                params.put("DEPARTMENT"         , post.getDepartment());//학과
-                params.put("DEPARTURE"          , post.getDeparture());
-                params.put("DEPARTURE_DETAIL"  , post.getDeparture_detail());
-                params.put("DESTINATION"        , post.getDestination());
-                params.put("DESTINATION_DETAIL", post.getDestination_detail());
-                params.put("PASSENGER_NUM"      , post.getPassenger_num());
-                params.put("WAIT_TIME"           , post.getWait_time());
-                Log.i("권수정", "click upload button!");
-                //todo 업로드 후 화면 전환 -> 목록으로
-                connection.addPosting(params);
+                connection.addPosting(params,board_list);
                 board_list.performClick();
             }
 

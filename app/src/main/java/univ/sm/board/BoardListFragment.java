@@ -1,6 +1,7 @@
 package univ.sm.board;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,7 +69,7 @@ public class BoardListFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(boardViewAdapter);
     }
-
+    ProgressDialog pd = null;
 
     /* 무명객체를 함수화 - adapter에 borad list를 받아옴.*/
     public void getServerRequestData(){
@@ -76,6 +77,10 @@ public class BoardListFragment extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                pd = new ProgressDialog(getContext());
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.setMessage("Loading to list");
+                pd.show();
             }
 
             @Override
@@ -83,6 +88,7 @@ public class BoardListFragment extends Fragment {
                 /** CallVan board data download */
                 LoopjConnection connection = LoopjConnection.getInstance(context);
                 connection.getBoardList();
+
                 return null;
             }
 
@@ -92,6 +98,7 @@ public class BoardListFragment extends Fragment {
                 try {
                     /* 동적으로 할당되는 뷰를 그려주거나 이벤트 할당*/
                     fn_dynamicLayout();
+                    pd.dismiss();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

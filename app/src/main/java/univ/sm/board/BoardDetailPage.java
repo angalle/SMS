@@ -101,10 +101,16 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         commentRCV = (RecyclerView) findViewById(R.id.commentRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         commentRCV.setLayoutManager(layoutManager);
+        mCommentsList = new ArrayList<>();
+        if(mPost == null){
+            Comment comment = new Comment("1", "1", "1", "I want to join you", "id", "name", "doc", "f", "0", "d", "a");
+            mCommentsList.add(comment);
+        }else{
+            mCommentsList = mPost.getCommentsList();
+        }
 
-        mCommentsList = mPost.getCommentsList();
-        Comment comment = new Comment("1", "1", "1", "I want to join you", "id", "name", "doc", "f", "0", "d", "a");
-        mCommentsList.add(comment);
+
+
 
         BoardCommentListAdapter commentListAdapter = new BoardCommentListAdapter(mCommentsList, getApplicationContext());
         commentRCV.setAdapter(commentListAdapter);

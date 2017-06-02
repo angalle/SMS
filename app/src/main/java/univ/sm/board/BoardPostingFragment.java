@@ -38,7 +38,6 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
     private EditText writeName,department,studentNo,departure,departure_detail,destination_detail,destination,passwd;
     private Spinner passengerNum,waitTimeSpinner;
     String regId="";
-    private static String waitTime;
     FrameLayout l_layout;
 
 
@@ -47,18 +46,10 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         return b;
     }
 
-    public BoardPostingFragment(){
+    public BoardPostingFragment() {
         super();
         this.context = BoardActivity.context;
 
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof Activity){
-            context = (Activity)context;
-        }
     }
 
     public Post sendParentClickData() {
@@ -72,6 +63,9 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         post.setDestination_detail(destination_detail.getText().toString());
         post.setPasswd(passwd.getText().toString());
 
+        post.setPassenger_num(passengerNum.getSelectedItem().toString());
+        post.setWait_time(waitTimeSpinner.getSelectedItem().toString());
+
 
         System.out.println("writeNameStr::::::::"+department.getText().toString());
         System.out.println("passwdStr::::::::"+writeName.getText().toString());
@@ -79,7 +73,6 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         System.out.println("departmentStr::::::::"+departure.getText().toString());
         System.out.println("peopleNum::::::::"+departure_detail.getText().toString());
         System.out.println("departureStr::::::::"+destination.getText().toString());
-        post.setReg_id(regId);
         return post;
     }
 
@@ -92,7 +85,6 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         l_layout = (FrameLayout) inflater.inflate(R.layout.board_posting,container,false);
-        //SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
         set_initView(l_layout);
         return l_layout;
     }
@@ -121,20 +113,18 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         passengerNum.setAdapter(peopleAdapter);
         passengerNum.setOnItemSelectedListener(this);
-
-        SharedPreferences sp = context.getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-        regId = sp.getString(Const.SHARED_REG_ID,"");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            /*이벤트 구현*/
+
         }
     }
     /** 스피너 선택 이벤트를 위한 메소드*/
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     @Override
