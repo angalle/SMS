@@ -49,9 +49,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         downLoadBoard_setLayout();
-
     }
 
     void downLoadBoard_setLayout() {
@@ -138,14 +136,6 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    /*var CALL_BOARD_NO              //해당글의 INDEX
-         var COMMENT_LEVEL             // 댓글의 댓글레벨
-         var CONTENTS                         // 내용
-         var REG_ID                                // 댓글 남긴사람의 기기값
-         var WRITE_NAME                      // 작성자이름
-         var DEPARTMENT                      // 학과
-         var BEFORE_COMMENT_NO    // 이전 댓글 INDEX - 이전 인덱스를 찾아서 레벨로 댓글의 댓글기능 구성
-         var SEND_REG_ID    	             // 타겟이 될 사람의 기기값*/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -164,13 +154,13 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
             case R.id.comment_btn:
                 SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
                 comment_params.put("WRITE_NAME", comment_name_editText.getText());
-                //comment_params.put("DEPARTMENT", comment_passwd_editText.getText());
-                //학과에 passwd 입력하는상태 -> passwd 불필요하다고 판단하여 삭제하기로함.
                 comment_params.put("CALL_BOARD_NO", board_no);
                 comment_params.put("CONTENTS", comment_editText.getText());
                 comment_params.put("REG_ID", sp.getString("reg-id", ""));
                 comment_params.put("COMMENT_LEVEL", 1);
-                comment_params.put("BEFORCOMMENT_NO", board_no); // 대댓 없으므로 board_no로 채어넣는
+                comment_params.put("BEFORCOMMENT_NO", board_no);//이희선씨의 보드넘버 요청
+                comment_params.put("SEND_REG_ID", " ");//이희선씨의 공백 요청
+
                 comment_editText.setText(null);
 
                 //이름 자동 생성을 위한 preference 저장
