@@ -66,13 +66,6 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         post.setPassenger_num(passengerNum.getSelectedItem().toString());
         post.setWait_time(waitTimeSpinner.getSelectedItem().toString());
 
-
-        System.out.println("writeNameStr::::::::"+department.getText().toString());
-        System.out.println("passwdStr::::::::"+writeName.getText().toString());
-        System.out.println("studentNoStr::::::::"+studentNo.getText().toString());
-        System.out.println("departmentStr::::::::"+departure.getText().toString());
-        System.out.println("peopleNum::::::::"+departure_detail.getText().toString());
-        System.out.println("departureStr::::::::"+destination.getText().toString());
         return post;
     }
 
@@ -84,8 +77,19 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /*fragment  view 가져와 초기화.*/
         l_layout = (FrameLayout) inflater.inflate(R.layout.board_posting,container,false);
         set_initView(l_layout);
+
+        /*입력 정보 자동 기억*/
+        SharedPreferences sp = context.getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+        sp.getString(Const.PASSWD,"");
+        sp.getString(Const.STUDENT_NO,"");
+        sp.getString(Const.DEPARTMENT,"");
+        writeName.setText(sp.getString(Const.WRITE_NAME,""));
+        passwd.setText(sp.getString(Const.WRITE_NAME,""));
+        studentNo.setText(sp.getString(Const.WRITE_NAME,""));
+        departure.setText(sp.getString(Const.WRITE_NAME,""));
         return l_layout;
     }
 
@@ -113,6 +117,8 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         passengerNum.setAdapter(peopleAdapter);
         passengerNum.setOnItemSelectedListener(this);
+
+
     }
 
     @Override

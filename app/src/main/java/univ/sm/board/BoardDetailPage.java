@@ -103,7 +103,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         commentRCV.setLayoutManager(layoutManager);
         mCommentsList = new ArrayList<>();
         if(mPost == null){
-            Comment comment = new Comment("1", "1", "1", "I want to join you", "id", "name", "doc", "f", "0", "d", "a");
+            Comment comment = new Comment("1", "1", "1", "Not Display nothing", "NDN", "NDN", "doc", "f", "0", "d", "a");
             mCommentsList.add(comment);
         }else{
             mCommentsList = mPost.getCommentsList();

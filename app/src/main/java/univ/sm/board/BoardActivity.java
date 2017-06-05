@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +52,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     private ImageView refresh_btn,board_selector;
     private ViewPager vp;
     public static Context context;
+    InputMethodManager imm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         vp.setAdapter(new BoardMainPageAdapter(getSupportFragmentManager()));
         vp.setCurrentItem(0);
 
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         /* 이벤트 */
         board_list.setOnClickListener(this);
@@ -93,6 +96,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
             moveImageBar(v);
             vp.setCurrentItem(0);
             subTitle.setText(Const.LIST_TITLE);
+            BoardListFragment.instance.getServerRequestData();
         }
         if(v.getId() == R.id.board_write){
             moveImageBar(v);
@@ -103,8 +107,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
             //// TODO: 2017-04-23  메인액티비티에서 리스트 프레그먼트의 데이터를 리프레쉬 하기.
             /*해결*/
             if(vp.getCurrentItem() == 0 ){
-                //why board_list click ?
-                //reason : refresh list
+                //propose : refresh list
                 board_list.performClick();
             }else if(vp.getCurrentItem() == 1 ){
                 /* 애초의 취지  :  등록 폼의 데이터들이 mainActivity의 event에서 접근이 안되서 문제가 발생.*/
@@ -120,8 +123,6 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 //Writing  : hs
                 //getText() : return Editable / Editable : not completely convert toString
                 //therfore make sure to method : toString();
-
-                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 String writeNameStr             = post.getWrite_name();
                 String passwdStr                = post.getPasswd();
                 String departmentStr            = post.getDepartment();
@@ -135,19 +136,18 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 String passengerNum             = post.getPassenger_num();
 
                 RequestParams params = new RequestParams();
-                params.put("WRITE_NAME"               , writeNameStr);
-                params.put("PASSWD"                      , passwdStr);
+                params.put(Const.WRITE_NAME               , writeNameStr);
+                params.put(Const.PASSWD                      , passwdStr);
                 SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-                params.put("REG_ID"                       , sp.getString(Const.SHARED_REG_ID,""));
-                params.put("STUDENT_NO"                  , studentNoStr);//학번
-                params.put("DEPARTMENT"                  , departmentStr);//학과
-                params.put("DEPARTURE"                   , departmentStr);
-                params.put("DEPARTURE_DETAIL"           , departure_detailStr);
-                params.put("DESTINATION"                , destinationStr);
-                params.put("DESTINATION_DETAIL"        , destination_detailStr);
-                params.put("PASSENGER_NUM"              , passengerNum);
-                params.put("WAIT_TIME"                  , waitTime);
-                Log.i("권수정", "click upload button!");
+                params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
+                params.put(Const.STUDENT_NO                  , studentNoStr);//학번
+                params.put(Const.DEPARTMENT                  , departmentStr);//학과
+                params.put(Const.DEPARTURE                   , departureStr);//출발지
+                params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
+                params.put(Const.DESTINATION                , destinationStr);
+                params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
+                params.put(Const.PASSENGER_NUM              , passengerNum);
+                params.put(Const.WAIT_TIME                  , waitTime);
                 //todo 업로드 후 화면 전환 -> 목록으로
 
                 if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
@@ -156,8 +156,26 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                     return ;
                 }
 
+
+                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);
-                board_list.performClick();
+                Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
+                //board_list.performClick();
+
+                imm.hideSoftInputFromWindow(refresh_btn.getWindowToken(), 0);
+
+                SharedPreferences.Editor spe = sp.edit();
+                spe.putString(Const.WRITE_NAME,writeNameStr);
+                spe.putString(Const.PASSWD,passwdStr);
+                spe.putString(Const.STUDENT_NO,studentNoStr);
+                //spe.putString(Const.REG_ID,"");
+                spe.putString(Const.DEPARTMENT,departmentStr);
+                //spe.putString(Const.DEPARTURE,"");
+                //spe.putString(Const.DEPARTURE_DETAIL,"");
+                //spe.putString(Const.DESTINATION,"");
+                //spe.putString(Const.DESTINATION_DETAIL,"");
+                //spe.putString(Const.PASSENGER_NUM,"");
+                //spe.putString(Const.WAIT_TIME,"");
             }
 
         }

@@ -29,10 +29,16 @@ public class BoardListFragment extends Fragment {
     LinearLayoutManager layoutManager = null;
     Context context;
     Activity activity;
+    static BoardListFragment instance;
+
+    //loading msg dialog
+    ProgressDialog pd = null;
 
     public static BoardListFragment newInstatnce(){
-        BoardListFragment b = new BoardListFragment();
-        return b;
+        if(instance == null){
+            instance = new BoardListFragment();
+        }
+        return instance;
     }
 
     public BoardListFragment(){
@@ -69,7 +75,7 @@ public class BoardListFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(boardViewAdapter);
     }
-    ProgressDialog pd = null;
+
 
     /* 무명객체를 함수화 - adapter에 borad list를 받아옴.*/
     public void getServerRequestData(){
