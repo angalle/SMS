@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -30,6 +34,8 @@ import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
 import univ.sm.data.Const;
 
+import static univ.sm.R.id.passengerNum;
+
 /**
  * 게시판 리스트 페이지
  * 데이터 불러오기, 새글올리기, 새로고침
@@ -40,24 +46,27 @@ import univ.sm.data.Const;
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class BoardActivity extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,ViewPager.OnPageChangeListener{
-    private TextView board_list,board_write;
+public class BoardActivity extends FragmentActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
+                                                                        ,ViewPager.OnPageChangeListener{
+    private TextView board_list,board_write,subTitle;
     private ImageView refresh_btn,board_selector;
     private ViewPager vp;
-    private BoardPostingFragment bpf;
-
+    public static Context context;
+    InputMethodManager imm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //기본 레이아웃 세팅
         setContentView(R.layout.board_main);
         fn_staticLayout();
+        context = getApplicationContext();
     }
 
     /* 정적 view 초기화 */
     private void fn_staticLayout() {
         /* view bind */
         board_list = (TextView)findViewById(R.id.board_list);
+        subTitle = (TextView)findViewById(R.id.subTitle);
         board_write = (TextView)findViewById(R.id.board_write);
         board_selector = (ImageView)findViewById(R.id.board_selector);
         refresh_btn = (ImageView) findViewById(R.id.refresh_btn);
@@ -65,6 +74,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         vp.setAdapter(new BoardMainPageAdapter(getSupportFragmentManager()));
         vp.setCurrentItem(0);
 
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         /* 이벤트 */
         board_list.setOnClickListener(this);
@@ -75,91 +85,97 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         vp.addOnPageChangeListener(this);
         /* 이미지 좌표 재 설정*/
         board_selector.getViewTreeObserver().addOnGlobalLayoutListener(this);
-
-
     }
 
     @Override
     public void onClick(View v) {
         //// TODO: 2017-04-29  프레그먼트의 tag값을 어떻게 가져올 수 있지?
-        //int tag = (int) v.getTag();
-        System.out.println("v.getId():::"+v.getId());
+        /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
+
         if(v.getId() == R.id.board_list){
             moveImageBar(v);
             vp.setCurrentItem(0);
+            subTitle.setText(Const.LIST_TITLE);
+            BoardListFragment.instance.getServerRequestData();
         }
         if(v.getId() == R.id.board_write){
             moveImageBar(v);
             vp.setCurrentItem(1);
+            subTitle.setText(Const.WRITE_TITLE);
         }
         if(v.getId() == R.id.refresh_btn){
             //// TODO: 2017-04-23  메인액티비티에서 리스트 프레그먼트의 데이터를 리프레쉬 하기.
+            /*해결*/
             if(vp.getCurrentItem() == 0 ){
-                //why board_list click ?
-                //reason : refresh list
+                //propose : refresh list
                 board_list.performClick();
             }else if(vp.getCurrentItem() == 1 ){
-                /*객체 초기화*/
-                bpf = new BoardPostingFragment();
-                System.out.println("refresh_btn regist btn");
-                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
+                /* 애초의 취지  :  등록 폼의 데이터들이 mainActivity의 event에서 접근이 안되서 문제가 발생.*/
+                /* 경과  : interface선언, static 변수 선언 등으로 해결해 보려했으나 정방향의 문제 해결을 진행함*/
+                /* getSupportFragmentManger의 사용법*/
+                /* 보통 MainActivity의 fragment id를 넣어라 아래 코드와 같이 진행하는게 원칙.*/
+                /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
+                BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
+                Post post = ff.sendParentClickData();
+                /*생각해보면 결국 viewPager도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
-                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout_view = inflater.inflate(R.layout.board_posting,null);
-
-                EditText writeName = (EditText) layout_view.findViewById(R.id.writename_edit);
-                EditText passwd = (EditText) layout_view.findViewById(R.id.passwd);
-                EditText department = (EditText) layout_view.findViewById(R.id.department_std_edit); //학과
-                EditText studentNo = (EditText) layout_view.findViewById(R.id.studentNo_edit);
-                EditText departure = (EditText) layout_view.findViewById(R.id.departure_detail);
-                EditText departure_detail= (EditText) layout_view.findViewById(R.id.departure_detail_edit);
-                EditText destination = (EditText) layout_view.findViewById(R.id.destination_edit);
-                EditText destination_detail = (EditText) layout_view.findViewById(R.id.destination_detail_edit);
-                EditText passengerNum = (EditText) layout_view.findViewById(R.id.passengerNum_edit);
-                //Spinner waitTimeSpinner = (Spinner) layout_view.findViewById(R.id.wait_time_spinner);
-                String waitTime = BoardPostingFragment.getWaitTime();
-                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-                sp.getString(Const.SHARED_REG_ID,"");
-                System.out.println("writeName::::"+"".equals(writeName.getText()));
-                System.out.println("department::::"+"".equals(department.getText()));
-                System.out.println("passengerNum::::"+passengerNum.getText());
+                // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
                 //Writing  : hs
                 //getText() : return Editable / Editable : not completely convert toString
                 //therfore make sure to method : toString();
-                String writeNameStr = writeName.getText().toString();
-                String passwdStr = passwd.getText().toString();
-                String departmentStr = department.getText().toString();
-                String studentNoStr = studentNo.getText().toString();
-                String departureStr = departure.getText().toString();
-                String departure_detailStr = departure_detail.getText().toString();
-                String destinationStr = destination.getText().toString();
-                String destination_detailStr = destination_detail.getText().toString();
-                String passengerNumStr = passengerNum.getText().toString();
+                String writeNameStr             = post.getWrite_name();
+                String passwdStr                = post.getPasswd();
+                String departmentStr            = post.getDepartment();
+                String studentNoStr             = post.getStudent_no();
+                String departureStr             = post.getDeparture();
+                String departure_detailStr      = post.getDeparture_detail();
+                String destinationStr           = post.getDestination();
+                String destination_detailStr    = post.getDestination_detail();
 
+                String waitTime                 = post.getWait_time();
+                String passengerNum             = post.getPassenger_num();
 
-                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNumStr)||
-                        "".equals(departureStr) ||"".equals(departure_detailStr) ||"".equals(destinationStr) ||"".equals(destination_detailStr) ){
+                RequestParams params = new RequestParams();
+                params.put(Const.WRITE_NAME               , writeNameStr);
+                params.put(Const.PASSWD                      , passwdStr);
+                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+                params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
+                params.put(Const.STUDENT_NO                  , studentNoStr);//학번
+                params.put(Const.DEPARTMENT                  , departmentStr);//학과
+                params.put(Const.DEPARTURE                   , departureStr);//출발지
+                params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
+                params.put(Const.DESTINATION                , destinationStr);
+                params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
+                params.put(Const.PASSENGER_NUM              , passengerNum);
+                params.put(Const.WAIT_TIME                  , waitTime);
+                //todo 업로드 후 화면 전환 -> 목록으로
+
+                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
+                        "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
                     Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
                     return ;
                 }
 
-                RequestParams params = new RequestParams();
-                params.put("WRITE_NAME"         , writeNameStr);
-                params.put("PASSWD"              , passwdStr);
-                params.put("STUDENT_NO"         , studentNoStr);//학번
-                params.put("DEPARTMENT"         , departmentStr);//학과
-                params.put("DEPARTURE"          , departureStr);
-                params.put("DEPARTURE_DETAIL"  , departure_detailStr);
-                params.put("DESTINATION"        , destinationStr);
-                params.put("DESTINATION_DETAIL", destination_detailStr);
-                params.put("PASSENGER_NUM"      , passengerNumStr);
-                params.put("WAIT_TIME"           , waitTime);
-                Log.i("권수정", "click upload button!");
-                //todo 업로드 후 화면 전환 -> 목록으로
 
+                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
+                connection.addPosting(params,board_list);
+                Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
+                //board_list.performClick();
 
-                connection.addPosting(params);
-                board_list.performClick();
+                imm.hideSoftInputFromWindow(refresh_btn.getWindowToken(), 0);
+
+                SharedPreferences.Editor spe = sp.edit();
+                spe.putString(Const.WRITE_NAME,writeNameStr);
+                spe.putString(Const.PASSWD,passwdStr);
+                spe.putString(Const.STUDENT_NO,studentNoStr);
+                //spe.putString(Const.REG_ID,"");
+                spe.putString(Const.DEPARTMENT,departmentStr);
+                //spe.putString(Const.DEPARTURE,"");
+                //spe.putString(Const.DEPARTURE_DETAIL,"");
+                //spe.putString(Const.DESTINATION,"");
+                //spe.putString(Const.DESTINATION_DETAIL,"");
+                //spe.putString(Const.PASSENGER_NUM,"");
+                //spe.putString(Const.WAIT_TIME,"");
             }
 
         }
@@ -217,4 +233,6 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     public void onPageScrollStateChanged(int state) {
 
     }
+
+
 }

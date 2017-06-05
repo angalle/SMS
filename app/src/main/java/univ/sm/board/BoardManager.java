@@ -87,7 +87,8 @@ public class BoardManager {
                     jsonPost.getString("DEPARTURE_DETAIL"), jsonPost.getString("DESTINATION"),
                     jsonPost.getString("DESTINATION_DETAIL"), jsonPost.getString("REG_ID"),
                     jsonPost.getString("USE_FLAG"), jsonPost.getString("PASSENGER_NUM"),
-                    jsonPost.getString("WAIT_TIME"), jsonPost.getString("INSERT_TIME"), jsonPost.getString("INSERT_DATE"), jsonPost.getString("REMAIN_TIME"));
+                    jsonPost.getString("WAIT_TIME"), jsonPost.getString("INSERT_TIME"), jsonPost.getString("INSERT_DATE"),
+                    jsonPost.getString("REMAIN_TIME"), jsonPost.getInt("COMMENT_CNT"));
 
 
 
@@ -135,7 +136,7 @@ public class BoardManager {
                     postJson.getString("DESTINATION_DETAIL"), postJson.getString("REG_ID"),
                     postJson.getString("USE_FLAG"), postJson.getString("PASSENGER_NUM"),
                     postJson.getString("WAIT_TIME"), postJson.getString("INSERT_TIME"),
-                    postJson.getString("INSERT_DATE"),/* postJson.getString("REMAIN_TIME")*/ null ,commentsList);
+                    postJson.getString("INSERT_DATE"), postJson.getInt("COMMENT_CNT"),commentsList);
 
             Log.i(TAG,"json2PostWithComment : mPost.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
             //댓글 리스트 추가해서 Post 만들기

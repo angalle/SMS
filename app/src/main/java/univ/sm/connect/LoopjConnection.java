@@ -1,7 +1,10 @@
 package univ.sm.connect;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -52,6 +55,7 @@ public class LoopjConnection {
     params.put("more", "data");*/
 
 
+
     /**
      * 콜벤 게시물 추가하기
      * params : WRITE_NAME 작성자, PASSWD 글 비밀번호, DEPARTMENT 학과, STUDENT_NO 학번,
@@ -60,16 +64,23 @@ public class LoopjConnection {
      *
      * @param params
      */
-    public void addPosting(RequestParams params) {
+    public void addPosting(RequestParams params,final TextView tv) {
         client.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvan , status : " + statusCode + ", responseBody : " + responseBody.toString() + ", //onSuccess");
+                tv.performClick();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/insertcallvan , status : " + statusCode + ", //onFailure");
+                tv.performClick();
             }
         });
     }
@@ -142,8 +153,6 @@ public class LoopjConnection {
                 Log.e("LoopjConnect", "response  : " + response);
 
                 postResult = BoardManager.json2PostWithComment(response);
-
-
             }
 
             @Override
@@ -185,6 +194,4 @@ public class LoopjConnection {
             }
         });
     }
-
-
 }

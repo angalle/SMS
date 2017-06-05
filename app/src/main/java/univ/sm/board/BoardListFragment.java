@@ -1,6 +1,7 @@
 package univ.sm.board;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,12 +29,29 @@ public class BoardListFragment extends Fragment {
     LinearLayoutManager layoutManager = null;
     Context context;
     Activity activity;
+    static BoardListFragment instance;
 
-    public BoardListFragment() {
+    //loading msg dialog
+    ProgressDialog pd = null;
+
+    public static BoardListFragment newInstatnce(){
+        if(instance == null){
+            instance = new BoardListFragment();
+        }
+        return instance;
+    }
+
+    public BoardListFragment(){
         super();
-         /*listView에서 뿌려질 view변수들을 초기화*/
-        this.context = getContext();
-        this.activity = getActivity();
+        this.context = BoardActivity.context;
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof Activity){
+            context = (Activity)context;
+        }
     }
 
     @Override
@@ -65,6 +83,10 @@ public class BoardListFragment extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                pd = new ProgressDialog(getContext());
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.setMessage("Loading to list");
+                pd.show();
             }
 
             @Override
@@ -72,6 +94,7 @@ public class BoardListFragment extends Fragment {
                 /** CallVan board data download */
                 LoopjConnection connection = LoopjConnection.getInstance(context);
                 connection.getBoardList();
+
                 return null;
             }
 
@@ -81,6 +104,7 @@ public class BoardListFragment extends Fragment {
                 try {
                     /* 동적으로 할당되는 뷰를 그려주거나 이벤트 할당*/
                     fn_dynamicLayout();
+                    pd.dismiss();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

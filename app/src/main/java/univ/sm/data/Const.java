@@ -34,9 +34,22 @@ public class Const {
     static public int TERMINAL_C = 1;
     static public int ONYANG_C = 2;
     //static public int CHEONANCAMPUS_C = 3;
-
+    /*SHARED PREPERENCD VARIABLE*/
     static public String SHARED_GCM = "GCM";
     static public String SHARED_REG_ID = "reg-id";
 
+    static public String LIST_TITLE = "게시물 목록";
+    static public String WRITE_TITLE = "게시물 등록";
 
+    static public String WRITE_NAME = "WRITE_NAME";
+    static public String PASSWD = "PASSWD";
+    static public String STUDENT_NO = "STUDENT_NO";
+    static public String REG_ID = "REG_ID";
+    static public String DEPARTMENT = "DEPARTMENT";
+    static public String DEPARTURE = "DEPARTURE";
+    static public String DEPARTURE_DETAIL = "DEPARTURE_DETAIL";
+    static public String DESTINATION = "DESTINATION";
+    static public String DESTINATION_DETAIL = "DESTINATION_DETAIL";
+    static public String PASSENGER_NUM = "PASSENGER_NUM";
+    static public String WAIT_TIME = "WAIT_TIME";
 }

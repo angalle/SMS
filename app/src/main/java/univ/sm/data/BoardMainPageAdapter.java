@@ -1,5 +1,6 @@
 package univ.sm.data;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -12,7 +13,6 @@ import univ.sm.board.BoardPostingFragment;
  */
 public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
 
-
     public BoardMainPageAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -22,9 +22,9 @@ public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
         switch(position)
         {
             case 0:
-                return new BoardListFragment();
+                return BoardListFragment.newInstatnce();
             case 1:
-                return new BoardPostingFragment();
+                return BoardPostingFragment.newInstatnce();
             default:
                 return null;
         }

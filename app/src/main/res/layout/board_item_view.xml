@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="#ffffff"
+    android:background="@drawable/itemback"
     android:orientation="horizontal"
     android:weightSum="3">
 
@@ -28,10 +28,11 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
+                android:id="@+id/WRITER"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:ellipsize="marquee"
+                android:paddingLeft="5dp"
                 android:text="작성자"
                 android:textColor="#58595b"
                 android:textSize="14sp" />
@@ -47,9 +48,10 @@
 
             <TextView
                 android:id="@+id/department"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:ellipsize="marquee"
+                android:paddingLeft="5dp"
                 android:text="학과명"
                 android:textColor="#58595b"
                 android:textSize="14sp" />
@@ -71,10 +73,12 @@
 
                 <TextView
                     android:id="@+id/DEPARTURE"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="center|right"
                     android:padding="5dp"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
                     android:text="출발지 이름"
                     android:textColor="#e16175"
                     android:textSize="20sp" />
@@ -102,9 +106,11 @@
 
                 <TextView
                     android:id="@+id/DESTINATION"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="left"
+                    android:textAlignment="center"
+                    android:ellipsize="end"
                     android:padding="5dp"
                     android:text="도착지 이름"
                     android:textColor="#e16175"
@@ -124,6 +130,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="10dp"
                 android:layout_weight="1">
 
                 <ImageView
@@ -139,15 +146,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
+                    android:text="목표인원 0명"
+                    android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:id="@+id/passengerNum"
                     android:layout_centerVertical="true"
+                    android:textSize="10dp"
                     android:textAlignment="center" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="10dp"
                 android:layout_weight="1">
 
                 <ImageView
@@ -163,8 +174,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
+                    android:text="관심댓글 0"
+                    android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:id="@+id/cmntCnt"
+                    android:textSize="10dp"
                     android:layout_centerVertical="true"
                     android:textAlignment="center" />
 
@@ -176,13 +190,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingRight="10dp"
         android:layout_weight="2.2"
         android:gravity="center">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:id="@+id/imageView4"
+            android:id="@+id/wait_time_img"
             android:src="@drawable/time_green_btn"
             android:adjustViewBounds="true" />
 
@@ -195,7 +210,7 @@
             android:textAlignment="gravity"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="0dp" />
     </RelativeLayout>
 
 

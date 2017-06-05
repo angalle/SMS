@@ -3,11 +3,13 @@ package univ.sm.board;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -84,17 +86,33 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
 
         @Override
         public void onBindView(Post item) {
+            TextView WRITER = (TextView) itemView.findViewById(R.id.WRITER);//작성자
+            TextView DEPARTMENT = (TextView) itemView.findViewById(R.id.department);//학과
             TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
             TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
             TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
-            TextView WRITE_NAME = (TextView) itemView.findViewById(R.id.name);
             TextView WAIT_TIME = (TextView) itemView.findViewById(R.id.waitTime);
+            TextView COMMENT_CNT = (TextView) itemView.findViewById(R.id.cmntCnt);
 
+            ImageView waitTimeImg = (ImageView) itemView.findViewById(R.id.wait_time_img) ;
+
+            String time = item.getRemain_time();
+            if(Integer.parseInt(time) <= 10 ){
+                waitTimeImg.setImageResource(R.drawable.time_pink_btn);
+                WAIT_TIME.setTextColor(Color.parseColor("#e06376"));
+            }else{
+                waitTimeImg.setImageResource(R.drawable.time_green_btn);
+                WAIT_TIME.setTextColor(Color.parseColor("#52b3b3"));
+            }
+
+            WRITER.setText(item.getWrite_name());
+            DEPARTMENT.setText(item.getDepartment());
+            COMMENT_CNT.setText("관심댓글 "+item.getComment_cnt());
             WAIT_TIME.setText(item.getRemain_time());
             DEPARTURE.setText(item.getDeparture());
             DESTINATION.setText(item.getDestination());
-            PASSENGER_NUM.setText("총 "+item.getPassenger_num());
-            WRITE_NAME.setText(item.getWrite_name());
+            PASSENGER_NUM.setText("목표인원 "+item.getPassenger_num()+"명");
+
         }
     }
 

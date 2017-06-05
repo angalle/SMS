@@ -11,29 +11,30 @@ import univ.sm.data.Comment;
  */
 
 public class Post {
-    private String board_no;    //게시글 번호 CALL_BOARD_NO
+    private String board_no;                //게시글 번호 CALL_BOARD_NO
     private String write_name;            //작성자 명
     private String passwd;                //비밀번호
     private String department;            //학과
-    private String student_no;        //학번
+    private String student_no;              //학번
     private String departure;            //출발지
     private String departure_detail;    //출발지 설명
-    private String destination;        //목적지
-    private String destination_detail;  //목적지설명
-    private String reg_id;               //gcm(push) 기기값
-    private Boolean use_flag;            //사용 flag Y/N
-    private String passenger_num;        //총 인원
-    private String wait_time;          //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
-    private String insert_time;     //등록시간
-    private String insert_date;        //등록날짜
-    private String remain_time;        //등록날짜
+    private String destination;             //목적지
+    private String destination_detail;      //목적지설명
+    private String reg_id;                  //gcm(push) 기기값
+    private Boolean use_flag;               //사용 flag Y/N
+    private String passenger_num;           //총 인원
+    private String wait_time;               //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
+    private String insert_time;             //등록시간
+    private String insert_date;             //등록날짜
+    private String remain_time;             //등록날짜
+    private int comment_cnt;             //코멘트 개수
 
     private ArrayList<Comment> commentsList; //댓글리스트
 
     public Post(String board_no, String write_name, String passwd, String department,
                 String student_no, String departure, String departure_detail, String destination,
                 String destination_detail, String reg_id, String use_flag, String passenger_num,
-                String wait_time, String insert_time, String insert_date, String remain_time) {
+                String wait_time, String insert_time, String insert_date, String remain_time,int comment_cnt) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -54,13 +55,13 @@ public class Post {
         this.insert_time = insert_time;
         this.insert_date = insert_date;
         this.remain_time = remain_time;
-
+        this.comment_cnt = comment_cnt;
     }
 
     public Post(String board_no, String write_name, String passwd, String department,
                 String student_no, String departure, String departure_detail, String destination,
                 String destination_detail, String reg_id, String use_flag, String passenger_num,
-                String wait_time, String insert_time, String insert_date, String remain_time, ArrayList<Comment> commentList) {
+                String wait_time, String insert_time, String insert_date,int comment_cnt, ArrayList<Comment> commentList) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -81,7 +82,12 @@ public class Post {
         this.insert_time = insert_time;
         this.insert_date = insert_date;
         this.remain_time = remain_time;
+        this.comment_cnt = comment_cnt;
         this.commentsList = commentList;
+    }
+
+    public Post(){
+
     }
 
 
@@ -110,7 +116,16 @@ public class Post {
         this.wait_time = newPost.wait_time;
         this.insert_time = newPost.insert_time;
         this.insert_date = newPost.insert_date;
+        this.comment_cnt = comment_cnt;
         this.remain_time = remain_time;
+    }
+
+    public int getComment_cnt() {
+        return comment_cnt;
+    }
+
+    public void setComment_cnt(int comment_cnt) {
+        this.comment_cnt = comment_cnt;
     }
 
     public String getBoard_no() {

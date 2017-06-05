@@ -10,7 +10,7 @@ DESTINATION_DETAIL	//목적지 설명
 REG_ID				//gcm 기기 값
 PASSENGER_NUM		//총 탑승인원
 WAIT_TIME			//대기시간*/-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,8 +20,6 @@ WAIT_TIME			//대기시간*/-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_weight="1.5"
         android:background="#FFFFFF"
         android:orientation="vertical">
@@ -29,30 +27,36 @@ WAIT_TIME			//대기시간*/-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="20dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/input_icon"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/input_icon"
+                        android:id="@+id/imageView7" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="내용입력"
+                        android:padding="10dp"
+                        android:text="내 용 입 력"
                         android:textColor="#58595b"
                         android:textStyle="bold"
                         android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,24 +69,26 @@ WAIT_TIME			//대기시간*/-->
                             android:padding="5dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:layout_height="wrap_content"
-                                android:text="작 성 자"
+                                android:text="· 작 성 자"
                                 android:textStyle="bold"
-                                android:textColor="#abdbd0"
-                                android:textSize="12sp" />
+                                android:textColor="#4fb2b3"
+                                android:textSize="12sp"
+                                android:id="@+id/textView7" />
 
                             <EditText
                                 android:id="@+id/writename_edit"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
+                                android:background="#ddf0f0"
                                 android:hint="실명이 아닐 경우 신청이 없을 수 있습니다."
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
 
                         </LinearLayout>
@@ -94,23 +100,24 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:textStyle="bold"
                                 android:layout_height="wrap_content"
-                                android:text="비밀번호"
-                                android:textColor="#abdbd0"
+                                android:text="·비밀번호"
+                                android:textColor="#4fb2b3"
                                 android:textSize="12sp" />
 
                             <EditText
                                 android:id="@+id/passwd"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
+                                android:inputType="number"
                                 android:layout_height="30dp"
-                                android:background="@null"
                                 android:hint="DEPARTURE..."
+                                android:background="#ddf0f0"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -121,11 +128,11 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:layout_height="wrap_content"
-                                android:text="학    과"
-                                android:textColor="#abdbd0"
+                                android:text="·학    과"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -134,10 +141,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
                                 android:hint="ex )  컴퓨터 공학과"
+                                android:background="#ddf0f0"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -148,11 +155,11 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:layout_height="wrap_content"
-                                android:text="학    번"
-                                android:textColor="#abdbd0"
+                                android:text="·학    번"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -160,11 +167,12 @@ WAIT_TIME			//대기시간*/-->
                                 android:id="@+id/studentNo_edit"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
+                                android:inputType="number"
                                 android:layout_height="30dp"
-                                android:background="@null"
                                 android:hint="ex )  20102222222"
+                                android:background="#ddf0f0"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -175,19 +183,19 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
-                                android:text="대기 시간"
-                                android:textColor="#abdbd0"
+                                android:text="·대기 시간"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
                             <Spinner
                                 android:id="@+id/wait_time_spinner"
-                                android:padding="5dp"
+                                android:padding="15dp"
+                                android:background="#ddf0f0"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="#ffffff"
                                 >
                             </Spinner>
                         </LinearLayout>
@@ -199,11 +207,11 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:layout_height="wrap_content"
-                                android:text="출 발 지"
-                                android:textColor="#abdbd0"
+                                android:text="·출 발 지"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -212,10 +220,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
+                                android:background="#ddf0f0"
                                 android:hint="ex ) 천안역 셔틀버스장"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -230,11 +238,11 @@ WAIT_TIME			//대기시간*/-->
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/subcategort_btn"/>
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:padding="5dp"
+                                android:layout_width="70dp"
+                                android:padding="1dp"
                                 android:layout_height="wrap_content"
                                 android:text="출발지상세"
-                                android:textColor="#abdbd0"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -243,10 +251,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
+                                android:background="#dedede"
                                 android:hint="ex ) 천안역 셔틀버스장"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -257,11 +265,11 @@ WAIT_TIME			//대기시간*/-->
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:padding="5dp"
                                 android:layout_height="wrap_content"
-                                android:text="목 적 지"
-                                android:textColor="#abdbd0"
+                                android:text="·목 적 지"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -270,10 +278,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
+                                android:background="#ddf0f0"
                                 android:hint="ex ) 천안역 셔틀버스장"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -288,11 +296,11 @@ WAIT_TIME			//대기시간*/-->
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/subcategort_btn"/>
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:padding="5dp"
+                                android:layout_width="70dp"
+                                android:padding="1dp"
                                 android:layout_height="wrap_content"
-                                android:text="목적지상세"
-                                android:textColor="#abdbd0"
+                                android:text="·목적지상세"
+                                android:textColor="#4fb2b3"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -301,10 +309,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:background="@null"
+                                android:background="#dedede"
                                 android:hint="ex ) 천안역 셔틀버스장"
                                 android:textColor="#555555"
-                                android:textColorHint="#f1f1f2"
+                                android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -314,26 +322,25 @@ WAIT_TIME			//대기시간*/-->
                             android:padding="5dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="5dp"
-                                    android:text="모집 인원"
-                                    android:textColor="#abdbd0"
-                                    android:textStyle="bold"
-                                    android:textSize="12sp" />
 
-                                <EditText
-                                    android:id="@+id/passengerNum_edit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:padding="5dp"
-                                    android:background="@null"
-                                    android:hint="PASSENGER_NUM..."
-                                    android:textColor="#555555"
-                                    android:textColorHint="#f1f1f2"
-                                    android:textStyle="bold"
-                                    android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="·모집 인원"
+                                android:textColor="#4fb2b3"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:id="@+id/textView6" />
+
+                            <Spinner
+                                android:id="@+id/passengerNum_spinner"
+                                android:padding="15dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#ddf0f0"
+                                >
+                            </Spinner>
                         </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -343,4 +350,4 @@ WAIT_TIME			//대기시간*/-->
 
     <!--    footer  -->
 
-</LinearLayout>
+</FrameLayout>
