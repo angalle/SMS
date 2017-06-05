@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />
 
-            <android.support.v7.widget.AppCompatTextView
+           <!-- <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -264,7 +264,7 @@
                 android:id="@+id/comment_passwd"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3" />
+                android:layout_weight="3" />-->
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/comment_info_ok_btn"

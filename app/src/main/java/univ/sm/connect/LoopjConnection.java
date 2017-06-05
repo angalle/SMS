@@ -1,8 +1,6 @@
 package univ.sm.connect;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -40,7 +38,7 @@ public class LoopjConnection {
     }
 
 
-    private AsyncHttpClient client = new AsyncHttpClient();
+    private AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     private SyncHttpClient syncHttpClient = new SyncHttpClient();
     private static String boardUrl = "http://52.78.113.18:40000";
     private static String getBoardListUrl = "/selectcallvan";
@@ -65,7 +63,7 @@ public class LoopjConnection {
      * @param params
      */
     public void addPosting(RequestParams params,final TextView tv) {
-        client.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
+        asyncHttpClient.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -179,7 +177,7 @@ public class LoopjConnection {
     // 글쓴이가 답변남길시 - 해당 댓글남긴사람의 기기값.*/
 
     public void addComment(RequestParams params) {
-        client.post(boardUrl + addCommentUrl, params, new JsonHttpResponseHandler() {
+        syncHttpClient.post(boardUrl + addCommentUrl, params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
