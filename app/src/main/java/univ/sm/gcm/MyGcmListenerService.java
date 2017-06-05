@@ -13,6 +13,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import univ.sm.R;
+import univ.sm.Splash;
 
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -33,14 +34,14 @@ public class MyGcmListenerService extends GcmListenerService {
 	}
 
 	private void createNotification(String title, String body) {
-		/*Intent intent = new Intent(this, Splash.class);
+		Intent intent = new Intent(this, Splash.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.gcmbusicon2)
+                .setSmallIcon(R.drawable.input_icon)
                 .setContentTitle("선문대 셔틀버스 시간표")
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -50,12 +51,11 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 , notificationBuilder.build());*/
+        notificationManager.notify(0 , notificationBuilder.build());
 
 
-        /* PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /*ID of notification *//*, intent,
-                PendingIntent.FLAG_ONE_SHOT);*/
-        /* notificationManager.notify(0 /*Request code *//*, notificationBuilder.build());*/
+        /*PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 *//*ID of notification *//*, intent,PendingIntent.FLAG_ONE_SHOT);
+        notificationManager.notify(0 *//*Request code *//*, notificationBuilder.build());*/
 	}
 
 }
