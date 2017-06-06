@@ -29,9 +29,10 @@
 
             <TextView
                 android:id="@+id/WRITER"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:singleLine="true"
                 android:paddingLeft="5dp"
                 android:text="작성자"
                 android:textColor="#58595b"
@@ -48,9 +49,10 @@
 
             <TextView
                 android:id="@+id/department"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:singleLine="true"
                 android:paddingLeft="5dp"
                 android:text="학과명"
                 android:textColor="#58595b"
@@ -77,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center|right"
                     android:padding="5dp"
-                    android:ellipsize="end"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
                     android:textAlignment="center"
                     android:text="출발지 이름"
                     android:textColor="#e16175"
@@ -110,7 +113,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:textAlignment="center"
-                    android:ellipsize="end"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
                     android:padding="5dp"
                     android:text="도착지 이름"
                     android:textColor="#e16175"

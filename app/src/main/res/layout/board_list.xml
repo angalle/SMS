@@ -42,7 +42,6 @@
                     android:layout_height="50dp"
                     android:background="@drawable/transparent_background">
                 </LinearLayout>
-
             </LinearLayout>
         </RelativeLayout>
 
