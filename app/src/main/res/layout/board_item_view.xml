@@ -174,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="관심댓글 0"
+                    android:text="0"
                     android:textColor="#000000"
                     android:paddingLeft="10dp"
                     android:id="@+id/cmntCnt"

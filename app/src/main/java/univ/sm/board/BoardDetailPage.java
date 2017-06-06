@@ -39,16 +39,20 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     private TextView WRITE_NAME_view, DEPARTMENT_view, STUDENT_NO_view, DEPARTURE_view, DEPARTURE_DETAIL_view, DESTINATION_view, DESTINATION_DETAIL_view, PASSENGER_NUM_view, WAIT_TIME_view;
     private RecyclerView commentRCV;
     private ArrayList<Comment> mCommentsList;
-    private EditText comment_editText, comment_name_editText, comment_passwd_editText;
+    private EditText comment_editText, comment_name_editText;
     private ImageButton comment_popup_btn;
     private Button comment_btn, comment_info_ok_btn;
     private LinearLayout comment_info_layout;
     private RequestParams comment_params = new RequestParams();
+    private SharedPreferences userPref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        downLoadBoard_setLayout();
+    }
 
+    void downLoadBoard_setLayout() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -74,12 +78,10 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     }
 
     private void downloadData() {
-
         //디테일 페이지 데이터 받아오기 (mPost + 댓글)
         Log.i(TAG, "CALL_BOARD_NO : " + board_no + ", position : " + position);
         LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
         mPost = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
-
     }
 
     private void setLayout() {
@@ -96,40 +98,30 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         PASSENGER_NUM_view = (TextView) findViewById(R.id.PASSENGER_NUM_view);
         WAIT_TIME_view = (TextView) findViewById(R.id.WAIT_TIME_view);
 
-
         /** board comment 구성*/
         commentRCV = (RecyclerView) findViewById(R.id.commentRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         commentRCV.setLayoutManager(layoutManager);
         mCommentsList = new ArrayList<>();
-        if(mPost == null){
-            Comment comment = new Comment("1", "1", "1", "Not Display nothing", "NDN", "NDN", "doc", "f", "0", "d", "a");
-            mCommentsList.add(comment);
-        }else{
+        if (mPost == null) {
+        } else {
             mCommentsList = mPost.getCommentsList();
         }
-
-
-
 
         BoardCommentListAdapter commentListAdapter = new BoardCommentListAdapter(mCommentsList, getApplicationContext());
         commentRCV.setAdapter(commentListAdapter);
 
         comment_info_layout = (LinearLayout) findViewById(R.id.comment_info_Layout);
         comment_name_editText = (EditText) findViewById(R.id.comment_name);
+        userPref = getSharedPreferences("userPref", MODE_PRIVATE);
+        comment_name_editText.setText(userPref.getString("name",""));
         comment_editText = (EditText) findViewById(R.id.comment_editText);
-        comment_passwd_editText = (EditText) findViewById(R.id.comment_passwd);
         comment_info_ok_btn = (Button) findViewById(R.id.comment_info_ok_btn);
         comment_info_ok_btn.setOnClickListener(this);
         comment_popup_btn = (ImageButton) findViewById(R.id.comment_popup_btn);
         comment_popup_btn.setOnClickListener(this);
         comment_btn = (Button) findViewById(R.id.comment_btn);
         comment_btn.setOnClickListener(this);
-
-
-//        BoardManager.refreshPost(position,/*jsonobject*/);
-//todo 디테일 페이지를 새로고침
-
 
         if (mPost.getBoard_no().equals(board_no)) {
             WRITE_NAME_view.setText(mPost.getWrite_name());
@@ -144,20 +136,10 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    /*var CALL_BOARD_NO              //해당글의 INDEX
-         var COMMENT_LEVEL             // 댓글의 댓글레벨
-         var CONTENTS                         // 내용
-         var REG_ID                                // 댓글 남긴사람의 기기값
-         var WRITE_NAME                      // 작성자이름
-         var DEPARTMENT                      // 학과
-         var BEFORE_COMMENT_NO    // 이전 댓글 INDEX - 이전 인덱스를 찾아서 레벨로 댓글의 댓글기능 구성
-         var SEND_REG_ID    	             // 타겟이 될 사람의 기기값*/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.comment_info_ok_btn:
-
-
                 if (comment_info_layout.getVisibility() == View.VISIBLE) {
                     comment_info_layout.setVisibility(View.GONE);
                 }
@@ -168,22 +150,40 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                     comment_info_layout.setVisibility(View.VISIBLE);
                 }
                 break;
-            case R.id.comment_btn:
 
+            case R.id.comment_btn:
                 SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
                 comment_params.put("WRITE_NAME", comment_name_editText.getText());
-                comment_params.put("DEPARTMENT", comment_passwd_editText.getText()); //fixme 학과에 passwd 입력하는상태
                 comment_params.put("CALL_BOARD_NO", board_no);
                 comment_params.put("CONTENTS", comment_editText.getText());
                 comment_params.put("REG_ID", sp.getString("reg-id", ""));
+                comment_params.put("COMMENT_LEVEL", 1);
+                comment_params.put("BEFORCOMMENT_NO", board_no);//이희선씨의 보드넘버 요청
+                comment_params.put("SEND_REG_ID", " ");//이희선씨의 공백 요청
 
                 comment_editText.setText(null);
-                Log.i(TAG, "comment_params.toString() : " + comment_params.toString());
-                LoopjConnection.getInstance(getApplicationContext()).addComment(comment_params); //전송
 
+                //이름 자동 생성을 위한 preference 저장
+                SharedPreferences.Editor editor = userPref.edit();
+                editor.putString("name",comment_name_editText.getText().toString());
+                editor.commit();
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        /** 댓글 입력, 데이터 전송*/
+                        LoopjConnection.getInstance(getApplicationContext()).addComment(comment_params);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        downLoadBoard_setLayout();
+                    }
+                }.execute(null, null, null);
                 break;
-
         }
     }
-}
 
+}

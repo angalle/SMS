@@ -1,8 +1,6 @@
 package univ.sm.connect;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -26,10 +24,17 @@ import univ.sm.board.Post;
 public class LoopjConnection {
     private static LoopjConnection instance;
 
-    //    private JSONObject result;
     private Object result;
     private Post postResult;
     private static Context mContext;
+
+    private AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private SyncHttpClient syncHttpClient = new SyncHttpClient();
+    private static String boardUrl = "http://52.78.113.18:40000";
+    private static String getBoardListUrl = "/selectcallvan";
+    private static String addPostingUrl = "/insertcallvan";
+    private static String getonepostUrl = "/selectcallvaninfo";
+    private static String addCommentUrl = "/insertcallvancomment";
 
     public static LoopjConnection getInstance(Context context) {
         if (instance == null) {
@@ -38,23 +43,6 @@ public class LoopjConnection {
         mContext = context;
         return instance;
     }
-
-
-    private AsyncHttpClient client = new AsyncHttpClient();
-    private SyncHttpClient syncHttpClient = new SyncHttpClient();
-    private static String boardUrl = "http://52.78.113.18:40000";
-    private static String getBoardListUrl = "/selectcallvan";
-    private static String addPostingUrl = "/insertcallvan";
-    private static String getonepostUrl = "/selectcallvaninfo";
-    private static String addCommentUrl = "/insertcallvancomment";
-    private BoardManager boardManager;
-
-
-    /*RequestParams params = new RequestParams();
-    params.put("key", "value");
-    params.put("more", "data");*/
-
-
 
     /**
      * 콜벤 게시물 추가하기
@@ -65,7 +53,7 @@ public class LoopjConnection {
      * @param params
      */
     public void addPosting(RequestParams params,final TextView tv) {
-        client.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
+        asyncHttpClient.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -100,7 +88,7 @@ public class LoopjConnection {
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvan , status : " + statusCode + ", //onSuccess");
                 Log.e("권수정", "result : " + response);
                 result = response;
-                boardManager = new BoardManager(response);
+                new BoardManager(response);
             }
 
             @Override
@@ -110,31 +98,7 @@ public class LoopjConnection {
         });
         return (JSONObject) result;
     }
-    /*{
-  "CALLVAN_INFO": [
-    {
-      "CALL_BOARD_NO": "ANONY2017041800042",
-      "WRITE_NAME": "ㅇㄹ",
-      "PASSWD": "11",
-      "DEPARTMENT": "ㅇㅇ",
-      "STUDENT_NO": "ㅇㄷㅇ",
-      "DEPARTURE": "ㅇㅇ",
-      "DEPARTURE_DETAIL": "ㅇㅇ",
-      "DESTINATION": "ㅇㅇ",
-      "DESTINATION_DETAIL": "ㅇㅇ",
-      "REG_ID": "undefined",
-      "USE_FLAG": "Y",
-      "PASSENGER_NUM": "ㅇ",
-      "WAIT_TIME": "062833",
-      "INSERT_TIME": "061333",
-      "INSERT_DATE": "20170418"
-    }
-  ],
-  "COMMENTS": []
-}*/
 
-    /*RequestParams params = new RequestParams();
-    params.put("CALL_BOARD_NO", "ANONY2017041800042");*/
 
     /**
      * 게시글 한개 불러오기
@@ -165,21 +129,17 @@ public class LoopjConnection {
         return postResult;
     }
 
-    /*
-    //PARAMETER
-    var CALL_BOARD_NO              //해당글의 INDEX
-    var COMMENT_LEVEL             // 댓글의 댓글레벨
-    var CONTENTS                         // 내용
-    var REG_ID                                // 댓글 남긴사람의 기기값
-    var WRITE_NAME                      // 작성자이름
-    var DEPARTMENT                      // 학과
-    var BEFORE_COMMENT_NO    // 이전 댓글 INDEX - 이전 인덱스를 찾아서 레벨로 댓글의 댓글기능 구성
-    var SEND_REG_ID    	             // 타겟이 될 사람의 기기값
-    // 탑승 신청시 -  글쓴이의 기기값
-    // 글쓴이가 답변남길시 - 해당 댓글남긴사람의 기기값.*/
+
+
+    /**
+     * 댓글 등록
+     *
+     * @param params CALL_BOARD_NO, COMMENT_LEVEL, CONTENTS, REG_ID,
+     *               WRITE_NAME, BEFORE_COMMENT_NO, SEND_REG_ID
+     */
 
     public void addComment(RequestParams params) {
-        client.post(boardUrl + addCommentUrl, params, new JsonHttpResponseHandler() {
+        syncHttpClient.post(boardUrl + addCommentUrl, params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
