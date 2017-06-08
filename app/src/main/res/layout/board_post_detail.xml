@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/background"
+            android:background="#FFFFFFFF"
             android:orientation="vertical">
 
             <LinearLayout
@@ -56,7 +56,7 @@
                 android:orientation="horizontal"
                 android:padding="2dp">
 
-                <android.support.v7.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/writer_icon_btn" />
@@ -152,7 +152,7 @@
                 </LinearLayout>
 
 
-                <android.support.v7.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/arrow_green_btn" />

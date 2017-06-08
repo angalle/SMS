@@ -77,8 +77,9 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     boardIntent.putExtra("position", getLayoutPosition());
                     boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
-                    activity.startActivity(boardIntent);
                     Log.i(TAG, "position : " + getLayoutPosition() + ",  board_no : " + postArrayList.get(getLayoutPosition()).getBoard_no());
+                    activity.startActivity(boardIntent);
+
 
                 }
             });
