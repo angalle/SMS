@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import univ.sm.R;
@@ -28,11 +30,10 @@ public class BoardListFragment extends Fragment {
     BoardViewAdapter boardViewAdapter;
     LinearLayoutManager layoutManager = null;
     Context context;
-    Activity activity;
     static BoardListFragment instance;
 
     //loading msg dialog
-    ProgressDialog pd = null;
+    static ProgressDialog pd = null;
 
     public static BoardListFragment newInstatnce(){
         if(instance == null){
@@ -79,38 +80,45 @@ public class BoardListFragment extends Fragment {
 
     /* 무명객체를 함수화 - adapter에 borad list를 받아옴.*/
     public void getServerRequestData(){
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, JSONObject>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                pd = new ProgressDialog(getContext());
+                pd = new ProgressDialog(BoardListFragment.instance.getContext());
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 pd.setMessage("Loading to list");
+                //pd.setCancelable(false);
+                //pd.setIndeterminate(true);
                 pd.show();
             }
 
             @Override
-            protected Void doInBackground(Void... params) {
+            protected JSONObject doInBackground(Void... params) {
                 /** CallVan board data download */
                 LoopjConnection connection = LoopjConnection.getInstance(context);
-                connection.getBoardList();
-
-                return null;
+                return connection.getBoardList();
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                try {
-                    /* 동적으로 할당되는 뷰를 그려주거나 이벤트 할당*/
-                    fn_dynamicLayout();
-                    pd.dismiss();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+            protected void onPostExecute(JSONObject jsonObject) {
+                        try {
+                            /* 동적으로 할당되는 뷰를 그려주거나 이벤트 할당*/
+                            fn_dynamicLayout();
+                            if(pd.isShowing()){
+                                pd.dismiss();
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+
+                        }finally {
+                            pd.dismiss();
+                        }
+                    }
+                }.execute(null, null, null);
             }
-        }.execute(null, null, null);
-    }
+
+
 
     /* 동적 view 초기화 */
     private void fn_dynamicLayout() throws Exception{

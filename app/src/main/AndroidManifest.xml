@@ -16,6 +16,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data android:scheme = "@string/kakao_scheme"
+                    android:host="@string/kakaolink_host"></data>
             </intent-filter>
         </activity>
 
@@ -63,6 +66,10 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"></meta-data>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key"></meta-data>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

@@ -9,14 +9,32 @@
     android:background="#4fb2b3"
     android:weightSum="5.7"
     >
-    <!-- header -->
-    <ImageView
-        android:id="@+id/mainImgview"
-        android:layout_width="wrap_content"
-        android:src="@drawable/main"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.7"
-        android:scaleType="fitXY"/>
+        >
+        <ImageView
+            android:id="@+id/mainImgview"
+            android:layout_width="wrap_content"
+            android:src="@drawable/main"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|bottom">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/kakaolink_btn_small"
+                android:id="@+id/kakaoShare">
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- header -->
 
     <!-- center -->
     <LinearLayout

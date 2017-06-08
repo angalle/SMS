@@ -46,6 +46,7 @@ public class BoardManager {
     public static ArrayList<Post> getPostArrayList() {
         if (postArrayList == null) {
             Log.e("board", "postArrayList is null");
+            postArrayList = new ArrayList<Post>();
         }
         return postArrayList;
     }
