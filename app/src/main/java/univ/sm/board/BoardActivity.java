@@ -2,40 +2,25 @@ package univ.sm.board;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
 import univ.sm.data.Const;
 
-import static univ.sm.R.id.passengerNum;
 
 /**
  * 게시판 리스트 페이지
@@ -116,65 +101,70 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 Post post = ff.sendParentClickData();
                 /*생각해보면 결국 viewPager도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
-                // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
-                //Writing  : hs
-                //getText() : return Editable / Editable : not completely convert toString
-                //therfore make sure to method : toString();
-                String writeNameStr             = post.getWrite_name();
-                String passwdStr                = post.getPasswd();
-                String departmentStr            = post.getDepartment();
-                String studentNoStr             = post.getStudent_no();
-                String departureStr             = post.getDeparture();
-                String departure_detailStr      = post.getDeparture_detail();
-                String destinationStr           = post.getDestination();
-                String destination_detailStr    = post.getDestination_detail();
-
-                String waitTime                 = post.getWait_time();
-                String passengerNum             = post.getPassenger_num();
-
-                RequestParams params = new RequestParams();
-                params.put(Const.WRITE_NAME               , writeNameStr);
-                params.put(Const.PASSWD                      , passwdStr);
-                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-                params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
-                params.put(Const.STUDENT_NO                  , studentNoStr);//학번
-                params.put(Const.DEPARTMENT                  , departmentStr);//학과
-                params.put(Const.DEPARTURE                   , departureStr);//출발지
-                params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
-                params.put(Const.DESTINATION                , destinationStr);
-                params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
-                params.put(Const.PASSENGER_NUM              , passengerNum);
-                params.put(Const.WAIT_TIME                  , waitTime);
-                //todo 업로드 후 화면 전환 -> 목록으로
-
-                if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
-                        "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
-                    Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
-                    return ;
+                RequestParams params = getPostRequestParams(post);
+                try{
+                    if(params == null){
+                        throw new Exception("BoardPostingFramget not send Data");
+                    };
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-
 
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);
-                Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
+
                 board_list.performClick();
-
                 imm.hideSoftInputFromWindow(refresh_btn.getWindowToken(), 0);
-
+                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM,MODE_PRIVATE);
                 SharedPreferences.Editor spe = sp.edit();
-                spe.putString(Const.WRITE_NAME,writeNameStr);
-                spe.putString(Const.PASSWD,passwdStr);
-                spe.putString(Const.STUDENT_NO,studentNoStr);
-                //spe.putString(Const.REG_ID,"");
-                spe.putString(Const.DEPARTMENT,departmentStr);
-                //spe.putString(Const.DEPARTURE,"");
-                //spe.putString(Const.DEPARTURE_DETAIL,"");
-                //spe.putString(Const.DESTINATION,"");
-                //spe.putString(Const.DESTINATION_DETAIL,"");
-                //spe.putString(Const.PASSENGER_NUM,"");
-                //spe.putString(Const.WAIT_TIME,"");
+                spe.putString(Const.WRITE_NAME      ,post.getWrite_name());
+                spe.putString(Const.PASSWD          ,post.getPasswd());
+                spe.putString(Const.STUDENT_NO      ,post.getStudent_no());
+                spe.putString(Const.DEPARTMENT      ,post.getDepartment());
+
+                Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    /*BoardPostingFragmenet (등록화면)에 있는 값들을 모두 가져온다.*/
+    private RequestParams getPostRequestParams(Post post){
+        // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
+        //Writing  : hs
+        //getText() : return Editable / Editable : not completely convert toString
+        //therfore make sure to method : toString();
+        String writeNameStr             = post.getWrite_name();
+        String passwdStr                = post.getPasswd();
+        String departmentStr            = post.getDepartment();
+        String studentNoStr             = post.getStudent_no();
+        String departureStr             = post.getDeparture();
+        String departure_detailStr      = post.getDeparture_detail();
+        String destinationStr           = post.getDestination();
+        String destination_detailStr    = post.getDestination_detail();
+
+        String waitTime                 = post.getWait_time();
+        String passengerNum             = post.getPassenger_num();
+
+        RequestParams params = new RequestParams();
+        params.put(Const.WRITE_NAME               , writeNameStr);
+        params.put(Const.PASSWD                      , passwdStr);
+        SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+        params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
+        params.put(Const.STUDENT_NO                  , studentNoStr);//학번
+        params.put(Const.DEPARTMENT                  , departmentStr);//학과
+        params.put(Const.DEPARTURE                   , departureStr);//출발지
+        params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
+        params.put(Const.DESTINATION                , destinationStr);
+        params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
+        params.put(Const.PASSENGER_NUM              , passengerNum);
+        params.put(Const.WAIT_TIME                  , waitTime);
+        //todo 업로드 후 화면 전환 -> 목록으로
+
+        if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
+                "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
+            Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        return params;
     }
 
     /* 주말선택의 빨간바를 이동하는 함수 */

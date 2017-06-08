@@ -11,13 +11,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 repositories {
+    mavenCentral()
     maven { url 'https://maven.fabric.io/public' }
+    maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
 }
 
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.1'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "univ.sm"
@@ -44,7 +46,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     /*User Library*/
-    compile 'com.android.support:appcompat-v7:23.3.+'
+    compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.android.support:design:23.3.0'
     // RecyclerView
     compile 'com.android.support:recyclerview-v7:23.3.+'
@@ -73,4 +75,8 @@ dependencies {
         transitive = true;
     }
 
+    // 카카오링크 sdk를 사용하기 위해 필요.
+    compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
+    // facebook share sdk
+    //compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
