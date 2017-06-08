@@ -132,7 +132,7 @@ public class BoardManager {
 
             post = new Post(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
                     postJson.getString("PASSWD"), postJson.getString("DEPARTMENT"),
-                    postJson.getString("STUDENT_NO"), /*postJson.getString("DEPARTURE")*/ null,
+                    postJson.getString("STUDENT_NO"), postJson.getString("DEPARTURE"),
                     postJson.getString("DEPARTURE_DETAIL"), postJson.getString("DESTINATION"),
                     postJson.getString("DESTINATION_DETAIL"), postJson.getString("REG_ID"),
                     postJson.getString("USE_FLAG"), postJson.getString("PASSENGER_NUM"),

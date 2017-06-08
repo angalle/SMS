@@ -33,6 +33,11 @@
     <string name="WRITER">작성자</string>
     <string name="DEPARTMENT">학과</string>
 
+    <string name="OK">OK</string>
+    <string name="modify">수정</string>
+
+
+
 
     <!--        post 관련        -->
     <string-array name="wait_time_array">
