@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -53,6 +54,8 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     private ViewPager vp;
     public static Context context;
     InputMethodManager imm;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,19 +94,13 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     public void onClick(View v) {
         //// TODO: 2017-04-29  프레그먼트의 tag값을 어떻게 가져올 수 있지?
         /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
-
         if(v.getId() == R.id.board_list){
-            moveImageBar(v);
             vp.setCurrentItem(0);
-            subTitle.setText(Const.LIST_TITLE);
-            BoardListFragment.instance.getServerRequestData();
-        }
-        if(v.getId() == R.id.board_write){
-            moveImageBar(v);
+        }else if(v.getId() == R.id.board_write){
             vp.setCurrentItem(1);
+            moveImageBar(v);
             subTitle.setText(Const.WRITE_TITLE);
-        }
-        if(v.getId() == R.id.refresh_btn){
+        }else if(v.getId() == R.id.refresh_btn){
             //// TODO: 2017-04-23  메인액티비티에서 리스트 프레그먼트의 데이터를 리프레쉬 하기.
             /*해결*/
             if(vp.getCurrentItem() == 0 ){
@@ -160,7 +157,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);
                 Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
-                //board_list.performClick();
+                board_list.performClick();
 
                 imm.hideSoftInputFromWindow(refresh_btn.getWindowToken(), 0);
 
@@ -177,7 +174,6 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 //spe.putString(Const.PASSENGER_NUM,"");
                 //spe.putString(Const.WAIT_TIME,"");
             }
-
         }
     }
 
@@ -192,6 +188,28 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         board_selector.animate().setDuration(150);
         board_selector.animate().scaleX(toWidth / width);
         board_selector.animate().translationX(toX-(width-toWidth)/2.0f).withLayer();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position == 0){
+            moveImageBar(board_list);
+
+            subTitle.setText(Const.LIST_TITLE);
+            BoardListFragment.instance.getServerRequestData();
+        }else if(position == 1){
+            board_write.performClick();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
@@ -214,25 +232,5 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
             observer.removeOnGlobalLayoutListener(listener);
         }
     }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        if(position == 0){
-            board_list.performClick();
-        }else if(position == 1){
-            board_write.performClick();
-        }
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
 
 }
