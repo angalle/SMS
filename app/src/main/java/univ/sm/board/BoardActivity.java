@@ -107,7 +107,6 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                     return ;
                 }
 
-
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);
 
