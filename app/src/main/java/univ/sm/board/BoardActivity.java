@@ -102,13 +102,11 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 /*생각해보면 결국 viewPager도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
                 RequestParams params = getPostRequestParams(post);
-                try{
-                    if(params == null){
-                        throw new Exception("BoardPostingFramget not send Data");
-                    };
-                }catch (Exception e){
-                    e.printStackTrace();
+
+                if(params == null){
+                    return ;
                 }
+
 
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);

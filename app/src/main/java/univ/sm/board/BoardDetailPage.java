@@ -95,8 +95,8 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         DEPARTURE_DETAIL_view = (TextView) findViewById(R.id.DEPARTURE_DETAIL_view);
         DESTINATION_view = (TextView) findViewById(R.id.DESTINATION_view);
         DESTINATION_DETAIL_view = (TextView) findViewById(R.id.DESTINATION_DETAIL_view);
-        PASSENGER_NUM_view = (TextView) findViewById(R.id.PASSENGER_NUM_view);
-        WAIT_TIME_view = (TextView) findViewById(R.id.WAIT_TIME_view);
+        PASSENGER_NUM_view = (TextView) findViewById(R.id.passengerNum_tv);
+        WAIT_TIME_view = (TextView) findViewById(R.id.wait_time_tv);
 
         /** board comment 구성*/
         commentRCV = (RecyclerView) findViewById(R.id.commentRecyclerView);
