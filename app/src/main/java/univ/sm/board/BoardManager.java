@@ -137,7 +137,7 @@ public class BoardManager {
                     postJson.getString("DESTINATION_DETAIL"), postJson.getString("REG_ID"),
                     postJson.getString("USE_FLAG"), postJson.getString("PASSENGER_NUM"),
                     postJson.getString("WAIT_TIME"), postJson.getString("INSERT_TIME"),
-                    postJson.getString("INSERT_DATE"), postJson.getInt("COMMENT_CNT"),commentsList);
+                    postJson.getString("INSERT_DATE"),postJson.getString("REMAIN_TIME"), postJson.getInt("COMMENT_CNT"),commentsList);
 
             Log.i(TAG,"json2PostWithComment : mPost.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
             //댓글 리스트 추가해서 Post 만들기

@@ -49,6 +49,12 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         fn_staticLayout();
         context = getApplicationContext();
     }
+    /* 새로고침을 하기위한 메소드 추가. */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        board_list.performClick();
+    }
 
     /* 정적 view 초기화 */
     private void fn_staticLayout() {
@@ -143,17 +149,17 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
 
         RequestParams params = new RequestParams();
         params.put(Const.WRITE_NAME               , writeNameStr);
-        params.put(Const.PASSWD                      , passwdStr);
+        params.put(Const.PASSWD                   , passwdStr);
         SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-        params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
-        params.put(Const.STUDENT_NO                  , studentNoStr);//학번
-        params.put(Const.DEPARTMENT                  , departmentStr);//학과
-        params.put(Const.DEPARTURE                   , departureStr);//출발지
-        params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
-        params.put(Const.DESTINATION                , destinationStr);
-        params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
-        params.put(Const.PASSENGER_NUM              , passengerNum);
-        params.put(Const.WAIT_TIME                  , waitTime);
+        params.put(Const.REG_ID                   , sp.getString(Const.SHARED_REG_ID,""));
+        params.put(Const.STUDENT_NO               , studentNoStr);//학번
+        params.put(Const.DEPARTMENT               , departmentStr);//학과
+        params.put(Const.DEPARTURE                , departureStr);//출발지
+        params.put(Const.DEPARTURE_DETAIL         , departure_detailStr);
+        params.put(Const.DESTINATION              , destinationStr);
+        params.put(Const.DESTINATION_DETAIL       , destination_detailStr);
+        params.put(Const.PASSENGER_NUM            , passengerNum);
+        params.put(Const.WAIT_TIME                , waitTime);
         //todo 업로드 후 화면 전환 -> 목록으로
 
         if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||

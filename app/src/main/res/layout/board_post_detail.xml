@@ -168,8 +168,8 @@
                     <View
                         android:layout_width="16dp"
                         android:layout_height="18dp">
-
                     </View>
+
                     <TextView
                         android:id="@+id/DESTINATION_view"
                         android:layout_width="wrap_content"
@@ -180,16 +180,15 @@
                         android:textStyle="bold"
                         android:textSize="25sp" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:gravity="center_horizontal">
+                android:gravity="center">
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
@@ -207,10 +206,9 @@
                     android:textSize="11sp" />
 
                 <View
-                    android:layout_width="50dp"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_width="66dp"
+                    android:paddingRight="25dp"
+                    android:layout_height="0dp" />
 
                 <ImageView
                     android:layout_width="18dp"
@@ -234,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:weightSum="3">
 
                 <LinearLayout
@@ -271,7 +269,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/total_people"
+                        android:id="@+id/passengerNum_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -320,7 +318,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/passengerNum_tv"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#4fb2b3"
@@ -346,20 +344,23 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:id="@+id/callvan_flag"
                     />
 
                 <TextView
-                    android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="탑승완료"
                     android:textColor="#e16175"
                     android:textSize="18sp" />
@@ -374,9 +375,10 @@
                     android:textColorHint="#bbeeb8b8"
                     android:textSize="15sp"
                     android:background="@drawable/background_inputext"
-                    android:id="@+id/editText" />
+                    android:id="@+id/passwd_ed" />
 
                 <Button
+                    android:id="@+id/modify_btn"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
@@ -386,17 +388,6 @@
                     android:textColor="#ffffff"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="#eeeeee"
-                android:gravity="center"
-                android:text="댓글"
-                android:textColor="#434343" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -404,7 +395,6 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:background="#ddf0f0" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"

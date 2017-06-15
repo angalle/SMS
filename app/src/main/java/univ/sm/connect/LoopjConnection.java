@@ -35,6 +35,7 @@ public class LoopjConnection {
     private static String addPostingUrl = "/insertcallvan";
     private static String getonepostUrl = "/selectcallvaninfo";
     private static String addCommentUrl = "/insertcallvancomment";
+    private static String approvalCallvan = "/callvan_complete";
 
     public static LoopjConnection getInstance(Context context) {
         if (instance == null) {
@@ -150,6 +151,30 @@ public class LoopjConnection {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.i("LoopjConnect", boardUrl + addCommentUrl + " , status : " + statusCode + " , errorResponse : " + errorResponse + " //onFailure");
+            }
+        });
+    }
+
+    /**
+     * 댓글 등록
+     *
+     * @param params CALL_BOARD_NO, COMMENT_LEVEL, CONTENTS, REG_ID,
+     *               WRITE_NAME, BEFORE_COMMENT_NO, SEND_REG_ID
+     */
+
+    public void approvalCallvan(RequestParams params) {
+        syncHttpClient.post(boardUrl + approvalCallvan, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.i("LoopjConnect", boardUrl + approvalCallvan + " , status : " + statusCode + ", response : "+response +", //onSuccess");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i("LoopjConnect", boardUrl + approvalCallvan + " , status : " + statusCode + " , errorResponse : " + errorResponse + " //onFailure");
             }
         });
     }

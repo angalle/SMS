@@ -87,8 +87,6 @@ public class BoardListFragment extends Fragment {
                 pd = new ProgressDialog(BoardListFragment.instance.getContext());
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 pd.setMessage("Loading to list");
-                //pd.setCancelable(false);
-                //pd.setIndeterminate(true);
                 pd.show();
             }
 
