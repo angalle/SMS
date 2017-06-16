@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -53,7 +54,9 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        board_list.performClick();
+        Log.e("test:::::","other activity close");
+        if(BoardListFragment.instance != null)
+            BoardListFragment.instance.getServerRequestData();
     }
 
     /* 정적 view 초기화 */
@@ -87,6 +90,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
         if(v.getId() == R.id.board_list){
             vp.setCurrentItem(0);
+            //BoardListFragment.instance.getServerRequestData();
         }else if(v.getId() == R.id.board_write){
             vp.setCurrentItem(1);
             moveImageBar(v);
@@ -144,8 +148,8 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         String destinationStr           = post.getDestination();
         String destination_detailStr    = post.getDestination_detail();
 
-        String waitTime                 = post.getWait_time();
-        String passengerNum             = post.getPassenger_num();
+        String waitTime                 = post.getWait_time().replace("분","");
+        String passengerNum             = post.getPassenger_num().replace("명","");
 
         RequestParams params = new RequestParams();
         params.put(Const.WRITE_NAME               , writeNameStr);

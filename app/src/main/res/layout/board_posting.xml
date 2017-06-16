@@ -114,7 +114,7 @@ WAIT_TIME			//대기시간*/-->
                                 android:padding="5dp"
                                 android:inputType="number"
                                 android:layout_height="30dp"
-                                android:hint="DEPARTURE..."
+                                android:hint="비밀번호는 자유형식입니다."
                                 android:background="#ddf0f0"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
@@ -141,7 +141,7 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
                                 android:layout_height="30dp"
-                                android:hint="ex )  컴퓨터 공학과"
+                                android:hint="정확한 학과정보를 입력해주세요."
                                 android:background="#ddf0f0"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
@@ -151,7 +151,7 @@ WAIT_TIME			//대기시간*/-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
+                            android:padding="6dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
                             <TextView
@@ -169,7 +169,7 @@ WAIT_TIME			//대기시간*/-->
                                 android:padding="5dp"
                                 android:inputType="number"
                                 android:layout_height="30dp"
-                                android:hint="ex )  20102222222"
+                                android:hint="정확한 학번정보를 입력해주세요."
                                 android:background="#ddf0f0"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
@@ -192,7 +192,6 @@ WAIT_TIME			//대기시간*/-->
                                 android:textSize="12sp" />
                             <Spinner
                                 android:id="@+id/wait_time_spinner"
-                                android:padding="15dp"
                                 android:background="#ddf0f0"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -250,9 +249,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:id="@+id/departure_detail_edit"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
+                                android:layout_marginRight="5dp"
                                 android:layout_height="30dp"
                                 android:background="#dedede"
-                                android:hint="ex ) 천안역 셔틀버스장"
+                                android:hint="ex ) 왼쪽 50m"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
@@ -279,7 +279,7 @@ WAIT_TIME			//대기시간*/-->
                                 android:padding="5dp"
                                 android:layout_height="30dp"
                                 android:background="#ddf0f0"
-                                android:hint="ex ) 천안역 셔틀버스장"
+                                android:hint="ex ) 선문대학교 기숙사"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
@@ -308,9 +308,10 @@ WAIT_TIME			//대기시간*/-->
                                 android:id="@+id/destination_detail_edit"
                                 android:layout_width="match_parent"
                                 android:padding="5dp"
+                                android:layout_marginRight="5dp"
                                 android:layout_height="30dp"
                                 android:background="#dedede"
-                                android:hint="ex ) 천안역 셔틀버스장"
+                                android:hint="ex ) 남자 M동"
                                 android:textColor="#555555"
                                 android:textColorHint="#ffffff"
                                 android:textSize="10sp" />
@@ -335,7 +336,6 @@ WAIT_TIME			//대기시간*/-->
 
                             <Spinner
                                 android:id="@+id/passengerNum_spinner"
-                                android:padding="15dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#ddf0f0"

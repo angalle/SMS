@@ -101,20 +101,20 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
         department          = (EditText) v.findViewById(R.id.department_std_edit); //학과
         studentNo           = (EditText) v.findViewById(R.id.studentNo_edit);
         departure           = (EditText) v.findViewById(R.id.departure_detail);
-        departure_detail   = (EditText) v.findViewById(R.id.departure_detail_edit);
+        departure_detail    = (EditText) v.findViewById(R.id.departure_detail_edit);
         destination         = (EditText) v.findViewById(R.id.destination_edit);
-        destination_detail = (EditText) v.findViewById(R.id.destination_detail_edit);
-        passwd               = (EditText) v.findViewById(R.id.passwd);
+        destination_detail  = (EditText) v.findViewById(R.id.destination_detail_edit);
+        passwd              = (EditText) v.findViewById(R.id.passwd);
 
         waitTimeSpinner = (Spinner) v.findViewById(R.id.wait_time_spinner);
-        ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.wait_time_array, R.layout.support_simple_spinner_dropdown_item);
-        waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.wait_time_array, R.layout.spin);
+        waiteAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         waitTimeSpinner.setAdapter(waiteAdapter);
         waitTimeSpinner.setOnItemSelectedListener(this);
 
         passengerNum = (Spinner) v.findViewById(R.id.passengerNum_spinner);
-        ArrayAdapter<CharSequence> peopleAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.peopleNum_array, R.layout.support_simple_spinner_dropdown_item);
-        waiteAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> peopleAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.peopleNum_array, R.layout.spin);
+        waiteAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         passengerNum.setAdapter(peopleAdapter);
         passengerNum.setOnItemSelectedListener(this);
 

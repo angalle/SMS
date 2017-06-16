@@ -108,7 +108,6 @@ public class BoardListFragment extends Fragment {
 
                         }catch (Exception e){
                             e.printStackTrace();
-
                         }finally {
                             pd.dismiss();
                         }
