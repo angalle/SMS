@@ -215,6 +215,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                             passwd_ed.setEnabled(false);
                             modify_btn.setEnabled(false);
                             Toast.makeText(getApplicationContext(),"승인완료",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }.execute(null, null, null);
                 }else{
