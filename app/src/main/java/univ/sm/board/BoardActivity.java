@@ -89,8 +89,8 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         //// TODO: 2017-04-29  프레그먼트의 tag값을 어떻게 가져올 수 있지?
         /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
         if(v.getId() == R.id.board_list){
-            vp.setCurrentItem(0);
-            //BoardListFragment.instance.getServerRequestData();
+            //vp.setCurrentItem(0);
+            BoardListFragment.instance.getServerRequestData();
         }else if(v.getId() == R.id.board_write){
             vp.setCurrentItem(1);
             moveImageBar(v);

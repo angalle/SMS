@@ -10,7 +10,8 @@ DESTINATION_DETAIL	//목적지 설명
 REG_ID				//gcm 기기 값
 PASSENGER_NUM		//총 탑승인원
 WAIT_TIME			//대기시간*/-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +38,10 @@ WAIT_TIME			//대기시간*/-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -235,13 +239,14 @@ WAIT_TIME			//대기시간*/-->
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
                                 android:adjustViewBounds="true"
+                                android:paddingLeft="5dp"
                                 android:src="@drawable/subcategort_btn"/>
                             <TextView
                                 android:layout_width="70dp"
                                 android:padding="1dp"
                                 android:layout_height="wrap_content"
                                 android:text="출발지상세"
-                                android:textColor="#4fb2b3"
+                                android:textColor="#58595b"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -293,14 +298,15 @@ WAIT_TIME			//대기시간*/-->
                             <ImageView
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
+                                android:paddingLeft="5dp"
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/subcategort_btn"/>
                             <TextView
                                 android:layout_width="70dp"
                                 android:padding="1dp"
                                 android:layout_height="wrap_content"
-                                android:text="·목적지상세"
-                                android:textColor="#4fb2b3"
+                                android:text="목적지상세"
+                                android:textColor="#58595b"
                                 android:textStyle="bold"
                                 android:textSize="12sp" />
 
@@ -342,6 +348,16 @@ WAIT_TIME			//대기시간*/-->
                                 >
                             </Spinner>
                         </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:text="@string/postinfo"
+                        android:textColor="#58595b"
+                        android:textStyle="bold"
+                        android:textSize="12sp"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
