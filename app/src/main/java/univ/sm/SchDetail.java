@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -18,18 +19,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.Shuttle;
+import univ.sm.data.Utility;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
-public class SchDetail extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,Spinner.OnItemSelectedListener{
+public class SchDetail extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,Spinner.OnItemSelectedListener{
     ImageView schDetailTopBar,  quickBtn,   changeDirection;
     TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay;
     Spinner destination;
@@ -100,6 +107,9 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
         quickBtn = (ImageView) findViewById(R.id.quickBtn);
         changeDirection = (ImageView) findViewById(R.id.changeDirection);
 
+        Picasso.with(this).load(R.drawable.quick_btn).resize(100,110).into(quickBtn);
+
+
         /* 각 버튼 마다 이벤트 리스너*/
         quickBtn.setOnClickListener(this);
         changeDirection.setOnClickListener(this);
@@ -128,9 +138,13 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
     @Override
     public void onGlobalLayout() {
-        System.out.println("test access");
-        schDetailTopBar.setX(schDetailWeekDay.getX());
-        schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
+        if(Utility.getCurrentDate2int()==1){
+            schDetailSunDay.performClick();
+        }else if(Utility.getCurrentDate2int()==7){
+            schDetailSatureDay.performClick();
+        }else {
+            schDetailWeekDay.performClick();
+        }
         removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
     }
 
@@ -222,5 +236,6 @@ public class SchDetail extends AppCompatActivity implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 
 }

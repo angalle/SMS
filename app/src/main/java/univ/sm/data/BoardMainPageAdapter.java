@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 
+import univ.sm.R;
 import univ.sm.board.BoardListFragment;
 import univ.sm.board.BoardPostingFragment;
 
@@ -12,9 +14,10 @@ import univ.sm.board.BoardPostingFragment;
  * Created by heesun on 2017-04-23.
  */
 public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
-
+    FragmentTransaction ft = null;
     public BoardMainPageAdapter(FragmentManager fm) {
         super(fm);
+
     }
 
     @Override
@@ -26,7 +29,7 @@ public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return BoardPostingFragment.newInstatnce();
             default:
-                return null;
+                return BoardListFragment.newInstatnce();
         }
     }
 

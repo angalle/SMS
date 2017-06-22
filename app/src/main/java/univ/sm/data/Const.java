@@ -37,11 +37,14 @@ public class Const {
 
     /*SHARED PREPERENCD VARIABLE*/
     static public String SHARED_GCM = "GCM";
-    static public String SHARED_REG_ID = "reg-id";
+    static public String SHARED_REG_ID = "REG_ID";
 
     static public String LIST_TITLE = "게시물 목록";
     static public String WRITE_TITLE = "게시물 등록";
 
+    /**
+     * SHARED PREPERENCD VARIABLE
+     * */
     static public String WRITE_NAME = "WRITE_NAME";
     static public String PASSWD = "PASSWD";
     static public String STUDENT_NO = "STUDENT_NO";
@@ -53,4 +56,19 @@ public class Const {
     static public String DESTINATION_DETAIL = "DESTINATION_DETAIL";
     static public String PASSENGER_NUM = "PASSENGER_NUM";
     static public String WAIT_TIME = "WAIT_TIME";
+
+    /**
+     * CALLCAN PROCESS MSG
+     */
+    public static String CALLVAN_LOADING_MSG = "콜벤리스트를 불러오는 중입니다....";
+
+    /**
+     * CALVAN PROCESS URL
+     */
+    static public  String BOARD_URL = "http://52.78.113.18:40000";
+    static public  String SELECT_CALLVAN = "/selectcallvan";
+    static public  String INSERT_CALLVAN = "/insertcallvan";
+    static public  String SELECT_ONE_CALLVAN = "/selectcallvaninfo";
+    static public  String INSERT_CALLVAN_COMMENT = "/insertcallvancomment";
+    static public  String APPROAVAL_CALLVAN = "/callvan_complete";
 }

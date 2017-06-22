@@ -155,4 +155,16 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             e.printStackTrace();
         }
     }
+
+    int exitCount = 0;
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(exitCount == 1) {
+            finish();
+        }else{
+            Toast.makeText(getApplicationContext(),"한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            exitCount++;
+        }
+    }
 }

@@ -62,6 +62,7 @@
                         android:text="WeekDay"
                         android:textStyle="bold"
                         android:id="@+id/sch_detail_weekDay"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
                         android:textSize="17dp"
                         android:textStyle="bold"
                         android:id="@+id/sch_detail_satureDay"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

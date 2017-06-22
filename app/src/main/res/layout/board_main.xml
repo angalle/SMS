@@ -180,9 +180,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="5dp"
-                android:adjustViewBounds="false"
                 android:paddingBottom="5dp"
-                android:src="@drawable/quick_btn" />
+                android:src="@drawable/quick_btn"
+                android:adjustViewBounds="true" />
 
         </RelativeLayout>
     </RelativeLayout>

@@ -73,6 +73,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         /* 초기화할때와 SET 할때를 구분해서 함수를 나눠놨음.*/
         init();
         downLoadBoard_setLayout();
+        comment_editText.requestFocus();
     }
 
     private void init() {
@@ -156,7 +157,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
         } else {
             mCommentsList = mPost.getCommentsList();
         }
-        //TODO: 아래처럼 바꾸는게 나음. BUT   에러처리 해주세영
+        //TODO: 아래처럼 바꾸는게 나음. AND  에러처리 해주세영
         /*
         * if (mPost != null) {
         *   mCommentsList = mPost.getCommentsList();
@@ -215,6 +216,9 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                             passwd_ed.setEnabled(false);
                             modify_btn.setEnabled(false);
                             Toast.makeText(getApplicationContext(),"승인완료",Toast.LENGTH_SHORT).show();
+                            callvan_flag.setVisibility(View.INVISIBLE);
+                            passwd_ed.setVisibility(View.INVISIBLE);
+                            modify_btn.setVisibility(View.INVISIBLE);
                             finish();
                         }
                     }.execute(null, null, null);
@@ -232,6 +236,11 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                 comment_params.put("COMMENT_LEVEL", 1);
                 comment_params.put("BEFORCOMMENT_NO", board_no);            //이희선씨의 보드넘버 요청
                 comment_params.put("SEND_REG_ID", " ");                     //이희선씨의 공백 요청
+
+                if(comment_editText.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"댓글을 입력하세요",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
 
                 comment_editText.setText(null);
 
