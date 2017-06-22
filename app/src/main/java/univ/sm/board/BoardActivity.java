@@ -72,6 +72,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         refresh_btn = (ImageView) findViewById(R.id.refresh_btn);
         vp = (ViewPager)findViewById(R.id.borad_vPager);
         vp.setAdapter(new BoardMainPageAdapter(getSupportFragmentManager()));
+        vp.setCurrentItem(0);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -196,6 +197,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
     public void onPageSelected(int position) {
         if(position == 0){
             moveImageBar(board_list);
+
             subTitle.setText(Const.LIST_TITLE);
             BoardListFragment.instance.getServerRequestData();
             Picasso.with(context).load(R.drawable.quick_btn).resize(100,110).into(refresh_btn);

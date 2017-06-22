@@ -19,7 +19,7 @@ repositories {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.1'
+    buildToolsVersion '23.0.1'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "univ.sm"
@@ -79,8 +79,8 @@ dependencies {
 
     // 카카오링크 sdk를 사용하기 위해 필요.
     compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
-    // facebook share sdk
-    compile ('com.facebook.android:facebook-android-sdk:[4,5)'){
+        // facebook share sdk
+        compile ('com.facebook.android:facebook-android-sdk:[4,5)'){
         exclude module: 'support-v4'
         exclude group: 'com.android.support'
     }
