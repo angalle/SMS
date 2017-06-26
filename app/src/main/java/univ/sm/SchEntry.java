@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -77,6 +78,9 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
         recyclerView.setAdapter(ra);
     }
 
+    int destinationWitdh = 800;
+    int destinationHeight = 50;
+
     @Override
     public void onClick(View v) {
         float toX = 0, toWidth = 0;      /* 이동해야할 x좌표 */
@@ -102,11 +106,15 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
             }
         }else if (v.getId() == R.id.KTX) {
             STATION_FLAG = Const.CHEONANSTATION_C;
+            //Picasso.with(this).load(R.drawable.sch_detail_cheonan).resize(destinationWitdh,destinationHeight).into(imgDestination);
+            //Picasso.with(this).load(R.drawable.sch_detail_cheonan).fit().centerCrop().into(imgDestination);
             imgDestination.setImageResource(R.drawable.sch_detail_cheonan);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.CHEONANSTATION_STR);
         } else if (v.getId() == R.id.Terminal) {
             STATION_FLAG = Const.TERMINAL_C;
+            //Picasso.with(this).load(R.drawable.sch_detail_terminal).resize(destinationWitdh,destinationHeight).into(imgDestination);
+            //Picasso.with(this).load(R.drawable.sch_detail_terminal).fit().centerCrop().into(imgDestination);
             imgDestination.setImageResource(R.drawable.sch_detail_terminal);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.TERMINALSTATION_STR);
@@ -114,8 +122,10 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
             STATION_FLAG = Const.ONYANG_C;
             /* 온양시간은 동적*/
             if(changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]].get(1).getB()[4].contains(":"))
+                //Picasso.with(this).load(R.drawable.sch_detail_onyang).resize(destinationWitdh,destinationHeight).into(imgDestination);
                 imgDestination.setImageResource(R.drawable.sch_detail_onyang);
             else
+                //Picasso.with(this).load(R.drawable.sch_detail_onyang_vacation).resize(destinationWitdh,destinationHeight).into(imgDestination);
                 imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
 
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
