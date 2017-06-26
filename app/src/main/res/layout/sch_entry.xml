@@ -129,8 +129,8 @@
 
                     <ImageView
                         android:id="@+id/detail_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_marginRight="10dp"
                         android:adjustViewBounds="true"
                         android:src="@drawable/detail_btn" />

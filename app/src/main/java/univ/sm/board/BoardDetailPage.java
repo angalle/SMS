@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.Comment;
+import univ.sm.data.Const;
 
 /**
  * 게시판 세부 페이지
@@ -232,7 +233,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                 comment_params.put("WRITE_NAME", comment_name_editText.getText());
                 comment_params.put("CALL_BOARD_NO", board_no);
                 comment_params.put("CONTENTS", comment_editText.getText());
-                comment_params.put("REG_ID", sp.getString("reg-id", ""));
+                comment_params.put("REG_ID", sp.getString(Const.SHARED_REG_ID, ""));
                 comment_params.put("COMMENT_LEVEL", 1);
                 comment_params.put("BEFORCOMMENT_NO", board_no);            //이희선씨의 보드넘버 요청
                 comment_params.put("SEND_REG_ID", " ");                     //이희선씨의 공백 요청

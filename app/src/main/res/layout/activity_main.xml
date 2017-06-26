@@ -126,14 +126,16 @@
             android:layout_weight="1"
             android:weightSum="5"
             android:id="@+id/app_info_btn">
+
             <ImageView
-                android:src="@drawable/question_menu_btn"
-                android:layout_weight="4"
+                android:id="@+id/imageView9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="3dp"
+                android:layout_weight="4"
                 android:adjustViewBounds="true"
-                android:keepScreenOn="false" />
+                android:keepScreenOn="false"
+                android:padding="3dp"
+                android:src="@drawable/question_menu_btn" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -157,12 +159,15 @@
             android:id="@+id/callboard_menu_btn">
 
             <ImageView
-                android:src="@drawable/call_menu_btn"
-                android:layout_weight="4"
+                android:id="@+id/imageView8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="3dp"
-                android:adjustViewBounds="false"/>
+                android:layout_weight="4"
+                android:adjustViewBounds="true"
+                android:keepScreenOn="false"
+                android:padding="0dp"
+                android:src="@drawable/call_menu_btn" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,7 +192,4 @@
             android:textColor="#FFFFFF"
             android:text="@string/app_full_name"/>
     </RelativeLayout>
-
-
-
 </LinearLayout>
