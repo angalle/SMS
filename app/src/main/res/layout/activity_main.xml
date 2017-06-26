@@ -99,12 +99,14 @@
             android:id="@+id/sch_entry_btn">
 
             <ImageView
-                android:src="@drawable/full_menu_btn"
-                android:layout_weight="4"
+                android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:adjustViewBounds="false"
                 android:padding="3dp"
-                android:adjustViewBounds="false"/>
+                android:src="@drawable/full_menu_btn" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
