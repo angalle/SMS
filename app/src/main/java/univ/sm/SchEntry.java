@@ -29,12 +29,13 @@ import univ.sm.data.Const;
 import univ.sm.data.EntryRecyclerAdapter;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.Shuttle;
+import univ.sm.data.Utility;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
-public class SchEntry extends AppCompatActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
+public class SchEntry extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
     TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang, destination_title;
     ImageView schDetailTopBar,  detail_btn, top_btn, imgDestination;
     Context context;
@@ -60,7 +61,6 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_entry);
         initView();
-
 
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
@@ -137,6 +137,19 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         schDetailTopBar.animate().translationX(toX-(width-toWidth)/2.0f).withLayer();
     }
 
+    @Override
+    public void onGlobalLayout() {
+        if(Utility.getCurrentDate2int()==1){
+            schDetailSunDay.performClick();
+        }else if(Utility.getCurrentDate2int()==7){
+            schDetailSatureDay.performClick();
+        }else {
+            schDetailWeekDay.performClick();
+        }
+        removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
+
+    }
+
     /*GlobalLayout을 사용할때 계속 호출 되는 경우가 있는데 Listener를 remove 시켜줘야 계속 호출이 반복되지 않음.*/
     private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
         if (observer == null) {
@@ -183,13 +196,6 @@ public class SchEntry extends AppCompatActivity implements View.OnClickListener,
         schDetailTopBar.getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
 
-    @Override
-    public void onGlobalLayout() {
-        //originHeight = animationBox.getHeight();
-        schDetailTopBar.setX(schDetailWeekDay.getX());
-        schDetailTopBar.getLayoutParams().width = schDetailWeekDay.getWidth();
-        removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
-    }
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
         STATION_FLAG =staionIndex;

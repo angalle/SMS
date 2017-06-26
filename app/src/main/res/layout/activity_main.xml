@@ -23,14 +23,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right|bottom">
+            android:gravity="right|top">
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:src="@drawable/kakaolink_btn_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/kakaotalk_icon"
                 android:id="@+id/kakaoShare">
+            </ImageView>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/com_facebook_button_icon_blue"
+                android:id="@+id/facebookShare">
             </ImageView>
         </LinearLayout>
     </RelativeLayout>

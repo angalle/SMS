@@ -6,7 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 
+import univ.sm.MainActivity;
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
@@ -48,6 +52,14 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         setContentView(R.layout.board_main);
         fn_staticLayout();
         context = getApplicationContext();
+    }
+
+    /* 새로고침을 하기위한 메소드 추가. */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        vp.setCurrentItem(0);
+        //refresh_btn.performClick();
     }
 
     /* 정적 view 초기화 */
@@ -83,14 +95,13 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
             vp.setCurrentItem(0);
         }else if(v.getId() == R.id.board_write){
             vp.setCurrentItem(1);
-            moveImageBar(v);
-            subTitle.setText(Const.WRITE_TITLE);
         }else if(v.getId() == R.id.refresh_btn){
             //// TODO: 2017-04-23  메인액티비티에서 리스트 프레그먼트의 데이터를 리프레쉬 하기.
             /*해결*/
             if(vp.getCurrentItem() == 0 ){
                 //propose : refresh list
-                board_list.performClick();
+                vp.setCurrentItem(1);
+                vp.setCurrentItem(0);
             }else if(vp.getCurrentItem() == 1 ){
                 /* 애초의 취지  :  등록 폼의 데이터들이 mainActivity의 event에서 접근이 안되서 문제가 발생.*/
                 /* 경과  : interface선언, static 변수 선언 등으로 해결해 보려했으나 정방향의 문제 해결을 진행함*/
@@ -99,7 +110,7 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
                 /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
                 BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
                 Post post = ff.sendParentClickData();
-                /*생각해보면 결국 viewPager도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
+                /*생각해보면 결국 viewPa\ger도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
                 RequestParams params = getPostRequestParams(post);
 
@@ -138,22 +149,22 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         String destinationStr           = post.getDestination();
         String destination_detailStr    = post.getDestination_detail();
 
-        String waitTime                 = post.getWait_time();
-        String passengerNum             = post.getPassenger_num();
+        String waitTime                 = post.getWait_time().replace("분","");
+        String passengerNum             = post.getPassenger_num().replace("명","");
 
         RequestParams params = new RequestParams();
         params.put(Const.WRITE_NAME               , writeNameStr);
-        params.put(Const.PASSWD                      , passwdStr);
+        params.put(Const.PASSWD                   , passwdStr);
         SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-        params.put(Const.REG_ID                       , sp.getString(Const.SHARED_REG_ID,""));
-        params.put(Const.STUDENT_NO                  , studentNoStr);//학번
-        params.put(Const.DEPARTMENT                  , departmentStr);//학과
-        params.put(Const.DEPARTURE                   , departureStr);//출발지
-        params.put(Const.DEPARTURE_DETAIL           , departure_detailStr);
-        params.put(Const.DESTINATION                , destinationStr);
-        params.put(Const.DESTINATION_DETAIL        , destination_detailStr);
-        params.put(Const.PASSENGER_NUM              , passengerNum);
-        params.put(Const.WAIT_TIME                  , waitTime);
+        params.put(Const.REG_ID                   , sp.getString(Const.SHARED_REG_ID,""));
+        params.put(Const.STUDENT_NO               , studentNoStr);//학번
+        params.put(Const.DEPARTMENT               , departmentStr);//학과
+        params.put(Const.DEPARTURE                , departureStr);//출발지
+        params.put(Const.DEPARTURE_DETAIL         , departure_detailStr);
+        params.put(Const.DESTINATION              , destinationStr);
+        params.put(Const.DESTINATION_DETAIL       , destination_detailStr);
+        params.put(Const.PASSENGER_NUM            , passengerNum);
+        params.put(Const.WAIT_TIME                , waitTime);
         //todo 업로드 후 화면 전환 -> 목록으로
 
         if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
@@ -189,8 +200,11 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
 
             subTitle.setText(Const.LIST_TITLE);
             BoardListFragment.instance.getServerRequestData();
+            Picasso.with(context).load(R.drawable.quick_btn).resize(100,110).into(refresh_btn);
         }else if(position == 1){
-            board_write.performClick();
+            moveImageBar(board_write);
+            subTitle.setText(Const.WRITE_TITLE);
+            Picasso.with(context).load(R.drawable.regist_bottom_btn).resize(100,130).into(refresh_btn);
         }
     }
 
@@ -220,4 +234,9 @@ public class BoardActivity extends FragmentActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //System.gc();
+        super.onBackPressed();
+    }
 }

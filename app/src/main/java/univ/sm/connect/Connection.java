@@ -78,6 +78,7 @@ public class Connection {
 					i++;
 				}
 			}
+
 			busarr.add(st);
 			ShuttleArr = busArrayMake(busarr.size(), busarr);
 		} catch (Exception e) {

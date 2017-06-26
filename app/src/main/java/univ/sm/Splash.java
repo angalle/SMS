@@ -74,15 +74,11 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 Intent next = new Intent(Splash.this, MainActivity.class);
                 startActivity(next);
                 finish();
             }
         }, 5000);
-
-
-
     }
 
     private boolean DataSetting() {

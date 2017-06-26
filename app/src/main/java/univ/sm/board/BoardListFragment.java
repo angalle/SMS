@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
+import univ.sm.data.Const;
 
 /**
  * Created by heesun on 2017-04-23.
@@ -45,26 +47,14 @@ public class BoardListFragment extends Fragment {
     public BoardListFragment(){
         super();
         this.context = BoardActivity.context;
-
-    }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof Activity){
-            context = (Activity)context;
-        }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getServerRequestData();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         LinearLayout l_layout = (LinearLayout) inflater.inflate(R.layout.board_list,container,false);
+        getServerRequestData();
         set_initView(l_layout);
         return l_layout;
     }
@@ -86,9 +76,7 @@ public class BoardListFragment extends Fragment {
                 super.onPreExecute();
                 pd = new ProgressDialog(BoardListFragment.instance.getContext());
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pd.setMessage("Loading to list");
-                //pd.setCancelable(false);
-                //pd.setIndeterminate(true);
+                pd.setMessage(Const.CALLVAN_LOADING_MSG);
                 pd.show();
             }
 
@@ -110,7 +98,6 @@ public class BoardListFragment extends Fragment {
 
                         }catch (Exception e){
                             e.printStackTrace();
-
                         }finally {
                             pd.dismiss();
                         }
@@ -125,5 +112,12 @@ public class BoardListFragment extends Fragment {
         postArrayList = BoardManager.getPostArrayList();
         boardViewAdapter.setBoardArrayList(postArrayList);
         boardViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.e("onDestroy:::::","DDDDDDDDDDDDDDD");
     }
 }

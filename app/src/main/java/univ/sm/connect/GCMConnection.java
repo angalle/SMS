@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GCMConnection {
-	public static String addrTwo = "http://52.78.113.18:40001/register";
-	StringBuffer sb = null;
 	String regid="";
 	
 	public GCMConnection(String regid) {
@@ -36,10 +34,7 @@ public class GCMConnection {
 			request.setEntity(new UrlEncodedFormEntity(postData));			
 			HttpResponse response = client.execute(request);
 			// respose�� �����Ͱ� ����
-			
 			 String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-
-             Log.e("RESPONSE :::::: ", responseString);
 		} catch (Exception e) {
 			Log.e("internet not", "connecting fail");
 		}

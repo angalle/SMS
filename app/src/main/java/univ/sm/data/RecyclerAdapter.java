@@ -3,6 +3,7 @@ package univ.sm.data;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 compareString.add(items.get(i).getB()[2]);
             }
         }
-
     }
 
     @Override
@@ -152,6 +152,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }else{
             tempPivotTime = item.getB()[findIndex].substring(0,5);
         }
+
+        if(tempPivotTime.contains("(")){
+            tempPivotTime = tempPivotTime .replace("(","")+ "\n(금Ⅹ)";
+        }
+
         return tempPivotTime;
     }
 

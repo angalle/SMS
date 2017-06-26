@@ -15,10 +15,20 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 import univ.sm.board.BoardManager;
 import univ.sm.board.Post;
+import univ.sm.data.Const;
 
 /**
  * board 통신부분
  * Created by soo jeong.
+ */
+
+/**
+ * 공통부분을 수정할때 기능을 기준으로 메소드를 증가시키면 한 클래스에 많은 메소드가 생기게된다.
+ * 그러면 어떻게 메소드를 안생기게 할까...?
+ *
+ * 크게 디비에 동작하는건 4가지이다. CRUD //
+ * 이 4가지메소드를 만들어 놓고 파라미터로 URL과 PARAM을 받으면 공통소스는 늘어나지 않게 된다.
+ * 그래서 사용할때 CONST 공통을 만들어 놓고 사용하면 URL수정시에도 간편하게 모든 URL을 수정 할 수 있다.
  */
 
 public class LoopjConnection {
@@ -29,12 +39,8 @@ public class LoopjConnection {
     private static Context mContext;
 
     private AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-    private SyncHttpClient syncHttpClient = new SyncHttpClient();
-    private static String boardUrl = "http://52.78.113.18:40000";
-    private static String getBoardListUrl = "/selectcallvan";
-    private static String addPostingUrl = "/insertcallvan";
-    private static String getonepostUrl = "/selectcallvaninfo";
-    private static String addCommentUrl = "/insertcallvancomment";
+    private SyncHttpClient syncHttpClient = new SyncHttpClient();    
+
 
     public static LoopjConnection getInstance(Context context) {
         if (instance == null) {
@@ -53,7 +59,7 @@ public class LoopjConnection {
      * @param params
      */
     public void addPosting(RequestParams params,final TextView tv) {
-        asyncHttpClient.post(boardUrl + addPostingUrl, params, new AsyncHttpResponseHandler() {
+        asyncHttpClient.post(Const.BOARD_URL + Const.INSERT_CALLVAN, params, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -79,12 +85,11 @@ public class LoopjConnection {
      */
     public JSONObject getBoardList() {
 
-        syncHttpClient.post(boardUrl + getBoardListUrl, new JsonHttpResponseHandler() {
+        syncHttpClient.post(Const.BOARD_URL + Const.SELECT_CALLVAN, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.i("LoopjConnect", "http://52.78.113.18:40000/selectcallvan , status : " + statusCode + ", //onSuccess");
-                Log.e("권수정", "result : " + response);
                 result = response;
                 new BoardManager(response);
             }
@@ -108,12 +113,11 @@ public class LoopjConnection {
      */
     public Post getOnePost(RequestParams postNo) {
 
-        syncHttpClient.post(boardUrl + getonepostUrl, postNo, new JsonHttpResponseHandler() {
+        syncHttpClient.post(Const.BOARD_URL + Const.SELECT_ONE_CALLVAN, postNo, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.i("LoopjConnect", boardUrl + getonepostUrl + ", status : " + statusCode + ", //onSuccess");
-                Log.e("LoopjConnect", "response  : " + response);
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.SELECT_ONE_CALLVAN + ", status : " + statusCode + ", //onSuccess");
 
                 postResult = BoardManager.json2PostWithComment(response);
             }
@@ -121,7 +125,7 @@ public class LoopjConnection {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.i("LoopjConnect", boardUrl + getonepostUrl + " , status : " + statusCode + ", //onFailure");
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.SELECT_ONE_CALLVAN + " , status : " + statusCode + ", //onFailure");
                 postResult = null;
             }
         });
@@ -138,18 +142,41 @@ public class LoopjConnection {
      */
 
     public void addComment(RequestParams params) {
-        syncHttpClient.post(boardUrl + addCommentUrl, params, new JsonHttpResponseHandler() {
+        syncHttpClient.post(Const.BOARD_URL + Const.INSERT_CALLVAN_COMMENT, params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.i("LoopjConnect", boardUrl + addCommentUrl + " , status : " + statusCode + ", response : "+response +", //onSuccess");
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.INSERT_CALLVAN_COMMENT + " , status : " + statusCode + ", response : "+response +", //onSuccess");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.i("LoopjConnect", boardUrl + addCommentUrl + " , status : " + statusCode + " , errorResponse : " + errorResponse + " //onFailure");
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.INSERT_CALLVAN_COMMENT + " , status : " + statusCode + " , errorResponse : " + errorResponse + " //onFailure");
+            }
+        });
+    }
+
+    /**
+     * 댓글 등록
+     *
+     * @param params CALL_BOARD_NO, COMMENT_LEVEL, CONTENTS, REG_ID,
+     *               WRITE_NAME, BEFORE_COMMENT_NO, SEND_REG_ID
+     */
+
+    public void approvalCallvan(RequestParams params) {
+        syncHttpClient.post(Const.BOARD_URL + Const.APPROAVAL_CALLVAN, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.APPROAVAL_CALLVAN + " , status : " + statusCode + ", response : "+response +", //onSuccess");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i("LoopjConnect", Const.BOARD_URL + Const.APPROAVAL_CALLVAN + " , status : " + statusCode + " , errorResponse : " + errorResponse + " //onFailure");
             }
         });
     }

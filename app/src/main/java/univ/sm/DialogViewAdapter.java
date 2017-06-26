@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 /**
@@ -24,13 +26,17 @@ public class DialogViewAdapter extends PagerAdapter {
         this.context = context;
         this.IMAGES=IMAGES;
         inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View layout = (ViewGroup) inflater.inflate(R.layout.sch_detail_fake, container, false);
         final ImageView imageView = (ImageView) layout.findViewById(R.id.imageTT1);
-        imageView.setImageResource(IMAGES.get(position));
+
+        Picasso.with(context).load(IMAGES.get(position)).resize(400,700).into(imageView);
+
+        //imageView.setImageResource(IMAGES.get(position));
         container.addView(layout, 0);
 
         return layout;
