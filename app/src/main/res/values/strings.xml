@@ -61,4 +61,14 @@
         <item>3명</item>
         <item>4명</item>
     </string-array>
+
+
+    <string name="makers">
+        이희선(angalle4@gmail.com)
+    권수정(0401tnwjd@gmail.com)
+    이소원(sowannab@gmail.com)
+    김보혜(sweetbobo515@gmail.com)
+    선문대학교 셔틀 링크
+    http://lily.sunmoon.ac.kr/Page/About/About08_04_01.aspx
+    </string>
 </resources>

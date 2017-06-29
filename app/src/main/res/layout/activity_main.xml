@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="right|top">
+
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -41,6 +42,14 @@
                 android:background="@drawable/com_facebook_button_icon_blue"
                 android:id="@+id/facebookShare">
             </ImageView>
+
+            <Button
+                android:id="@+id/setting_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="설정" />
         </LinearLayout>
     </RelativeLayout>
     <!-- header -->
