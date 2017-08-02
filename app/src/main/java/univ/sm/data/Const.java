@@ -71,4 +71,14 @@ public class Const {
     static public  String SELECT_ONE_CALLVAN = "/selectcallvaninfo";
     static public  String INSERT_CALLVAN_COMMENT = "/insertcallvancomment";
     static public  String APPROAVAL_CALLVAN = "/callvan_complete";
+
+    /*
+     * SETTING INFO
+     */
+    static public String NOTIKEY = "selectNotice";
+    static public String SETINFO = "SETINFO";
+    static public String NOTICE = "NOTICE";
+    static public String DEFAULTNOTI = "TRUE";
+    static public String TRUE = "TRUE";
+    static public String FALSE = "FALSE";
 }

@@ -32,9 +32,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
 
-
-    ImageView kakaoShare, facebookShare;
-    Button settingBtn;
+    ImageView kakaoShare, facebookShare, settingBtn;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -73,8 +71,17 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         AppEventsLogger.activateApp(this);
 
         /**setting button*/
-        settingBtn = (Button) findViewById(R.id.setting_button);
+        settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
+
+        /***setting info init*/
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Const.SETINFO, MODE_PRIVATE);
+        if("first".equals(sp.getString(Const.NOTICE, "first"))){
+            Toast.makeText(getApplicationContext(),"here is ?",Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor spe = sp.edit();
+            spe.putString(Const.NOTICE,Const.DEFAULTNOTI);
+            spe.commit();
+        }
     }
 
     @Override
@@ -129,7 +136,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
                 shareFacebook();
                 break;
             case R.id.setting_button:
-                intent.setClass(MainActivity.this,SettingActivity.class);
+                intent.setClass(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -176,7 +183,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
 
     int exitCount = 0;
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         //super.onBackPressed();
         if (exitCount == 1) {
@@ -185,5 +192,5 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             Toast.makeText(getApplicationContext(), "한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             exitCount++;
         }
-    }
+    }*/
 }

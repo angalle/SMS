@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="이희선(angalle4@gmail.com)
-    권수정(0401tnwjd@gmail.com)
-    이소원(sowannab@gmail.com)
-    김보혜(sweetbobo515@gmail.com)
-    선문대학교 셔틀 링크
-    http://lily.sunmoon.ac.kr/Page/About/About08_04_01.aspx">
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Setting">
-
+    <PreferenceCategory android:title="SETTING">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="selectNotice"
             android:summaryOff="댓글 알림을 받지 않습니다."
             android:summaryOn="댓글 알림을 받습니다."
             android:title="댓글 알림" />
-
-
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="APP INFO">
+        <Preference
+            android:title="개발자"
+            android:summary="
+개발자\n
+- 이희선(angalle4@gmail.com)\n
+">
+        </Preference>
+
+        <Preference
+            android:title="디자이너"
+            android:summary="
+디자이너\n
+- 권수정(0401tnwjd@gmail.com)\n
+- 이소원(sowannab@gmail.com)\n
+- 김보혜(sweetbobo515@gmail.com)
+">
+        </Preference>
+
+        <Preference
+            android:summary="개발자에게 메일을 보냅니다"
+            android:title="메일 보내기" >
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:angalle4@gmail.com" />
+        </Preference>
+
+        <Preference
+            android:title="선문대학교 셔틀버스 링크"
+            android:summary="클릭시 이동합니다.">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://lily.sunmoon.ac.kr/Page/About/About08_04_01.aspx"></intent>
+        </Preference>
+    </PreferenceCategory>
+
 
 
 </PreferenceScreen>

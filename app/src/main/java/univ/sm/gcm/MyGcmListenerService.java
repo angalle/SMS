@@ -4,17 +4,23 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import univ.sm.R;
+import univ.sm.SettingActivity;
 import univ.sm.Splash;
 import univ.sm.board.BoardDetailPage;
+import univ.sm.data.Const;
 
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -41,8 +47,21 @@ public class MyGcmListenerService extends GcmListenerService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("board_no",callNo);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,PendingIntent.FLAG_ONE_SHOT);
+        Uri defaultSoundUri = null;
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+
+
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            boolean notiState = sp.getBoolean(Const.NOTIKEY, true);
+            System.out.println(notiState+"");
+            //Toast.makeText(getApplicationContext(),notiState+"",Toast.LENGTH_SHORT).show();
+            if (notiState) {
+                    defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }else{
+                    defaultSoundUri = RingtoneManager.getDefaultUri(AudioManager.RINGER_MODE_SILENT);
+            }
+
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.input_icon)
                 .setContentTitle("SMS - 선문대셔틀버스 시간표")

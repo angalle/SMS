@@ -3,6 +3,7 @@ package univ.sm;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -10,24 +11,30 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
+
+import univ.sm.data.Const;
 
 /**
  * Created by kwonsujeong on 2017. 6. 26..
  */
 
 public class SettingActivity extends PreferenceActivity{
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingFragment()).commit();
     }
+
+
     public static class SettingFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.setting);
             setHasOptionsMenu(true);
-
         }
 
         @Override
@@ -44,13 +51,8 @@ public class SettingActivity extends PreferenceActivity{
 
 
         @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
 
-            Preference connectionPref = findPreference(key);
-            if (connectionPref instanceof EditTextPreference) {
-                EditTextPreference editPref = (EditTextPreference) connectionPref;
-                editPref.setSummary(editPref.getText());
-            }
         }
     }
 }
