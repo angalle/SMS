@@ -42,24 +42,6 @@ public class Splash extends Activity {
             startService(intent);
         }
 
-
-
-       mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
-        requestNewInterstitial();
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                mInterstitialAd.show();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getApplicationContext(), "erroCode" + errorCode, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Thread th = new Thread(){
             @Override
             public void run() {

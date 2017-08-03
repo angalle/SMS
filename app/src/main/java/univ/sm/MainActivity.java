@@ -15,6 +15,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.kakao.kakaolink.KakaoLink;
 import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.tsengvn.typekit.Typekit;
@@ -73,15 +76,6 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         /**setting button*/
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
-
-        /***setting info init*/
-        SharedPreferences sp = getApplicationContext().getSharedPreferences(Const.SETINFO, MODE_PRIVATE);
-        if("first".equals(sp.getString(Const.NOTICE, "first"))){
-            Toast.makeText(getApplicationContext(),"here is ?",Toast.LENGTH_SHORT).show();
-            SharedPreferences.Editor spe = sp.edit();
-            spe.putString(Const.NOTICE,Const.DEFAULTNOTI);
-            spe.commit();
-        }
     }
 
     @Override
@@ -140,6 +134,56 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
         }
+    }
+
+
+    public InterstitialAd mInterstitialAd;
+    @Override
+    protected void onResume() {
+        super.onResume();
+            if(mInterstitialAd != null){
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    mInterstitialAd.show();
+                }
+
+                @Override
+                public void onAdFailedToLoad(int errorCode) {
+                    Toast.makeText(getApplicationContext(), "erroCode" + errorCode, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+        requestNewInterstitial();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(getApplicationContext(), "erroCode" + errorCode, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+
     }
 
     private void shareFacebook() {
