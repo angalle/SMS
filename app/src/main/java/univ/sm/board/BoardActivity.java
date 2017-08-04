@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
 
+import univ.sm.CommonActivity;
 import univ.sm.MainActivity;
 import univ.sm.R;
 import univ.sm.connect.LoopjConnection;
@@ -36,7 +37,7 @@ import univ.sm.data.Const;
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class BoardActivity extends FragmentActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
+public class BoardActivity extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
                                                                         ,ViewPager.OnPageChangeListener{
     private TextView board_list,board_write,subTitle;
     private ImageView refresh_btn,board_selector;
