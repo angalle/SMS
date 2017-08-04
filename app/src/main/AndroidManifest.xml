@@ -14,7 +14,7 @@
         <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +24,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
             <data   android:scheme = "@string/kakao_scheme"
                 android:host="@string/kakaolink_host">
@@ -32,31 +32,32 @@
         <activity
             android:name=".SchDetail"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SchEntry"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SchEntryFake"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SchDetailFake"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".InfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".board.BoardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".board.BoardDetailPage"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
+
         <activity android:name=".SettingActivity"/>
         <!--**********************************************************************-->
         <!-- *********************안드로이드 fabric 관련 설정 ********************-->

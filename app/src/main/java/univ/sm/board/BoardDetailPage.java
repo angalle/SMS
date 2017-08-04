@@ -238,6 +238,11 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
                 comment_params.put("BEFORCOMMENT_NO", board_no);            //이희선씨의 보드넘버 요청
                 comment_params.put("SEND_REG_ID", " ");                     //이희선씨의 공백 요청
 
+                if(comment_name_editText.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"사용자명을 입력하세요",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+
                 if(comment_editText.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"댓글을 입력하세요",Toast.LENGTH_SHORT).show();
                     return ;

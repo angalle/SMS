@@ -23,7 +23,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "univ.sm"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 20
         versionName "3.0.3"

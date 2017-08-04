@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,77 +11,78 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.4"
-        android:layout_gravity="center_vertical">
+        android:layout_gravity="center_vertical"
+        android:layout_weight="3.4">
 
         <ImageView
-            android:layout_height="wrap_content"
-            android:src="@drawable/weekbar"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
             android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/weekbar" />
 
         <LinearLayout
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="270dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
 
                 <ImageView
-                    android:layout_height="match_parent"
-                    android:src="@drawable/weekbar_select"
-                    android:layout_width="92dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:layout_centerVertical="true"
                     android:id="@+id/sch_detail_top_bar"
-                    android:adjustViewBounds="true" />
+                    android:layout_width="92dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="6dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/weekbar_select" />
 
                 <LinearLayout
-                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_centerVertical="true"
-                    android:gravity="center">
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/sch_detail_weekDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
                         android:paddingLeft="10dp"
-                        android:textSize="17dp"
+                        android:paddingRight="10dp"
                         android:text="WeekDay"
-                        android:textStyle="bold"
-                        android:id="@+id/sch_detail_weekDay"/>
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/sch_detail_satureDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="5dp"
                         android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:text="SaturDay"
                         android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:id="@+id/sch_detail_satureDay"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/sch_detail_sunDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
                         android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:text="SunDay"
                         android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:id="@+id/sch_detail_sunDay"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -192,52 +194,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="80dp">
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="#FFFFFF"
-                    android:layout_height="30dp">
-                </LinearLayout>
+                    android:orientation="vertical"></LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:background="#eeb8b8"
-                android:orientation="vertical"
-                android:layout_height="70dp">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <ImageView
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/quick_bakcground"
-                android:layout_height="80dp"
                 android:layout_width="80dp"
-                android:adjustViewBounds="false" />
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="false"
+                android:src="@drawable/quick_bakcground" />
 
             <ImageView
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/quick_btn"
                 android:id="@+id/quickBtn"
-                android:layout_centerVertical="true"
-                android:layout_height="60dp"
                 android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_marginBottom="5dp"
                 android:adjustViewBounds="false"
-                android:paddingBottom="5dp" />
+                android:paddingBottom="5dp"
+                android:src="@drawable/quick_btn" />
 
         </RelativeLayout>
         <!--<ImageView

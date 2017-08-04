@@ -3,9 +3,12 @@ package univ.sm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -159,22 +162,14 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
     @Override
     protected void onStop() {
         super.onStop();
+        /**광고 초기화*/
+        if(mInterstitialAd != null){
 
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
-        requestNewInterstitial();
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                mInterstitialAd.show();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getApplicationContext(), "erroCode" + errorCode, Toast.LENGTH_SHORT).show();
-            }
-        });
+        }else{
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+            requestNewInterstitial();
+        }
     }
 
     private void requestNewInterstitial() {
