@@ -71,7 +71,10 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
         super.onResume();
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
-
+        if(changeTemp == null){
+            Splash.DataSetting();
+            changeTemp= Connection.positionShuttleArr;
+        }
         STATION = new ArrayList<>();
         /*역 관련 상수 초기화*/
         STATION.add(Const.CHEONANSTATION);

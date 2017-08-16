@@ -62,7 +62,7 @@ public class Splash extends Activity {
         }, 1000);
     }
 
-    private boolean DataSetting() {
+    public static boolean DataSetting() {
         int i = 0;
         try{
             for (String url : SplashData.busUrl) {
@@ -80,7 +80,7 @@ public class Splash extends Activity {
                 i++;
             }
         }catch (Exception e){
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

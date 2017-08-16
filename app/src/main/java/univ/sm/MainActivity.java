@@ -187,7 +187,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
                 .setContentTitle("SMS - 선문대셔틀버스 시간표 & 콜벤합승")
                 .setImageUrl(Uri.parse("https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw"))
                 .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=univ.sm"))
-                .setContentDescription("SMS - 선문대셔틀버스 시간표 & 콜벤합승\n콜벤합승기능이 추가되었습니다. \n처음한번 입력하면 입력정보는 계속 기억됩니다.\n테스트중에 있으니 많은 피드백 주시기 바랍니다.")
+                .setContentDescription("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~")
                 .build();
 
         ShareDialog shareDialog = new ShareDialog(this);
@@ -201,7 +201,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             final KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
             final KakaoTalkLinkMessageBuilder kakaoMsgBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
 
-            kakaoMsgBuilder.addText("SMS - 선문대셔틀버스 시간표 & 콜벤합승\n콜벤합승기능이 추가되었습니다. \n처음한번 입력하면 입력정보는 계속 기억됩니다.\n테스트중에 있으니 많은 피드백 주시기 바랍니다.");
+            kakaoMsgBuilder.addText("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~");
 
             String url = "https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw";
             String url2 = "https://lh3.googleusercontent.com/HWQPZPUdMvPpP_R5QQmxQiFgtFzfrlpV9mFHeQb56uhzgahxqUNHoGO_D00vsf3ACqA=h900-rw";

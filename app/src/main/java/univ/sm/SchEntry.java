@@ -62,10 +62,17 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_entry);
         initView();
+    }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
-
+        if(changeTemp == null){
+            Splash.DataSetting();
+            changeTemp= Connection.positionShuttleArr;
+        }
         STATION = new ArrayList<>();
         /*역 관련 상수 초기화*/
         STATION.add(Const.CHEONANSTATION);
