@@ -15,19 +15,19 @@
 
         <Button
             android:id="@+id/negative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:text="취소" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_close" />
     </LinearLayout>
 
     <com.google.android.gms.ads.NativeExpressAdView
         android:id="@+id/adView"
         android:layout_width="400dp"
-        android:layout_height="350dp"
+        android:layout_height="330dp"
         android:layout_gravity="center_horizontal"
-        ads:adUnitId="ca-app-pub-8944137857067935/6840253602"
-        ads:adSize="302x320">
+        ads:adSize="302x320"
+        ads:adUnitId="ca-app-pub-8944137857067935/6840253602">
 
     </com.google.android.gms.ads.NativeExpressAdView>
 
@@ -38,17 +38,42 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="뒤로가기" />
+            android:id="@+id/positive"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_appclose" />
 
         <Button
-            android:id="@+id/positive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:text="종료" />
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_back" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:text="종료하기"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/back_tv"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:text="뒤로가기"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
 </LinearLayout>

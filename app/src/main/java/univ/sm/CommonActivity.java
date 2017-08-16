@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
@@ -39,10 +40,12 @@ public class CommonActivity extends AppCompatActivity {
         NativeExpressAdView adView = (NativeExpressAdView)dialog.findViewById(R.id.adView);
         adView.loadAd(new AdRequest.Builder().build());
         Button backBtn = (Button)dialog.findViewById(R.id.back);
+        TextView backTv = (TextView)dialog.findViewById(R.id.back_tv);
         Button positiveBtn = (Button)dialog.findViewById(R.id.positive);
         Button negativeBtn = (Button)dialog.findViewById(R.id.negative);
         /* 뒤로가기버튼 사라지기 */
         disappearView(backBtn);
+        disappearView(backTv);
         /* 뒤로가기 */
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
