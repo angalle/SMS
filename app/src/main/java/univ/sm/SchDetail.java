@@ -212,6 +212,10 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
         if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
+            if(changeTemp == null){
+                Splash.DataSetting();
+                changeTemp= Connection.positionShuttleArr;
+            }
             ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
             recyclerView.setAdapter(ra);
         }

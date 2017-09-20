@@ -55,7 +55,7 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
 
     @Override
     public int getItemCount() {
-        return this.items.size()-1;
+        return this.items == null ? 0 : this.items.size()-1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
