@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.7"
+        android:layout_weight="0.78"
         >
         <ImageView
             android:id="@+id/mainImgview"
@@ -185,6 +185,26 @@
                 android:textColor="#58595b"
                 android:textSize="8sp" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+    >
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_id">
+        </com.google.android.gms.ads.AdView>
+
     </LinearLayout>
 
     <!-- footer -->

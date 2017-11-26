@@ -3,13 +3,9 @@ package univ.sm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -20,6 +16,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.kakao.kakaolink.KakaoLink;
 import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
@@ -37,7 +34,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
 
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
-
+    AdView mAdView;
     ImageView kakaoShare, facebookShare, settingBtn;
 
     @Override
@@ -79,6 +76,12 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         /**setting button*/
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
     }
 
     @Override

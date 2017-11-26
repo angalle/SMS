@@ -64,8 +64,9 @@ public class Const {
 
     /**
      * CALVAN PROCESS URL
+     * 52.78.186.130
      */
-    static public  String BOARD_URL = "http://52.78.113.18:40000";
+    static public  String BOARD_URL = "http://52.78.186.130:40000";
     static public  String SELECT_CALLVAN = "/selectcallvan";
     static public  String INSERT_CALLVAN = "/insertcallvan";
     static public  String SELECT_ONE_CALLVAN = "/selectcallvaninfo";

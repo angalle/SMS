@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
+
 repositories {
     mavenCentral()
     maven { url 'https://maven.fabric.io/public' }
@@ -25,8 +26,8 @@ android {
         applicationId "univ.sm"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 25
-        versionName "3.1.4"
+        versionCode 27
+        versionName "3.1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -59,6 +60,8 @@ dependencies {
     compile "com.google.android.gms:play-services-gcm:9.6.1"
     compile 'com.google.android.gms:play-services-ads:9.6.1'
 
+    compile 'com.google.firebase:firebase-ads:10.0.1'
+
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
@@ -85,3 +88,4 @@ dependencies {
         exclude group: 'com.android.support'
     }
 }
+apply plugin: 'com.google.gms.google-services'
