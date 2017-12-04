@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "474166243122",
+    "firebase_url": "https://smsfirebaseproject-633ba.firebaseio.com",
+    "project_id": "smsfirebaseproject-633ba",
+    "storage_bucket": "smsfirebaseproject-633ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474166243122:android:2a32f6ddbffb5f61",
+        "android_client_info": {
+          "package_name": "univ.sm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474166243122-l0k44mfdnlrbeptvbk45svrdi4pvgbr4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "univ.sm",
+            "certificate_hash": "6b1026884769024c144fd67d22294a8c995a2130"
+          }
+        },
+        {
+          "client_id": "474166243122-irgcj2qjf3gjs96lfq9ps9dr89ar0qan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH9wtsTq2huugPxvXKQ9XyICOOG0IxmUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474166243122-irgcj2qjf3gjs96lfq9ps9dr89ar0qan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
