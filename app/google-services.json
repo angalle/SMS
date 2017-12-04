@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "583513470179",
+    "firebase_url": "https://sunmoon-shuttle.firebaseio.com",
+    "project_id": "sunmoon-shuttle",
+    "storage_bucket": "sunmoon-shuttle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583513470179:android:2a32f6ddbffb5f61",
+        "android_client_info": {
+          "package_name": "univ.sm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583513470179-k7bgvbvtnoli2bvoaeg8iuh17u6e3s6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "univ.sm",
+            "certificate_hash": "2aac0bbd0696ee3b4b4f79ccc41b68336e750c06"
+          }
+        },
+        {
+          "client_id": "583513470179-ih49sqpsdlrd6kitfvhbkbn3ufpkhs0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzEShkFSBYJJA1PIafPU7tEKKR3Kagi9M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
