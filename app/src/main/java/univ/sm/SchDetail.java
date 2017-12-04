@@ -82,10 +82,15 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
         STATION.add(Const.ONYANG);
         /*STATION.add(Const.CHEONANCAMPUS);*/
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
-        recyclerView.setAdapter(ra);
+        try{
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
+            ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
+            recyclerView.setAdapter(ra);
+        }catch (Exception e){
+            Toast.makeText(getApplication(),"인터넷이 연결되지 않았거나, 데이터를 받아오지 못하였습니다.",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /* 주말선택의 빨간바를 이동하는 함수 */
@@ -205,6 +210,11 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
     }
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+        if(changeTemp == null){
+            Splash.DataSetting();
+            changeTemp= Connection.positionShuttleArr;
+        }
+
         STATION_FLAG = staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;

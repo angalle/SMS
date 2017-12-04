@@ -166,13 +166,13 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
     protected void onStop() {
         super.onStop();
         /**광고 초기화*/
-        if(mInterstitialAd != null){
+       /* if(mInterstitialAd != null){
 
-        }else{
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
-            requestNewInterstitial();
-        }
+        }else{*/
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+        requestNewInterstitial();
+        /*}*/
     }
 
     private void requestNewInterstitial() {

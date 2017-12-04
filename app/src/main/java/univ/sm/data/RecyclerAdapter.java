@@ -22,6 +22,8 @@ import java.util.List;
 
 import butterknife.OnClick;
 import univ.sm.R;
+import univ.sm.Splash;
+import univ.sm.connect.Connection;
 
 import static android.R.id.list;
 import static univ.sm.R.id.background_opposite;

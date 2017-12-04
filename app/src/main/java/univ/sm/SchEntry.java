@@ -215,6 +215,11 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
 
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+        if(changeTemp == null){
+            Splash.DataSetting();
+            changeTemp= Connection.positionShuttleArr;
+        }
+
         STATION_FLAG =staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;

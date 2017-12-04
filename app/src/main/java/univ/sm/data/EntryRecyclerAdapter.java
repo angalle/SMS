@@ -14,7 +14,7 @@ import univ.sm.R;
 /**
  * Created by uaer on 2017-01-13.
  */
-public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdapter.ViewHolder>{
+public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdapter.ViewHolder> {
     Context context;
     ArrayList<Shuttle> items;
 
