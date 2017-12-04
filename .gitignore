@@ -44,4 +44,4 @@ captures/
 .externalNativeBuild
 
 # Custome
-.gradle/wrapper/gradle_wrapper.properties
+#.gradle/wrapper/gradle_wrapper.properties
