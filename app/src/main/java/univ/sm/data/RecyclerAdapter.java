@@ -3,7 +3,6 @@ package univ.sm.data;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
-import butterknife.OnClick;
 import univ.sm.R;
-import univ.sm.Splash;
-import univ.sm.connect.Connection;
-
-import static android.R.id.list;
-import static univ.sm.R.id.background_opposite;
+import univ.sm.data.item.Shuttle;
 
 /**
  * Created by uaer on 2017-01-13.

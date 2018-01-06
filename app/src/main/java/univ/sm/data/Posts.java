@@ -1,16 +1,14 @@
-package univ.sm.board;
+package univ.sm.data;
 
 
 import java.util.ArrayList;
-
-import univ.sm.data.Comment;
 
 /**
  * 게시글 data 객체
  * Created by kwonsoojeong on 2017-03-24.
  */
 
-public class Post {
+public class Posts {
     private String board_no;                //게시글 번호 CALL_BOARD_NO
     private String write_name;              //작성자 명
     private String passwd;                  //비밀번호
@@ -31,10 +29,10 @@ public class Post {
 
     private ArrayList<Comment> commentsList; //댓글리스트
 
-    public Post(String board_no, String write_name, String passwd, String department,
-                String student_no, String departure, String departure_detail, String destination,
-                String destination_detail, String reg_id, String use_flag, String passenger_num,
-                String wait_time, String insert_time, String insert_date, String remain_time,int comment_cnt) {
+    public Posts(String board_no, String write_name, String passwd, String department,
+                 String student_no, String departure, String departure_detail, String destination,
+                 String destination_detail, String reg_id, String use_flag, String passenger_num,
+                 String wait_time, String insert_time, String insert_date, String remain_time, int comment_cnt) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -58,10 +56,10 @@ public class Post {
         this.comment_cnt = comment_cnt;
     }
 
-    public Post(String board_no, String write_name, String passwd, String department,
-                String student_no, String departure, String departure_detail, String destination,
-                String destination_detail, String reg_id, String use_flag, String passenger_num,
-                String wait_time, String insert_time, String insert_date, String remain_time,int comment_cnt, ArrayList<Comment> commentList) {
+    public Posts(String board_no, String write_name, String passwd, String department,
+                 String student_no, String departure, String departure_detail, String destination,
+                 String destination_detail, String reg_id, String use_flag, String passenger_num,
+                 String wait_time, String insert_time, String insert_date, String remain_time, int comment_cnt, ArrayList<Comment> commentList) {
 
         this.board_no = board_no;
         this.write_name = write_name;
@@ -86,7 +84,7 @@ public class Post {
         this.commentsList = commentList;
     }
 
-    public Post(){
+    public Posts(){
 
     }
 
@@ -97,7 +95,7 @@ public class Post {
      *
      * @param newPost
      */
-    public void refreshPost(Post newPost) {
+    public void refreshPost(Posts newPost) {
         this.board_no = newPost.board_no;
         this.write_name = newPost.write_name;
         this.passwd = newPost.passwd;

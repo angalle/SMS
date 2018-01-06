@@ -1,4 +1,4 @@
-package univ.sm.board;
+package univ.sm.view.board.detail;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +23,7 @@ import com.loopj.android.http.RequestParams;
 import java.util.ArrayList;
 
 import univ.sm.R;
+import univ.sm.data.Posts;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.Comment;
 import univ.sm.data.Const;
@@ -44,9 +45,9 @@ import univ.sm.data.Const;
  *
  * */
 
-public class BoardDetailPage extends AppCompatActivity implements View.OnClickListener {
+public class BoardDetailView extends AppCompatActivity implements View.OnClickListener {
     /* TODO:이런 공통변수는 Const에 넣어서 활용하면 좋음*/
-    private static final String TAG = "BoardDetailPage";
+    private static final String TAG = "BoardDetailView";
 
     private TextView WRITE_NAME_view, DEPARTMENT_view, STUDENT_NO_view, DEPARTURE_view,REMAIN_TIME_view,
     DEPARTURE_DETAIL_view, DESTINATION_view, DESTINATION_DETAIL_view, PASSENGER_NUM_view, WAIT_TIME_view;
@@ -62,7 +63,7 @@ public class BoardDetailPage extends AppCompatActivity implements View.OnClickLi
     private RequestParams appravalParams = new RequestParams();
     private SharedPreferences userPref;
 
-    private Post mPost;
+    private Posts mPost;
     private String board_no;
     private int position;
 

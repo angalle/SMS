@@ -57,10 +57,23 @@ public class Const {
     static public String PASSENGER_NUM = "PASSENGER_NUM";
     static public String WAIT_TIME = "WAIT_TIME";
 
+    /*
+     * SETTING INFO
+     */
+    static public String NOTIKEY = "selectNotice";
+    static public String SETINFO = "SETINFO";
+    static public String NOTICE = "NOTICE";
+    static public String DEFAULTNOTI = "TRUE";
+    static public String TRUE = "TRUE";
+    static public String FALSE = "FALSE";
+
     /**
      * CALLCAN PROCESS MSG
      */
     public static String CALLVAN_LOADING_MSG = "콜벤리스트를 불러오는 중입니다....";
+
+
+
 
     /**
      * CALVAN PROCESS URL
@@ -73,13 +86,27 @@ public class Const {
     static public  String INSERT_CALLVAN_COMMENT = "/insertcallvancomment";
     static public  String APPROAVAL_CALLVAN = "/callvan_complete";
 
-    /*
-     * SETTING INFO
-     */
-    static public String NOTIKEY = "selectNotice";
-    static public String SETINFO = "SETINFO";
-    static public String NOTICE = "NOTICE";
-    static public String DEFAULTNOTI = "TRUE";
-    static public String TRUE = "TRUE";
-    static public String FALSE = "FALSE";
+
+
+
+    /**
+         000 :  천안아산역
+         001 :  천안터미널
+         002 :  온양터미널
+         003 :  천안캠퍼스
+
+         -------------------------
+
+         WEK : 평일
+         SAT : 토요일
+         SUN : 일요일
+     **/
+    static public  String SCH_CHEONAN_ASAN_ST   = "000";
+    static public  String SCH_CHEONAN_TERMINAL  = "001";
+    static public  String SCH_ONYANG_TERMINAL   = "002";
+    static public  String SCH_CHEONAN_CAMPAUS   = "003";
+
+    static public  String WEEKDAY       = "WEK";
+    static public  String SATURADAY     = "SAT";
+    static public  String SUNDAY        = "SUN";
 }

@@ -23,11 +23,18 @@ import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import univ.sm.board.BoardActivity;
 import univ.sm.data.Const;
+import univ.sm.view.CommonView;
+import univ.sm.view.board.BoardView;
+import univ.sm.view.question.InfoView;
+import univ.sm.view.detail.SchDetailFakeView;
+import univ.sm.view.detail.SchDetailView;
+import univ.sm.view.entry.SchEntryFakeView;
+import univ.sm.view.entry.SchEntryView;
+import univ.sm.view.SettingView;
 
 
-public class MainActivity extends CommonActivity implements View.OnClickListener {
+public class MainView extends CommonView implements View.OnClickListener {
     LinearLayout sch_detail_btn,            //  상세 스케줄 버튼
             sch_entry_btn,             //  전체정보 뿌려주는 버튼
             app_info_btn;              //  앱 정보 버튼
@@ -80,8 +87,6 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
     }
 
     @Override
@@ -92,41 +97,43 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
 
         switch (v.getId()) {
             case R.id.sch_detail_btn:
-                intent.setClass(MainActivity.this, SchDetail.class);
+                intent.setClass(MainView.this, SchDetailView.class);
                 startActivity(intent);
                 if (g_limit_v.getString(Const.CAN_U_FIRST_1, null) == null) {
-                    fake.setClass(MainActivity.this, SchDetailFake.class);
+                    fake.setClass(MainView.this, SchDetailFakeView.class);
                     startActivity(fake);
                 }
                 break;
             case R.id.sch_entry_btn:
-                intent.setClass(MainActivity.this, SchEntry.class);
+                intent.setClass(MainView.this, SchEntryView.class);
                 startActivity(intent);
                 if (g_limit_v.getString(Const.CAN_U_FIRST_2, null) == null) {
-                    fake.setClass(MainActivity.this, SchEntryFake.class);
+                    fake.setClass(MainView.this, SchEntryFakeView.class);
                     startActivity(fake);
                 }
                 break;
             case R.id.app_info_btn:
-                 /*final AppInfo dialog = new AppInfo(this);
-            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialog) {
-                    //나타날때 쓰는 효과
-                }
-            });
-            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    //사라질때 하는 효과
-                }
-            });
-            dialog.show();*/
-                intent.setClass(MainActivity.this, InfoActivity.class);
+             /*  디자이너 요청으로 전체화면으로 수정
+                 final AppInfo dialog = new AppInfo(this);
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        //나타날때 쓰는 효과
+                    }
+                });
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        //사라질때 하는 효과
+                    }
+                });
+                dialog.show();
+            */
+                intent.setClass(MainView.this, InfoView.class);
                 startActivity(intent);
                 break;
             case R.id.callboard_menu_btn:
-                intent.setClass(MainActivity.this, BoardActivity.class);
+                intent.setClass(MainView.this, BoardView.class);
                 startActivity(intent);
                 break;
             case R.id.kakaoShare:
@@ -136,7 +143,7 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
                 shareFacebook();
                 break;
             case R.id.setting_button:
-                intent.setClass(MainActivity.this, SettingActivity.class);
+                intent.setClass(MainView.this, SettingView.class);
                 startActivity(intent);
                 break;
         }
@@ -166,13 +173,9 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
     protected void onStop() {
         super.onStop();
         /**광고 초기화*/
-       /* if(mInterstitialAd != null){
-
-        }else{*/
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
         requestNewInterstitial();
-        /*}*/
     }
 
     private void requestNewInterstitial() {

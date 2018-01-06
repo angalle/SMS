@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import univ.sm.R;
+import univ.sm.data.item.Shuttle;
 
 /**
  * Created by uaer on 2017-01-13.

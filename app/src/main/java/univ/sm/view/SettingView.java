@@ -1,4 +1,4 @@
-package univ.sm;
+package univ.sm.view;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -13,13 +13,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import univ.sm.R;
 import univ.sm.data.Const;
 
 /**
  * Created by kwonsujeong on 2017. 6. 26..
  */
 
-public class SettingActivity extends PreferenceActivity{
+public class SettingView extends PreferenceActivity{
 
 
     @Override

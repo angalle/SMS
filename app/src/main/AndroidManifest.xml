@@ -12,7 +12,7 @@
         >
 
         <activity
-            android:name=".Splash"
+            android:name=".view.SplashView"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".MainView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -30,35 +30,29 @@
                 android:host="@string/kakaolink_host">
             </data>
         <activity
-            android:name=".SchDetail"
+            android:name=".view.detail.SchDetailView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SchEntry"
+            android:name=".view.entry.SchEntryView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SchEntryFake"
+            android:name=".view.entry.SchEntryFakeView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SchDetailFake"
+            android:name=".view.detail.SchDetailFakeView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".InfoActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".board.BoardActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".board.BoardDetailPage"
+            android:name=".view.question.InfoView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".SettingActivity"/>
+        <activity android:name=".view.SettingView"/>
+        <activity android:name=".view.board.BoardView"/>
+        <activity android:name=".view.board.detail.BoardDetailView"/>
         <!--**********************************************************************-->
         <!-- *********************안드로이드 fabric 관련 설정 ********************-->
         <!--**********************************************************************-->

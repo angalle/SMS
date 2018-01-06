@@ -1,42 +1,35 @@
-package univ.sm;
+package univ.sm.view.entry;
 
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableLayout;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import univ.sm.R;
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.EntryRecyclerAdapter;
-import univ.sm.data.RecyclerAdapter;
-import univ.sm.data.Shuttle;
+import univ.sm.data.item.Shuttle;
 import univ.sm.data.Utility;
+import univ.sm.view.CommonView;
+import univ.sm.view.SplashView;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
-public class SchEntry extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
+public class SchEntryView extends CommonView implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener{
     TextView schDetailWeekDay,  schDetailSatureDay,  schDetailSunDay, KTX, Terminal,  Onyang, destination_title;
     ImageView schDetailTopBar,  detail_btn, top_btn, imgDestination;
     Context context;
@@ -70,7 +63,7 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
         if(changeTemp == null){
-            Splash.DataSetting();
+            SplashView.DataSetting();
             changeTemp= Connection.positionShuttleArr;
         }
         STATION = new ArrayList<>();
@@ -216,7 +209,7 @@ public class SchEntry extends CommonActivity implements View.OnClickListener,Vie
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
         if(changeTemp == null){
-            Splash.DataSetting();
+            SplashView.DataSetting();
             changeTemp= Connection.positionShuttleArr;
         }
 

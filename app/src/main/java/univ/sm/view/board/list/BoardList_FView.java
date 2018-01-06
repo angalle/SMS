@@ -1,6 +1,5 @@
-package univ.sm.board;
+package univ.sm.view.board.list;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,33 +18,36 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import univ.sm.R;
+import univ.sm.connect.BoardManager;
+import univ.sm.data.Posts;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.Const;
+import univ.sm.view.board.BoardView;
 
 /**
  * Created by heesun on 2017-04-23.
  */
-public class BoardListFragment extends Fragment {
+public class BoardList_FView extends Fragment {
     private RecyclerView mRecyclerView;
-    private ArrayList<Post> postArrayList = new ArrayList<>();
+    private ArrayList<Posts> postArrayList = new ArrayList<>();
     BoardViewAdapter boardViewAdapter;
     LinearLayoutManager layoutManager = null;
     Context context;
-    static BoardListFragment instance;
+    public static BoardList_FView instance;
 
     //loading msg dialog
     static ProgressDialog pd = null;
 
-    public static BoardListFragment newInstatnce(){
+    public static BoardList_FView newInstatnce(){
         if(instance == null){
-            instance = new BoardListFragment();
+            instance = new BoardList_FView();
         }
         return instance;
     }
 
-    public BoardListFragment(){
+    public BoardList_FView(){
         super();
-        this.context = BoardActivity.context;
+        this.context = BoardView.context;
     }
 
     @Nullable
@@ -74,7 +75,7 @@ public class BoardListFragment extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                pd = new ProgressDialog(BoardListFragment.instance.getContext());
+                pd = new ProgressDialog(BoardList_FView.instance.getContext());
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 pd.setMessage(Const.CALLVAN_LOADING_MSG);
                 pd.show();
@@ -117,7 +118,5 @@ public class BoardListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        Log.e("onDestroy:::::","DDDDDDDDDDDDDDD");
     }
 }

@@ -1,14 +1,12 @@
 package univ.sm.data;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.reflect.Method;
-import java.util.Objects;
 
-import univ.sm.board.BoardActivity;
 import univ.sm.connect.LoopjConnection;
+import univ.sm.view.board.BoardView;
 
 /**
  * Created by uaer on 2017-06-02.
@@ -21,7 +19,7 @@ public class CustomAsyncTask extends AsyncTask<String,Void,Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(BoardActivity.context);
+        pd = new ProgressDialog(BoardView.context);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("로딩...");
         pd.show();
@@ -30,9 +28,9 @@ public class CustomAsyncTask extends AsyncTask<String,Void,Void>{
     @Override
     protected Void doInBackground(String... strings) {
         try{
-            LoopjConnection lc = LoopjConnection.getInstance(BoardActivity.context);
+            LoopjConnection lc = LoopjConnection.getInstance(BoardView.context);
             Method method =lc.getClass().getDeclaredMethod(strings[0],noparams);
-            method.invoke(LoopjConnection.getInstance(BoardActivity.context),null);
+            method.invoke(LoopjConnection.getInstance(BoardView.context),null);
         }catch (Exception e){
             e.printStackTrace();
         }

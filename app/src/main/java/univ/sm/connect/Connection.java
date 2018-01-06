@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 
-import univ.sm.data.Shuttle;
+import univ.sm.data.item.Shuttle;
 import univ.sm.data.SplashData;
 
 
@@ -106,7 +106,7 @@ public class Connection {
 					if (list.get(y).charAt(i) == ' ') {
 						switch (arryrows) {
 						case 0:
-							s.No = filter(test);
+							s.NO = filter(test);
 							break;
 						case 1:
 							s.b[0] = filter(test);

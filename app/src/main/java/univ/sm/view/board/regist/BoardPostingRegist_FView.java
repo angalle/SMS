@@ -1,39 +1,30 @@
-package univ.sm.board;
+package univ.sm.view.board.regist;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import com.loopj.android.http.RequestParams;
 
 import univ.sm.R;
-import univ.sm.connect.LoopjConnection;
+import univ.sm.data.Posts;
 import univ.sm.data.Const;
+import univ.sm.view.board.BoardView;
 
 import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by heesun on 2017-04-23.
  */
-public class BoardPostingFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener{
+public class BoardPostingRegist_FView extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener{
     Context context;
     private EditText writeName,department,studentNo,departure,departure_detail,destination_detail,destination,passwd;
     private Spinner passengerNum,waitTimeSpinner;
@@ -41,19 +32,19 @@ public class BoardPostingFragment extends Fragment implements View.OnClickListen
     FrameLayout l_layout;
 
 
-    public static BoardPostingFragment newInstatnce(){
-        BoardPostingFragment b = new BoardPostingFragment();
+    public static BoardPostingRegist_FView newInstatnce(){
+        BoardPostingRegist_FView b = new BoardPostingRegist_FView();
         return b;
     }
 
-    public BoardPostingFragment() {
+    public BoardPostingRegist_FView() {
         super();
-        this.context = BoardActivity.context;
+        this.context = BoardView.context;
 
     }
 
-    public Post sendParentClickData() {
-        Post post = new Post();
+    public Posts sendParentClickData() {
+        Posts post = new Posts();
         post.setDepartment(department.getText().toString());
         post.setWrite_name(writeName.getText().toString());
         post.setStudent_no(studentNo.getText().toString());
