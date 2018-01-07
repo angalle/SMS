@@ -42,3 +42,6 @@ captures/
 
 .DS_Store
 .externalNativeBuild
+
+# Custome
+#.gradle/wrapper/gradle_wrapper.properties

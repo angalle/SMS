@@ -1,4 +1,4 @@
-package univ.sm.board;
+package univ.sm.view.board.list;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,22 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import univ.sm.R;
-import univ.sm.connect.LoopjConnection;
+import univ.sm.data.Posts;
+import univ.sm.view.board.detail.BoardDetailView;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
     private static final String TAG = "BoardViewAdapter";
-    private List<Post> postArrayList = new ArrayList<>();    //List<Post> items = new ArrayList<>;
+    private List<Posts> postArrayList = new ArrayList<>();    //List<Posts> items = new ArrayList<>;
     private Context context;
     private Activity activity;
 
-    public BoardViewAdapter(List<Post> mItems, Activity activity) {
+    public BoardViewAdapter(List<Posts> mItems, Activity activity) {
         this.postArrayList = mItems;
         this.activity = activity;
     }
@@ -48,7 +46,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         return postArrayList.size();
     }
 
-    public void setBoardArrayList(List<Post> boardArrayList){
+    public void setBoardArrayList(List<Posts> boardArrayList){
         //어뎁터 board 리스트 새로 받아오기
         postArrayList.clear();
         postArrayList.addAll(boardArrayList);
@@ -63,7 +61,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         public abstract void onBindView(ITEM item);
     }
 
-    public class ViewHolder extends BaseViewHolder<Post> {
+    public class ViewHolder extends BaseViewHolder<Posts> {
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -72,8 +70,8 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
                 public void onClick(View v) {
                     // 디테일 페이지로 이동
                     Intent boardIntent = new Intent();
-                    //boardIntent.setClass(context, BoardDetailPage.class);
-                    boardIntent.setClass(activity, BoardDetailPage.class);
+                    //boardIntent.setClass(context, BoardDetailView.class);
+                    boardIntent.setClass(activity, BoardDetailView.class);
                     boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     boardIntent.putExtra("position", getLayoutPosition());
                     boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
@@ -86,7 +84,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         }
 
         @Override
-        public void onBindView(Post item) {
+        public void onBindView(Posts item) {
             TextView WRITER = (TextView) itemView.findViewById(R.id.WRITER);//작성자
             TextView DEPARTMENT = (TextView) itemView.findViewById(R.id.department);//학과
             TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지

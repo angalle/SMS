@@ -1,14 +1,12 @@
-package univ.sm;
+package univ.sm.view.detail;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -21,22 +19,22 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
+import univ.sm.R;
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
-import univ.sm.data.Shuttle;
+import univ.sm.data.item.Shuttle;
 import univ.sm.data.Utility;
+import univ.sm.view.CommonView;
+import univ.sm.view.SplashView;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
-public class SchDetail extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,Spinner.OnItemSelectedListener{
+public class SchDetailView extends CommonView implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener,Spinner.OnItemSelectedListener{
     ImageView schDetailTopBar,  quickBtn,   changeDirection;
     TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay;
     Spinner destination;
@@ -72,7 +70,7 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
         if(changeTemp == null){
-            Splash.DataSetting();
+            SplashView.DataSetting();
             changeTemp= Connection.positionShuttleArr;
         }
         STATION = new ArrayList<>();
@@ -82,10 +80,15 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
         STATION.add(Const.ONYANG);
         /*STATION.add(Const.CHEONANCAMPUS);*/
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
-        recyclerView.setAdapter(ra);
+        try{
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
+            ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
+            recyclerView.setAdapter(ra);
+        }catch (Exception e){
+            Toast.makeText(getApplication(),"인터넷이 연결되지 않았거나, 데이터를 받아오지 못하였습니다.",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /* 주말선택의 빨간바를 이동하는 함수 */
@@ -205,6 +208,11 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
     }
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+        if(changeTemp == null){
+            SplashView.DataSetting();
+            changeTemp= Connection.positionShuttleArr;
+        }
+
         STATION_FLAG = staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;
@@ -213,7 +221,7 @@ public class SchDetail extends CommonActivity implements View.OnClickListener,Vi
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
             if(changeTemp == null){
-                Splash.DataSetting();
+                SplashView.DataSetting();
                 changeTemp= Connection.positionShuttleArr;
             }
             ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);

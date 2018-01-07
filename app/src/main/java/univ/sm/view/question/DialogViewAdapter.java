@@ -1,4 +1,4 @@
-package univ.sm;
+package univ.sm.view.question;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import univ.sm.R;
 
 /**
  * Created by heesun on 2016-12-13.

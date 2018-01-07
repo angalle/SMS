@@ -1,20 +1,13 @@
-package univ.sm;
+package univ.sm.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
@@ -23,12 +16,14 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 
+import univ.sm.MainView;
+import univ.sm.R;
 import univ.sm.connect.Connection;
-import univ.sm.data.Shuttle;
+import univ.sm.data.item.Shuttle;
 import univ.sm.data.SplashData;
 import univ.sm.gcm.RegistrationIntentService;
 
-public class Splash extends Activity {
+public class SplashView extends Activity {
     public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
     public InterstitialAd mInterstitialAd;
     @Override
@@ -55,7 +50,7 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent next = new Intent(Splash.this, MainActivity.class);
+                Intent next = new Intent(SplashView.this, MainView.class);
                 startActivity(next);
                 finish();
             }

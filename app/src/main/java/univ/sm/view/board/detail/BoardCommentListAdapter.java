@@ -1,4 +1,4 @@
-package univ.sm.board;
+package univ.sm.view.board.detail;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,7 @@ import univ.sm.R;
 import univ.sm.data.Comment;
 
 public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentListAdapter.BaseViewHolder> {
-    private List<Comment> commentsList = new ArrayList<>();    //List<Post> items = new ArrayList<>;
+    private List<Comment> commentsList = new ArrayList<>();    //List<Posts> items = new ArrayList<>;
     private Context context;
 
     public BoardCommentListAdapter(List<Comment> mItems, Context context) {

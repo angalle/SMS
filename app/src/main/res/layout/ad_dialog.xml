@@ -26,7 +26,7 @@
         android:layout_width="400dp"
         android:layout_height="330dp"
         android:layout_gravity="center_horizontal"
-        ads:adSize="302x320"
+        ads:adSize="300x320"
         ads:adUnitId="ca-app-pub-8944137857067935/6840253602">
 
     </com.google.android.gms.ads.NativeExpressAdView>

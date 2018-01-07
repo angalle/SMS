@@ -1,14 +1,12 @@
 package univ.sm.data;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 
-import univ.sm.R;
-import univ.sm.board.BoardListFragment;
-import univ.sm.board.BoardPostingFragment;
+import univ.sm.view.board.list.BoardList_FView;
+import univ.sm.view.board.regist.BoardPostingRegist_FView;
 
 /**
  * Created by heesun on 2017-04-23.
@@ -25,11 +23,11 @@ public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
         switch(position)
         {
             case 0:
-                return BoardListFragment.newInstatnce();
+                return BoardList_FView.newInstatnce();
             case 1:
-                return BoardPostingFragment.newInstatnce();
+                return BoardPostingRegist_FView.newInstatnce();
             default:
-                return BoardListFragment.newInstatnce();
+                return BoardList_FView.newInstatnce();
         }
     }
 

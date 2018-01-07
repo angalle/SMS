@@ -1,33 +1,20 @@
-package univ.sm;
+package univ.sm.view.entry;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.aakira.expandablelayout.ExpandableLayout;
-
-import java.util.ArrayList;
-
-import univ.sm.connect.Connection;
+import univ.sm.R;
 import univ.sm.data.Const;
-import univ.sm.data.EntryRecyclerAdapter;
-import univ.sm.data.Shuttle;
 
 /**
  * Created by heesun on 2016-12-13.
  */
 
-public class SchEntryFake extends AppCompatActivity{
+public class SchEntryFakeView extends AppCompatActivity{
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
     ImageView image;

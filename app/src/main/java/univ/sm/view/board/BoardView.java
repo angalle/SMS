@@ -1,14 +1,11 @@
-package univ.sm.board;
+package univ.sm.view.board;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -19,12 +16,14 @@ import android.widget.Toast;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
 
-import univ.sm.CommonActivity;
-import univ.sm.MainActivity;
 import univ.sm.R;
+import univ.sm.data.Posts;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
 import univ.sm.data.Const;
+import univ.sm.view.CommonView;
+import univ.sm.view.board.list.BoardList_FView;
+import univ.sm.view.board.regist.BoardPostingRegist_FView;
 
 
 /**
@@ -37,7 +36,7 @@ import univ.sm.data.Const;
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class BoardActivity extends CommonActivity implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
+public class BoardView extends CommonView implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener
                                                                         ,ViewPager.OnPageChangeListener{
     private TextView board_list,board_write,subTitle;
     private ImageView refresh_btn,board_selector;
@@ -109,8 +108,8 @@ public class BoardActivity extends CommonActivity implements View.OnClickListene
                 /* getSupportFragmentManger의 사용법*/
                 /* 보통 MainActivity의 fragment id를 넣어라 아래 코드와 같이 진행하는게 원칙.*/
                 /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
-                BoardPostingFragment ff = (BoardPostingFragment)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
-                Post post = ff.sendParentClickData();
+                BoardPostingRegist_FView ff = (BoardPostingRegist_FView)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
+                Posts post = ff.sendParentClickData();
                 /*생각해보면 결국 viewPa\ger도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
                 RequestParams params = getPostRequestParams(post);
@@ -136,7 +135,7 @@ public class BoardActivity extends CommonActivity implements View.OnClickListene
         }
     }
     /*BoardPostingFragmenet (등록화면)에 있는 값들을 모두 가져온다.*/
-    private RequestParams getPostRequestParams(Post post){
+    private RequestParams getPostRequestParams(Posts post){
         // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
         //Writing  : hs
         //getText() : return Editable / Editable : not completely convert toString
@@ -200,7 +199,7 @@ public class BoardActivity extends CommonActivity implements View.OnClickListene
             moveImageBar(board_list);
 
             subTitle.setText(Const.LIST_TITLE);
-            BoardListFragment.instance.getServerRequestData();
+            BoardList_FView.instance.getServerRequestData();
             Picasso.with(context).load(R.drawable.quick_btn).resize(100,110).into(refresh_btn);
         }else if(position == 1){
             moveImageBar(board_write);
@@ -233,11 +232,5 @@ public class BoardActivity extends CommonActivity implements View.OnClickListene
         } else {
             observer.removeOnGlobalLayoutListener(listener);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        //System.gc();
-        super.onBackPressed();
     }
 }

@@ -1,19 +1,18 @@
-package univ.sm.board;
+package univ.sm.connect;
 
-import android.nfc.Tag;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import univ.sm.data.Comment;
+import univ.sm.data.Posts;
 
 /**
- * Post 데이터 객체 관리용
+ * Posts 데이터 객체 관리용
  * 서버에서 받아온 데이터 파싱..등등
  * Created by SooJeong on 2017-03-24.
  */
@@ -21,12 +20,12 @@ import univ.sm.data.Comment;
 public class BoardManager {
 
     private static final String TAG = "BoardManager";
-    private static ArrayList<Post> postArrayList;
+    private static ArrayList<Posts> postArrayList;
 
     public BoardManager(JSONObject data) {
 
-        //Post 객체 생성 및 List 추가
-        ArrayList<Post> postList = new ArrayList<>();
+        //Posts 객체 생성 및 List 추가
+        ArrayList<Posts> postList = new ArrayList<>();
 
         try {
             JSONObject jsonObject = data;
@@ -43,10 +42,10 @@ public class BoardManager {
         this.postArrayList = postList;
     }
 
-    public static ArrayList<Post> getPostArrayList() {
+    public static ArrayList<Posts> getPostArrayList() {
         if (postArrayList == null) {
             Log.e("board", "postArrayList is null");
-            postArrayList = new ArrayList<Post>();
+            postArrayList = new ArrayList<Posts>();
         }
         return postArrayList;
     }
@@ -54,18 +53,18 @@ public class BoardManager {
     /**
      * mPost 바꿔치기
      *
-     * @param i       바꿀 Post 의 인덱스
-     * @param newPost 새로운 내용의 Post
+     * @param i       바꿀 Posts 의 인덱스
+     * @param newPost 새로운 내용의 Posts
      */
-    public static void refreshPost(int i, Post newPost) {
-        Post post = postArrayList.get(i);
+    public static void refreshPost(int i, Posts newPost) {
+        Posts post = postArrayList.get(i);
         post.refreshPost(newPost);
     }
 
     /**
      * mPost 바꿔치기
      *
-     * @param i        바꿀 Post 의 인덱스
+     * @param i        바꿀 Posts 의 인덱스
      * @param jsonPost 새로운 내용의 JSONObject
      */
     public static void refreshPost(int i, JSONObject jsonPost) {
@@ -73,16 +72,16 @@ public class BoardManager {
     }
 
     /**
-     * JSONObject-> Post 객체로 바꾸기
+     * JSONObject-> Posts 객체로 바꾸기
      *
      * @param jsonPost JSONObject
      * @return mPost
      */
-    private static Post json2Post(JSONObject jsonPost) {
-        Post post = null;
+    private static Posts json2Post(JSONObject jsonPost) {
+        Posts post = null;
         Log.e("권수정", "jsonBaord : " + jsonPost);
         try {
-            post = new Post(jsonPost.getString("CALL_BOARD_NO"), jsonPost.getString("WRITE_NAME"),
+            post = new Posts(jsonPost.getString("CALL_BOARD_NO"), jsonPost.getString("WRITE_NAME"),
                     jsonPost.getString("PASSWD"), jsonPost.getString("DEPARTMENT"),
                     jsonPost.getString("STUDENT_NO"), jsonPost.getString("DEPARTURE"),
                     jsonPost.getString("DEPARTURE_DETAIL"), jsonPost.getString("DESTINATION"),
@@ -105,8 +104,8 @@ public class BoardManager {
      * @param jsonPost
      * @return
      */
-    public static Post json2PostWithComment(JSONObject jsonPost) {
-        Post post = null;
+    public static Posts json2PostWithComment(JSONObject jsonPost) {
+        Posts post = null;
 
         try {
             JSONArray postsJsonArray = jsonPost.getJSONArray("CALLVAN_INFO");
@@ -130,7 +129,7 @@ public class BoardManager {
             }
 
 
-            post = new Post(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
+            post = new Posts(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
                     postJson.getString("PASSWD"), postJson.getString("DEPARTMENT"),
                     postJson.getString("STUDENT_NO"), postJson.getString("DEPARTURE"),
                     postJson.getString("DEPARTURE_DETAIL"), postJson.getString("DESTINATION"),
@@ -140,7 +139,7 @@ public class BoardManager {
                     postJson.getString("INSERT_DATE"),postJson.getString("REMAIN_TIME"), postJson.getInt("COMMENT_CNT"),commentsList);
 
             Log.i(TAG,"json2PostWithComment : mPost.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
-            //댓글 리스트 추가해서 Post 만들기
+            //댓글 리스트 추가해서 Posts 만들기
 
         } catch (JSONException e) {
             e.printStackTrace();

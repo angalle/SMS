@@ -10,11 +10,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import univ.sm.R;
+import univ.sm.data.item.Shuttle;
 
 /**
  * Created by uaer on 2017-01-13.
  */
-public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdapter.ViewHolder>{
+public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdapter.ViewHolder> {
     Context context;
     ArrayList<Shuttle> items;
 

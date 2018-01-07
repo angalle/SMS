@@ -12,15 +12,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import univ.sm.R;
-import univ.sm.SettingActivity;
-import univ.sm.Splash;
-import univ.sm.board.BoardDetailPage;
 import univ.sm.data.Const;
+import univ.sm.view.board.detail.BoardDetailView;
 
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -43,7 +40,7 @@ public class MyGcmListenerService extends GcmListenerService {
 	}
 
 	private void createNotification(String title, String body,String callNo) {
-		Intent intent = new Intent(this, BoardDetailPage.class);
+		Intent intent = new Intent(this, BoardDetailView.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("board_no",callNo);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,PendingIntent.FLAG_ONE_SHOT);
