@@ -72,8 +72,8 @@ public class Const {
      */
     public static String CALLVAN_LOADING_MSG = "콜벤리스트를 불러오는 중입니다....";
 
-
-
+    /* 이전 예전 url*/
+    static public  String BASE_URL = "http://52.78.186.130:40002";
 
     /**
      * CALVAN PROCESS URL
@@ -106,7 +106,7 @@ public class Const {
     static public  String SCH_ONYANG_TERMINAL   = "002";
     static public  String SCH_CHEONAN_CAMPAUS   = "003";
 
-    static public  String WEEKDAY       = "WEK";
-    static public  String SATURADAY     = "SAT";
-    static public  String SUNDAY        = "SUN";
+    static public  String WEEKDAY1       = "WEK";
+    static public  String SATURADAY2     = "SAT";
+    static public  String SUNDAY3        = "SUN";
 }

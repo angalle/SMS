@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -20,9 +21,13 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import univ.sm.R;
 import univ.sm.connect.Connection;
+import univ.sm.connect.api.schdule.SchCall;
+import univ.sm.connect.api.schdule.SchCallbakService;
+import univ.sm.connect.api.schdule.SchService;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.item.Shuttle;
@@ -56,10 +61,28 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     /* OPPOSIT // REVERSE*/
     int DIRECTION_FLAG = Const.OPPOSIT;
 
+    private SchService scheduleApi;
+    SchCall schCallBack;
+
+    private HashMap<String,Object> params;
+
+    SchCallbakService schCallbakService = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_detail);
+
+        scheduleApi = SchService.getInstance(this).createApi();
+        schCallbakService = new SchCallbakService();
+
+        params = new HashMap<String,Object>();
+        //params.put("POSITION_FLAG","000");
+        //params.put("WEEK_FLAG","WEK");
+        Log.e("SchCall ::::::","call data");
+
+        scheduleApi.getSchedule(params,schCallbakService);
+        Log.e("SchCall ::::::","call data" + schCallbakService.getArrShuttle());
+
         /* view 초기화 */
         initView();
     }

@@ -1,5 +1,7 @@
 package univ.sm.connect;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -16,5 +18,5 @@ public interface CommonService {
 
     @FormUrlEncoded
     @POST("/posts")
-    Call<Shuttle> getSchedule(@FieldMap HashMap<String,Object> parameters);
+    Call<JSONObject> getSchedule(@FieldMap HashMap<String,Object> parameters);
 }

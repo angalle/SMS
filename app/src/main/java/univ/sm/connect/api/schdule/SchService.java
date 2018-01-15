@@ -1,7 +1,13 @@
-package univ.sm.connect;
+package univ.sm.connect.api.schdule;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -9,41 +15,41 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import univ.sm.connect.api.CommonCallbak;
 import univ.sm.data.item.Shuttle;
 
 /**
  * Created by heesun on 2017-12-06.
  */
 
-public class CommonConnection {
+public class SchService {
 
-    static CommonService apiService;
+    static SchCall schduleApi;
     static Context mContext;
-    static String mUrl;
+    static String baseUrl = SchCall.BaseURL;
     private static Retrofit retrofit;
 
     private static class SingletonHolder{
-        private static CommonConnection INSTANCE = new CommonConnection(mContext,mUrl);
+        private static SchService INSTANCE = new SchService(mContext);
     }
 
-    public static CommonConnection getInstance(Context context,String url){
-        if(context != null || url != null){
+    public static SchService getInstance(Context context){
+        if(context != null){
             mContext = context;
-            mUrl = url;
         }
 
         return SingletonHolder.INSTANCE;
     }
 
-    private CommonConnection(Context context,String url){
+    private SchService(Context context){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(url)
+                .baseUrl(baseUrl)
                 .build();
     }
 
-    public CommonConnection createApi(){
-        apiService = create(CommonService.class);
+    public SchService createApi(){
+        schduleApi = create(SchCall.class);
         return this;
     }
 
@@ -51,25 +57,27 @@ public class CommonConnection {
         if(service == null){
             throw new RuntimeException("Api is nul:::::::::");
         }
-
         return retrofit.create(service);
     }
 
 
 
-    public void getSchedule(HashMap<String,Object> parameters, final  CommonCallbak callback){
-        apiService.getSchedule(parameters).enqueue(new Callback<Shuttle>() {
+    public void getSchedule(HashMap<String,Object> parameters, final CommonCallbak callback){
+        Log.e("SchCall1 ::::::","call data");
+        schduleApi.get_schdule_p(parameters).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Shuttle> call, Response<Shuttle> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.isSuccessful()){
+                    Log.e("success ::::::",response.toString()+":::success");
                     callback.onSuccess(response.code(),response.body());
                 }else{
+                    Log.e("error ::::::",response.code()+":::error");
                     callback.onFailure(response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<Shuttle> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 callback.onError(t);
             }
         });

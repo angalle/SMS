@@ -1,4 +1,4 @@
-package univ.sm.connect;
+package univ.sm.connect.api;
 
 /**
  * Created by heesun on 2017-12-06.

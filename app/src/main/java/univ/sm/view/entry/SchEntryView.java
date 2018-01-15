@@ -127,7 +127,6 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
             else
                 //Picasso.with(this).load(R.drawable.sch_detail_onyang_vacation).resize(destinationWitdh,destinationHeight).into(imgDestination);
                 imgDestination.setImageResource(R.drawable.sch_detail_onyang_vacation);
-
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.ONYANGSTATION_STR);
         } else if(v.getId() == R.id.top_btn){
