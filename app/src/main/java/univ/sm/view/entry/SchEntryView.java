@@ -18,9 +18,11 @@ import java.util.ArrayList;
 
 import univ.sm.CommonUtil;
 import univ.sm.R;
+import univ.sm.StaticData;
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.EntryRecyclerAdapter;
+import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.item.Shuttle;
 import univ.sm.data.Utility;
 import univ.sm.view.CommonView;
@@ -46,9 +48,9 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
 
     ArrayList<int[]> STATION;
     /*TERMINAL_C // ONYANG_C*/
-    int STATION_FLAG = Const.CHEONANSTATION_C;
+    String STATION_FLAG = Const.CHEONAN_ASAN_ST_000;
     /*SATURDAY // SUNDAY*/
-    int DAY_FLAG = Const.WEEKDAY;
+    String DAY_FLAG = Const.WEK;
     /* OPPOSIT REVERSE*/
     int DIRECTION_FLAG = Const.OPPOSIT;
     @Override
@@ -59,24 +61,17 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         context = getApplicationContext();
-        changeTemp= Connection.positionShuttleArr;
-        if(changeTemp == null){
-            CommonUtil.DataSetting(this);
-            changeTemp= Connection.positionShuttleArr;
+        try{
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
+            ra = new EntryRecyclerAdapter(context, StaticData.getArrShuttle(Const.CHEONAN_ASAN_ST_000,Const.WEK), Const.OPPOSIT);
+            recyclerView.setAdapter(ra);
+        }catch (Exception e){
+            Toast.makeText(getApplication(),"인터넷이 연결되지 않았거나, 데이터를 받아오지 못하였습니다.",Toast.LENGTH_SHORT).show();
         }
-        STATION = new ArrayList<>();
-        /*역 관련 상수 초기화*/
-        STATION.add(Const.CHEONANSTATION);
-        STATION.add(Const.TERMINAL);
-        STATION.add(Const.ONYANG);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
-        recyclerView.setAdapter(ra);
     }
 
     int destinationWitdh = 800;
@@ -86,15 +81,15 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
     public void onClick(View v) {
         float toX = 0, toWidth = 0;      /* 이동해야할 x좌표 */
         if (v.getId() == R.id.sch_entry_weekDay) {
-            DAY_FLAG = Const.WEEKDAY;
+            DAY_FLAG = Const.WEK;
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             moveImageBar(v);
         } else if (v.getId() == R.id.sch_entry_satureDay) {
-            DAY_FLAG = Const.SATUREDAY;
+            DAY_FLAG = Const.SAT;
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             moveImageBar(v);
         } else if (v.getId() == R.id.sch_entry_sunDay) {
-            DAY_FLAG = Const.SUNDAY;
+            DAY_FLAG = Const.SUN;
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             moveImageBar(v);
         } else if (v.getId() == R.id.detail_btn) {
@@ -106,23 +101,23 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
                 openFlag = true;
             }
         }else if (v.getId() == R.id.KTX) {
-            STATION_FLAG = Const.CHEONANSTATION_C;
+            STATION_FLAG = Const.CHEONAN_ASAN_ST_000;
             //Picasso.with(this).load(R.drawable.sch_detail_cheonan).resize(destinationWitdh,destinationHeight).into(imgDestination);
             //Picasso.with(this).load(R.drawable.sch_detail_cheonan).fit().centerCrop().into(imgDestination);
             imgDestination.setImageResource(R.drawable.sch_detail_cheonan);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.CHEONANSTATION_STR);
         } else if (v.getId() == R.id.Terminal) {
-            STATION_FLAG = Const.TERMINAL_C;
+            STATION_FLAG = Const.CHEONAN_TERMINAL_ST_001;
             //Picasso.with(this).load(R.drawable.sch_detail_terminal).resize(destinationWitdh,destinationHeight).into(imgDestination);
             //Picasso.with(this).load(R.drawable.sch_detail_terminal).fit().centerCrop().into(imgDestination);
             imgDestination.setImageResource(R.drawable.sch_detail_terminal);
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             destination_title.setText(Const.TERMINALSTATION_STR);
         } else if (v.getId() == R.id.Onyang) {
-            STATION_FLAG = Const.ONYANG_C;
+            STATION_FLAG = Const.ONYANG_CAMPAUSE_ST_002;
             /* 온양시간은 동적*/
-            if(changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]].get(1).getB()[4].contains(":"))
+            if(StaticData.getArrShuttle(Const.CHEONAN_ASAN_ST_000,Const.WEK).size() == 0)
                 //Picasso.with(this).load(R.drawable.sch_detail_onyang).resize(destinationWitdh,destinationHeight).into(imgDestination);
                 imgDestination.setImageResource(R.drawable.sch_detail_onyang);
             else
@@ -207,22 +202,22 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
     }
 
 
-    private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+    private void changeShuttleArr(String station,String day,int const_direction){
         if(changeTemp == null){
             CommonUtil.DataSetting(this);
             changeTemp= Connection.positionShuttleArr;
         }
 
-        STATION_FLAG =staionIndex;
-        DAY_FLAG = dayIndex;
+        STATION_FLAG =station;
+        DAY_FLAG = day;
         DIRECTION_FLAG = const_direction;
-        ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+        ra = new EntryRecyclerAdapter(context, StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), Const.OPPOSIT);
         recyclerView.setAdapter(ra);
 
-        if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
+        if(STATION_FLAG.equals(Const.ONYANG_CAMPAUSE_ST_002)  && !Const.WEK.equals(DAY_FLAG)){
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
-            ra = new EntryRecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+            ra = new EntryRecyclerAdapter(context, StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), Const.OPPOSIT);
             recyclerView.setAdapter(ra);
             //접혔다 폈다하는 레이아웃 동작/변수
             expandableLayout.collapse();

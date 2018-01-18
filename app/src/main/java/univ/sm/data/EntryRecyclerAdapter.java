@@ -40,23 +40,25 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Shuttle item = items.get(position+1);
-        String[] tempTime = new String[5];
-        for(int i =0; i<5; i++){
-            tempTime[i] = item.getB()[i].replace("(금Ⅹ)","\n(금Ⅹ)");
-        }
+        Shuttle item = items.get(position);
 
-        holder.entry_one.setText(tempTime[0]);
-        holder.entry_two.setText(tempTime[1]);
-        holder.entry_three.setText(tempTime[2]);
-        holder.entry_four.setText(tempTime[3]);
-        holder.entry_five.setText(tempTime[4]);
+        String one = item.getST_ONE().replace("(금Ⅹ)","\n(금Ⅹ)");
+        String two = item.getST_TWO().replace("(금Ⅹ)","\n(금Ⅹ)");
+        String tre = item.getST_TRE().replace("(금Ⅹ)","\n(금Ⅹ)");
+        String four = item.getST_FOR().replace("(금Ⅹ)","\n(금Ⅹ)");
+        String fiv = item.getST_FIV().replace("(금Ⅹ)","\n(금Ⅹ)");
+
+        holder.entry_one.setText(one);
+        holder.entry_two.setText(two);
+        holder.entry_three.setText(tre);
+        holder.entry_four.setText(four);
+        holder.entry_five.setText(fiv);
 
     }
 
     @Override
     public int getItemCount() {
-        return this.items == null ? 0 : this.items.size()-1;
+        return this.items == null ? 0 : this.items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
