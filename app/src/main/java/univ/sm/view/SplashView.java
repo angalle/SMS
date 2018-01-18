@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.facebook.common.Common;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
@@ -15,37 +16,40 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import univ.sm.CommonUtil;
 import univ.sm.MainView;
 import univ.sm.R;
 import univ.sm.connect.Connection;
+import univ.sm.connect.api.schdule.SchCall;
+import univ.sm.connect.api.schdule.SchCallbakService;
+import univ.sm.connect.api.schdule.SchService;
 import univ.sm.data.item.Shuttle;
 import univ.sm.data.SplashData;
 import univ.sm.gcm.RegistrationIntentService;
 
 public class SplashView extends Activity {
-    public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
+
     public InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.splash);
-        if (checkPlayServices()) {
-            // Start IntentService to register this application with GCM.
+
+        /* setting fabric  */
+        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
+
+        /* check google play service */
+        if (CommonUtil.checkPlayServices(this)) {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
+        }else{
+            finish();
         }
 
-        Thread th = new Thread(){
-            @Override
-            public void run() {
-
-                DataSetting();
-            }
-        };
-        th.start();
-
+        /* 전역변수에 db 데이터 받아오기 */
+        CommonUtil.DataSetting(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -57,59 +61,11 @@ public class SplashView extends Activity {
         }, 1000);
     }
 
-    public static boolean DataSetting() {
-        int i = 0;
-        try{
-            for (String url : SplashData.busUrl) {
-                Connection getBusArray = new Connection(url);
-                if (i != SplashData.busUrl.length - 1) {
-                    Connection.positionShuttleArr[i] = getBusArray.HttpConnect();
-                    positionShuttleArr[i] = getBusArray.HttpConnect();
-                    //Connection.positionShuttleArr[i] = getBusArray.getBusArray();
-                    if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
-                        break;
-                    }
-                } else {
-                    SplashData.setNotice_con(getBusArray.HttpInfoConnect());
-                }
-                i++;
-            }
-        }catch (Exception e){
-            //Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        mInterstitialAd.loadAd(adRequest);
-
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
     }
 
-    /**
-     * Google Play Service를 사용할 수 있는 환경이지를 체크한다.
-     */
-    private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this,9000).show();
-            } else {
-                Log.i("test", "This device is not supported.");
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
+
 }

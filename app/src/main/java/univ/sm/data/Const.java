@@ -20,6 +20,8 @@ public class Const {
 
     static public int OPPOSIT = 0;
     static public int REVERSE = 1;
+    static public String OPSIT = "0";
+    static public String REVSE = "1";
 
     static public int WEEKDAY = 0;
     static public int SATUREDAY = 1;
@@ -101,12 +103,12 @@ public class Const {
          SAT : 토요일
          SUN : 일요일
      **/
-    static public  String SCH_CHEONAN_ASAN_ST   = "000";
-    static public  String SCH_CHEONAN_TERMINAL  = "001";
-    static public  String SCH_ONYANG_TERMINAL   = "002";
-    static public  String SCH_CHEONAN_CAMPAUS   = "003";
+    static public  String CHEONAN_ASAN_ST_000   = "000";
+    static public  String CHEONAN_TERMINAL_ST_001   = "001";
+    static public  String ONYANG_CAMPAUSE_ST_002   = "002";
+    static public  String CHONAN_CAMPAUSE_ST_003   = "003";
 
-    static public  String WEEKDAY1       = "WEK";
-    static public  String SATURADAY2     = "SAT";
-    static public  String SUNDAY3        = "SUN";
+    static public  String WEK       = "WEK";
+    static public  String SAT       = "SAT";
+    static public  String SUN       = "SUN";
 }

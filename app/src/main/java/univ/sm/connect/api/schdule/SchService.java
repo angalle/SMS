@@ -2,6 +2,7 @@ package univ.sm.connect.api.schdule;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -73,6 +74,7 @@ public class SchService {
                 }else{
                     Log.e("error ::::::",response.code()+":::error");
                     callback.onFailure(response.code());
+                    Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -18,20 +18,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.common.Common;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import univ.sm.CommonUtil;
 import univ.sm.R;
+import univ.sm.StaticData;
 import univ.sm.connect.Connection;
 import univ.sm.connect.api.schdule.SchCall;
 import univ.sm.connect.api.schdule.SchCallbakService;
 import univ.sm.connect.api.schdule.SchService;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
-import univ.sm.data.item.Shuttle;
 import univ.sm.data.Utility;
+import univ.sm.data.item.Shuttle;
 import univ.sm.view.CommonView;
 import univ.sm.view.SplashView;
 
@@ -55,33 +58,16 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     RecyclerAdapter ra;
 
     /*TERMINAL_C // ONYANG_C*/
-    int STATION_FLAG = Const.CHEONANSTATION_C;
+    String STATION_FLAG = Const.CHEONAN_ASAN_ST_000;
     /*SATURDAY // SUNDAY*/
-    int DAY_FLAG = Const.WEEKDAY;
+    String DAY_FLAG = Const.WEK;
     /* OPPOSIT // REVERSE*/
     int DIRECTION_FLAG = Const.OPPOSIT;
 
-    private SchService scheduleApi;
-    SchCall schCallBack;
-
-    private HashMap<String,Object> params;
-
-    SchCallbakService schCallbakService = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_detail);
-
-        scheduleApi = SchService.getInstance(this).createApi();
-        schCallbakService = new SchCallbakService();
-
-        params = new HashMap<String,Object>();
-        //params.put("POSITION_FLAG","000");
-        //params.put("WEEK_FLAG","WEK");
-        Log.e("SchCall ::::::","call data");
-
-        scheduleApi.getSchedule(params,schCallbakService);
-        Log.e("SchCall ::::::","call data" + schCallbakService.getArrShuttle());
 
         /* view 초기화 */
         initView();
@@ -91,38 +77,14 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     protected void onResume() {
         super.onResume();
         context = getApplicationContext();
-        changeTemp= Connection.positionShuttleArr;
-        if(changeTemp == null){
-            SplashView.DataSetting();
-            changeTemp= Connection.positionShuttleArr;
-        }
-        STATION = new ArrayList<>();
-        /*역 관련 상수 초기화*/
-        STATION.add(Const.CHEONANSTATION);
-        STATION.add(Const.TERMINAL);
-        STATION.add(Const.ONYANG);
-        /*STATION.add(Const.CHEONANCAMPUS);*/
-
         try{
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(layoutManager);
-            ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], Const.OPPOSIT);
+            ra = new RecyclerAdapter(context,StaticData.getArrShuttle(Const.CHEONAN_ASAN_ST_000,Const.WEK), Const.OPPOSIT);
             recyclerView.setAdapter(ra);
         }catch (Exception e){
             Toast.makeText(getApplication(),"인터넷이 연결되지 않았거나, 데이터를 받아오지 못하였습니다.",Toast.LENGTH_SHORT).show();
         }
-
-    }
-
-    /* 주말선택의 빨간바를 이동하는 함수 */
-    private void moveImageBar(View v){
-        /* 이동해야할 x좌표 */
-        float toX=v.getLeft();
-        float toWidth=v.getWidth();
-
-        float width = schDetailTopBar.getWidth();
-        schDetailTopBar.animate().scaleX(toWidth/width);
-        schDetailTopBar.animate().translationX(toX-(width-toWidth)/2.0f).withLayer();
     }
 
     private void initView(){
@@ -164,18 +126,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
         destination.setAdapter(a8Adapter);
     }
 
-    /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
-    @Override
-    public void onGlobalLayout() {
-        if(Utility.getCurrentDate2int()==1){
-            schDetailSunDay.performClick();
-        }else if(Utility.getCurrentDate2int()==7){
-            schDetailSatureDay.performClick();
-        }else {
-            schDetailWeekDay.performClick();
-        }
-        removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
-    }
+
 
     /*GlobalLayout을 사용할때 계속 호출 되는 경우가 있는데 Listener를 remove 시켜줘야 계속 호출이 반복되지 않음.*/
     private static void removeOnGlobalLayoutListener(ViewTreeObserver observer, ViewTreeObserver.OnGlobalLayoutListener listener) {
@@ -193,18 +144,18 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     public void onClick(final View v) {
         /*평일 기능*/
         if(v.getId() == R.id.sch_detail_weekDay){
-            moveImageBar(v);
-            DAY_FLAG = Const.WEEKDAY;
+            CommonUtil.moveImageBar(v,schDetailTopBar);
+            DAY_FLAG = Const.WEK;
             changeShuttleArr(STATION_FLAG,DAY_FLAG, DIRECTION_FLAG);
             /*토요일 기능*/
         }else if(v.getId() == R.id.sch_detail_satureDay){
-            moveImageBar(v);
-            DAY_FLAG = Const.SATUREDAY;
+            CommonUtil.moveImageBar(v,schDetailTopBar);
+            DAY_FLAG = Const.SAT;
             changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
             /*일요일 기능*/
         }else if(v.getId() == R.id.sch_detail_sunDay) {
-            moveImageBar(v);
-            DAY_FLAG = Const.SUNDAY;
+            CommonUtil.moveImageBar(v,schDetailTopBar);
+            DAY_FLAG = Const.SUN;
             changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
             /*빨리찾기 기능 구현*/
         }else if(v.getId() == R.id.quickBtn){
@@ -230,30 +181,31 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
         }
     }
 
-    private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
+    private void changeShuttleArr(String staionIndex,String dayIndex,int const_direction){
         if(changeTemp == null){
-            SplashView.DataSetting();
+            CommonUtil.DataSetting(this);
             changeTemp= Connection.positionShuttleArr;
         }
 
         STATION_FLAG = staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;
-
-        if(STATION_FLAG > Const.TERMINAL_C && DAY_FLAG > Const.WEEKDAY){
+        System.out.println(STATION_FLAG);
+        System.out.println(DAY_FLAG);
+        if(STATION_FLAG.equals(Const.ONYANG_CAMPAUSE_ST_002)  && !Const.WEK.equals(DAY_FLAG)){
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
             if(changeTemp == null){
-                SplashView.DataSetting();
+                CommonUtil.DataSetting(this);
                 changeTemp= Connection.positionShuttleArr;
             }
-            ra = new RecyclerAdapter(context,changeTemp[STATION.get(STATION_FLAG)[DAY_FLAG]], DIRECTION_FLAG);
+            ra = new RecyclerAdapter(context,StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), DIRECTION_FLAG);
             recyclerView.setAdapter(ra);
         }
     }
 
     private void findQuickTime() {
-        /*Todo : 가장빠른 시간을 가져오기 -  미해결 이슈 : 인덱스의 view의 색상을 변경해야 하는 이슈*/
+        /*  Todo : 가장빠른 시간을 가져오기 -  미해결 이슈 : 인덱스의 view의 색상을 변경해야 하는 이슈    */
         int index = ra.getMostFastIndex();
         if(index >= ra.getItemCount()) {
             recyclerView.smoothScrollToPosition(0);
@@ -266,13 +218,34 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        STATION_FLAG = position;
+        if(position == 0){
+            STATION_FLAG = Const.CHEONAN_ASAN_ST_000;
+        }else if(position == 1){
+            STATION_FLAG = Const.CHEONAN_TERMINAL_ST_001;
+        }else if(position == 2){
+            STATION_FLAG = Const.ONYANG_CAMPAUSE_ST_002;
+        }
+
         changeShuttleArr(STATION_FLAG,DAY_FLAG,DIRECTION_FLAG);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+
+    /*onCreate에서 먹지 않는 setWidth,getWidth 등의 함수들을 이 안에서 구현이 가능 하다.*/
+    @Override
+    public void onGlobalLayout() {
+        if(Utility.getCurrentDate2int()==1){
+            schDetailSunDay.performClick();
+        }else if(Utility.getCurrentDate2int()==7){
+            schDetailSatureDay.performClick();
+        }else {
+            schDetailWeekDay.performClick();
+        }
+        removeOnGlobalLayoutListener(schDetailTopBar.getViewTreeObserver(), this);
     }
 
 

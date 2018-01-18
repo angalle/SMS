@@ -16,6 +16,7 @@ import com.github.aakira.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
+import univ.sm.CommonUtil;
 import univ.sm.R;
 import univ.sm.connect.Connection;
 import univ.sm.data.Const;
@@ -63,7 +64,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
         context = getApplicationContext();
         changeTemp= Connection.positionShuttleArr;
         if(changeTemp == null){
-            SplashView.DataSetting();
+            CommonUtil.DataSetting(this);
             changeTemp= Connection.positionShuttleArr;
         }
         STATION = new ArrayList<>();
@@ -208,7 +209,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
 
     private void changeShuttleArr(int staionIndex,int dayIndex,int const_direction){
         if(changeTemp == null){
-            SplashView.DataSetting();
+            CommonUtil.DataSetting(this);
             changeTemp= Connection.positionShuttleArr;
         }
 
