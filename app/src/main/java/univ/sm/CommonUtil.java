@@ -10,13 +10,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.HashMap;
 
-import univ.sm.connect.Connection;
 import univ.sm.connect.api.schdule.SchCall;
 import univ.sm.connect.api.schdule.SchCallbakService;
 import univ.sm.connect.api.schdule.SchService;
-import univ.sm.data.SplashData;
-
-import static univ.sm.StaticData.positionShuttleArr;
 
 
 /**
@@ -40,36 +36,6 @@ public class CommonUtil {
         }
         return true;
     }
-
-
-    /*
-    *   get schedule (file base)
-    * */
-    /*public static boolean DataSetting() {
-
-        int i = 0;
-        try{
-            for (String url : SplashData.busUrl) {
-                Connection getBusArray = new Connection(url);
-                if (i != SplashData.busUrl.length - 1) {
-                    Connection.positionShuttleArr[i] = getBusArray.HttpConnect();
-                    positionShuttleArr[i] = getBusArray.HttpConnect();
-                    //Connection.positionShuttleArr[i] = getBusArray.getBusArray();
-                    if (Connection.positionShuttleArr[i].get(0).getNo() == null) {
-                        break;
-                    }
-                } else {
-                    SplashData.setNotice_con(getBusArray.HttpInfoConnect());
-                }
-                i++;
-            }
-        }catch (Exception e){
-            //Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }*/
-
 
     /*
     *

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -18,25 +17,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.common.Common;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import univ.sm.CommonUtil;
 import univ.sm.R;
 import univ.sm.StaticData;
-import univ.sm.connect.Connection;
-import univ.sm.connect.api.schdule.SchCall;
-import univ.sm.connect.api.schdule.SchCallbakService;
-import univ.sm.connect.api.schdule.SchService;
 import univ.sm.data.Const;
 import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.Utility;
 import univ.sm.data.item.Shuttle;
 import univ.sm.view.CommonView;
-import univ.sm.view.SplashView;
 
 /**
  * Created by heesun on 2016-12-13.
@@ -182,23 +174,12 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     }
 
     private void changeShuttleArr(String staionIndex,String dayIndex,int const_direction){
-        if(changeTemp == null){
-            CommonUtil.DataSetting(this);
-            changeTemp= Connection.positionShuttleArr;
-        }
-
         STATION_FLAG = staionIndex;
         DAY_FLAG = dayIndex;
         DIRECTION_FLAG = const_direction;
-        System.out.println(STATION_FLAG);
-        System.out.println(DAY_FLAG);
         if(STATION_FLAG.equals(Const.ONYANG_CAMPAUSE_ST_002)  && !Const.WEK.equals(DAY_FLAG)){
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
-            if(changeTemp == null){
-                CommonUtil.DataSetting(this);
-                changeTemp= Connection.positionShuttleArr;
-            }
             ra = new RecyclerAdapter(context,StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), DIRECTION_FLAG);
             recyclerView.setAdapter(ra);
         }

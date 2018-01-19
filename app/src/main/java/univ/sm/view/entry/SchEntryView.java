@@ -16,17 +16,13 @@ import com.github.aakira.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
-import univ.sm.CommonUtil;
 import univ.sm.R;
 import univ.sm.StaticData;
-import univ.sm.connect.Connection;
 import univ.sm.data.Const;
 import univ.sm.data.EntryRecyclerAdapter;
-import univ.sm.data.RecyclerAdapter;
 import univ.sm.data.item.Shuttle;
 import univ.sm.data.Utility;
 import univ.sm.view.CommonView;
-import univ.sm.view.SplashView;
 
 /**
  * Created by heesun on 2016-12-13.
@@ -203,11 +199,6 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
 
 
     private void changeShuttleArr(String station,String day,int const_direction){
-        if(changeTemp == null){
-            CommonUtil.DataSetting(this);
-            changeTemp= Connection.positionShuttleArr;
-        }
-
         STATION_FLAG =station;
         DAY_FLAG = day;
         DIRECTION_FLAG = const_direction;

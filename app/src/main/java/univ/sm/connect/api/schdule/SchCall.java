@@ -20,9 +20,10 @@ import univ.sm.data.item.Shuttle;
 
 public interface SchCall {
     /* BASE URL */
-    final String BaseURL = Const.BASE_URL;
+    final String BaseURL = Const.BASE_URL;/* 40002 */
 
     @FormUrlEncoded
     @POST("/get_schdule")
     Call<JsonObject> get_schdule_p(@FieldMap HashMap<String,Object> parameters);
+
 }

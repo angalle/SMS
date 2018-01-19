@@ -18,6 +18,7 @@ import univ.sm.data.Const;
 
 /**
  * Created by kwonsujeong on 2017. 6. 26..
+ * 설정 아이콘을 누를 때 나오는 페이지.
  */
 
 public class SettingView extends PreferenceActivity{
