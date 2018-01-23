@@ -22,9 +22,7 @@ import java.util.HashMap;
 import univ.sm.R;
 import univ.sm.connect.api.board.BoardCallbakService;
 import univ.sm.connect.api.board.BoardService;
-import univ.sm.connect.api.schdule.SchCallbakService;
-import univ.sm.connect.api.schdule.SchService;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
 import univ.sm.data.Const;
@@ -116,7 +114,7 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 /* 보통 MainActivity의 fragment id를 넣어라 아래 코드와 같이 진행하는게 원칙.*/
                 /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
                 BoardPostingRegist_FView ff = (BoardPostingRegist_FView)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
-                Posts post = ff.sendParentClickData();
+                Board post = ff.sendParentClickData();
                 /*생각해보면 결국 viewPa\ger도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
                 RequestParams params = getPostRequestParams(post);
@@ -151,7 +149,7 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         }
     }
     /*BoardPostingFragmenet (등록화면)에 있는 값들을 모두 가져온다.*/
-    private RequestParams getPostRequestParams(Posts post){
+    private RequestParams getPostRequestParams(Board post){
         // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
         //Writing  : hs
         //getText() : return Editable / Editable : not completely convert toString

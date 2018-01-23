@@ -13,7 +13,7 @@ import com.loopj.android.http.SyncHttpClient;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.data.Const;
 
 /**
@@ -34,7 +34,7 @@ public class LoopjConnection {
     private static LoopjConnection instance;
 
     private Object result;
-    private Posts postResult;
+    private Board postResult;
     private static Context mContext;
 
     private AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
@@ -110,7 +110,7 @@ public class LoopjConnection {
      * @param postNo (CALL_BOARD_NO : ex. ANONY2017041800042)
      * @return
      */
-    public Posts getOnePost(RequestParams postNo) {
+    public Board getOnePost(RequestParams postNo) {
 
         syncHttpClient.post(Const.BOARD_URL + Const.SELECT_ONE_CALLVAN, postNo, new JsonHttpResponseHandler() {
             @Override

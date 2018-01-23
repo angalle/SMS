@@ -3,7 +3,7 @@ package univ.sm.data.item;
 
 import java.util.ArrayList;
 
-import univ.sm.data.Comment;
+import univ.sm.data.BoardComment;
 
 /**
  * 게시글 리스트  +  게시글 상세페이지
@@ -29,7 +29,7 @@ public class Posts {
     private String REMAIN_TIME;             //등록날짜
     private int COMMENT_CNT;                //코멘트 개수
 
-    private ArrayList<univ.sm.data.Comment> commentsList; //댓글리스트
+    private ArrayList<BoardComment> commentsList; //댓글리스트
 
 
     /**
@@ -53,7 +53,7 @@ public class Posts {
      */
     public Posts(String BOARD_NO,   String WRITE_NAME,      String PASSWORD,      String DEPARTMENT,  String STUDENT_NO,  String DEPARTURE,   String DEPARTURE_DETAIL,
                  String DESTINATION,String DESTINATION_DETAIL,                  String REG_ID,      String USE_FLAG,     String PASSENGER_NUM,
-                 String WAIT_TIME,  String INSERT_TIME,     String INSERT_DATE, String REMAIN_TIME, int COMMENT_CNT,    ArrayList<univ.sm.data.Comment> commentList) {
+                 String WAIT_TIME,  String INSERT_TIME,     String INSERT_DATE, String REMAIN_TIME, int COMMENT_CNT,    ArrayList<BoardComment> commentList) {
 
         
         this.BOARD_NO = BOARD_NO;   this.WRITE_NAME = WRITE_NAME;   this.PASSWORD = PASSWORD;   this.DEPARTMENT = DEPARTMENT;   this.STUDENT_NO = STUDENT_NO;

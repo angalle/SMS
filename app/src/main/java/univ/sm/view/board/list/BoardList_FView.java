@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import univ.sm.R;
 import univ.sm.connect.BoardManager;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.Const;
 import univ.sm.view.board.BoardView;
@@ -29,7 +29,7 @@ import univ.sm.view.board.BoardView;
  */
 public class BoardList_FView extends Fragment {
     private RecyclerView mRecyclerView;
-    private ArrayList<Posts> postArrayList = new ArrayList<>();
+    private ArrayList<Board> postArrayList = new ArrayList<>();
     BoardViewAdapter boardViewAdapter;
     LinearLayoutManager layoutManager = null;
     Context context;

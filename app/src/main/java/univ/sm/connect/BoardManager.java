@@ -8,11 +8,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import univ.sm.data.Comment;
-import univ.sm.data.Posts;
+import univ.sm.data.BoardComment;
+import univ.sm.data.Board;
 
 /**
- * Posts 데이터 객체 관리용
+ * Board 데이터 객체 관리용
  * 서버에서 받아온 데이터 파싱..등등
  * Created by SooJeong on 2017-03-24.
  */
@@ -20,12 +20,12 @@ import univ.sm.data.Posts;
 public class BoardManager {
 
     private static final String TAG = "BoardManager";
-    private static ArrayList<Posts> postArrayList;
+    private static ArrayList<Board> postArrayList;
 
     public BoardManager(JSONObject data) {
 
-        //Posts 객체 생성 및 List 추가
-        ArrayList<Posts> postList = new ArrayList<>();
+        //Board 객체 생성 및 List 추가
+        ArrayList<Board> postList = new ArrayList<>();
 
         try {
             JSONObject jsonObject = data;
@@ -42,10 +42,10 @@ public class BoardManager {
         this.postArrayList = postList;
     }
 
-    public static ArrayList<Posts> getPostArrayList() {
+    public static ArrayList<Board> getPostArrayList() {
         if (postArrayList == null) {
             Log.e("board", "postArrayList is null");
-            postArrayList = new ArrayList<Posts>();
+            postArrayList = new ArrayList<Board>();
         }
         return postArrayList;
     }
@@ -53,18 +53,18 @@ public class BoardManager {
     /**
      * mPost 바꿔치기
      *
-     * @param i       바꿀 Posts 의 인덱스
-     * @param newPost 새로운 내용의 Posts
+     * @param i       바꿀 Board 의 인덱스
+     * @param newPost 새로운 내용의 Board
      */
-    public static void refreshPost(int i, Posts newPost) {
-        Posts post = postArrayList.get(i);
+    public static void refreshPost(int i, Board newPost) {
+        Board post = postArrayList.get(i);
         post.refreshPost(newPost);
     }
 
     /**
      * mPost 바꿔치기
      *
-     * @param i        바꿀 Posts 의 인덱스
+     * @param i        바꿀 Board 의 인덱스
      * @param jsonPost 새로운 내용의 JSONObject
      */
     public static void refreshPost(int i, JSONObject jsonPost) {
@@ -72,16 +72,16 @@ public class BoardManager {
     }
 
     /**
-     * JSONObject-> Posts 객체로 바꾸기
+     * JSONObject-> Board 객체로 바꾸기
      *
      * @param jsonPost JSONObject
      * @return mPost
      */
-    private static Posts json2Post(JSONObject jsonPost) {
-        Posts post = null;
+    private static Board json2Post(JSONObject jsonPost) {
+        Board post = null;
         Log.e("권수정", "jsonBaord : " + jsonPost);
         try {
-            post = new Posts(jsonPost.getString("CALL_BOARD_NO"), jsonPost.getString("WRITE_NAME"),
+            post = new Board(jsonPost.getString("CALL_BOARD_NO"), jsonPost.getString("WRITE_NAME"),
                     jsonPost.getString("PASSWD"), jsonPost.getString("DEPARTMENT"),
                     jsonPost.getString("STUDENT_NO"), jsonPost.getString("DEPARTURE"),
                     jsonPost.getString("DEPARTURE_DETAIL"), jsonPost.getString("DESTINATION"),
@@ -104,8 +104,8 @@ public class BoardManager {
      * @param jsonPost
      * @return
      */
-    public static Posts json2PostWithComment(JSONObject jsonPost) {
-        Posts post = null;
+    public static Board json2PostWithComment(JSONObject jsonPost) {
+        Board post = null;
 
         try {
             JSONArray postsJsonArray = jsonPost.getJSONArray("CALLVAN_INFO");
@@ -113,12 +113,12 @@ public class BoardManager {
             Log.i(TAG, "postJson : " +postJson);
             JSONArray commentsArrayJson = jsonPost.getJSONArray("COMMENTS");
 
-            ArrayList<Comment> commentsList = new ArrayList<>();
+            ArrayList<BoardComment> commentsList = new ArrayList<>();
 
             for(int i = 0 ; i < commentsArrayJson.length(); i++){
                 JSONObject commentsjson= commentsArrayJson.getJSONObject(i);
 
-                Comment comment = new Comment(commentsjson.getString("COMMENT_NO"), commentsjson.getString("CALL_BOARD_NO"),
+                BoardComment comment = new BoardComment(commentsjson.getString("COMMENT_NO"), commentsjson.getString("CALL_BOARD_NO"),
                         commentsjson.getString("COMMENT_LEVEL"), commentsjson.getString("CONTENTS"),
                         commentsjson.getString("REG_ID"), commentsjson.getString("WRITE_NAME"),
                         commentsjson.getString("DEPARTMENT"), commentsjson.getString("SHARING_FLAG"),
@@ -129,7 +129,7 @@ public class BoardManager {
             }
 
 
-            post = new Posts(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
+            post = new Board(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
                     postJson.getString("PASSWD"), postJson.getString("DEPARTMENT"),
                     postJson.getString("STUDENT_NO"), postJson.getString("DEPARTURE"),
                     postJson.getString("DEPARTURE_DETAIL"), postJson.getString("DESTINATION"),
@@ -139,7 +139,7 @@ public class BoardManager {
                     postJson.getString("INSERT_DATE"),postJson.getString("REMAIN_TIME"), postJson.getInt("COMMENT_CNT"),commentsList);
 
             Log.i(TAG,"json2PostWithComment : mPost.boardno = " + post.getBoard_no() + ", commentList.size = " + commentsList.size());
-            //댓글 리스트 추가해서 Posts 만들기
+            //댓글 리스트 추가해서 Board 만들기
 
         } catch (JSONException e) {
             e.printStackTrace();

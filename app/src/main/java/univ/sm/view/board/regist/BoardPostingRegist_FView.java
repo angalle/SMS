@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import univ.sm.R;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.data.Const;
 import univ.sm.view.board.BoardView;
 
@@ -43,8 +43,8 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
 
     }
 
-    public Posts sendParentClickData() {
-        Posts post = new Posts();
+    public Board sendParentClickData() {
+        Board post = new Board();
         post.setDepartment(department.getText().toString());
         post.setWrite_name(writeName.getText().toString());
         post.setStudent_no(studentNo.getText().toString());

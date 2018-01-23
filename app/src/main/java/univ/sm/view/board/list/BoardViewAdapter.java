@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.view.board.detail.BoardDetailView;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
     private static final String TAG = "BoardViewAdapter";
-    private List<Posts> postArrayList = new ArrayList<>();    //List<Posts> items = new ArrayList<>;
+    private List<Board> postArrayList = new ArrayList<>();    //List<Board> items = new ArrayList<>;
     private Context context;
     private Activity activity;
 
-    public BoardViewAdapter(List<Posts> mItems, Activity activity) {
+    public BoardViewAdapter(List<Board> mItems, Activity activity) {
         this.postArrayList = mItems;
         this.activity = activity;
     }
@@ -46,7 +46,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         return postArrayList.size();
     }
 
-    public void setBoardArrayList(List<Posts> boardArrayList){
+    public void setBoardArrayList(List<Board> boardArrayList){
         //어뎁터 board 리스트 새로 받아오기
         postArrayList.clear();
         postArrayList.addAll(boardArrayList);
@@ -61,7 +61,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         public abstract void onBindView(ITEM item);
     }
 
-    public class ViewHolder extends BaseViewHolder<Posts> {
+    public class ViewHolder extends BaseViewHolder<Board> {
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -84,7 +84,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         }
 
         @Override
-        public void onBindView(Posts item) {
+        public void onBindView(Board item) {
             TextView WRITER = (TextView) itemView.findViewById(R.id.WRITER);//작성자
             TextView DEPARTMENT = (TextView) itemView.findViewById(R.id.department);//학과
             TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지

@@ -23,9 +23,9 @@ import com.loopj.android.http.RequestParams;
 import java.util.ArrayList;
 
 import univ.sm.R;
-import univ.sm.data.Posts;
+import univ.sm.data.Board;
 import univ.sm.connect.LoopjConnection;
-import univ.sm.data.Comment;
+import univ.sm.data.BoardComment;
 import univ.sm.data.Const;
 
 /**
@@ -58,12 +58,12 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     private ImageButton comment_popup_btn;
     private LinearLayout comment_info_layout;
 
-    private ArrayList<Comment> mCommentsList;
+    private ArrayList<BoardComment> mCommentsList;
     private RequestParams comment_params = new RequestParams();
     private RequestParams appravalParams = new RequestParams();
     private SharedPreferences userPref;
 
-    private Posts mPost;
+    private Board mPost;
     private String board_no;
     private int position;
 

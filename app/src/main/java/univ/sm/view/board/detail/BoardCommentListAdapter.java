@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
-import univ.sm.data.Comment;
+import univ.sm.data.BoardComment;
 
 public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentListAdapter.BaseViewHolder> {
-    private List<Comment> commentsList = new ArrayList<>();    //List<Posts> items = new ArrayList<>;
+    private List<BoardComment> commentsList = new ArrayList<>();    //List<Board> items = new ArrayList<>;
     private Context context;
 
-    public BoardCommentListAdapter(List<Comment> mItems, Context context) {
+    public BoardCommentListAdapter(List<BoardComment> mItems, Context context) {
         this.commentsList = mItems;
         this.context = context;
     }
@@ -38,7 +38,7 @@ public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentLi
         return commentsList.size();
     }
 
-    public void setCommentArrayList(List<Comment> commentArrayList){
+    public void setCommentArrayList(List<BoardComment> commentArrayList){
         //어뎁터 board 리스트 새로 받아오기
         commentsList.clear();
         commentsList.addAll(commentArrayList);
@@ -53,14 +53,14 @@ public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentLi
         public abstract void onBindView(ITEM item);
     }
 
-    public class ViewHolder extends BaseViewHolder<Comment> {
+    public class ViewHolder extends BaseViewHolder<BoardComment> {
 
         private ViewHolder(View itemView) {
             super(itemView);
         }
 
         @Override
-        public void onBindView(Comment item) {
+        public void onBindView(BoardComment item) {
             /*TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
             TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
             TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
