@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
+import univ.sm.CommonUtil;
 import univ.sm.StaticData;
 import univ.sm.connect.api.CommonCallbak;
 import univ.sm.data.item.Shuttle;
@@ -27,6 +28,7 @@ public class BoardCallbakService implements CommonCallbak {
 
     @Override
     public void onSuccess(int code, Object receiveData) {
+        JsonObject jsonObject = CommonUtil.cnvtJson2Obj(receiveData);
     }
 
     @Override

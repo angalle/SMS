@@ -187,7 +187,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
 
     private void findQuickTime() {
         /*  Todo : 가장빠른 시간을 가져오기 -  미해결 이슈 : 인덱스의 view의 색상을 변경해야 하는 이슈    */
-        int index = ra.getMostFastIndex();
+        int index = ra.getMostFastIndex()+1;
         if(index >= ra.getItemCount()) {
             recyclerView.smoothScrollToPosition(0);
             Toast.makeText(getApplicationContext(), "막차시간이 끝났습니다.", Toast.LENGTH_SHORT).show();

@@ -3,11 +3,9 @@
     package="univ.sm">
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/icon_blue"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/SplashTheme"
         android:windowSoftInputMode="adjustPan"
         >
 
@@ -26,7 +24,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-            <data   android:scheme = "@string/kakao_scheme"
+            <data
+                android:scheme = "@string/kakao_scheme"
                 android:host="@string/kakaolink_host">
             </data>
         <activity

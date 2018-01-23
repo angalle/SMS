@@ -6,8 +6,6 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,7 +15,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import univ.sm.connect.api.CommonCallbak;
+import univ.sm.data.Const;
 import univ.sm.data.item.Shuttle;
+
+import static univ.sm.StaticData.arrShuttle;
 
 /**
  * Created by heesun on 2017-12-06.
@@ -27,7 +28,6 @@ public class SchService {
 
     static SchCall schduleApi;
     static Context mContext;
-    static String baseUrl = SchCall.BaseURL;
     private static Retrofit retrofit;
 
     private static class SingletonHolder{
@@ -45,7 +45,7 @@ public class SchService {
     private SchService(Context context){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(baseUrl)
+                .baseUrl(Const.BASE_URL)
                 .build();
     }
 
@@ -64,22 +64,20 @@ public class SchService {
 
 
     public void getSchedule(HashMap<String,Object> parameters, final CommonCallbak callback){
-        Log.e("SchCall1 ::::::","call data");
-        schduleApi.get_schdule_p(parameters).enqueue(new Callback<JsonObject>() {
+        Log.e("getSchedule ::::::", "call data");
+        schduleApi.get_schdule(parameters).enqueue(new Callback<ArrayList<Shuttle>>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<ArrayList<Shuttle>> call, Response<ArrayList<Shuttle>> response) {
                 if(response.isSuccessful()){
-                    Log.e("success ::::::",response.toString()+":::success");
-                    callback.onSuccess(response.code(),response.body());
+                    callback.onSuccess(response.code(), response.body());
                 }else{
-                    Log.e("error ::::::",response.code()+":::error");
                     callback.onFailure(response.code());
                     Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Shuttle> > call, Throwable t) {
                 callback.onError(t);
             }
         });

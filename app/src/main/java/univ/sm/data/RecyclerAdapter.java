@@ -21,6 +21,10 @@ import java.util.Iterator;
 import univ.sm.R;
 import univ.sm.data.item.Shuttle;
 
+import static univ.sm.data.Const.CHEONAN_ASAN;
+import static univ.sm.data.Const.CHEONAN_TERMINAL;
+import static univ.sm.data.Const.ONYANG_TERMINAL;
+
 /**
  * Created by uaer on 2017-01-13.
  */
@@ -79,12 +83,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Shuttle item = items.get(position);
+
         /* HEADER 따로 DB에 저장 */
-        /*item = items.get(0);
-        pivotTime=item.getST_ONE();
-        startTitle=item.getST_ONE();
-        middleTitle=item.getST_TWO();
-        endTitle=item.getST_TRE();*/
+        if(position == 0){
+            setViewHolderTitle(item.getSTOP_SITE_CODE(),directionFlag);
+        }
 
         holder.indx.setText((position+1)+"");
         String tempPivotTime="";
@@ -101,13 +104,58 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.detail_line.setImageResource(R.drawable.line_point_s);
 
         if(directionFlag == 0){
-            holder.textSchduleFirst.setText         (item.getST_ONE()+"\t"+startTitle);
-            holder.textSchduleSecond.setText        (tempMiddleTime+"\t"+middleTitle);
-            holder.textSchduleThird.setText         (item.getST_TRE()+"\t"+endTitle);
+            holder.textSchduleFirst.setText         (item.getST_ONE()+" "+startTitle);
+            holder.textSchduleSecond.setText        (tempMiddleTime+" "+middleTitle);
+            holder.textSchduleThird.setText         (item.getST_TRE()+" "+endTitle);
         }else{
-            holder.textSchduleFirst.setText         (endTitle+"\t"+item.getST_TRE());
-            holder.textSchduleSecond.setText        (middleTitle+"\t"+tempMiddleTime);
-            holder.textSchduleThird.setText         (startTitle+"\t"+item.getST_FIV());
+            holder.textSchduleFirst.setText         (endTitle+" "+item.getST_TRE());
+            holder.textSchduleSecond.setText        (middleTitle+" "+tempMiddleTime);
+            holder.textSchduleThird.setText         (startTitle+" "+item.getST_FIV());
+        }
+    }
+
+    public void setViewHolderTitle(String stopSitecode,int directionFlag){
+        if(Const.CHEONAN_ASAN_ST_000.equals(stopSitecode) ){
+            if(directionFlag == Const.OPPOSIT){
+                pivotTime   =   Const.CHEONAN_ASAN[0];
+                startTitle  =   Const.CHEONAN_ASAN[0];
+                middleTitle =   Const.CHEONAN_ASAN[1];
+                endTitle    =   Const.CHEONAN_ASAN[2];
+            }
+            if(directionFlag == Const.REVERSE){
+                pivotTime   =   Const.CHEONAN_ASAN[2];
+                startTitle  =   Const.CHEONAN_ASAN[2];
+                middleTitle =   Const.CHEONAN_ASAN[3];
+                endTitle    =   Const.CHEONAN_ASAN[4];
+            }
+        }
+        if(Const.CHEONAN_TERMINAL_ST_001.equals(stopSitecode) ){
+            if(directionFlag == Const.OPPOSIT){
+                pivotTime   =   Const.CHEONAN_TERMINAL[0];
+                startTitle  =   Const.CHEONAN_TERMINAL[0];
+                middleTitle =   Const.CHEONAN_TERMINAL[1];
+                endTitle    =   Const.CHEONAN_TERMINAL[2];
+            }
+            if(directionFlag == Const.REVERSE){
+                pivotTime   =   Const.CHEONAN_TERMINAL[2];
+                startTitle  =   Const.CHEONAN_TERMINAL[2];
+                middleTitle =   Const.CHEONAN_TERMINAL[3];
+                endTitle    =   Const.CHEONAN_TERMINAL[4];
+            }
+        }
+        if(Const.ONYANG_CAMPAUSE_ST_002.equals(stopSitecode) ){
+            if(directionFlag == Const.OPPOSIT){
+                pivotTime   =   Const.ONYANG_TERMINAL[0];
+                startTitle  =   Const.ONYANG_TERMINAL[0];
+                middleTitle =   Const.ONYANG_TERMINAL[1];
+                endTitle    =   Const.ONYANG_TERMINAL[2];
+            }
+            if(directionFlag == Const.REVERSE){
+                pivotTime   =   Const.ONYANG_TERMINAL[2];
+                startTitle  =   Const.ONYANG_TERMINAL[2];
+                middleTitle =   Const.ONYANG_TERMINAL[3];
+                endTitle    =   Const.ONYANG_TERMINAL[4];
+            }
         }
     }
 

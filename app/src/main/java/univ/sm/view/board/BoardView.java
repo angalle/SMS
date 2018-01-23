@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -16,7 +17,13 @@ import android.widget.Toast;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 import univ.sm.R;
+import univ.sm.connect.api.board.BoardCallbakService;
+import univ.sm.connect.api.board.BoardService;
+import univ.sm.connect.api.schdule.SchCallbakService;
+import univ.sm.connect.api.schdule.SchService;
 import univ.sm.data.Posts;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.data.BoardMainPageAdapter;
@@ -117,6 +124,15 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 if(params == null){
                     return ;
                 }
+
+                BoardService boardService = BoardService.getInstance(context).createApi();
+                BoardCallbakService schCallbakService = new BoardCallbakService();
+
+                HashMap<String, Object> params1 = new HashMap<String, Object>();
+                Log.e("SchCall ::::::", "call data");
+
+
+                boardService.getBoardList(params, schCallbakService);
 
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);

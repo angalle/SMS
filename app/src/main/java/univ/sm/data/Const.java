@@ -74,7 +74,7 @@ public class Const {
      */
     public static String CALLVAN_LOADING_MSG = "콜벤리스트를 불러오는 중입니다....";
 
-    /* 이전 예전 url*/
+    /* 옮길 URL*/
     static public  String BASE_URL = "http://52.78.186.130:40002";
 
     /**
@@ -111,4 +111,9 @@ public class Const {
     static public  String WEK       = "WEK";
     static public  String SAT       = "SAT";
     static public  String SUN       = "SUN";
+
+
+    static public String[] CHEONAN_ASAN = {"아산캠","KTX","천안역","KTX","아산캠"};
+    static public String[] CHEONAN_TERMINAL = {"아산캠","","터미널","","아산캠"};
+    static public String[] ONYANG_TERMINAL = {"아산캠","온양터미널","온양역","아산캠",""};
 }

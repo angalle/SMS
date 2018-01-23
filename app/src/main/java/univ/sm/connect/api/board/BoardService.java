@@ -16,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import univ.sm.connect.api.CommonCallbak;
 import univ.sm.connect.api.schdule.SchCall;
+import univ.sm.data.Const;
 
 /**
  * Created by heesun on 2017-12-06.
@@ -25,7 +26,6 @@ public class BoardService {
 
     static BoardCall boardApi;
     static Context mContext;
-    static String baseUrl = SchCall.BaseURL;
     private static Retrofit retrofit;
 
     private static class SingletonHolder{
@@ -43,7 +43,7 @@ public class BoardService {
     private BoardService(Context context){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(baseUrl)
+                .baseUrl(Const.BASE_URL)
                 .build();
     }
 
@@ -95,7 +95,7 @@ public class BoardService {
      *
      * @return JSONObject
      */
-    public void getBoardList(HashMap<String,Object> parameters, final CommonCallbak callback){
+    public void getBoardList(RequestParams parameters, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
         boardApi.getBoardList().enqueue(new Callback<JsonObject>() {
             @Override

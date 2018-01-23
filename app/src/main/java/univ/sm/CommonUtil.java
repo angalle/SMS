@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
@@ -52,10 +54,12 @@ public class CommonUtil {
         schCallbakService = new SchCallbakService();
 
         params = new HashMap<String, Object>();
-        Log.e("SchCall ::::::", "call data");
+        Log.e("DataSetting ::::::", "call data");
 
 
         scheduleApi.getSchedule(params, schCallbakService);
+
+        Log.e("DataSetting ::::::", StaticData.arrShuttle.size() + ":::");
     }
 
 
@@ -65,7 +69,7 @@ public class CommonUtil {
     *
     * */
 
-    /* 주말선택의 빨간바를 이동하는 함수 */
+    /* 클릭한 곳의 길이를 구해 동적으로 width를 변환하는 함수 */
     public static void moveImageBar(View pivot,View target){
         /* 이동해야할 x좌표 */
         float toX       =   pivot.getLeft();
@@ -74,5 +78,11 @@ public class CommonUtil {
         float width = target.getWidth();
         target.animate().scaleX(toWidth/width);
         target.animate().translationX(toX-(width-toWidth)/2.0f).withLayer();
+    }
+
+    public static JsonObject cnvtJson2Obj(Object obj){
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
+        return  (JsonObject) gson.toJsonTree(obj);
     }
 }

@@ -47,6 +47,7 @@ public class CommonView extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 finish();
             }
         });
@@ -54,6 +55,7 @@ public class CommonView extends AppCompatActivity {
         positiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 finishAffinity();
             }
         });

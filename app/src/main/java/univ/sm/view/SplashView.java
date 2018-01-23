@@ -18,6 +18,7 @@ import univ.sm.gcm.RegistrationIntentService;
 public class SplashView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
@@ -35,13 +36,15 @@ public class SplashView extends Activity {
         /* 전역변수에 db 데이터 받아오기 */
         CommonUtil.DataSetting(this);
 
-        new Handler().postDelayed(new Runnable() {
+        Intent next = new Intent(SplashView.this, MainView.class);
+        startActivity(next);
+        finish();
+
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent next = new Intent(SplashView.this, MainView.class);
-                startActivity(next);
-                finish();
+
             }
-        }, 1000);
+        }, 1000);*/
     }
 }
