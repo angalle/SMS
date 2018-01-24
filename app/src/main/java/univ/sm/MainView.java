@@ -26,6 +26,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import univ.sm.data.Const;
 import univ.sm.view.CommonView;
 import univ.sm.view.board.BoardView;
+import univ.sm.view.board.login.IndirectLoginView;
 import univ.sm.view.question.InfoView;
 import univ.sm.view.detail.SchDetailFakeView;
 import univ.sm.view.detail.SchDetailView;
@@ -133,8 +134,11 @@ public class MainView extends CommonView implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.callboard_menu_btn:
-                intent.setClass(MainView.this, BoardView.class);
+                intent.setClass(MainView.this, IndirectLoginView.class);
                 startActivity(intent);
+
+                /*intent.setClass(MainView.this, BoardView.class);
+                startActivity(intent);*/
                 break;
             case R.id.kakaoShare:
                 shareKakao();

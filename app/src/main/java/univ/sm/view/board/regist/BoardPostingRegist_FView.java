@@ -77,8 +77,8 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
         sp.getString(Const.PASSWD,"");
         sp.getString(Const.STUDENT_NO,"");
         sp.getString(Const.DEPARTMENT,"");
-        writeName.setText(sp.getString(Const.WRITE_NAME,""));
-        passwd.setText(sp.getString(Const.WRITE_NAME,""));
+//        writeName.setText(sp.getString(Const.WRITE_NAME,""));
+//        passwd.setText(sp.getString(Const.WRITE_NAME,""));
         studentNo.setText(sp.getString(Const.WRITE_NAME,""));
         departure.setText(sp.getString(Const.WRITE_NAME,""));
         return l_layout;
@@ -88,14 +88,14 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
         FrameLayout postingLayout = (FrameLayout) v.findViewById(R.id.posting_layout);
         postingLayout.setOnClickListener(this);
         //post parametars..
-        writeName           = (EditText) v.findViewById(R.id.writename_edit);
-        department          = (EditText) v.findViewById(R.id.department_std_edit); //학과
+        //writeName           = (EditText) v.findViewById(R.id.writename_edit);
+        //department          = (EditText) v.findViewById(R.id.department_std_edit); //학과
         studentNo           = (EditText) v.findViewById(R.id.studentNo_edit);
         departure           = (EditText) v.findViewById(R.id.departure_detail);
         departure_detail    = (EditText) v.findViewById(R.id.departure_detail_edit);
         destination         = (EditText) v.findViewById(R.id.destination_edit);
         destination_detail  = (EditText) v.findViewById(R.id.destination_detail_edit);
-        passwd              = (EditText) v.findViewById(R.id.passwd);
+        //passwd              = (EditText) v.findViewById(R.id.passwd);
 
         waitTimeSpinner = (Spinner) v.findViewById(R.id.wait_time_spinner);
         ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.wait_time_array, R.layout.spin);
