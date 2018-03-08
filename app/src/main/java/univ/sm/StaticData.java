@@ -13,7 +13,7 @@ public class StaticData {
     /* 시간표 데이터 */
     public static ArrayList<Shuttle>[] positionShuttleArr = new ArrayList[SplashData.busUrl.length];
 
-
+    String test ="";
     /* 시간표 데이터 */
     public static ArrayList<Shuttle> arrShuttle = new ArrayList();
 
