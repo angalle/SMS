@@ -43,6 +43,19 @@ WAIT_TIME			//대기시간*/-->
                     android:layout_marginTop="30dp"
                     />
 
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebook_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="test logger view"/>
+
             </LinearLayout>
         </ScrollView>
 
