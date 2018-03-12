@@ -1,7 +1,6 @@
 package univ.sm.Controller.api.schdule;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import univ.sm.Controller.CommonCallbak;
 import univ.sm.Model.Const;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 
 /**
  * Created by heesun on 2017-12-06.

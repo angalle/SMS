@@ -3,7 +3,7 @@ package univ.sm.Model.item;
 
 import java.util.ArrayList;
 
-import univ.sm.Model.BoardComment;
+import univ.sm.Model.board.BoardComment;
 
 /**
  * 게시글 리스트  +  게시글 상세페이지

@@ -1,4 +1,4 @@
-package univ.sm.Model;
+package univ.sm.View.detail.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,13 +19,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
+import univ.sm.Model.Const;
 import univ.sm.R;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 
 /**
  * Created by uaer on 2017-01-13.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
+public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder>{
     Context context;
     ArrayList<Shuttle> items;
     ArrayList<String> compareString;
@@ -47,7 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return position;
     }
 
-    public RecyclerAdapter(Context context, ArrayList<Shuttle> items, int directionFlag) {
+    public detailAdapter(Context context, ArrayList<Shuttle> items, int directionFlag) {
         setHasStableIds(true);
         this.context = context;
         this.items = items;

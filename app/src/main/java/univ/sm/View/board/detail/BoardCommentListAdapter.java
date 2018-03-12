@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
-import univ.sm.Model.BoardComment;
+import univ.sm.Model.board.BoardComment;
 
 public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentListAdapter.BaseViewHolder> {
     private List<BoardComment> commentsList = new ArrayList<>();    //List<Board> items = new ArrayList<>;

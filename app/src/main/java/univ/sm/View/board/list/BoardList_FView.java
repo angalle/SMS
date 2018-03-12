@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import univ.sm.R;
 import univ.sm.Controller.BoardManager;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.Board;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.Model.Const;
 import univ.sm.View.board.BoardView;

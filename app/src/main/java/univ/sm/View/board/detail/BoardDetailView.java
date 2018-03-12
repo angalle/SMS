@@ -23,9 +23,9 @@ import com.loopj.android.http.RequestParams;
 import java.util.ArrayList;
 
 import univ.sm.R;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.Board;
 import univ.sm.connect.LoopjConnection;
-import univ.sm.Model.BoardComment;
+import univ.sm.Model.board.BoardComment;
 import univ.sm.Model.Const;
 
 /**

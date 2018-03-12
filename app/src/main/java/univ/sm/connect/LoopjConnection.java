@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import univ.sm.Controller.BoardManager;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.Board;
 import univ.sm.Model.Const;
 
 /**

@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import univ.sm.R;
 import univ.sm.StaticData;
 import univ.sm.Model.Const;
-import univ.sm.Model.EntryRecyclerAdapter;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.View.entry.adapter.EntryRecyclerAdapter;
+import univ.sm.Model.shuttle.Shuttle;
 import univ.sm.Model.Utility;
 import univ.sm.View.CommonView;
 

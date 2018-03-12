@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import univ.sm.R;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.Board;
 import univ.sm.Model.Const;
 import univ.sm.View.board.BoardView;
 

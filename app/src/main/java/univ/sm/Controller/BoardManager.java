@@ -8,8 +8,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import univ.sm.Model.BoardComment;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.BoardComment;
+import univ.sm.Model.board.Board;
 
 /**
  * Board 데이터 객체 관리용

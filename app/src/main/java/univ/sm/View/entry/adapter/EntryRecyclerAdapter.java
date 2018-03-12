@@ -1,4 +1,4 @@
-package univ.sm.Model;
+package univ.sm.View.entry.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import univ.sm.R;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 
 /**
  * Created by uaer on 2017-01-13.

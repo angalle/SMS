@@ -1,4 +1,4 @@
-package univ.sm.Model;
+package univ.sm.Model.board;
 
 
 import com.google.gson.annotations.SerializedName;

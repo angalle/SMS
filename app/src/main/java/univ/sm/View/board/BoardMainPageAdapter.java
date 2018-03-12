@@ -1,4 +1,4 @@
-package univ.sm.Model;
+package univ.sm.View.board;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

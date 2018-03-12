@@ -8,7 +8,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import univ.sm.Model.Const;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 
 /**
  * Created by com01 on 2018. 1. 7..

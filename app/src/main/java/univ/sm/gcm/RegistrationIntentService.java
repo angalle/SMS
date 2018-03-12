@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import univ.sm.connect.GCMConnection;
 import univ.sm.Model.Const;
-import univ.sm.Model.SplashData;
 
 
 public class RegistrationIntentService extends IntentService{
@@ -85,8 +84,7 @@ public class RegistrationIntentService extends IntentService{
         spe.commit();
 		GCMConnection gcmCon = new GCMConnection(regid);
 
-		//gcmCon.HttpPostConnect(SplashData.addrSM);
-        gcmCon.HttpPostConnect(SplashData.register_GCM_AWS);
+        gcmCon.HttpPostConnect(Const.BASE_URL);
 	}
 	
 	

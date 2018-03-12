@@ -1,4 +1,4 @@
-package univ.sm.Model.item;
+package univ.sm.Model.shuttle;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package univ.sm.Model.item;
+package univ.sm.Model.board;
 
 /**
  * Created by heesun on 2017-04-18.

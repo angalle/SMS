@@ -22,13 +22,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import univ.sm.Util.AnimationUtil;
-import univ.sm.Util.CommonUtil;
 import univ.sm.R;
 import univ.sm.StaticData;
 import univ.sm.Model.Const;
-import univ.sm.Model.RecyclerAdapter;
+import univ.sm.View.detail.adapter.detailAdapter;
 import univ.sm.Model.Utility;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 import univ.sm.View.CommonView;
 
 /**
@@ -48,7 +47,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
 
     ArrayList<int[]> STATION;
     ArrayList<Shuttle>[] changeTemp;
-    RecyclerAdapter ra;
+    detailAdapter ra;
 
     /*TERMINAL_C // ONYANG_C*/
     String STATION_FLAG = Const.CHEONAN_ASAN_ST_000;
@@ -73,7 +72,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
         try{
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(layoutManager);
-            ra = new RecyclerAdapter(context,StaticData.getArrShuttle(Const.CHEONAN_ASAN_ST_000,Const.WEK), Const.OPPOSIT);
+            ra = new detailAdapter(context,StaticData.getArrShuttle(Const.CHEONAN_ASAN_ST_000,Const.WEK), Const.OPPOSIT);
             recyclerView.setAdapter(ra);
         }catch (Exception e){
             Toast.makeText(getApplication(),"인터넷이 연결되지 않았거나, 데이터를 받아오지 못하였습니다.",Toast.LENGTH_SHORT).show();
@@ -181,7 +180,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
         if(STATION_FLAG.equals(Const.ONYANG_CAMPAUSE_ST_002)  && !Const.WEK.equals(DAY_FLAG)){
             Toast.makeText(getApplicationContext(),"주말 운행은 하지 않습니다.",Toast.LENGTH_SHORT).show();
         }else{
-            ra = new RecyclerAdapter(context,StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), DIRECTION_FLAG);
+            ra = new detailAdapter(context,StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), DIRECTION_FLAG);
             recyclerView.setAdapter(ra);
         }
     }

@@ -1,12 +1,10 @@
 package univ.sm.Controller.api.schdule;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 import univ.sm.StaticData;
 import univ.sm.Controller.CommonCallbak;
-import univ.sm.Model.item.Shuttle;
+import univ.sm.Model.shuttle.Shuttle;
 
 /**
  * Created by com01 on 2018. 1. 7..

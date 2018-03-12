@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.sm.R;
-import univ.sm.Model.Board;
+import univ.sm.Model.board.Board;
 import univ.sm.View.board.detail.BoardDetailView;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {

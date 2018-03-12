@@ -5,7 +5,7 @@ import univ.sm.R;
 /**
  * Created by LeeHeesun on 2017-01-26.
  */
-public enum ModelObject {
+public enum AppInfoModelObject {
 
     RED("test", R.drawable.question_1),
     BLUE("test", R.drawable.question_2),
@@ -15,7 +15,7 @@ public enum ModelObject {
     private String mTitleResId;
     private int mLayoutResId;
 
-    ModelObject(String titleResId, int layoutResId) {
+    AppInfoModelObject(String titleResId, int layoutResId) {
         mTitleResId = titleResId;
         mLayoutResId = layoutResId;
     }
