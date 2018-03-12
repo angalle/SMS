@@ -16,8 +16,8 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import univ.sm.R;
-import univ.sm.data.Const;
-import univ.sm.view.board.detail.BoardDetailView;
+import univ.sm.Model.Const;
+import univ.sm.View.board.detail.BoardDetailView;
 
 
 public class MyGcmListenerService extends GcmListenerService {

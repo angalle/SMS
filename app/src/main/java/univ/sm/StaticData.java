@@ -2,8 +2,8 @@ package univ.sm;
 
 import java.util.ArrayList;
 
-import univ.sm.data.SplashData;
-import univ.sm.data.item.Shuttle;
+import univ.sm.Model.SplashData;
+import univ.sm.Model.item.Shuttle;
 
 /**
  * Created by PE_LHS on 2018-01-18.

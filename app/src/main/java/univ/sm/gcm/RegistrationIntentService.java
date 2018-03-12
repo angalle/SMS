@@ -14,8 +14,8 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import univ.sm.connect.GCMConnection;
-import univ.sm.data.Const;
-import univ.sm.data.SplashData;
+import univ.sm.Model.Const;
+import univ.sm.Model.SplashData;
 
 
 public class RegistrationIntentService extends IntentService{

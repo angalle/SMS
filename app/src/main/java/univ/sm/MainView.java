@@ -3,7 +3,6 @@ package univ.sm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,27 +11,23 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.kakao.kakaolink.KakaoLink;
-import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import univ.sm.data.Const;
-import univ.sm.view.CommonView;
-import univ.sm.view.board.BoardView;
-import univ.sm.view.board.login.IndirectLoginView;
-import univ.sm.view.question.InfoView;
-import univ.sm.view.detail.SchDetailFakeView;
-import univ.sm.view.detail.SchDetailView;
-import univ.sm.view.entry.SchEntryFakeView;
-import univ.sm.view.entry.SchEntryView;
-import univ.sm.view.SettingView;
+import univ.sm.Model.Const;
+import univ.sm.Util.ShareUtil;
+import univ.sm.View.CommonView;
+import univ.sm.View.SettingView;
+import univ.sm.View.board.login.IndirectLoginView;
+import univ.sm.View.detail.SchDetailFakeView;
+import univ.sm.View.detail.SchDetailView;
+import univ.sm.View.entry.SchEntryFakeView;
+import univ.sm.View.entry.SchEntryView;
+import univ.sm.View.question.InfoView;
 
 
 public class MainView extends CommonView implements View.OnClickListener {
@@ -72,12 +67,14 @@ public class MainView extends CommonView implements View.OnClickListener {
 
         g_limit_v = getSharedPreferences(Const.SHARED_LIMETE_LAYOUT, MODE_PRIVATE);
 
+        /** share button*/
         kakaoShare = (ImageView) findViewById(R.id.kakaoShare);
         kakaoShare.setOnClickListener(this);
 
         facebookShare = (ImageView) findViewById(R.id.facebookShare);
         facebookShare.setOnClickListener(this);
 
+        /** sdk initialize */
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
@@ -94,8 +91,6 @@ public class MainView extends CommonView implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent();
         Intent fake = new Intent();
-
-
         switch (v.getId()) {
             case R.id.sch_detail_btn:
                 intent.setClass(MainView.this, SchDetailView.class);
@@ -114,22 +109,6 @@ public class MainView extends CommonView implements View.OnClickListener {
                 }
                 break;
             case R.id.app_info_btn:
-             /*  디자이너 요청으로 전체화면으로 수정
-                 final AppInfo dialog = new AppInfo(this);
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        //나타날때 쓰는 효과
-                    }
-                });
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        //사라질때 하는 효과
-                    }
-                });
-                dialog.show();
-            */
                 intent.setClass(MainView.this, InfoView.class);
                 startActivity(intent);
                 break;
@@ -141,10 +120,10 @@ public class MainView extends CommonView implements View.OnClickListener {
                 startActivity(intent);*/
                 break;
             case R.id.kakaoShare:
-                shareKakao();
+                ShareUtil.shareKakao(this);
                 break;
             case R.id.facebookShare:
-                shareFacebook();
+                ShareUtil.shareFacebook(this);
                 break;
             case R.id.setting_button:
                 intent.setClass(MainView.this, SettingView.class);
@@ -186,60 +165,6 @@ public class MainView extends CommonView implements View.OnClickListener {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-
         mInterstitialAd.loadAd(adRequest);
-
     }
-
-    private void shareFacebook() {
-        ShareLinkContent content = new ShareLinkContent.Builder()
-
-                .setContentTitle("SMS - 선문대셔틀버스 시간표 & 콜벤합승")
-                .setImageUrl(Uri.parse("https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw"))
-                .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=univ.sm"))
-                .setContentDescription("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~")
-                .build();
-
-        ShareDialog shareDialog = new ShareDialog(this);
-
-        shareDialog.show(content, ShareDialog.Mode.FEED);
-        Toast.makeText(getApplicationContext(), "페이스북 공유하기", Toast.LENGTH_SHORT).show();
-    }
-
-    private void shareKakao() {
-        try {
-            final KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
-            final KakaoTalkLinkMessageBuilder kakaoMsgBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-
-            kakaoMsgBuilder.addText("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~");
-
-            String url = "https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw";
-            String url2 = "https://lh3.googleusercontent.com/HWQPZPUdMvPpP_R5QQmxQiFgtFzfrlpV9mFHeQb56uhzgahxqUNHoGO_D00vsf3ACqA=h900-rw";
-            String url3 = "https://lh3.googleusercontent.com/GIVzb9_SRj_JUQmL9vvZale6SaFQHsmfdswtRJ-0bZc3BwfYHYwIu3gUGryPHWMw8PnM=h900-rw";
-            kakaoMsgBuilder.addImage(url, 160, 160);
-            //kakaoMsgBuilder.addImage(url2,160,160);
-            //kakaoMsgBuilder.addImage(url3,160,160);
-            //kakaoMsgBuilder.addAppLink("https://play.google.com/store/apps/details?id=univ.sm");
-            kakaoMsgBuilder.addAppButton("SMS - 선문대셔틀버스 시간표 & 콜벤합승");
-
-            kakaoLink.sendMessage(kakaoMsgBuilder, this);
-
-            Toast.makeText(getApplicationContext(), "카카오톡 공유하기", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    int exitCount = 0;
-
-   /* @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        if (exitCount == 1) {
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
-            exitCount++;
-        }
-    }*/
 }

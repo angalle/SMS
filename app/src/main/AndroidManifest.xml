@@ -3,7 +3,7 @@
     package="univ.sm">
 
     <application
-        android:name=".view.question.GlobalApplication"
+        android:name=".View.question.GlobalApplication"
         android:icon="@drawable/icon_blue"
         android:label="@string/app_name"
         android:theme="@style/SplashTheme"
@@ -11,7 +11,7 @@
         >
 
         <activity
-            android:name=".view.SplashView"
+            android:name=".View.SplashView"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -30,31 +30,31 @@
                 android:host="@string/kakaolink_host">
             </data>
         <activity
-            android:name=".view.detail.SchDetailView"
+            android:name=".View.detail.SchDetailView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".view.entry.SchEntryView"
+            android:name=".View.entry.SchEntryView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".view.entry.SchEntryFakeView"
+            android:name=".View.entry.SchEntryFakeView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".view.detail.SchDetailFakeView"
+            android:name=".View.detail.SchDetailFakeView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".view.question.InfoView"
+            android:name=".View.question.InfoView"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".view.board.login.IndirectLoginView"/>
-        <activity android:name=".view.board.login.DirectLoginView"/>
-        <activity android:name=".view.SettingView"/>
-        <activity android:name=".view.board.BoardView"/>
-        <activity android:name=".view.board.detail.BoardDetailView"/>
+        <activity android:name=".View.board.login.IndirectLoginView"/>
+        <activity android:name=".View.board.login.DirectLoginView"/>
+        <activity android:name=".View.SettingView"/>
+        <activity android:name=".View.board.BoardView"/>
+        <activity android:name=".View.board.detail.BoardDetailView"/>
         <!--**********************************************************************-->
         <!-- *********************안드로이드 fabric 관련 설정 ********************-->
         <!--**********************************************************************-->
