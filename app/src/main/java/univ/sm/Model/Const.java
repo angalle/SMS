@@ -114,4 +114,7 @@ public class Const {
     static public String[] CHEONAN_ASAN = {"아산캠","KTX","천안역","KTX","아산캠"};
     static public String[] CHEONAN_TERMINAL = {"아산캠","","터미널","","아산캠"};
     static public String[] ONYANG_TERMINAL = {"아산캠","온양터미널","온양역","아산캠",""};
+
+
+    static public final String SENDER_ID = "726031754697";
 }

@@ -2,19 +2,36 @@ package univ.sm.Util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+import univ.sm.Model.Const;
 import univ.sm.StaticData;
 import univ.sm.Controller.api.schdule.SchCall;
 import univ.sm.Controller.api.schdule.SchCallbakService;
 import univ.sm.Controller.api.schdule.SchService;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.kakao.util.helper.Utility.getPackageInfo;
+import static univ.sm.Model.Const.SENDER_ID;
 
 
 /**
@@ -67,6 +84,36 @@ public class CommonUtil {
         String json = gson.toJson(obj);
         return  (JsonObject) gson.toJsonTree(obj);
     }
+
+
+    /** get hash key */
+    public static String getKeyHash(final Context context) {
+        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
+        if (packageInfo == null)
+            return null;
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+            } catch (NoSuchAlgorithmException e) {
+                Log.w("test", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+        return null;
+    }
+
+    /** implmetation RegistrationService
+     * how to get registration id , not allow main thread */
+    public static String getRegistrationId(Context context) throws  Exception{
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = sp.getString(Const.SHARED_REG_ID,"");
+
+        Log.i("GCM & Reg Id ::::: ", "GCM Registration Token: " + token);
+        return token;
+    }
+
 }
 
 

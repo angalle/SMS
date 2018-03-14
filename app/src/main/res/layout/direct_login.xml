@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--/*//POST PARAMETER
-WRITE_NAME			//작성자
-PASSWD				//글 비밀번호
-DEPARTMENT			//학과
-STUDENT_NO			//학번
-DEPARTURE			//출발지
-DEPARTURE_DETAIL	//출발지 설명
-DESTINATION			//목적지
-DESTINATION_DETAIL	//목적지 설명
-REG_ID				//gcm 기기 값
-PASSENGER_NUM		//총 탑승인원
-WAIT_TIME			//대기시간*/-->
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
@@ -85,12 +74,12 @@ WAIT_TIME			//대기시간*/-->
                             android:id="@+id/textView7" />
 
                         <EditText
-                            android:id="@+id/user_id"
+                            android:id="@+id/user_email"
                             android:layout_width="match_parent"
                             android:padding="5dp"
                             android:layout_height="30dp"
                             android:background="#ddf0f0"
-                            android:hint="실명이 아닐 경우 신청이 없을 수 있습니다."
+                            android:hint="ex) sunmoon@univ.co.kr"
                             android:maxLength="20"
                             android:textColor="#555555"
                             android:textColorHint="#ffffff"
@@ -147,35 +136,7 @@ WAIT_TIME			//대기시간*/-->
                             android:layout_width="match_parent"
                             android:padding="5dp"
                             android:layout_height="30dp"
-                            android:hint="정확한 학과정보를 입력해주세요."
-                            android:maxLength="20"
-                            android:background="#ddf0f0"
-                            android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:layout_height="wrap_content"
-                            android:text="·이  메  일"
-                            android:textColor="#4fb2b3"
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
-
-                        <EditText
-                            android:id="@+id/user_email"
-                            android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:layout_height="30dp"
-                            android:hint="정확한 학과정보를 입력해주세요."
+                            android:hint="실명을 입력해주세요. 경고 없이 삭제 될 수 있습니다."
                             android:maxLength="20"
                             android:background="#ddf0f0"
                             android:textColor="#555555"

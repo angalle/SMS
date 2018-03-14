@@ -3,11 +3,14 @@ package univ.sm.Controller.api.board;
 import com.google.gson.JsonObject;
 import com.loopj.android.http.RequestParams;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import univ.sm.Model.Const;
+import univ.sm.Model.User;
 
 /**
  * Created by com01 on 2018. 1. 7..
@@ -36,5 +39,17 @@ public interface BoardCall {
     @FormUrlEncoded
     @POST("/callvan_complete")
     Call<JsonObject> approvalCallvan(@FieldMap RequestParams postNo);
+
+    @FormUrlEncoded
+    @POST("/user")
+    Call<JsonObject> insertUser(@FieldMap HashMap<String,Object> postNo);
+
+    @FormUrlEncoded
+    @POST("/checking/email")
+    Call<JsonObject> checkEmail(@FieldMap HashMap<String,Object> postNo);
+
+    @FormUrlEncoded
+    @POST("/login/user")
+    Call<JsonObject> loginUser(@FieldMap HashMap<String,Object> postNo);
 
 }

@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.loopj.android.http.RequestParams;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import univ.sm.Controller.CommonCallbak;
 import univ.sm.Model.Const;
+import univ.sm.Model.User;
 
 /**
  * Created by heesun on 2017-12-06.
@@ -26,7 +29,7 @@ public class BoardService {
     private static Retrofit retrofit;
 
     private static class SingletonHolder{
-        private static BoardService INSTANCE = new BoardService(mContext);
+        private static BoardService INSTANCE = new BoardService();
     }
 
     public static BoardService getInstance(Context context){
@@ -37,7 +40,7 @@ public class BoardService {
         return SingletonHolder.INSTANCE;
     }
 
-    private BoardService(Context context){
+    private BoardService(){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Const.BASE_URL)
@@ -178,6 +181,86 @@ public class BoardService {
     public void approvalCallvan(RequestParams params, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
         boardApi.approvalCallvan(params).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.isSuccessful()){
+                    Log.e("success ::::::",response.toString()+":::success");
+                    callback.onSuccess(response.code(),response.body());
+                }else{
+                    Log.e("error ::::::",response.code()+":::error");
+                    callback.onFailure(response.code());
+                    Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError(t);
+            }
+        });
+    }
+
+
+
+    /**
+     * 유저 가입
+     *
+     * @param map
+     */
+    public void insertUser(HashMap<String,Object> map, final CommonCallbak callback){
+        Log.e("insertUser","user");
+        boardApi.insertUser(map).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.isSuccessful()){
+                    Log.e("success ::::::",response.toString()+":::success");
+                    callback.onSuccess(response.code(),response.body());
+                }else{
+                    Log.e("error ::::::",response.code()+":::error");
+                    callback.onFailure(response.code());
+                    Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError(t);
+            }
+        });
+    }
+
+    /**
+     * 이메일 체크
+     *
+     * @param map
+     */
+    public void checkEmail(HashMap<String,Object> map, final CommonCallbak callback){
+        Log.e("checkEmail","checkEmail");
+        boardApi.checkEmail(map).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.isSuccessful()){
+                    Log.e("success ::::::",response.toString()+":::success");
+                    callback.onSuccess(response.code(),response.body());
+                }else{
+                    Log.e("error ::::::",response.code()+":::error");
+                    callback.onFailure(response.code());
+                    Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError(t);
+            }
+        });
+    }
+
+    /**
+     * 이메일 체크
+     *
+     * @param map
+     */
+    public void loginUser(HashMap<String,Object> map, final CommonCallbak callback){
+        Log.e("loginUser","loginUser");
+        boardApi.loginUser(map).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.isSuccessful()){

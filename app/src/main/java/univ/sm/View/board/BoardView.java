@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 
 import univ.sm.R;
-import univ.sm.Controller.api.board.BoardCallbakService;
 import univ.sm.Controller.api.board.BoardService;
 import univ.sm.Model.board.Board;
 import univ.sm.connect.LoopjConnection;
@@ -123,13 +122,13 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 }
 
                 BoardService boardService = BoardService.getInstance(context).createApi();
-                BoardCallbakService schCallbakService = new BoardCallbakService();
+                //BoardCallbakService schCallbakService = new BoardCallbakService();
 
                 HashMap<String, Object> params1 = new HashMap<String, Object>();
                 Log.e("SchCall ::::::", "call data");
 
 
-                boardService.getBoardList(params, schCallbakService);
+                //boardService.getBoardList(params, schCallbakService);
 
                 LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
                 connection.addPosting(params,board_list);
