@@ -79,8 +79,8 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
         sp.getString(Const.DEPARTMENT,"");
 //        writeName.setText(sp.getString(Const.WRITE_NAME,""));
 //        passwd.setText(sp.getString(Const.WRITE_NAME,""));
-        studentNo.setText(sp.getString(Const.WRITE_NAME,""));
-        departure.setText(sp.getString(Const.WRITE_NAME,""));
+//        studentNo.setText(sp.getString(Const.WRITE_NAME,""));
+//        departure.setText(sp.getString(Const.WRITE_NAME,""));
         return l_layout;
     }
 

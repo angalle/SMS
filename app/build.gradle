@@ -12,6 +12,7 @@ buildscript {
     }
 }
 apply plugin: 'com.android.application'
+//apply plugin: 'com.android.library'
 apply plugin: 'io.fabric'
 
 repositories {
@@ -98,8 +99,8 @@ dependencies {
 
 
                     /********************** BUTTER NIFE **********************/
-                    compile 'com.jakewharton:butterknife:8.4.0'
-                    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+                    compile 'com.jakewharton:butterknife:8.8.1'
+                    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
                     /********************** BUTTER NIFE **********************/
 
 
