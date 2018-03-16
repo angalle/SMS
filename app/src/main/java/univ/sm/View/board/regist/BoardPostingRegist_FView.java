@@ -13,7 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import univ.sm.R;
 import univ.sm.Model.board.Board;
 import univ.sm.Model.Const;
@@ -25,11 +28,19 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by heesun on 2017-04-23.
  */
 public class BoardPostingRegist_FView extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener{
-    Context context;
-    private EditText writeName,department,studentNo,departure,departure_detail,destination_detail,destination,passwd;
-    private Spinner passengerNum,waitTimeSpinner;
-    String regId="";
+
+    @BindView(R.id.departure_detail)EditText departure;
+    @BindView(R.id.departure_detail_edit)EditText departure_detail;
+    @BindView(R.id.destination_edit)EditText destination_detail;
+    @BindView(R.id.destination_detail_edit)EditText destination;
+
+    @BindView(R.id.passengerNum_spinner)Spinner passengerNum;
+    @BindView(R.id.wait_time_spinner)Spinner waitTimeSpinner;
+
     FrameLayout l_layout;
+
+    public static Context context;
+    String regId="";
 
 
     public static BoardPostingRegist_FView newInstatnce(){
@@ -45,14 +56,10 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
 
     public Board sendParentClickData() {
         Board post = new Board();
-        post.setDepartment(department.getText().toString());
-        post.setWrite_name(writeName.getText().toString());
-        post.setStudent_no(studentNo.getText().toString());
         post.setDeparture(departure.getText().toString());
         post.setDeparture_detail(departure_detail.getText().toString());
         post.setDestination(destination.getText().toString());
         post.setDestination_detail(destination_detail.getText().toString());
-        post.setPasswd(passwd.getText().toString());
 
         post.setPassenger_num(passengerNum.getSelectedItem().toString());
         post.setWait_time(waitTimeSpinner.getSelectedItem().toString());
@@ -70,46 +77,29 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /*fragment  view 가져와 초기화.*/
         l_layout = (FrameLayout) inflater.inflate(R.layout.board_posting,container,false);
+        ButterKnife.bind(this,l_layout);
         set_initView(l_layout);
-
         /*입력 정보 자동 기억*/
         SharedPreferences sp = context.getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
         sp.getString(Const.PASSWD,"");
         sp.getString(Const.STUDENT_NO,"");
         sp.getString(Const.DEPARTMENT,"");
-//        writeName.setText(sp.getString(Const.WRITE_NAME,""));
-//        passwd.setText(sp.getString(Const.WRITE_NAME,""));
-//        studentNo.setText(sp.getString(Const.WRITE_NAME,""));
-//        departure.setText(sp.getString(Const.WRITE_NAME,""));
         return l_layout;
     }
 
     private void set_initView(View v){
         FrameLayout postingLayout = (FrameLayout) v.findViewById(R.id.posting_layout);
         postingLayout.setOnClickListener(this);
-        //post parametars..
-        //writeName           = (EditText) v.findViewById(R.id.writename_edit);
-        //department          = (EditText) v.findViewById(R.id.department_std_edit); //학과
-        studentNo           = (EditText) v.findViewById(R.id.studentNo_edit);
-        departure           = (EditText) v.findViewById(R.id.departure_detail);
-        departure_detail    = (EditText) v.findViewById(R.id.departure_detail_edit);
-        destination         = (EditText) v.findViewById(R.id.destination_edit);
-        destination_detail  = (EditText) v.findViewById(R.id.destination_detail_edit);
-        //passwd              = (EditText) v.findViewById(R.id.passwd);
 
-        waitTimeSpinner = (Spinner) v.findViewById(R.id.wait_time_spinner);
         ArrayAdapter<CharSequence> waiteAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.wait_time_array, R.layout.spin);
         waiteAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         waitTimeSpinner.setAdapter(waiteAdapter);
         waitTimeSpinner.setOnItemSelectedListener(this);
 
-        passengerNum = (Spinner) v.findViewById(R.id.passengerNum_spinner);
         ArrayAdapter<CharSequence> peopleAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.peopleNum_array, R.layout.spin);
         waiteAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         passengerNum.setAdapter(peopleAdapter);
         passengerNum.setOnItemSelectedListener(this);
-
-
     }
 
     @Override

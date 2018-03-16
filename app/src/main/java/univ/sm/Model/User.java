@@ -1,12 +1,13 @@
 package univ.sm.Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by PE-LHS on 2018-03-14.
  */
 
-public class User {
+public class User implements Serializable {
     public String MEMBER_EMAIL= "";
     public String MEMBER_PW= "";
     public String MEMBER_DEPATMENET= "";

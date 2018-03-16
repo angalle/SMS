@@ -1,12 +1,12 @@
 package univ.sm.View.board.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +16,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -28,14 +29,12 @@ import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.User;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +44,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import univ.sm.Controller.CommonCallbak;
 import univ.sm.Controller.api.board.BoardService;
+import univ.sm.Model.Const;
+import univ.sm.Model.User;
 import univ.sm.R;
 import univ.sm.View.CommonView;
 import univ.sm.View.board.BoardView;
-import univ.sm.View.board.list.BoardList_FView;
 
 /**
  * Created by PE_LHS on 2018-01-24.
@@ -62,26 +62,38 @@ public class IndirectLoginView extends CommonView {
     @BindView(R.id.user_email)TextView user_email;
     @BindView(R.id.user_pw) TextView user_pw;
 /*    @BindView(R.id.user_login) Button user_login;
-    @BindView(R.id.com_kakao_login) Button com_kakao_login;
-    @BindView(R.id.facebook_login) LoginButton facebook_login;*/
-
+    @BindView(R.id.com_kakao_login) Button com_kakao_login;*/
+    @BindView(R.id.facebook_login)LoginButton facebook_login;
+    SharedPreferences sp;
 
     /** 전역변수들, 카카오나 페이스북을 로그인 한 뒤에 정보를 받기위한 용도.*/
     String email = "";
     String name = "";
 
+    /** 페이스북 나중에 개발 */
+    /** 페이스북 나중에 개발 */
+    /** 페이스북 나중에 개발 */
+    /** 페이스북 나중에 개발 */
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        setContentView(R.layout.indirect_login);
-        ButterKnife.bind(this);
+        //FacebookSdk.sdkInitialize(this.getApplicationContext());
 
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
+        sp = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+        Log.e("email::",sp.getString(Const.SHARED_MEMBER_EMAIL,""));
+        if(!"".equals(sp.getString(Const.SHARED_MEMBER_EMAIL,""))){
+            HashMap<String,Object> map = new HashMap<String,Object>();
+            map.put("MEMBER_EMAIL",sp.getString(Const.SHARED_MEMBER_EMAIL,""));
+            BoardService.getInstance(getApplicationContext()).createApi().checkEmail(map,callbak);
+        }else{
+            setContentView(R.layout.indirect_login);
+            ButterKnife.bind(this);
 
-
-        facebook();
+            callback = new SessionCallback();
+            Session.getCurrentSession().addCallback(callback);
+            //facebook();
+        }
     }
 
     private class SessionCallback implements ISessionCallback {
@@ -99,6 +111,7 @@ public class IndirectLoginView extends CommonView {
         }
     }
 
+    /** 카카오톡 콜백 function */
     protected void redirectSignupActivity() {
         List<String> propertyKeys = new ArrayList<String>();
         propertyKeys.add("kaccount_email");
@@ -141,7 +154,7 @@ public class IndirectLoginView extends CommonView {
     }
 
 
-    /** 이메일 체크하고난 뒤 로직 */
+    /** 카카오톡 이메일 체크하고난 뒤 로직 */
     CommonCallbak callbak = new CommonCallbak(){
         @Override
         public void onError(Throwable t) {
@@ -158,6 +171,8 @@ public class IndirectLoginView extends CommonView {
                 if("false".equals(result)){
                     /** 없는 로직 수행*/
                     /** 직접 가입하는 페이지로 이동.*/
+
+
                     nextPage(
                             new Intent(IndirectLoginView.this,DirectLoginView.class)
                                     .putExtra("email",email)
@@ -166,12 +181,22 @@ public class IndirectLoginView extends CommonView {
                 }else{
                     /** 있는 로직 수행*/
                     /** 게시판 목록으로 이동*/
+
+                    JsonArray array = jObject.get("data").getAsJsonArray();
+                    JsonObject jsonObject = array.get(0).getAsJsonObject();
+                    User user = gson.fromJson(jsonObject, User.class);
+
+                    SharedPreferences sp = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+                    SharedPreferences.Editor spe = sp.edit();
+                    spe.putString(Const.SHARED_MEMBER_EMAIL,user.MEMBER_EMAIL);
+                    spe.commit();
+
+                    /** 게시판 목록으로 이동*/
+                    Toast.makeText(getApplicationContext(),"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
                     nextPage(
                             new Intent(IndirectLoginView.this,BoardView.class)
-                                    .putExtra("email",email)
-                                    .putExtra("name",name)
+                                    .putExtra("user",user)
                     );
-                    //Toast.makeText(getApplicationContext(),"성공적으로 가입되었습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -181,9 +206,13 @@ public class IndirectLoginView extends CommonView {
         }
     };
 
+    ProfileTracker profileTracker;
+
     @OnClick(R.id.facebook_login)
     public void facebook() {
         Log.e("facebook","facebook");
+
+        facebook_login.setReadPermissions("email");
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -192,8 +221,38 @@ public class IndirectLoginView extends CommonView {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-                        Log.e("onSuccess","onSuccess");
-                        Log.e("onSuccess","onSuccess"+loginResult.getAccessToken());
+                        Log.e("토큰",loginResult.getAccessToken().getToken());
+                        Log.e("토큰",loginResult.getRecentlyGrantedPermissions().toString());
+                        Log.e("유저아이디",loginResult.getAccessToken().getUserId());
+                        Log.e("전체내용",loginResult.getAccessToken().toString());
+                        Log.e("퍼미션 리스트",loginResult.getAccessToken().getPermissions()+"");
+
+                        GraphRequest request =GraphRequest.newMeRequest(loginResult.getAccessToken() ,
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject object, GraphResponse response) {
+                                        try {
+                                            Log.e("user profile",object.toString());
+                                            /*Log.e("user profile",object.getString("name"));
+                                            Log.e("user profile",object.getString("gender"));*/
+                                            Log.e("response ",response.toString());
+                                            Log.e("getJSONObject ",response.getJSONObject().toString());
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                        request.executeAsync();
+
+                        /*email = userProfile.getEmail();
+                        name = userProfile.getNickname();
+                        HashMap<String,Object> map = new HashMap<String,Object>();
+                        map.put("email",email);
+
+
+                        *//** 이메일 체크*//*
+                        BoardService.getInstance(getApplicationContext()).createApi().checkEmail(map,callbak);*/
                     }
 
                     @Override
@@ -223,7 +282,7 @@ public class IndirectLoginView extends CommonView {
         BoardService.getInstance(getApplicationContext()).createApi().loginUser(map,new CommonCallbak(){
             @Override
             public void onError(Throwable t) {
-                Toast.makeText(getApplicationContext(),"서버에 문제가 생겼습니다. 관리자에게 문의해주세요.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),Const.MSG_ERROR,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -241,14 +300,17 @@ public class IndirectLoginView extends CommonView {
                         /** 있는 로직 수행*/
                         JsonArray array = jObject.get("data").getAsJsonArray();
                         JsonObject jsonObject = array.get(0).getAsJsonObject();
-
                         User user = gson.fromJson(jsonObject, User.class);
+
+                        SharedPreferences.Editor spe = sp.edit();
+                        spe.putString(Const.SHARED_MEMBER_EMAIL,user.MEMBER_EMAIL);
+                        spe.commit();
 
                         /** 게시판 목록으로 이동*/
                         Toast.makeText(getApplicationContext(),"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
                         nextPage(
                                 new Intent(IndirectLoginView.this,BoardView.class)
-                                        .putExtra("MEMBER_EMAIL",jsonObject.get("MEMBER_EMAIL").toString())
+                                        .putExtra("user",user)
                         );
                     }
                 }
@@ -256,7 +318,7 @@ public class IndirectLoginView extends CommonView {
 
             @Override
             public void onFailure(int code) {
-                Toast.makeText(getApplicationContext(),"접속이 되지 않습니다. 인터넷망을 확인하거나 관리자에게 문의하세요.:::"+code,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),Const.MSG_FAIL+code,Toast.LENGTH_SHORT).show();
             }
         });
     }

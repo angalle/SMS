@@ -2,24 +2,36 @@ package univ.sm.View.board.list;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import univ.sm.Controller.CommonCallbak;
+import univ.sm.Controller.api.board.BoardService;
 import univ.sm.R;
 import univ.sm.Controller.BoardManager;
 import univ.sm.Model.board.Board;
+import univ.sm.Util.CommonUtil;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.Model.Const;
 import univ.sm.View.board.BoardView;
@@ -70,51 +82,62 @@ public class BoardList_FView extends Fragment {
 
 
     /* 무명객체를 함수화 - adapter에 borad list를 받아옴.*/
-    public void getServerRequestData(){
-        new AsyncTask<Void, Void, JSONObject>() {
+    public void getServerRequestData() {
+        pd = new ProgressDialog(BoardView.context);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage(Const.CALLVAN_LOADING_MSG);
+        pd.show();
+
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        BoardService.getInstance(context).createApi().getBoardList(param, new CommonCallbak() {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                pd = new ProgressDialog(BoardList_FView.instance.getContext());
-                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pd.setMessage(Const.CALLVAN_LOADING_MSG);
-                pd.show();
+            public void onError(Throwable t) {
+                Toast.makeText(BoardView.context, Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
             }
 
             @Override
-            protected JSONObject doInBackground(Void... params) {
-                /** CallVan board data download */
-                LoopjConnection connection = LoopjConnection.getInstance(context);
-                return connection.getBoardList();
-            }
+            public void onSuccess(int code, Object receiveData) {
+                try {
+                    if(code == 200){
+                        Gson gson = new Gson();
+                        JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                        String result = jObject.get("Result").getAsString();
+                        if("true".equals(result)){
+                            JsonArray array = jObject.get("CALLVANS").getAsJsonArray();
+                            for(JsonElement number: array) {
+                                JsonObject obj = number.getAsJsonObject();
+                                Board temp = gson.fromJson(obj,Board.class);
+                                postArrayList.add(temp);
+                            }
+                            //Toast.makeText(context, "등록되었습니다.", Toast.LENGTH_SHORT).show();
 
-            @Override
-            protected void onPostExecute(JSONObject jsonObject) {
-                        try {
+                            Log.e("array Size","Size"+postArrayList.size());
+
                             /* 동적으로 할당되는 뷰를 그려주거나 이벤트 할당*/
-                            fn_dynamicLayout();
-                            if(pd.isShowing()){
+                            boardViewAdapter.setBoardArrayList(postArrayList);
+                            mRecyclerView.setAdapter(boardViewAdapter);
+                            if (pd.isShowing()) {
                                 pd.dismiss();
                             }
 
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }finally {
-                            pd.dismiss();
+                        }else{
+                            Toast.makeText(context, "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }.execute(null, null, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    pd.dismiss();
+                }
             }
 
-
-
-    /* 동적 view 초기화 */
-    private void fn_dynamicLayout() throws Exception{
-        postArrayList = BoardManager.getPostArrayList();
-        boardViewAdapter.setBoardArrayList(postArrayList);
-        boardViewAdapter.notifyDataSetChanged();
+            @Override
+            public void onFailure(int code) {
+                Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

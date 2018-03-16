@@ -22,15 +22,15 @@ public interface BoardCall {
 
     @FormUrlEncoded
     @POST("/insertcallvan")
-    Call<JsonObject> addPosting(@FieldMap RequestParams postNo);
+    Call<JsonObject> addBoard(@FieldMap HashMap<String,Object> BoardInfo);
 
     @FormUrlEncoded
     @POST("/selectcallvan")
-    Call<JsonObject> getBoardList();
+    Call<JsonObject> getBoardList(@FieldMap HashMap<String,Object> serachCondition);
 
     @FormUrlEncoded
     @POST("/selectcallvaninfo")
-    Call<JsonObject> getOnePost(@FieldMap RequestParams postNo);
+    Call<JsonObject> getOneBoard(@FieldMap HashMap<String,Object> params);
 
     @FormUrlEncoded
     @POST("/insertcallvancomment")

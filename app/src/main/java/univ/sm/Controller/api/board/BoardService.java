@@ -68,25 +68,32 @@ public class BoardService {
      *
      * @param params
      */
-    public void addPosting(RequestParams params, final CommonCallbak callback){
+    public void addBoard(HashMap<String,Object> params, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
-        boardApi.addPosting(params).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.isSuccessful()){
-                    Log.e("success ::::::",response.toString()+":::success");
-                    callback.onSuccess(response.code(),response.body());
-                }else{
-                    Log.e("error ::::::",response.code()+":::error");
-                    callback.onFailure(response.code());
-                    Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
+        params.put("test","empty");
+        try{
+            boardApi.addBoard(params).enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    Log.e("ok reponse","yet");
+                    if(response.isSuccessful()){
+                        Log.e("success ::::::",response.toString()+":::success");
+                        callback.onSuccess(response.code(),response.body());
+                    }else{
+                        Log.e("error ::::::",response.code()+":::error");
+                        callback.onFailure(response.code());
+                        Toast.makeText(mContext,response.code()+":::error",Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                callback.onError(t);
-            }
-        });
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    callback.onError(t);
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -95,9 +102,10 @@ public class BoardService {
      *
      * @return JSONObject
      */
-    public void getBoardList(RequestParams parameters, final CommonCallbak callback){
+    public void getBoardList(HashMap<String,Object> parameters, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
-        boardApi.getBoardList().enqueue(new Callback<JsonObject>() {
+        parameters.put("test","empty");
+        boardApi.getBoardList(parameters).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.isSuccessful()){
@@ -120,12 +128,12 @@ public class BoardService {
      * 게시글 한개 불러오기
      * 게시판 + 댓글 포함
      *
-     * @param postNo (CALL_BOARD_NO : ex. ANONY2017041800042)
+     * @param params (CALL_BOARD_NO : ex. ANONY2017041800042)
      * @return
      */
-    public void getOnePost(RequestParams postNo, final CommonCallbak callback){
+    public void getOneBoard(HashMap<String,Object> params, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
-        boardApi.getOnePost(postNo).enqueue(new Callback<JsonObject>() {
+        boardApi.getOneBoard(params).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.isSuccessful()){

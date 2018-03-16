@@ -96,6 +96,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
             ImageView waitTimeImg = (ImageView) itemView.findViewById(R.id.wait_time_img) ;
 
             String time = item.getRemain_time();
+            Log.e("time","message"+time);
             if(Integer.parseInt(time) <= 10 ){
                 waitTimeImg.setImageResource(R.drawable.time_pink_btn);
                 WAIT_TIME.setTextColor(Color.parseColor("#e06376"));

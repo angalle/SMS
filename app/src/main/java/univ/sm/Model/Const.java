@@ -38,6 +38,8 @@ public class Const {
     /*SHARED PREPERENCD VARIABLE*/
     static public String SHARED_GCM = "GCM";
     static public String SHARED_REG_ID = "REG_ID";
+    static public String SHARED_USER = "USER";
+    static public String SHARED_MEMBER_EMAIL = "MEMBER_EMAIL";
 
     static public String LIST_TITLE = "게시물 목록";
     static public String WRITE_TITLE = "게시물 등록";
@@ -48,6 +50,7 @@ public class Const {
     static public String WRITE_NAME = "WRITE_NAME";
     static public String PASSWD = "PASSWD";
     static public String STUDENT_NO = "STUDENT_NO";
+    static public String MEMBER_EMAIL = "MEMBER_EMAIL";
     static public String REG_ID = "REG_ID";
     static public String DEPARTMENT = "DEPARTMENT";
     static public String DEPARTURE = "DEPARTURE";
@@ -71,6 +74,8 @@ public class Const {
      * CALLCAN PROCESS MSG
      */
     public static String CALLVAN_LOADING_MSG = "콜벤리스트를 불러오는 중입니다....";
+    public static String MSG_FAIL = "접속이 되지 않습니다. 인터넷망을 확인하거나 관리자에게 문의하세요.:::";
+    public static String MSG_ERROR = "서버에 문제가 생겼습니다. 관리자에게 문의해주세요.";
 
     /* 옮길 URL*/
     static public  String BASE_URL = "http://52.78.186.130:40002";

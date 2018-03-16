@@ -3,6 +3,7 @@ package univ.sm.Model.board;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,8 @@ import java.util.ArrayList;
  * Created on 2017-03-24.
  */
 
-public class Board {
+public class Board implements Serializable{
+
     @SerializedName("board_no")
     private String board_no;                //게시글 번호 CALL_BOARD_NO
     @SerializedName("write_name")

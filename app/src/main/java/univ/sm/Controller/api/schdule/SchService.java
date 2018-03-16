@@ -26,7 +26,7 @@ public class SchService {
     private static Retrofit retrofit;
 
     private static class SingletonHolder{
-        private static SchService INSTANCE = new SchService(mContext);
+        private static SchService INSTANCE = new SchService();
     }
 
     public static SchService getInstance(Context context){
@@ -37,7 +37,7 @@ public class SchService {
         return SingletonHolder.INSTANCE;
     }
 
-    private SchService(Context context){
+    private SchService(){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Const.BASE_URL)

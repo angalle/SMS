@@ -114,6 +114,13 @@ public class CommonUtil {
         return token;
     }
 
+    public static void nextPage(Intent intentInfo,Activity activity){
+        /** 추가 정보를 받아야 함. 새로운 뷰를 제공해야함.*/
+        Intent intent = intentInfo;
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
 }
 
 

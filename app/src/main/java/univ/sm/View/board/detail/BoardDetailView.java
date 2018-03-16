@@ -18,12 +18,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import univ.sm.Controller.CommonCallbak;
+import univ.sm.Controller.api.board.BoardService;
 import univ.sm.R;
 import univ.sm.Model.board.Board;
+import univ.sm.Util.CommonUtil;
+import univ.sm.View.board.BoardView;
 import univ.sm.connect.LoopjConnection;
 import univ.sm.Model.board.BoardComment;
 import univ.sm.Model.Const;
@@ -49,14 +58,31 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     /* TODO:이런 공통변수는 Const에 넣어서 활용하면 좋음*/
     private static final String TAG = "BoardDetailView";
 
-    private TextView WRITE_NAME_view, DEPARTMENT_view, STUDENT_NO_view, DEPARTURE_view,REMAIN_TIME_view,
-    DEPARTURE_DETAIL_view, DESTINATION_view, DESTINATION_DETAIL_view, PASSENGER_NUM_view, WAIT_TIME_view;
-    private EditText comment_editText, comment_name_editText,passwd_ed;
-    private Button comment_btn, comment_info_ok_btn,modify_btn;
-    private CheckBox callvan_flag;
-    private RecyclerView commentRCV;
-    private ImageButton comment_popup_btn;
-    private LinearLayout comment_info_layout;
+    @BindView(R.id.DEPARTMENT_view)TextView DEPARTMENT_view;
+    @BindView(R.id.WRITE_NAME_view)TextView WRITE_NAME_view;
+    @BindView(R.id.STUDENT_NO_view)TextView STUDENT_NO_view;
+    @BindView(R.id.DEPARTURE_view)TextView DEPARTURE_view;
+    @BindView(R.id.DEPARTURE_DETAIL_view)TextView DEPARTURE_DETAIL_view;
+    @BindView(R.id.DESTINATION_view)TextView DESTINATION_view;
+    @BindView(R.id.DESTINATION_DETAIL_view)TextView DESTINATION_DETAIL_view;
+    @BindView(R.id.passengerNum_tv)TextView PASSENGER_NUM_view;
+    @BindView(R.id.wait_time_tv)TextView WAIT_TIME_view;
+    @BindView(R.id.remain_time_tv)TextView REMAIN_TIME_view;
+
+    @BindView(R.id.comment_name)EditText comment_editText;
+    @BindView(R.id.comment_editText)EditText comment_name_editText;
+    @BindView(R.id.passwd_ed)EditText passwd_ed;
+
+    @BindView(R.id.comment_info_ok_btn)Button comment_btn;
+    @BindView(R.id.comment_btn)Button comment_info_ok_btn;
+    @BindView(R.id.modify_btn)Button modify_btn;
+
+    @BindView(R.id.callvan_flag)CheckBox callvan_flag;
+
+    @BindView(R.id.comment_popup_btn)ImageButton comment_popup_btn;
+
+    @BindView(R.id.commentRecyclerView)RecyclerView commentRCV;
+    @BindView(R.id.comment_info_Layout)LinearLayout comment_info_layout;
 
     private ArrayList<BoardComment> mCommentsList;
     private RequestParams comment_params = new RequestParams();
@@ -72,6 +98,7 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         // 무슨페이지인지 보기 쉽게 하기위해서 SETCONTENTVIEW함수는 맨앞으로 빼둠.
         setContentView(R.layout.board_post_detail);
+        ButterKnife.bind(this);
         /* 초기화할때와 SET 할때를 구분해서 함수를 나눠놨음.*/
         init();
         downLoadBoard_setLayout();
@@ -80,33 +107,6 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
 
     private void init() {
         /** board_post_detail layout 구성*/
-        comment_info_layout     = (LinearLayout) findViewById(R.id.comment_info_Layout);
-
-        DEPARTMENT_view         = (TextView) findViewById(R.id.DEPARTMENT_view);
-        WRITE_NAME_view         = (TextView) findViewById(R.id.WRITE_NAME_view);
-        STUDENT_NO_view         = (TextView) findViewById(R.id.STUDENT_NO_view);
-        DEPARTURE_view          = (TextView) findViewById(R.id.DEPARTURE_view);
-        DEPARTURE_DETAIL_view   = (TextView) findViewById(R.id.DEPARTURE_DETAIL_view);
-        DESTINATION_view        = (TextView) findViewById(R.id.DESTINATION_view);
-        DESTINATION_DETAIL_view = (TextView) findViewById(R.id.DESTINATION_DETAIL_view);
-        PASSENGER_NUM_view      = (TextView) findViewById(R.id.passengerNum_tv);
-        WAIT_TIME_view          = (TextView) findViewById(R.id.wait_time_tv);
-        REMAIN_TIME_view        = (TextView) findViewById(R.id.remain_time_tv);
-
-        comment_name_editText   = (EditText) findViewById(R.id.comment_name);
-        comment_editText        = (EditText) findViewById(R.id.comment_editText);
-        passwd_ed               = (EditText) findViewById(R.id.passwd_ed);
-
-        comment_info_ok_btn     = (Button) findViewById(R.id.comment_info_ok_btn);
-        comment_btn             = (Button) findViewById(R.id.comment_btn);
-        modify_btn              = (Button) findViewById(R.id.modify_btn);
-
-        callvan_flag            = (CheckBox) findViewById(R.id.callvan_flag);
-
-        comment_popup_btn       = (ImageButton) findViewById(R.id.comment_popup_btn);
-
-        commentRCV              = (RecyclerView) findViewById(R.id.commentRecyclerView);
-
         comment_info_ok_btn.setOnClickListener(this);
         comment_popup_btn.setOnClickListener(this);
         comment_btn.setOnClickListener(this);
@@ -149,9 +149,46 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     private void downloadData() {
         //디테일 페이지 데이터 받아오기 (mPost + 댓글)
         Log.i(TAG, "CALL_BOARD_NO : " + board_no + ", position : " + position);
-        LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
+
+        HashMap<String,Object> param = new HashMap<>();
+        param.put("CALL_BOARD_NO", board_no);
+
+        BoardService.getInstance(this).createApi().getOneBoard(param, new CommonCallbak() {
+            @Override
+            public void onError(Throwable t) {
+                Toast.makeText(BoardView.context, Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+                finish();
+            }
+
+            @Override
+            public void onSuccess(int code, Object receiveData) {
+                Log.e("onSuccess ::::::", "call data::::::" + code);
+                if(code == 200){
+                    Gson gson = new Gson();
+                    JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                    String result = jObject.get("Result").getAsString();
+                    Log.e("result ::::::", "result::::::" + result);
+                    if("true".equals(result)){
+                        String CALLVAN_INFO = jObject.get("CALLVAN_INFO").getAsString();
+                        mPost = gson.fromJson(CALLVAN_INFO,Board.class);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int code) {
+                Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        //LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
         /* TODO: 인텐트를 활용하는 FLAG값도 CONST클래스를 활용해서 사용할 것.*/
-        mPost = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
+        //mPost = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
     }
 
     private void setLayout() {

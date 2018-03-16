@@ -1,6 +1,8 @@
 package univ.sm.View.board;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,16 +16,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.RequestParams;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-import univ.sm.R;
+import univ.sm.Controller.CommonCallbak;
 import univ.sm.Controller.api.board.BoardService;
-import univ.sm.Model.board.Board;
-import univ.sm.connect.LoopjConnection;
 import univ.sm.Model.Const;
+import univ.sm.Model.User;
+import univ.sm.Model.board.Board;
+import univ.sm.R;
+import univ.sm.Util.CommonUtil;
 import univ.sm.View.CommonView;
 import univ.sm.View.board.list.BoardList_FView;
 import univ.sm.View.board.regist.BoardPostingRegist_FView;
@@ -45,7 +50,10 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
     private ImageView refresh_btn,board_selector;
     private ViewPager vp;
     public static Context context;
+    public static Activity activity;
     InputMethodManager imm;
+    private Intent intent;
+    private User user;
 
 
     @Override
@@ -54,7 +62,10 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         //기본 레이아웃 세팅
         setContentView(R.layout.board_main);
         fn_staticLayout();
-        context = getApplicationContext();
+        context = this;
+        activity = this;
+        intent = getIntent();
+        user = (User)intent.getSerializableExtra("user");
     }
 
     /* 새로고침을 하기위한 메소드 추가. */
@@ -89,9 +100,10 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         /* 이미지 좌표 재 설정*/
         board_selector.getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
-
+    HashMap<String,Object> params = new HashMap<String,Object>();
     @Override
     public void onClick(View v) {
+
         //// TODO: 2017-04-29  프레그먼트의 tag값을 어떻게 가져올 수 있지?
         /* viewpager에서 등록을 하던가 add 를해서 tag를 등록하면 가져올 수 있다.*/
         if(v.getId() == R.id.board_list){
@@ -106,71 +118,66 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 vp.setCurrentItem(1);
                 vp.setCurrentItem(0);
             }else if(vp.getCurrentItem() == 1 ){
-                /* 애초의 취지  :  등록 폼의 데이터들이 mainActivity의 event에서 접근이 안되서 문제가 발생.*/
-                /* 경과  : interface선언, static 변수 선언 등으로 해결해 보려했으나 정방향의 문제 해결을 진행함*/
-                /* getSupportFragmentManger의 사용법*/
-                /* 보통 MainActivity의 fragment id를 넣어라 아래 코드와 같이 진행하는게 원칙.*/
-                /* 상황에 따라 viewPager id값을 넣어서 하게 된다.*/
                 BoardPostingRegist_FView ff = (BoardPostingRegist_FView)getSupportFragmentManager().findFragmentById(R.id.borad_vPager);
                 Board post = ff.sendParentClickData();
-                /*생각해보면 결국 viewPa\ger도 fragment 이니까 해당 화면의 아이디를 불러오는 걸로 느껴진다.*/
 
-                RequestParams params = getPostRequestParams(post);
+                params = getPostRequestParams(post);
+                if(!params.isEmpty()){
+                    Log.e("SchCall ::::::", "call data::::"+params.isEmpty());
+                    BoardService.getInstance(context).createApi().addBoard(params, new CommonCallbak() {
+                        @Override
+                        public void onError(Throwable t) {
+                            Toast.makeText(getApplicationContext(), Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
 
-                if(params == null){
-                    return ;
+                        @Override
+                        public void onSuccess(int code, Object receiveData) {
+                            Log.e("onSuccess ::::::", "call data::::::" + code);
+                            if(code == 200){
+                                Gson gson = new Gson();
+                                JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                                String result = jObject.get("Result").getAsString();
+                                Log.e("result ::::::", "result::::::" + result);
+                                if("true".equals(result)){
+                                    Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                                    CommonUtil.nextPage(new Intent(BoardView.this,BoardView.class),activity);
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int code) {
+                            Toast.makeText(getApplicationContext(), Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+                    Toast.makeText(getApplicationContext(), "모든 항목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 }
-
-                BoardService boardService = BoardService.getInstance(context).createApi();
-                //BoardCallbakService schCallbakService = new BoardCallbakService();
-
-                HashMap<String, Object> params1 = new HashMap<String, Object>();
-                Log.e("SchCall ::::::", "call data");
-
-
-                //boardService.getBoardList(params, schCallbakService);
-
-                LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
-                connection.addPosting(params,board_list);
-
-                board_list.performClick();
-                imm.hideSoftInputFromWindow(refresh_btn.getWindowToken(), 0);
-                SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM,MODE_PRIVATE);
-                SharedPreferences.Editor spe = sp.edit();
-                spe.putString(Const.WRITE_NAME      ,post.getWrite_name());
-                spe.putString(Const.PASSWD          ,post.getPasswd());
-                spe.putString(Const.STUDENT_NO      ,post.getStudent_no());
-                spe.putString(Const.DEPARTMENT      ,post.getDepartment());
-
-                Toast.makeText(getApplicationContext(), "입력된 정보가 저장됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+
     /*BoardPostingFragmenet (등록화면)에 있는 값들을 모두 가져온다.*/
-    private RequestParams getPostRequestParams(Board post){
-        // 여기와 상관없지만 - EditText를 사용할때 String convert 주의점
-        //Writing  : hs
-        //getText() : return Editable / Editable : not completely convert toString
-        //therfore make sure to method : toString();
-        String writeNameStr             = post.getWrite_name();
-        String passwdStr                = post.getPasswd();
-        String departmentStr            = post.getDepartment();
-        String studentNoStr             = post.getStudent_no();
-        String departureStr             = post.getDeparture();
-        String departure_detailStr      = post.getDeparture_detail();
-        String destinationStr           = post.getDestination();
-        String destination_detailStr    = post.getDestination_detail();
+    private HashMap<String,Object> getPostRequestParams(Board post){
+        HashMap<String,Object> params           = new HashMap<String,Object>();
 
-        String waitTime                 = post.getWait_time().replace("분","");
-        String passengerNum             = post.getPassenger_num().replace("명","");
+        String departureStr                     = post.getDeparture();
+        String departure_detailStr              = post.getDeparture_detail();
+        String destinationStr                   = post.getDestination();
+        String destination_detailStr            = post.getDestination_detail();
 
-        RequestParams params = new RequestParams();
-        params.put(Const.WRITE_NAME               , writeNameStr);
-        params.put(Const.PASSWD                   , passwdStr);
-        SharedPreferences sp = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
-        params.put(Const.REG_ID                   , sp.getString(Const.SHARED_REG_ID,""));
-        params.put(Const.STUDENT_NO               , studentNoStr);//학번
-        params.put(Const.DEPARTMENT               , departmentStr);//학과
+        String waitTime                         = post.getWait_time().replace("분","");
+        String passengerNum                     = post.getPassenger_num().replace("명","");
+        SharedPreferences sp1                   = getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+        SharedPreferences sp2                   = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+
+        params.put(Const.REG_ID                   , sp1.getString(Const.SHARED_REG_ID,""));
+        params.put(Const.MEMBER_EMAIL             , sp2.getString(Const.SHARED_MEMBER_EMAIL,""));//학과
+
         params.put(Const.DEPARTURE                , departureStr);//출발지
         params.put(Const.DEPARTURE_DETAIL         , departure_detailStr);
         params.put(Const.DESTINATION              , destinationStr);
@@ -179,12 +186,12 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         params.put(Const.WAIT_TIME                , waitTime);
         //todo 업로드 후 화면 전환 -> 목록으로
 
-        if("".equals(writeNameStr) ||"".equals(passwdStr) ||"".equals(studentNoStr) ||"".equals(departmentStr) || "".equals(passengerNum)||
-                "".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
+        if("".equals(passengerNum)||"".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
             Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
-            return null;
+            return new HashMap<String,Object>();
+        }else{
+            return params;
         }
-        return params;
     }
 
     /* 주말선택의 빨간바를 이동하는 함수 */

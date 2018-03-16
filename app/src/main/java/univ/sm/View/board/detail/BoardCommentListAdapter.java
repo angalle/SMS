@@ -61,25 +61,12 @@ public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentLi
 
         @Override
         public void onBindView(BoardComment item) {
-            /*TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
-            TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
-            TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
-            TextView WRITE_NAME = (TextView) itemView.findViewById(R.id.name);
-            TextView WAIT_TIME = (TextView) itemView.findViewById(R.id.waitTime);
-
-            WAIT_TIME.setText(item.getRemain_time());
-            DEPARTURE.setText(item.getDeparture());
-            DESTINATION.setText(item.getDestination());
-            PASSENGER_NUM.setText("총 "+item.getPassenger_num());
-            WRITE_NAME.setText(item.getWrite_name());*/
 
             TextView comment_name = (TextView) itemView.findViewById(R.id.comment_writer_name);
             TextView comment_contents = (TextView) itemView.findViewById(R.id.comment_contents);
-            /*TextView comment_time = (TextView) itemView.findViewById(R.id.comment_time);*/
 
             comment_name.setText(item.getWRITE_NAME());
             comment_contents.setText(item.getCONTENTS());
-            /*comment_time.setText(item.getINSERT_TIME());*/
         }
     }
 
