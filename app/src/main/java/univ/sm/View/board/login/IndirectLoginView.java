@@ -135,6 +135,7 @@ public class IndirectLoginView extends CommonView {
 
             @Override
             public void onSuccess(UserProfile userProfile) {
+
                 email = userProfile.getEmail();
                 name = userProfile.getNickname();
                 HashMap<String,Object> map = new HashMap<String,Object>();

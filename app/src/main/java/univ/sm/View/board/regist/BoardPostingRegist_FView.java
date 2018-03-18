@@ -21,6 +21,7 @@ import univ.sm.R;
 import univ.sm.Model.board.Board;
 import univ.sm.Model.Const;
 import univ.sm.View.board.BoardView;
+import univ.sm.View.board.list.BoardList_FView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -42,16 +43,17 @@ public class BoardPostingRegist_FView extends Fragment implements View.OnClickLi
     public static Context context;
     String regId="";
 
-
-    public static BoardPostingRegist_FView newInstatnce(){
-        BoardPostingRegist_FView b = new BoardPostingRegist_FView();
-        return b;
+    public static BoardPostingRegist_FView newInstance(int index) {
+        BoardPostingRegist_FView f = new BoardPostingRegist_FView();
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+        return f;
     }
 
     public BoardPostingRegist_FView() {
         super();
         this.context = BoardView.context;
-
     }
 
     public Board sendParentClickData() {

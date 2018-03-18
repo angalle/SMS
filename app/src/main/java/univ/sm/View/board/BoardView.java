@@ -73,7 +73,6 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
     protected void onResume() {
         super.onResume();
         vp.setCurrentItem(0);
-        //refresh_btn.performClick();
     }
 
     /* 정적 view 초기화 */
@@ -122,43 +121,39 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 Board post = ff.sendParentClickData();
 
                 params = getPostRequestParams(post);
-                if(!params.isEmpty()){
-                    Log.e("SchCall ::::::", "call data::::"+params.isEmpty());
-                    BoardService.getInstance(context).createApi().addBoard(params, new CommonCallbak() {
-                        @Override
-                        public void onError(Throwable t) {
-                            Toast.makeText(getApplicationContext(), Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
-                            t.printStackTrace();
-                        }
-
-                        @Override
-                        public void onSuccess(int code, Object receiveData) {
-                            Log.e("onSuccess ::::::", "call data::::::" + code);
-                            if(code == 200){
-                                Gson gson = new Gson();
-                                JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
-                                String result = jObject.get("Result").getAsString();
-                                Log.e("result ::::::", "result::::::" + result);
-                                if("true".equals(result)){
-                                    Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
-                                    CommonUtil.nextPage(new Intent(BoardView.this,BoardView.class),activity);
-                                }else{
-                                    Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int code) {
-                            Toast.makeText(getApplicationContext(), Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else{
-                    Toast.makeText(getApplicationContext(), "모든 항목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                }
+                BoardService.getInstance(context).createApi().addBoard(params,callbackAddBoard );
             }
         }
     }
+
+    CommonCallbak callbackAddBoard = new CommonCallbak() {
+        @Override
+        public void onError(Throwable t) {
+            Toast.makeText(getApplicationContext(), Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+            t.printStackTrace();
+        }
+
+        @Override
+        public void onSuccess(int code, Object receiveData) {
+            if(code == 200){
+                Gson gson = new Gson();
+                JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                String result = jObject.get("Result").getAsString();
+                Log.e("result ::::::", "result::::::" + result);
+                if("true".equals(result)){
+                    Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    CommonUtil.nextPage(new Intent(BoardView.this,BoardView.class),activity);
+                }else{
+                    Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(int code) {
+            Toast.makeText(getApplicationContext(), Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+        }
+    };
 
 
     /*BoardPostingFragmenet (등록화면)에 있는 값들을 모두 가져온다.*/
@@ -216,9 +211,7 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
     public void onPageSelected(int position) {
         if(position == 0){
             moveImageBar(board_list);
-
             subTitle.setText(Const.LIST_TITLE);
-            BoardList_FView.instance.getServerRequestData();
             Picasso.with(context).load(R.drawable.quick_btn).resize(100,110).into(refresh_btn);
         }else if(position == 1){
             moveImageBar(board_write);

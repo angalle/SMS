@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 
+import java.util.HashMap;
+
 import univ.sm.View.board.list.BoardList_FView;
 import univ.sm.View.board.regist.BoardPostingRegist_FView;
 
@@ -15,7 +17,6 @@ public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
     FragmentTransaction ft = null;
     public BoardMainPageAdapter(FragmentManager fm) {
         super(fm);
-
     }
 
     @Override
@@ -23,16 +24,22 @@ public class BoardMainPageAdapter extends FragmentStatePagerAdapter {
         switch(position)
         {
             case 0:
-                return BoardList_FView.newInstatnce();
+                return BoardList_FView.newInstance(0);
             case 1:
-                return BoardPostingRegist_FView.newInstatnce();
+                return BoardPostingRegist_FView.newInstance(1);
             default:
-                return BoardList_FView.newInstatnce();
+                return BoardList_FView.newInstance(0);
         }
     }
 
     @Override
     public int getCount() {
         return 2;
+    }
+
+    HashMap<Integer,Fragment> mPageReferenceMap = new HashMap<Integer,Fragment>();
+
+    public Fragment getFragment(int key) {
+        return mPageReferenceMap.get(key);
     }
 }

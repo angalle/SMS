@@ -13,39 +13,39 @@ import java.util.ArrayList;
 
 public class Board implements Serializable{
 
-    @SerializedName("board_no")
+    @SerializedName("CALL_BOARD_NO")
     private String board_no;                //게시글 번호 CALL_BOARD_NO
-    @SerializedName("write_name")
+    @SerializedName("MEMBER_NAME")
     private String write_name;              //작성자 명
-    @SerializedName("passwd")
-    private String passwd;                  //비밀번호
-    @SerializedName("department")
+    /*@SerializedName("passwd")
+    private String passwd;                  //비밀번호*/
+    @SerializedName("MEMBER_DEPATMENET")
     private String department;              //학과
-    @SerializedName("student_no")
+    @SerializedName("MEMBET_ST_NO")
     private String student_no;              //학번
-    @SerializedName("departure")
+    @SerializedName("DEPARTURE")
     private String departure;               //출발지
-    @SerializedName("departure_detail")
+    @SerializedName("DEPARTURE_DETAIL")
     private String departure_detail;        //출발지 설명
-    @SerializedName("destination")
+    @SerializedName("DESTINATION")
     private String destination;             //목적지
-    @SerializedName("destination_detail")
+    @SerializedName("DESTINATION_DETAIL")
     private String destination_detail;      //목적지설명
-    @SerializedName("reg_id")
+    @SerializedName("MEMEBER_REG_NO")
     private String reg_id;                  //gcm(push) 기기값
-    @SerializedName("use_flag")
+    @SerializedName("USE_FLAG")
     private Boolean use_flag;               //사용 flag Y/N
-    @SerializedName("passenger_num")
+    @SerializedName("PASSENGER_NUM")
     private String passenger_num;           //총 인원
-    @SerializedName("wait_time")
+    @SerializedName("WAIT_TIME")
     private String wait_time;               //대기시간  남은시간 표현하려면 현재시간 - 대기시간 = 남은시간.  이렇게 해도되고... return value 에 추가를 해줄까 ...
-    @SerializedName("insert_time")
+    @SerializedName("INSERT_TIME")
     private String insert_time;             //등록시간
-    @SerializedName("insert_date")
+    @SerializedName("INSERT_DATE")
     private String insert_date;             //등록날짜
-    @SerializedName("remain_time")
+    @SerializedName("REMAIN_TIME")
     private String remain_time;             //등록날짜
-    @SerializedName("comment_cnt")
+    @SerializedName("COMMENT_CNT")
     private int comment_cnt;                //코멘트 개수
 
     @SerializedName("commentsList")
@@ -58,7 +58,6 @@ public class Board implements Serializable{
 
         this.board_no = board_no;
         this.write_name = write_name;
-        this.passwd = passwd;
         this.department = department;
         this.student_no = student_no;
         this.departure = departure;
@@ -85,7 +84,6 @@ public class Board implements Serializable{
 
         this.board_no = board_no;
         this.write_name = write_name;
-        this.passwd = passwd;
         this.department = department;
         this.student_no = student_no;
         this.departure = departure;
@@ -120,7 +118,6 @@ public class Board implements Serializable{
     public void refreshPost(Board newPost) {
         this.board_no = newPost.board_no;
         this.write_name = newPost.write_name;
-        this.passwd = newPost.passwd;
         this.department = newPost.department;
         this.student_no = newPost.student_no;
         this.departure = newPost.departure;
@@ -162,14 +159,6 @@ public class Board implements Serializable{
 
     public void setWrite_name(String write_name) {
         this.write_name = write_name;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 
     public String getDepartment() {

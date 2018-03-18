@@ -15,11 +15,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import univ.sm.R;
 import univ.sm.Model.board.Board;
 import univ.sm.View.board.detail.BoardDetailView;
 
 public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.BaseViewHolder> {
+    @BindView(R.id.WRITER) TextView WRITER;
+    @BindView(R.id.department) TextView DEPARTMENT;
+    @BindView(R.id.DEPARTURE) TextView DEPARTURE;
+    @BindView(R.id.DESTINATION) TextView DESTINATION;
+    @BindView(R.id.passengerNum) TextView PASSENGER_NUM;
+    @BindView(R.id.waitTime) TextView WAIT_TIME;
+    @BindView(R.id.cmntCnt) TextView COMMENT_CNT;
+
+    @BindView(R.id.wait_time_img) ImageView waitTimeImg;
+
     private static final String TAG = "BoardViewAdapter";
     private List<Board> postArrayList = new ArrayList<>();    //List<Board> items = new ArrayList<>;
     private Context context;
@@ -33,6 +45,7 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_item_view, parent, false);
+        ButterKnife.bind(this,itemView);
         return new ViewHolder(itemView);
     }
 
@@ -46,55 +59,27 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         return postArrayList.size();
     }
 
-    public void setBoardArrayList(List<Board> boardArrayList){
-        //어뎁터 board 리스트 새로 받아오기
-        postArrayList.clear();
-        postArrayList.addAll(boardArrayList);
-        notifyDataSetChanged();
-    }
-
-    public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
-        public BaseViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        public abstract void onBindView(ITEM item);
-    }
-
     public class ViewHolder extends BaseViewHolder<Board> {
-
         private ViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 디테일 페이지로 이동
-                    Intent boardIntent = new Intent();
-                    //boardIntent.setClass(context, BoardDetailView.class);
-                    boardIntent.setClass(activity, BoardDetailView.class);
-                    boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    boardIntent.putExtra("position", getLayoutPosition());
-                    boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
-                    Log.i(TAG, "position : " + getLayoutPosition() + ",  board_no : " + postArrayList.get(getLayoutPosition()).getBoard_no());
-                    activity.startActivity(boardIntent);
-
-
-                }
-            });
+                    super(itemView);
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // 디테일 페이지로 이동
+                            Intent boardIntent = new Intent();
+                            //boardIntent.setClass(context, BoardDetailView.class);
+                            boardIntent.setClass(activity, BoardDetailView.class);
+                            boardIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            boardIntent.putExtra("position", getLayoutPosition());
+                            boardIntent.putExtra("board_no", postArrayList.get(getLayoutPosition()).getBoard_no());
+                            Log.i(TAG, "position : " + getLayoutPosition() + ",  board_no : " + postArrayList.get(getLayoutPosition()).getBoard_no());
+                            activity.startActivity(boardIntent);
+                        }
+                    });
         }
 
         @Override
         public void onBindView(Board item) {
-            TextView WRITER = (TextView) itemView.findViewById(R.id.WRITER);//작성자
-            TextView DEPARTMENT = (TextView) itemView.findViewById(R.id.department);//학과
-            TextView DEPARTURE = (TextView) itemView.findViewById(R.id.DEPARTURE);//출발지
-            TextView DESTINATION = (TextView) itemView.findViewById(R.id.DESTINATION);//도착지
-            TextView PASSENGER_NUM = (TextView) itemView.findViewById(R.id.passengerNum);
-            TextView WAIT_TIME = (TextView) itemView.findViewById(R.id.waitTime);
-            TextView COMMENT_CNT = (TextView) itemView.findViewById(R.id.cmntCnt);
-
-            ImageView waitTimeImg = (ImageView) itemView.findViewById(R.id.wait_time_img) ;
-
             String time = item.getRemain_time();
             Log.e("time","message"+time);
             if(Integer.parseInt(time) <= 10 ){
@@ -116,4 +101,10 @@ public class BoardViewAdapter extends RecyclerView.Adapter<BoardViewAdapter.Base
         }
     }
 
+    public abstract class BaseViewHolder<ITEM> extends RecyclerView.ViewHolder {
+        public BaseViewHolder(View itemView) {
+            super(itemView);
+        }
+        public abstract void onBindView(ITEM item);
+    }
 }
