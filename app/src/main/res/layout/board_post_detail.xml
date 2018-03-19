@@ -14,32 +14,6 @@
         android:background="#ddf0f0"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/titlelayoutcorner"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-            <!--title-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/destination_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="게시물 \n상세페이지"
-                    android:textColor="#ffffff"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </LinearLayout>
 
 
 
@@ -57,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:background="#ddf0f0"
-                android:padding="5dp"
+                android:padding="3dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -125,11 +99,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:gravity="center">
                 <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/icon_bus" />
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:src="@drawable/icon_bus"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -151,12 +128,12 @@
                     android:text="출발지"
                     android:textColor="#4fb2b3"
                     android:textStyle="bold"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/arrow_green_btn" />
@@ -178,7 +155,7 @@
                         android:text="도착지"
                         android:textColor="#4fb2b3"
                         android:textStyle="bold"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -232,7 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="1dp"
                 android:weightSum="3">
 
                 <LinearLayout
@@ -274,7 +251,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="5명"
-                        android:textSize="18dp"
+                        android:textSize="15dp"
                         android:textColor="#ffffff"
                         android:layout_weight="1"/>
 
@@ -292,7 +269,7 @@
                         android:layout_height="wrap_content"
                         android:background="#4fb2b3"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:text="대기시간"
                         android:textColor="#ffffff"
                         android:layout_weight="1"/>
@@ -302,10 +279,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:textStyle="bold"
                         android:hint="10분"
-                        android:textSize="18dp"
+                        android:textSize="15dp"
                         android:textColor="#58595b"
                         android:layout_weight="1"/>
                 </LinearLayout>
@@ -323,7 +300,7 @@
                         android:layout_height="wrap_content"
                         android:background="#4fb2b3"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:text="남은시간"
                         android:textColor="#ffffff" />
 
@@ -333,8 +310,8 @@
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:textSize="18dp"
+                        android:padding="3dp"
+                        android:textSize="15dp"
                         android:text="10분"
                         android:textColor="#e16175" />
 
@@ -344,7 +321,6 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -383,7 +359,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:background="#e16175"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="@string/modify"
                     android:textColor="#ffffff"/>
             </LinearLayout>
@@ -420,43 +396,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/comment_info_Layout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="이름"
-                android:textColor="@android:color/background_dark" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/comment_name"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:textColor="#000000" />
-
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/comment_info_ok_btn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/ride_modify_icon"
-                android:text="@string/OK" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/comment_info_Layout"
             android:background="#eeb8b8"
             android:orientation="horizontal"
+            android:id="@+id/foot_layout"
             android:weightSum="10">
 
             <android.support.v7.widget.AppCompatImageButton

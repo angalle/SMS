@@ -71,12 +71,8 @@ public class CommonUtil {
         schCallbakService = new SchCallbakService();
 
         params = new HashMap<String, Object>();
-        Log.e("DataSetting ::::::", "call data");
-
 
         scheduleApi.getSchedule(params, schCallbakService);
-
-        Log.e("DataSetting ::::::", StaticData.arrShuttle.size() + ":::");
     }
 
     public static JsonObject cnvtJson2Obj(Object obj){
@@ -106,8 +102,10 @@ public class CommonUtil {
 
     /** implmetation RegistrationService
      * how to get registration id , not allow main thread */
-    public static String getRegistrationId(Context context) throws  Exception{
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+    public String getRegistrationId(Context context) throws  Exception{
+        ContextWrapper cw = new ContextWrapper(context);
+        SharedPreferences sp = cw.getSharedPreferences(Const.SHARED_GCM, MODE_PRIVATE);
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String token = sp.getString(Const.SHARED_REG_ID,"");
 
         Log.i("GCM & Reg Id ::::: ", "GCM Registration Token: " + token);

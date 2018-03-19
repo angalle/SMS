@@ -40,6 +40,7 @@ public class Const {
     static public String SHARED_REG_ID = "REG_ID";
     static public String SHARED_USER = "USER";
     static public String SHARED_MEMBER_EMAIL = "MEMBER_EMAIL";
+    static public String SHARED_MEMBER_NAME = "MEMBER_NAME";
 
     static public String LIST_TITLE = "게시물 목록";
     static public String WRITE_TITLE = "게시물 등록";

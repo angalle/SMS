@@ -184,20 +184,29 @@ public class IndirectLoginView extends CommonView {
                     /** 게시판 목록으로 이동*/
 
                     JsonArray array = jObject.get("data").getAsJsonArray();
-                    JsonObject jsonObject = array.get(0).getAsJsonObject();
-                    User user = gson.fromJson(jsonObject, User.class);
+                    if(array.size() == 0){
+                        nextPage(
+                                new Intent(IndirectLoginView.this,DirectLoginView.class)
+                                        .putExtra("email",email)
+                                        .putExtra("name",name)
+                        );
+                    }else{
+                        JsonObject jsonObject = array.get(0).getAsJsonObject();
+                        User user = gson.fromJson(jsonObject, User.class);
 
-                    SharedPreferences sp = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
-                    SharedPreferences.Editor spe = sp.edit();
-                    spe.putString(Const.SHARED_MEMBER_EMAIL,user.MEMBER_EMAIL);
-                    spe.commit();
+                        SharedPreferences sp = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+                        SharedPreferences.Editor spe = sp.edit();
+                        spe.putString(Const.SHARED_MEMBER_EMAIL,user.MEMBER_EMAIL);
+                        spe.putString(Const.SHARED_MEMBER_NAME,user.MEMBER_NAME);
+                        spe.commit();
 
-                    /** 게시판 목록으로 이동*/
-                    Toast.makeText(getApplicationContext(),"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
-                    nextPage(
-                            new Intent(IndirectLoginView.this,BoardView.class)
-                                    .putExtra("user",user)
-                    );
+                        /** 게시판 목록으로 이동*/
+                        Toast.makeText(getApplicationContext(),"로그인 되었습니다.",Toast.LENGTH_SHORT).show();
+                        nextPage(
+                                new Intent(IndirectLoginView.this,BoardView.class)
+                                        .putExtra("user",user)
+                        );
+                    }
                 }
             }
         }

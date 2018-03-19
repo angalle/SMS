@@ -65,7 +65,7 @@ public class BoardCommentListAdapter extends RecyclerView.Adapter<BoardCommentLi
             TextView comment_name = (TextView) itemView.findViewById(R.id.comment_writer_name);
             TextView comment_contents = (TextView) itemView.findViewById(R.id.comment_contents);
 
-            comment_name.setText(item.getWRITE_NAME());
+            comment_name.setText(item.getMEMBER_NAME());
             comment_contents.setText(item.getCONTENTS());
         }
     }

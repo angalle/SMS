@@ -158,7 +158,7 @@ public class BoardService {
      * @param params CALL_BOARD_NO, COMMENT_LEVEL, CONTENTS, REG_ID,
      *               WRITE_NAME, BEFORE_COMMENT_NO, SEND_REG_ID
      */
-    public void addComment(RequestParams params, final CommonCallbak callback){
+    public void addComment(HashMap<String,Object> params, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
         boardApi.addComment(params).enqueue(new Callback<JsonObject>() {
             @Override
@@ -186,7 +186,7 @@ public class BoardService {
      * @param params CALL_BOARD_NO, COMMENT_LEVEL, CONTENTS, REG_ID,
      *               WRITE_NAME, BEFORE_COMMENT_NO, SEND_REG_ID
      */
-    public void approvalCallvan(RequestParams params, final CommonCallbak callback){
+    public void approvalCallvan(HashMap<String,Object> params, final CommonCallbak callback){
         Log.e("SchCall1 ::::::","call data");
         boardApi.approvalCallvan(params).enqueue(new Callback<JsonObject>() {
             @Override

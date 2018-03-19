@@ -2,6 +2,8 @@ package univ.sm.Controller;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -115,20 +117,12 @@ public class BoardManager {
 
             ArrayList<BoardComment> commentsList = new ArrayList<>();
 
+            Gson gson = new Gson();
             for(int i = 0 ; i < commentsArrayJson.length(); i++){
                 JSONObject commentsjson= commentsArrayJson.getJSONObject(i);
-
-                BoardComment comment = new BoardComment(commentsjson.getString("COMMENT_NO"), commentsjson.getString("CALL_BOARD_NO"),
-                        commentsjson.getString("COMMENT_LEVEL"), commentsjson.getString("CONTENTS"),
-                        commentsjson.getString("REG_ID"), commentsjson.getString("WRITE_NAME"),
-                        commentsjson.getString("DEPARTMENT"), commentsjson.getString("SHARING_FLAG"),
-                        commentsjson.getString("BEFORE_COMMENT_NO"), commentsjson.getString("INSERT_TIME"),
-                        commentsjson.getString("INSERT_DATE"));
-                commentsList.add(comment);
-
+                //BoardComment comment = gson.fromJson(commentsjson,BoardComment.class);
+                //commentsList.add(comment);
             }
-
-
             post = new Board(postJson.getString("CALL_BOARD_NO"), postJson.getString("WRITE_NAME"),
                     postJson.getString("PASSWD"), postJson.getString("DEPARTMENT"),
                     postJson.getString("STUDENT_NO"), postJson.getString("DEPARTURE"),

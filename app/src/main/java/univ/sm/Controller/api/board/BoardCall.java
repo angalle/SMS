@@ -34,11 +34,11 @@ public interface BoardCall {
 
     @FormUrlEncoded
     @POST("/insertcallvancomment")
-    Call<JsonObject> addComment(@FieldMap RequestParams postNo);
+    Call<JsonObject> addComment(@FieldMap HashMap<String,Object> postNo);
 
     @FormUrlEncoded
     @POST("/callvan_complete")
-    Call<JsonObject> approvalCallvan(@FieldMap RequestParams postNo);
+    Call<JsonObject> approvalCallvan(@FieldMap HashMap<String,Object> postNo);
 
     @FormUrlEncoded
     @POST("/user")

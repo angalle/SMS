@@ -121,6 +121,10 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 Board post = ff.sendParentClickData();
 
                 params = getPostRequestParams(post);
+                if(params.size() == 0){
+                    Toast.makeText(getApplicationContext(),"콜벤 입력정보를 모두 입력해주세요.",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 BoardService.getInstance(context).createApi().addBoard(params,callbackAddBoard );
             }
         }
@@ -141,7 +145,7 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
                 String result = jObject.get("Result").getAsString();
                 Log.e("result ::::::", "result::::::" + result);
                 if("true".equals(result)){
-                    Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "등록되었습니다. 대기시간이 지나면 해당 글은 자동으로 사라집니다.", Toast.LENGTH_SHORT).show();
                     CommonUtil.nextPage(new Intent(BoardView.this,BoardView.class),activity);
                 }else{
                     Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
@@ -182,7 +186,7 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         //todo 업로드 후 화면 전환 -> 목록으로
 
         if("".equals(passengerNum)||"".equals(departureStr) ||/*"".equals(departure_detailStr) ||*/"".equals(destinationStr) /*||"".equals(destination_detailStr)*/ ){
-            Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "전부 다 입력해주세요", Toast.LENGTH_SHORT).show();
             return new HashMap<String,Object>();
         }else{
             return params;

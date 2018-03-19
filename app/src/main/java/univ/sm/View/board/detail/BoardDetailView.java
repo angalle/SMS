@@ -1,5 +1,6 @@
 package univ.sm.View.board.detail;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -10,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.loopj.android.http.RequestParams;
 
@@ -43,17 +48,6 @@ import univ.sm.Model.Const;
  * Created by kwonsoojeong on 2017-03-28.
  */
 
-/**
- *
- *
- *          코드값에대해서 코멘트를 좀 달아봤습니다. 코드는 다 이유가 있어서 쓴거라 코드의 내용에 대해서 말하지 않음.
- *          코드를 정리하거나 코드스타일에 대해서 조금 코멘트 달아봤습니다.
- *          더 좋은 방법이나 문제점 이슈등이 있으면 톡주시면 되겠습니다.
- *          WRITE BY HS   UNTILL 2017 06 25 AFTER DELETE THIS CONTENTS
- *
- *
- * */
-
 public class BoardDetailView extends AppCompatActivity implements View.OnClickListener {
     /* TODO:이런 공통변수는 Const에 넣어서 활용하면 좋음*/
     private static final String TAG = "BoardDetailView";
@@ -69,12 +63,11 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.wait_time_tv)TextView WAIT_TIME_view;
     @BindView(R.id.remain_time_tv)TextView REMAIN_TIME_view;
 
-    @BindView(R.id.comment_name)EditText comment_editText;
-    @BindView(R.id.comment_editText)EditText comment_name_editText;
+    @BindView(R.id.comment_editText)EditText comment_editText;
+
     @BindView(R.id.passwd_ed)EditText passwd_ed;
 
-    @BindView(R.id.comment_info_ok_btn)Button comment_btn;
-    @BindView(R.id.comment_btn)Button comment_info_ok_btn;
+    @BindView(R.id.comment_btn)Button comment_btn;
     @BindView(R.id.modify_btn)Button modify_btn;
 
     @BindView(R.id.callvan_flag)CheckBox callvan_flag;
@@ -82,11 +75,9 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.comment_popup_btn)ImageButton comment_popup_btn;
 
     @BindView(R.id.commentRecyclerView)RecyclerView commentRCV;
-    @BindView(R.id.comment_info_Layout)LinearLayout comment_info_layout;
+    @BindView(R.id.foot_layout)LinearLayout foot_layout;
 
     private ArrayList<BoardComment> mCommentsList;
-    private RequestParams comment_params = new RequestParams();
-    private RequestParams appravalParams = new RequestParams();
     private SharedPreferences userPref;
 
     private Board mPost;
@@ -105,9 +96,15 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
         comment_editText.requestFocus();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
     private void init() {
         /** board_post_detail layout 구성*/
-        comment_info_ok_btn.setOnClickListener(this);
+
         comment_popup_btn.setOnClickListener(this);
         comment_btn.setOnClickListener(this);
         modify_btn.setOnClickListener(this);
@@ -117,39 +114,13 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
 
         mCommentsList = new ArrayList<>();
         userPref = getSharedPreferences("userPref", MODE_PRIVATE);
-        comment_name_editText.setText(userPref.getString("name",""));
+
+        Intent intent = getIntent();
+        board_no = intent.getStringExtra("board_no");
+        position = intent.getIntExtra("position",0);
     }
 
     void downLoadBoard_setLayout() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                Intent intent = getIntent();
-                /* TODO: 인텐트를 활용하는 FLAG값도 CONST클래스를 활용해서 사용할 것.*/
-                position = intent.getExtras().getInt("position");
-                board_no = intent.getExtras().getString("board_no");
-            }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                /** CallVan mPost + comment data download */
-                downloadData();
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                setLayout();
-            }
-        }.execute(null, null, null);
-    }
-
-    private void downloadData() {
-        //디테일 페이지 데이터 받아오기 (mPost + 댓글)
-        Log.i(TAG, "CALL_BOARD_NO : " + board_no + ", position : " + position);
-
         HashMap<String,Object> param = new HashMap<>();
         param.put("CALL_BOARD_NO", board_no);
 
@@ -163,17 +134,27 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onSuccess(int code, Object receiveData) {
-                Log.e("onSuccess ::::::", "call data::::::" + code);
                 if(code == 200){
                     Gson gson = new Gson();
                     JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
                     String result = jObject.get("Result").getAsString();
-                    Log.e("result ::::::", "result::::::" + result);
                     if("true".equals(result)){
-                        String CALLVAN_INFO = jObject.get("CALLVAN_INFO").getAsString();
-                        mPost = gson.fromJson(CALLVAN_INFO,Board.class);
+                        JsonArray CALLVAN_INFO = jObject.get("CALLVAN_INFO").getAsJsonArray();
+                        if(CALLVAN_INFO.size() != 0){
+
+                            mPost = gson.fromJson(CALLVAN_INFO.get(0),Board.class);
+                            mCommentsList.clear();
+                            JsonArray COMMENTS = jObject.get("COMMENTS").getAsJsonArray();
+                            for(JsonElement element : COMMENTS){
+                                BoardComment temp  = new BoardComment();
+                                temp = gson.fromJson(element,BoardComment.class);
+                                mCommentsList.add(temp);
+                            }
+
+                            setLayout();
+                        }
                     }else{
-                        Toast.makeText(getApplicationContext(), "오류가 발생하였습니다. 관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -185,24 +166,9 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
                 finish();
             }
         });
-
-        //LoopjConnection connection = LoopjConnection.getInstance(getApplicationContext());
-        /* TODO: 인텐트를 활용하는 FLAG값도 CONST클래스를 활용해서 사용할 것.*/
-        //mPost = connection.getOnePost(new RequestParams("CALL_BOARD_NO", board_no));
     }
 
     private void setLayout() {
-        if (mPost == null) {
-        } else {
-            mCommentsList = mPost.getCommentsList();
-        }
-        //TODO: 아래처럼 바꾸는게 나음. AND  에러처리 해주세영
-        /*
-        * if (mPost != null) {
-        *   mCommentsList = mPost.getCommentsList();
-        * }
-        * */
-
         BoardCommentListAdapter commentListAdapter = new BoardCommentListAdapter(mCommentsList, getApplicationContext());
         commentRCV.setAdapter(commentListAdapter);
 
@@ -223,90 +189,96 @@ public class BoardDetailView extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.comment_info_ok_btn:
-                if (comment_info_layout.getVisibility() == View.VISIBLE) {
-                    comment_info_layout.setVisibility(View.GONE);
-                }
-                break;
-
-            case R.id.comment_popup_btn:
-                if (comment_info_layout.getVisibility() == View.GONE) {
-                    comment_info_layout.setVisibility(View.VISIBLE);
-                }
-                break;
             case R.id.modify_btn:
-                appravalParams = new RequestParams();
+                HashMap<String,Object> appravalParams = new HashMap<>() ;
                 appravalParams.put("CALL_BOARD_NO",board_no);
                 appravalParams.put("PASSWD",passwd_ed.getText().toString());
-                Log.e(":::::::::::::",""+callvan_flag.isChecked());
+
                 if(callvan_flag.isChecked()){
-                    new AsyncTask<Void, Void, Void>() {
+                    BoardService.getInstance(this).createApi().approvalCallvan(appravalParams, new CommonCallbak() {
                         @Override
-                        protected Void doInBackground(Void... params) {
-                            /** 댓글 입력, 데이터 전송*/
-                            LoopjConnection.getInstance(getApplicationContext()).approvalCallvan(appravalParams);
-                            return null;
+                        public void onError(Throwable t) {
+                            Toast.makeText(BoardView.context, Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
                         }
 
                         @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            callvan_flag.setEnabled(false);
-                            passwd_ed.setEnabled(false);
-                            modify_btn.setEnabled(false);
-                            Toast.makeText(getApplicationContext(),"승인완료",Toast.LENGTH_SHORT).show();
-                            callvan_flag.setVisibility(View.INVISIBLE);
-                            passwd_ed.setVisibility(View.INVISIBLE);
-                            modify_btn.setVisibility(View.INVISIBLE);
-                            finish();
+                        public void onSuccess(int code, Object receiveData) {
+                            Gson gson = new Gson();
+                            JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                            String result = jObject.get("Result").getAsString();
+                            if("false".equals(result)){
+                                Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                            }else{
+                                callvan_flag.setEnabled(false);
+                                passwd_ed.setEnabled(false);
+                                modify_btn.setEnabled(false);
+                                Toast.makeText(getApplicationContext(),"승인완료 :: 해당항목은 사라집니다.",Toast.LENGTH_SHORT).show();
+                                callvan_flag.setVisibility(View.INVISIBLE);
+                                passwd_ed.setVisibility(View.INVISIBLE);
+                                modify_btn.setVisibility(View.INVISIBLE);
+                                finish();
+                                CommonUtil.nextPage(new Intent(BoardDetailView.this,BoardView.class), BoardView.activity);
+                            }
                         }
-                    }.execute(null, null, null);
+
+                        @Override
+                        public void onFailure(int code) {
+                            Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }else{
                     Toast.makeText(getApplicationContext(),"승인을 체크해야만 탑승완료처리가 됩니다.",Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.comment_btn:
-                SharedPreferences sp = getSharedPreferences("GCM", MODE_PRIVATE);
-                comment_params.put("WRITE_NAME", comment_name_editText.getText());
+                HashMap<String,Object> comment_params = new HashMap<String,Object>();
+                SharedPreferences sp                   = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+
+                comment_params.put("MEMBER_EMAIL", sp.getString(Const.SHARED_MEMBER_EMAIL,""));
+                comment_params.put("MEMBER_NAME", sp.getString(Const.SHARED_MEMBER_NAME,""));
                 comment_params.put("CALL_BOARD_NO", board_no);
                 comment_params.put("CONTENTS", comment_editText.getText());
-                comment_params.put("REG_ID", sp.getString(Const.SHARED_REG_ID, ""));
                 comment_params.put("COMMENT_LEVEL", 1);
                 comment_params.put("BEFORCOMMENT_NO", board_no);            //이희선씨의 보드넘버 요청
                 comment_params.put("SEND_REG_ID", " ");                     //이희선씨의 공백 요청
-
-                if(comment_name_editText.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(),"사용자명을 입력하세요",Toast.LENGTH_SHORT).show();
-                    return ;
-                }
 
                 if(comment_editText.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"댓글을 입력하세요",Toast.LENGTH_SHORT).show();
                     return ;
                 }
 
-                comment_editText.setText(null);
-
-                //이름 자동 생성을 위한 preference 저장
-                SharedPreferences.Editor editor = userPref.edit();
-                editor.putString("name",comment_name_editText.getText().toString());
-                editor.commit();
-
-                new AsyncTask<Void, Void, Void>() {
+                BoardService.getInstance(this).createApi().addComment(comment_params, new CommonCallbak() {
                     @Override
-                    protected Void doInBackground(Void... params) {
-                        /** 댓글 입력, 데이터 전송*/
-                        LoopjConnection.getInstance(getApplicationContext()).addComment(comment_params);
-                        return null;
+                    public void onError(Throwable t) {
+                        Toast.makeText(BoardView.context, Const.MSG_ERROR, Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
                     }
 
                     @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                        downLoadBoard_setLayout();
+                    public void onSuccess(int code, Object receiveData) {
+                        Gson gson = new Gson();
+                        JsonObject jObject = gson.fromJson(receiveData.toString(),JsonObject.class);
+                        String result = jObject.get("Result").getAsString();
+                        if("false".equals(result)){
+                            Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                        }else{
+                            // InputMethodManager를 가져옴
+                            InputMethodManager imm =     (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                            Toast.makeText(BoardView.context, "댓글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            // 감출 때
+                            imm.hideSoftInputFromWindow(comment_editText.getWindowToken(), 0);
+                            comment_editText.setText("");
+                            downLoadBoard_setLayout();
+                        }
                     }
-                }.execute(null, null, null);
+
+                    @Override
+                    public void onFailure(int code) {
+                        Toast.makeText(BoardView.context, Const.MSG_FAIL, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }

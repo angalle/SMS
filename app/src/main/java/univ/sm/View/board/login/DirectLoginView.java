@@ -20,10 +20,9 @@ import univ.sm.Controller.CommonCallbak;
 import univ.sm.Controller.api.board.BoardService;
 import univ.sm.Model.Const;
 import univ.sm.R;
+import univ.sm.Util.CommonUtil;
 import univ.sm.View.CommonView;
 import univ.sm.View.board.BoardView;
-
-import static univ.sm.Util.CommonUtil.getRegistrationId;
 
 /**
  * Created by PE_LHS on 2018-01-24.
@@ -70,7 +69,7 @@ public class DirectLoginView extends CommonView{
             map.put("MEMBER_DEPATMENET",univ_depart.getText().toString());
             map.put("MEMBET_ST_NO",studentNo_edit.getText().toString());
 
-            map.put("MEMEBER_REG_NO",getRegistrationId(this));
+            map.put("MEMEBER_REG_NO", new CommonUtil().getRegistrationId(this));
             map.put("INDIRECT_FLAG",INDIRECT_FLAG);
 
             BoardService.getInstance(this).createApi().insertUser(map,callbak);
