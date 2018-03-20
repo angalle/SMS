@@ -92,10 +92,10 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
         String tempMiddleTime="";
         if(directionFlag == 0){
             tempPivotTime = splite_5Length(item.getST_ONE());     //변수의 길이를 5길이까지 검사해서 자르는 메소드
-            tempMiddleTime = filter_10Min(item.getST_TWO());      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
+            tempMiddleTime = filter_10Min(item.getST_TWO(),item.getST_ONE());      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }else{
             tempPivotTime = splite_5Length(item.getST_TRE());     //변수의 길이를 5길이까지 검사해서 자르는 메소드
-            tempMiddleTime = filter_10Min(item.getST_FOR());      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
+            tempMiddleTime = filter_10Min(item.getST_FOR(),item.getST_TRE());      //중간 인덱스의 "10분"스트링값을 치환하는 메소드
         }
 
         Log.e("tempPivotTime:::",""+tempPivotTime);
@@ -159,12 +159,14 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
         }
     }
 
-    public String filter_10Min(String data){
+    public String filter_10Min(String compareStr, String addTime){
+        Log.e("compareStr :::", compareStr);
+        Log.e("addTime :::", addTime);
         String tempMiddleTime = "";
         DateFormat df = new SimpleDateFormat("H:mm");
-        if("10분".equals(data)) {
+        if("10분".equals(compareStr) || "10분예상".equals(compareStr)) {
             try {
-                Date date = df.parse(data);
+                Date date = df.parse(addTime);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.add(Calendar.MINUTE, 10);
@@ -172,9 +174,9 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }else if("15분".equals(data)) {
+        }else if("15분".equals(compareStr)) {
             try {
-                Date date = df.parse(data);
+                Date date = df.parse(addTime);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.add(Calendar.MINUTE, 15);
@@ -183,7 +185,10 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
                 e.printStackTrace();
             }
         }else{
-            tempMiddleTime = data;
+            //compareStr :: 이곳에 원래 들어가야할 시간
+            //addTime  :: 이 시간에 + 10분 or + 15분 해야하는 시간.
+
+            tempMiddleTime = compareStr;
         }
         return tempMiddleTime;
     }
@@ -264,7 +269,9 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
                 continue;
             }
 
-            if(compare_time < Integer.parseInt(tempData.replace("(금Ⅹ)",""))){
+            /*Log.e("compare_time::::",compare_time+"");
+            Log.e("time::::",tempData.replace("(금X)",""));*/
+            if(compare_time < Integer.parseInt(tempData.replace("(금Ⅹ)","").replace("(금X)",""))){
                 index = startIndex;
                 break;
             }
