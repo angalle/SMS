@@ -42,11 +42,15 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         Shuttle item = items.get(position);
 
-        String one = item.getST_ONE().replace("(금Ⅹ)","\n(금Ⅹ)");
-        String two = item.getST_TWO().replace("(금Ⅹ)","\n(금Ⅹ)");
-        String tre = item.getST_TRE().replace("(금Ⅹ)","\n(금Ⅹ)");
-        String four = item.getST_FOR().replace("(금Ⅹ)","\n(금Ⅹ)");
-        String fiv = item.getST_FIV().replace("(금Ⅹ)","\n(금Ⅹ)");
+        String one = item.getST_ONE().replace("(금Ⅹ)","\n(금Ⅹ)").replace("(금X)","\n(금X)");
+        String two = item.getST_TWO().replace("(금Ⅹ)","\n(금Ⅹ)").replace("(금X)","\n(금X)");
+        String tre = item.getST_TRE().replace("(금Ⅹ)","\n(금Ⅹ)").replace("(금X)","\n(금X)");
+        String four = item.getST_FOR().replace("(금Ⅹ)","\n(금Ⅹ)").replace("(금X)","\n(금X)");
+        String fiv = item.getST_FIV().replace("(금Ⅹ)","\n(금Ⅹ)").replace("(금X)","\n(금X)");
+
+        if("10분예상".contains(two)){
+            two = "10분\n예상";
+        }
 
         holder.entry_one.setText(one);
         holder.entry_two.setText(two);

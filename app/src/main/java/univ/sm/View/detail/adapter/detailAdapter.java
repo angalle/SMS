@@ -164,23 +164,23 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
         Log.e("addTime :::", addTime);
         String tempMiddleTime = "";
         DateFormat df = new SimpleDateFormat("H:mm");
-        if("10분".equals(compareStr) || "10분예상".equals(compareStr)) {
+        if("10분".contains(compareStr) || "10분예상".contains(compareStr)) {
             try {
                 Date date = df.parse(addTime);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.add(Calendar.MINUTE, 10);
-                tempMiddleTime = df.format(cal.getTime());
+                tempMiddleTime = df.format(cal.getTime()) + "(예상)";
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }else if("15분".equals(compareStr)) {
+        }else if("15분".contains(compareStr)) {
             try {
                 Date date = df.parse(addTime);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.add(Calendar.MINUTE, 15);
-                tempMiddleTime = df.format(cal.getTime());
+                tempMiddleTime = df.format(cal.getTime()) + "(예상)";
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -271,7 +271,7 @@ public class detailAdapter extends RecyclerView.Adapter<detailAdapter.ViewHolder
 
             /*Log.e("compare_time::::",compare_time+"");
             Log.e("time::::",tempData.replace("(금X)",""));*/
-            if(compare_time < Integer.parseInt(tempData.replace("(금Ⅹ)","").replace("(금X)",""))){
+            if(compare_time < Integer.parseInt(tempData.replace("(금Ⅹ)","").replace("(금X)","").replace("(예상)",""))){
                 index = startIndex;
                 break;
             }
