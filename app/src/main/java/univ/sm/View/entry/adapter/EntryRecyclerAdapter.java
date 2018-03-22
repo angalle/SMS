@@ -24,7 +24,6 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
     }
 
     int directionFlag = 0;
-    String pivotTime,startTitle,middleTitle,endTitle;
 
     public EntryRecyclerAdapter(Context context, ArrayList<Shuttle> items, int directionFlag) {
         this.context = context;
@@ -76,13 +75,5 @@ public class EntryRecyclerAdapter extends RecyclerView.Adapter<EntryRecyclerAdap
             entry_four=(TextView)itemView.findViewById(R.id.entry_four);
             entry_five=(TextView)itemView.findViewById(R.id.entry_five);
         }
-    }
-    public void clear(){
-        items.clear();
-        notifyDataSetChanged();
-    }
-    public void addAll(ArrayList<Shuttle> list){
-        items.addAll(list);
-        notifyDataSetChanged();
     }
 }

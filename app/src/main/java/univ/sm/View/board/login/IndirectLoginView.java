@@ -1,7 +1,5 @@
 package univ.sm.View.board.login;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,10 +11,8 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -47,6 +43,7 @@ import univ.sm.Controller.api.board.BoardService;
 import univ.sm.Model.Const;
 import univ.sm.Model.User;
 import univ.sm.R;
+import univ.sm.Util.CommonUtil;
 import univ.sm.View.CommonView;
 import univ.sm.View.board.BoardView;
 
@@ -172,7 +169,11 @@ public class IndirectLoginView extends CommonView {
                 if("false".equals(result)){
                     /** 없는 로직 수행*/
                     /** 직접 가입하는 페이지로 이동.*/
-
+                    SharedPreferences sp = getSharedPreferences(Const.SHARED_USER, MODE_PRIVATE);
+                    SharedPreferences.Editor spe = sp.edit();
+                    spe.putString(Const.SHARED_MEMBER_EMAIL,"");
+                    spe.putString(Const.SHARED_MEMBER_NAME,"");
+                    spe.commit();
 
                     nextPage(
                             new Intent(IndirectLoginView.this,DirectLoginView.class)
@@ -331,6 +332,11 @@ public class IndirectLoginView extends CommonView {
                 Toast.makeText(getApplicationContext(),Const.MSG_FAIL+code,Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @OnClick(R.id.join_btn)
+    public void clickJoin(){
+        CommonUtil.nextPage(new Intent(IndirectLoginView.this,DirectLoginView.class),this);
     }
 
     @OnClick(R.id.com_kakao_login)

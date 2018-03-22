@@ -8,10 +8,13 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.common.Common;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,15 +62,36 @@ public class DirectLoginView extends CommonView{
     @OnClick(R.id.join_btn)
     public void join(){
         try{
-            Log.e("click","click");
+            String email  = user_email.getText().toString();
+            String pw = user_pw.getText().toString();
+            String name = user_name.getText().toString();
+            String depart = univ_depart.getText().toString();
+            String studentNo = studentNo_edit.getText().toString();
+
+            if(!isEmailValid(email)){
+                Toast.makeText(getApplicationContext(),"이메일 형식에 맞게 입력해주세요.",Toast.LENGTH_SHORT).show();
+                user_email.requestFocus();
+                return;
+            }
+
+            if(!validatePassword(pw)){
+                Toast.makeText(getApplicationContext(),"비밀번호 4-16자, 소문자,숫자,특수문자를 섞어서 사용해주세요.",Toast.LENGTH_SHORT).show();
+                user_pw.requestFocus();
+                return;
+            }
+
+            if("".equals(name)){Toast.makeText(getApplicationContext(),"이름을 입력해주세요.",Toast.LENGTH_SHORT).show();user_name.requestFocus();}
+            if("".equals(depart)){Toast.makeText(getApplicationContext(),"학과를 입력해주세요.",Toast.LENGTH_SHORT).show();univ_depart.requestFocus();}
+            if("".equals(studentNo)){Toast.makeText(getApplicationContext(),"학번을 입력해주세요.",Toast.LENGTH_SHORT).show();studentNo_edit.requestFocus();}
+
 
             HashMap<String,Object> map = new HashMap<String,Object>();
 
-            map.put("MEMBER_EMAIL",user_email.getText().toString());
-            map.put("MEMBER_PW",user_pw.getText().toString());
-            map.put("MEMBER_NAME",user_name.getText().toString());
-            map.put("MEMBER_DEPATMENET",univ_depart.getText().toString());
-            map.put("MEMBET_ST_NO",studentNo_edit.getText().toString());
+            map.put("MEMBER_EMAIL",email);
+            map.put("MEMBER_PW",pw);
+            map.put("MEMBER_NAME",name);
+            map.put("MEMBER_DEPATMENET",depart);
+            map.put("MEMBET_ST_NO",studentNo);
 
             map.put("MEMEBER_REG_NO", new CommonUtil().getRegistrationId(this));
             map.put("INDIRECT_FLAG",INDIRECT_FLAG);
@@ -77,6 +101,11 @@ public class DirectLoginView extends CommonView{
             e.printStackTrace();
             Log.e("error",e.toString());
         }
+    }
+
+    @OnClick(R.id.cancel_btn)
+    public void clickCancel(){
+        CommonUtil.nextPage(new Intent(DirectLoginView.this,IndirectLoginView.class),this);
     }
 
     private void nextPage(Intent intentInfo){
@@ -119,4 +148,19 @@ public class DirectLoginView extends CommonView{
 
         }
     };
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                .matches();
+    }
+
+    //비밀번호 정규식
+    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM
+            = Pattern.compile("^[a-z0-9!@.#$%^&*?_~]{4,16}$"); // 4자리 ~ 16자리까지 가능
+
+    // 비밀번호 검사
+    public static boolean validatePassword(String pwStr) {
+        Matcher matcher = VALID_PASSWOLD_REGEX_ALPHA_NUM.matcher(pwStr);
+        return matcher.matches();
+    }
 }
