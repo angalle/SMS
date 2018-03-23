@@ -122,9 +122,10 @@
 
                 <TextView
                     android:id="@+id/DEPARTURE_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:text="출발지"
                     android:textColor="#4fb2b3"
                     android:textStyle="bold"
@@ -134,7 +135,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/arrow_green_btn" />
 
@@ -143,15 +144,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <View
-                        android:layout_width="16dp"
+                        android:layout_width="12dp"
                         android:layout_height="18dp">
                     </View>
 
                     <TextView
                         android:id="@+id/DESTINATION_view"
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:text="도착지"
                         android:textColor="#4fb2b3"
                         android:textStyle="bold"
@@ -160,49 +162,56 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/detailplace_icon_btn"/>
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/detailplace_icon_btn"/>
 
-                <TextView
-                    android:id="@+id/DEPARTURE_DETAIL_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="10dp"
-                    android:text="출발지 설명"
-                    android:textColor="#555555"
-                    android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/DEPARTURE_DETAIL_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="10dp"
+                        android:text="출발지 설명"
+                        android:textColor="#555555"
+                        android:textSize="11sp" />
+                </LinearLayout>
 
-                <View
-                    android:layout_width="66dp"
-                    android:paddingRight="25dp"
-                    android:layout_height="0dp" />
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/detailplace_icon_btn"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/detailplace_icon_btn"/>
 
-                <TextView
-                    android:id="@+id/DESTINATION_DETAIL_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="10dp"
-                    android:text="도착지 설명"
-                    android:textColor="#555555"
-                    android:textSize="11sp" />
-
+                    <TextView
+                        android:id="@+id/DESTINATION_DETAIL_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="10dp"
+                        android:text="도착지 설명"
+                        android:textColor="#555555"
+                        android:textSize="11sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
