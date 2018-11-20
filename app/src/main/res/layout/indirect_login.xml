@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/posting_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,23 +19,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="5dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp">
 
                     <ImageView
+                        android:id="@+id/imageView7"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/input_icon"
-                        android:id="@+id/imageView7" />
+                        android:src="@drawable/input_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -44,107 +42,94 @@
                         android:padding="10dp"
                         android:text="SMS 로 그 인"
                         android:textColor="#58595b"
-                        android:textStyle="bold"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="80dp"
-                        android:padding="5dp"
-                        android:layout_height="wrap_content"
-                        android:text="·아이디"
-                        android:textStyle="bold"
-                        android:textColor="#4fb2b3"
-                        android:textSize="12sp"
-                        android:id="@+id/idTv" />
+                    android:orientation="horizontal"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/user_email"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="60dp"
+                        android:background="#ddf0f0"
                         android:hint="이메일 주소를 입력해주세요."
                         android:maxLength="20"
-                        android:background="#ddf0f0"
+                        android:paddingLeft="10dp"
                         android:textColor="#555555"
-                        android:textColorHint="#ffffff"
-                        android:textSize="10sp" />
+                        android:textColorHint="#6c6c6c"
+                        android:inputType="textEmailAddress"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="80dp"
-                        android:padding="5dp"
-                        android:layout_height="wrap_content"
-                        android:text="·비밀번호"
-                        android:textStyle="bold"
-                        android:textColor="#4fb2b3"
-                        android:textSize="12sp"
-                        android:id="@+id/pwIv" />
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
 
                     <EditText
                         android:id="@+id/user_pw"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:inputType="textPassword"
-                        android:hint="비밀번호를 입력해주세요"
-                        android:maxLength="20"
+                        android:layout_height="60dp"
                         android:background="#ddf0f0"
+                        android:hint="비밀번호를 입력해주세요"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:paddingLeft="10dp"
                         android:textColor="#555555"
-                        android:textColorHint="#ffffff"
-                        android:textSize="10sp" />
+                        android:textColorHint="#6c6c6c"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/user_login"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="#e16175"
-                    android:layout_margin="10dp"
-                    android:text="로그인"
-                    android:textSize="20dp"
-                    android:textColor="#ffffff"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="30dp">
+
+                    <Button
+                        android:id="@+id/user_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#e16175"
+                        android:text="로그인"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp" />
 
 
-                <Button
-                    android:id="@+id/join_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="#e16175"
-                    android:layout_margin="10dp"
-                    android:text="회원가입"
-                    android:textSize="20dp"
-                    android:textColor="#ffffff"/>
-
-s
+                    <Button
+                        android:id="@+id/join_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#e16175"
+                        android:text="회원가입"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp" />
+                </LinearLayout>
 
                 <com.kakao.usermgmt.LoginButton
                     android:id="@+id/com_kakao_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="50dp"
-                    />
+                    android:layout_weight="1" />
 
                 <com.facebook.login.widget.LoginButton
                     android:id="@+id/facebook_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:visibility="gone"
-                    android:layout_marginTop="30dp" />
+                    android:visibility="gone" />
 
 
             </LinearLayout>

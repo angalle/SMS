@@ -15,8 +15,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.tsengvn.typekit.Typekit;
-import com.tsengvn.typekit.TypekitContextWrapper;
 
 import univ.sm.Model.Const;
 import univ.sm.Util.ShareUtil;
@@ -40,18 +38,11 @@ public class MainView extends CommonView implements View.OnClickListener {
     AdView mAdView;
     ImageView kakaoShare, facebookShare, settingBtn;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Typekit.getInstance().
-                addNormal(Typekit.createFromAsset(this, "fonts/NanumBarunGothic.otf"));
 
         sch_detail_btn = (LinearLayout) findViewById(R.id.sch_detail_btn);
         sch_entry_btn = (LinearLayout) findViewById(R.id.sch_entry_btn);
@@ -120,7 +111,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 startActivity(intent);*/
                 break;
             case R.id.kakaoShare:
-                ShareUtil.shareKakao(this);
+                ShareUtil.shareStaticKakao(this);
                 break;
             case R.id.facebookShare:
                 ShareUtil.shareFacebook(this);

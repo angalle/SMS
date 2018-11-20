@@ -44,20 +44,7 @@ public class MyGcmListenerService extends GcmListenerService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("board_no",callNo);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,PendingIntent.FLAG_ONE_SHOT);
-        Uri defaultSoundUri = null;
-
-
-
-
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            boolean notiState = sp.getBoolean(Const.NOTIKEY, true);
-            System.out.println(notiState+"");
-            //Toast.makeText(getApplicationContext(),notiState+"",Toast.LENGTH_SHORT).show();
-            if (notiState) {
-                    defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-            }else{
-                    defaultSoundUri = RingtoneManager.getDefaultUri(AudioManager.RINGER_MODE_SILENT);
-            }
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.input_icon)

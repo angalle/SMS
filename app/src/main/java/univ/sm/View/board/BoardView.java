@@ -27,21 +27,12 @@ import univ.sm.Controller.api.board.BoardService;
 import univ.sm.Model.Const;
 import univ.sm.Model.User;
 import univ.sm.Model.board.Board;
+
 import univ.sm.R;
 import univ.sm.Util.CommonUtil;
 import univ.sm.View.CommonView;
-import univ.sm.View.board.list.BoardList_FView;
 import univ.sm.View.board.regist.BoardPostingRegist_FView;
 
-
-/**
- * 게시판 리스트 페이지
- * 데이터 불러오기, 새글올리기, 새로고침
- * Created by kwonsoojeong on 2017-03-02.
- *
- * Modify by leeheesun on 2017-04-xx
- * 코드 마음대로 수정해서 미안합니다 - ☆  정리만 해봤어요 기능은 같고 주석처리 해놨어용
- */
 
 @SuppressWarnings("DefaultFileTemplate")
 public class BoardView extends CommonView implements View.OnClickListener,ViewTreeObserver.OnGlobalLayoutListener

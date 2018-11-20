@@ -26,7 +26,7 @@ public class RegistrationIntentService extends IntentService{
 
 	private static final String TAG = "RegIntentService";
 	
-    private static final String SENDER_ID = "726031754697";
+    private static final String SENDER_ID = "474166243122";
 	
 
 	@Override
@@ -86,6 +86,4 @@ public class RegistrationIntentService extends IntentService{
 
         gcmCon.HttpPostConnect(Const.BASE_URL);
 	}
-	
-	
 }

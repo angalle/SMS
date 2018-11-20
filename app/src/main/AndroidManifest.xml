@@ -6,7 +6,7 @@
         android:name=".View.GlobalApplication"
         android:icon="@drawable/icon_blue"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
+        android:theme="@style/MainTheme"
         android:windowSoftInputMode="adjustPan"
         >
 
@@ -20,37 +20,18 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".MainView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".View.detail.SchDetailView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.entry.SchEntryView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.entry.SchEntryFakeView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.detail.SchDetailFakeView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.question.InfoView"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-
-        <activity android:name=".View.board.login.IndirectLoginView"/>
-        <activity android:name=".View.board.login.DirectLoginView"/>
-        <activity android:name=".View.SettingView"/>
-        <activity android:name=".View.board.BoardView"/>
-        <activity android:name=".View.board.detail.BoardDetailView"/>
+        <activity android:name=".MainView"                                  android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.CommonView"                           android:screenOrientation="portrait" android:theme="@style/popupTheme"/>
+        <activity android:name=".View.detail.SchDetailView"                 android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.entry.SchEntryView"                   android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.entry.SchEntryFakeView"               android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.detail.SchDetailFakeView"             android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.question.InfoView"                    android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".View.board.login.IndirectLoginView"        android:theme="@style/MainTheme"/>
+        <activity android:name=".View.board.login.DirectLoginView"          android:theme="@style/MainTheme"/>
+        <activity android:name=".View.SettingView"                          android:theme="@style/MainTheme"/>
+        <activity android:name=".View.board.BoardView"                      android:theme="@style/MainTheme"/>
+        <activity android:name=".View.board.detail.BoardDetailView"         android:theme="@style/MainTheme"/>
         <!--**********************************************************************-->
         <!-- *********************안드로이드 fabric 관련 설정 ********************-->
         <!--**********************************************************************-->
@@ -140,8 +121,6 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <permission
         android:name="univ.sm.permission.C2D_MESSAGE"

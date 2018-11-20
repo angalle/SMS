@@ -3,50 +3,100 @@ package univ.sm.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.widget.Toast;
 
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
-import com.kakao.kakaolink.KakaoLink;
-import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
+import com.kakao.kakaolink.v2.KakaoLinkResponse;
+import com.kakao.kakaolink.v2.KakaoLinkService;
+import com.kakao.message.template.ButtonObject;
+import com.kakao.message.template.ContentObject;
+import com.kakao.message.template.FeedTemplate;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.SocialObject;
+import com.kakao.network.ErrorResult;
+import com.kakao.network.callback.ResponseCallback;
+import com.kakao.util.helper.log.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by PE_LHS on 2018-01-18.
  */
 
 public class ShareUtil {
-    public static void shareKakao(Context context) {
-        try {
-            final KakaoLink kakaoLink = KakaoLink.getKakaoLink(context);
-            final KakaoTalkLinkMessageBuilder kakaoMsgBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+    public static void shareStaticKakao(Context context) {
+        String templateId = "13377";
 
-            kakaoMsgBuilder.addText("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~");
+        Map<String, String> templateArgs = new HashMap<String, String>();
+        //templateArgs.put("template_arg1", "value1");
+        //templateArgs.put("template_arg2", "value2");
 
-            String url = "https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw";
-            String url2 = "https://lh3.googleusercontent.com/HWQPZPUdMvPpP_R5QQmxQiFgtFzfrlpV9mFHeQb56uhzgahxqUNHoGO_D00vsf3ACqA=h900-rw";
-            String url3 = "https://lh3.googleusercontent.com/GIVzb9_SRj_JUQmL9vvZale6SaFQHsmfdswtRJ-0bZc3BwfYHYwIu3gUGryPHWMw8PnM=h900-rw";
-            kakaoMsgBuilder.addImage(url, 160, 160);
-            //kakaoMsgBuilder.addImage(url2,160,160);
-            //kakaoMsgBuilder.addImage(url3,160,160);
-            //kakaoMsgBuilder.addAppLink("https://play.google.com/store/apps/details?id=univ.sm");
-            kakaoMsgBuilder.addAppButton("SMS - 선문대셔틀버스 시간표 & 콜벤합승");
+        Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+        //serverCallbackArgs.put("user_id", "${current_user_id}");
+        //serverCallbackArgs.put("product_id", "${shared_product_id}");
 
-            kakaoLink.sendMessage(kakaoMsgBuilder, context);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        KakaoLinkService.getInstance().sendCustom(context, templateId, templateArgs, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.e(errorResult.toString());
+            }
+
+            @Override
+            public void onSuccess(KakaoLinkResponse result) {
+                Toast.makeText(context,"공유되었습니다",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public static void shareFacebook(Activity activity) {
-        ShareLinkContent content = new ShareLinkContent.Builder()
-
-                .setContentTitle("SMS - 선문대셔틀버스 시간표 & 콜벤합승")
+        SharePhoto photo = new SharePhoto.Builder()
                 .setImageUrl(Uri.parse("https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=h900-rw"))
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
                 .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=univ.sm"))
-                .setContentDescription("SMS - 선문대셔틀버스 시간표 \n콜벤합승기능이 추가되었어요 ~ \n처음한번 입력하면 입력정보는 계속 기억되요 ~ \n 많은홍보 해주세요 ~_~")
                 .build();
 
         ShareDialog shareDialog = new ShareDialog(activity);
         shareDialog.show(content, ShareDialog.Mode.FEED);
+    }
+    public static void shareDynamicKakao(Context context) {
+        FeedTemplate params = FeedTemplate
+                .newBuilder(ContentObject.newBuilder("SMS(선문셔틀 버스 앱 + 콜벤)",
+                        "https://lh3.googleusercontent.com/Rs_2Gp66OYlGpd8oLgdNtefYa7xHqFlaof33ena8A7M0Cv6DbywgyLG2vYm8awxim4g=w720-h310-rw",
+                        LinkObject.newBuilder().setWebUrl("https://play.google.com/store/apps/details?id=univ.sm")
+                                .setMobileWebUrl("https://play.google.com/store/apps/details?id=univ.sm").build())
+                        .setDescrption("클릭시 앱 다운로드 사이트로 이동!")
+                        .build())
+                /*.setSocial(SocialObject.newBuilder().setLikeCount(10).setCommentCount(20)
+                        .setSharedCount(30).setViewCount(40).build())*/
+                .addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder().setWebUrl("https://play.google.com/store/apps/details?id=univ.sm").setMobileWebUrl("https://play.google.com/store/apps/details?id=univ.sm").build()))
+                /*.addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
+                        .setWebUrl("https://play.google.com/store/apps/details?id=univ.sm")
+                        .setMobileWebUrl("https://play.google.com/store/apps/details?id=univ.sm")
+                        //.setAndroidExecutionParams("key1=value1")
+                        //.setIosExecutionParams("key1=value1")
+                        .build()))*/
+                .build();
+
+        Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+        //serverCallbackArgs.put("user_id", "${current_user_id}");
+        //serverCallbackArgs.put("product_id", "${shared_product_id}");
+
+        KakaoLinkService.getInstance().sendDefault(context, params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.e(errorResult.toString());
+            }
+
+            @Override
+            public void onSuccess(KakaoLinkResponse result) {
+                Toast.makeText(context,"공유되었습니다",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

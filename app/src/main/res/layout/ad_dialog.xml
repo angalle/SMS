@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/backgroundlayoutcorner"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="301dp"
     android:layout_height="wrap_content"
->
+    android:layout_margin="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,21 +17,23 @@
 
         <Button
             android:id="@+id/negative"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="10dp"
             android:background="@drawable/btn_close" />
     </LinearLayout>
 
-    <com.google.android.gms.ads.NativeExpressAdView
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
-        android:layout_width="400dp"
-        android:layout_height="330dp"
-        android:layout_gravity="center_horizontal"
-        ads:adSize="300x320"
-        ads:adUnitId="ca-app-pub-8944137857067935/6840253602">
-
-    </com.google.android.gms.ads.NativeExpressAdView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        ads:adSize="MEDIUM_RECTANGLE"
+        ads:adUnitId="ca-app-pub-8944137857067935/8498895879">
+    </com.google.android.gms.ads.AdView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -41,14 +45,18 @@
             android:id="@+id/positive"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/btn_appclose" />
 
         <Button
             android:id="@+id/back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/btn_back" />
 
     </LinearLayout>
@@ -60,7 +68,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="70dp"
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:text="종료하기"
@@ -68,7 +76,7 @@
 
         <TextView
             android:id="@+id/back_tv"
-            android:layout_width="50dp"
+            android:layout_width="70dp"
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:text="뒤로가기"

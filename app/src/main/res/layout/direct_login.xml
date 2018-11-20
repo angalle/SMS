@@ -63,27 +63,18 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:layout_height="wrap_content"
-                            android:text="·아 이 디"
-                            android:textStyle="bold"
-                            android:textColor="#4fb2b3"
-                            android:textSize="12sp"
-                            android:id="@+id/textView7" />
-
                         <EditText
                             android:id="@+id/user_email"
                             android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:layout_height="30dp"
+                            android:layout_height="60dp"
                             android:background="#ddf0f0"
                             android:hint="ex) sunmoon@univ.co.kr"
-                            android:maxLength="20"
                             android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
+                            android:textColorHint="#6c6c6c"
+                            android:maxLength="20"
+                            android:paddingLeft="10dp"
+                            android:inputType="textEmailAddress"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -93,27 +84,19 @@
                         android:padding="5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:text="·비밀번호"
-                            android:textColor="#4fb2b3"
-                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/user_pw"
                             android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:layout_height="30dp"
-                            android:hint="비밀번호는 영어소문자/숫자/특수문자 4-16자리로 해주세요."
-                            android:inputType="textPassword"
-                            android:maxLength="20"
+                            android:layout_height="60dp"
                             android:background="#ddf0f0"
+                            android:hint="비밀번호는 영소/숫자/특수 4-16자리로 해주세요."
+                            android:maxLength="20"
+                            android:paddingLeft="10dp"
                             android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
+                            android:textColorHint="#6c6c6c"
+                            android:inputType="textEmailAddress"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -122,26 +105,19 @@
                         android:padding="5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:layout_height="wrap_content"
-                            android:text="·이    름"
-                            android:textColor="#4fb2b3"
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/user_name"
                             android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:layout_height="30dp"
-                            android:hint="실명을 입력해주세요. 경고 없이 삭제 될 수 있습니다."
-                            android:maxLength="20"
+                            android:layout_height="60dp"
                             android:background="#ddf0f0"
+                            android:hint="반드시 실명을 입력해주세요."
+                            android:maxLength="20"
+                            android:paddingLeft="10dp"
                             android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
+                            android:textColorHint="#6c6c6c"
+                            android:inputType="textEmailAddress"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -150,26 +126,19 @@
                         android:padding="5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:layout_height="wrap_content"
-                            android:text="·학    과"
-                            android:textColor="#4fb2b3"
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/univ_depart"
                             android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:layout_height="30dp"
+                            android:layout_height="60dp"
+                            android:background="#ddf0f0"
                             android:hint="정확한 학과정보를 입력해주세요."
                             android:maxLength="20"
-                            android:background="#ddf0f0"
+                            android:paddingLeft="10dp"
                             android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
+                            android:textColorHint="#6c6c6c"
+                            android:inputType="textEmailAddress"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -178,27 +147,18 @@
                         android:padding="6dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="80dp"
-                            android:padding="5dp"
-                            android:layout_height="wrap_content"
-                            android:text="·학    번"
-                            android:textColor="#4fb2b3"
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
-
                         <EditText
                             android:id="@+id/studentNo_edit"
                             android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:inputType="number"
-                            android:maxLength="20"
-                            android:layout_height="30dp"
-                            android:hint="정확한 학번정보를 입력해주세요."
+                            android:layout_height="60dp"
                             android:background="#ddf0f0"
+                            android:hint="정확한 학번을 입력해주세요."
+                            android:maxLength="20"
+                            android:paddingLeft="10dp"
                             android:textColor="#555555"
-                            android:textColorHint="#ffffff"
-                            android:textSize="10sp" />
+                            android:textColorHint="#6c6c6c"
+                            android:inputType="textEmailAddress"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <TextView
@@ -209,42 +169,44 @@
                         android:text="@string/postinfo"
                         android:textColor="#e16175"
                         android:textStyle="bold"
-                        android:textSize="12sp"/>
+                        android:textSize="15sp"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="40dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/join_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="60dp"
                         android:background="#e16175"
-                        android:layout_margin="10dp"
+                        android:gravity="center"
                         android:text="@string/join"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#ffffff"
+                        android:textSize="25sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/cancel_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="60dp"
                         android:background="#e16175"
-                        android:layout_margin="10dp"
+                        android:gravity="center"
                         android:text="@string/cancel"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#ffffff"
+                        android:textSize="25sp" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -48,7 +48,7 @@ public class DirectLoginView extends CommonView{
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
-        String name = intent.getStringExtra("name");
+        String name = intent.getStringExtra("birthday");
 
         user_email.setText(email);
         user_name.setText(name);

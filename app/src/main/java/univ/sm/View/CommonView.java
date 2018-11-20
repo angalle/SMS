@@ -3,6 +3,9 @@ package univ.sm.View;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -10,11 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Iterator;
 import java.util.List;
 
+import univ.sm.MainView;
 import univ.sm.R;
 
 /**
@@ -25,29 +31,37 @@ import univ.sm.R;
  */
 
 public class CommonView extends AppCompatActivity {
-
+    private AdView mAdView;
+    Button backBtn,positiveBtn,negativeBtn;
+    TextView backTv;
 
     @Override
-    public void onBackPressed() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.ad_dialog);
-        NativeExpressAdView adView = (NativeExpressAdView)dialog.findViewById(R.id.adView);
-        adView.loadAd(new AdRequest.Builder().build());
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+        setContentView(R.layout.ad_dialog);
+        mAdView = (AdView)findViewById(R.id.adView);
+        mAdView.loadAd(adRequest);
 
-        Button backBtn = (Button)dialog.findViewById(R.id.back);
-        TextView backTv = (TextView)dialog.findViewById(R.id.back_tv);
-        Button positiveBtn = (Button)dialog.findViewById(R.id.positive);
-        Button negativeBtn = (Button)dialog.findViewById(R.id.negative);
+
+        backBtn = (Button)findViewById(R.id.back);
+        backTv = (TextView)findViewById(R.id.back_tv);
+        positiveBtn = (Button)findViewById(R.id.positive);
+        negativeBtn = (Button)findViewById(R.id.negative);
 
         /* 뒤로가기버튼 사라지기 */
         disappearView(backBtn);
         disappearView(backTv);
+
         /* 뒤로가기 */
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                Intent mainPage = new Intent(CommonView.this,MainView.class);
+                startActivity(mainPage);
                 finish();
             }
         });
@@ -55,34 +69,29 @@ public class CommonView extends AppCompatActivity {
         positiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
                 finishAffinity();
             }
         });
-        /* 취소버튼 */
+
+        /* 취소버튼 엑스버튼*/
         negativeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                finish();
             }
         });
+    }
 
-        dialog.show();
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,CommonView.class);
+        startActivityForResult(intent,1);
     }
 
     /* 상위의 엑티비티가  MainView 면 해당 view가 사라지는 기능.*/
     private void disappearView(View view){
-        List<ActivityManager.RunningTaskInfo > info;
-        Context mContext  = getApplicationContext();
-        ActivityManager activityManager = (ActivityManager) mContext.getSystemService(mContext.ACTIVITY_SERVICE);
-
-        info = activityManager.getRunningTasks(7);
-
-        for (Iterator iterator = info.iterator(); iterator.hasNext();)  {
-            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) iterator.next();
-            if(runningTaskInfo.topActivity.getClassName().equals("univ.sm.MainView")) {
-                view.setVisibility(View.GONE);
-            }
+        if(getCallingActivity() == null || getCallingActivity().getClassName().equals("univ.sm.MainView")){
+            view.setVisibility(View.GONE);
         }
     }
 }

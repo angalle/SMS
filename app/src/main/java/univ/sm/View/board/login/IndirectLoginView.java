@@ -24,8 +24,8 @@ import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.UserProfile;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
@@ -65,7 +65,8 @@ public class IndirectLoginView extends CommonView {
 
     /** 전역변수들, 카카오나 페이스북을 로그인 한 뒤에 정보를 받기위한 용도.*/
     String email = "";
-    String name = "";
+    String birthday = "";
+    String phone = "";
 
     /** 페이스북 나중에 개발 */
     /** 페이스북 나중에 개발 */
@@ -116,12 +117,20 @@ public class IndirectLoginView extends CommonView {
         propertyKeys.add("profile_image");
         propertyKeys.add("thumbnail_image");
         Log.e("678678678","UserProfile : test");
-        UserManagement.requestMe(new MeResponseCallback() {
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                Toast.makeText(getApplicationContext(),"카카오톡 인증에 실패하였습니다.",Toast.LENGTH_SHORT).show();
-                Log.e("error","msg::::"+errorResult);
+        UserManagement.getInstance().me(new MeV2ResponseCallback(){
 
+            @Override
+            public void onSuccess(MeV2Response result) {
+                email = result.getKakaoAccount().getEmail();
+                birthday = result.getKakaoAccount().getBirthday();
+                phone = result.getKakaoAccount().getPhoneNumber();
+                HashMap<String,Object> map = new HashMap<String,Object>();
+                map.put("email",email== null ? "" :email);
+                map.put("birthday",birthday == null ? "" :birthday);
+                map.put("phone",phone == null ? "" :phone);
+
+                /** 이메일 체크*/
+                BoardService.getInstance(getApplicationContext()).createApi().checkEmail(map,callbak);
             }
 
             @Override
@@ -129,26 +138,7 @@ public class IndirectLoginView extends CommonView {
                 Toast.makeText(getApplicationContext(),"세션이 종료되었습니다. 다시 로그인 해 주세요.",Toast.LENGTH_SHORT).show();
                 Log.e("error","msg::::"+errorResult);
             }
-
-            @Override
-            public void onSuccess(UserProfile userProfile) {
-
-                email = userProfile.getEmail();
-                name = userProfile.getNickname();
-                HashMap<String,Object> map = new HashMap<String,Object>();
-                map.put("email",email);
-
-
-                /** 이메일 체크*/
-                BoardService.getInstance(getApplicationContext()).createApi().checkEmail(map,callbak);
-
-            }
-
-            @Override
-            public void onNotSignedUp() {
-                Toast.makeText(getApplicationContext(),"로그인되어있지 않습니다. 다시 로그인 해 주세요.",Toast.LENGTH_SHORT).show();
-            }
-        }, propertyKeys, false);
+        });
     }
 
 
@@ -156,7 +146,9 @@ public class IndirectLoginView extends CommonView {
     CommonCallbak callbak = new CommonCallbak(){
         @Override
         public void onError(Throwable t) {
-
+            t.printStackTrace();
+            Log.e("emailcheck","emailcheck error"+t.getMessage());
+            Toast.makeText(getApplicationContext(),"email check error",Toast.LENGTH_SHORT).show();
         }
         @Override
         public void onSuccess(int code, Object receiveData) {
@@ -178,7 +170,7 @@ public class IndirectLoginView extends CommonView {
                     nextPage(
                             new Intent(IndirectLoginView.this,DirectLoginView.class)
                                     .putExtra("email",email)
-                                    .putExtra("name",name)
+                                    .putExtra("birthday", birthday)
                     );
                 }else{
                     /** 있는 로직 수행*/
@@ -189,7 +181,7 @@ public class IndirectLoginView extends CommonView {
                         nextPage(
                                 new Intent(IndirectLoginView.this,DirectLoginView.class)
                                         .putExtra("email",email)
-                                        .putExtra("name",name)
+                                        .putExtra("birthday", birthday)
                         );
                     }else{
                         JsonObject jsonObject = array.get(0).getAsJsonObject();
@@ -213,7 +205,8 @@ public class IndirectLoginView extends CommonView {
         }
         @Override
         public void onFailure(int code) {
-
+            Log.e("error code email check","emailcheck error code"+code);
+            Toast.makeText(getApplicationContext(),"email check error",Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -244,8 +237,6 @@ public class IndirectLoginView extends CommonView {
                                     public void onCompleted(JSONObject object, GraphResponse response) {
                                         try {
                                             Log.e("user profile",object.toString());
-                                            /*Log.e("user profile",object.getString("name"));
-                                            Log.e("user profile",object.getString("gender"));*/
                                             Log.e("response ",response.toString());
                                             Log.e("getJSONObject ",response.getJSONObject().toString());
 
@@ -257,7 +248,7 @@ public class IndirectLoginView extends CommonView {
                         request.executeAsync();
 
                         /*email = userProfile.getEmail();
-                        name = userProfile.getNickname();
+                        birthday = userProfile.getNickname();
                         HashMap<String,Object> map = new HashMap<String,Object>();
                         map.put("email",email);
 
