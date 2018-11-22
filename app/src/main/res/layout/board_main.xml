@@ -22,6 +22,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:layout_marginTop="5dp"
+            android:padding="10dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/weekbar" />
@@ -41,7 +42,7 @@
 
                 <ImageView
                     android:id="@+id/board_selector"
-                    android:layout_width="110dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="8dp"

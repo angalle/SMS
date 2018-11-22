@@ -17,7 +17,6 @@
 - 이희선(angalle4@gmail.com)\n
 ">
         </Preference>
-
         <Preference
             android:title="디자이너"
             android:summary="
@@ -26,6 +25,7 @@
 - 이소원(sowannab@gmail.com)\n
 - 김보혜(sweetbobo515@gmail.com)
 ">
+
         </Preference>
 
         <Preference
@@ -42,6 +42,12 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="http://lily.sunmoon.ac.kr/Page/About/About08_04_01.aspx"></intent>
         </Preference>
+
+        <Preference
+            android:title="앱 VERSION"
+            android:summary="@string/app_version">
+        </Preference>
+
     </PreferenceCategory>
 
 

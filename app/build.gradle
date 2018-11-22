@@ -1,3 +1,7 @@
+def versionMajor = 3
+def versionMinor = 2
+def versionPatch = 8
+
 buildscript {
     repositories {
 
@@ -40,14 +44,19 @@ android {
         applicationId "univ.sm"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 38
-        versionName "3.2.7"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         multiDexEnabled true
     }
     buildTypes {
+        debug {
+            versionNameSuffix ".debug"
+            resValue 'string', 'app_version',"${defaultConfig.versionName}${versionNameSuffix}"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue 'string', 'app_version',"${defaultConfig.versionName}"
         }
     }
     compileOptions {
@@ -138,10 +147,7 @@ dependencies {
     // 카카오톡 sdk를 사용하기 위해 필요.
     compile group: 'com.kakao.sdk', name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
     // facebook share sdk
-    compile('com.facebook.android:facebook-android-sdk:[4,5)') {
-        /*exclude module: 'support-v4'
-        exclude group: 'com.android.support'*/
-    }
+    compile('com.facebook.android:facebook-android-sdk:[4,5)')
 }
 
 

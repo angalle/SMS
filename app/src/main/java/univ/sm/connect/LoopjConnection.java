@@ -13,9 +13,9 @@ import com.loopj.android.http.SyncHttpClient;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import univ.sm.Controller.BoardManager;
-import univ.sm.Model.board.Board;
-import univ.sm.Model.Const;
+import univ.sm.controller.BoardManager;
+import univ.sm.model.board.Board;
+import univ.sm.model.Const;
 
 /**
  * board 통신부분

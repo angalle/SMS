@@ -1,6 +1,5 @@
 package univ.sm;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,23 +8,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
-import univ.sm.Model.Const;
-import univ.sm.Util.ShareUtil;
-import univ.sm.View.CommonView;
-import univ.sm.View.SettingView;
-import univ.sm.View.board.login.IndirectLoginView;
-import univ.sm.View.detail.SchDetailFakeView;
-import univ.sm.View.detail.SchDetailView;
-import univ.sm.View.entry.SchEntryFakeView;
-import univ.sm.View.entry.SchEntryView;
-import univ.sm.View.question.InfoView;
+import univ.sm.model.Const;
+import univ.sm.util.ShareUtil;
+import univ.sm.view.CommonView;
+import univ.sm.view.SettingView;
+import univ.sm.view.board.login.IndirectLoginView;
+import univ.sm.view.detail.SchDetailFakeView;
+import univ.sm.view.detail.SchDetailView;
+import univ.sm.view.entry.SchEntryFakeView;
+import univ.sm.view.entry.SchEntryView;
+import univ.sm.view.question.InfoView;
 
 
 public class MainView extends CommonView implements View.OnClickListener {
@@ -66,8 +63,8 @@ public class MainView extends CommonView implements View.OnClickListener {
         facebookShare.setOnClickListener(this);
 
         /** sdk initialize */
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+        //AppEventsLogger.activateApp(this);
 
         /**setting button*/
         settingBtn = (ImageView) findViewById(R.id.setting_button);

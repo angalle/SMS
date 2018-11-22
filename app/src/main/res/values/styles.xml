@@ -16,7 +16,13 @@
 
     <style name="MainTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/viewBg</item>
+    </style>
+
+    <style name="PreferenceScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">@color/preferBg</item>
+        <item name="android:textColorSecondary">@color/album_title</item>
     </style>
 
     <style name="popupTheme" parent="Theme.AppCompat.DayNight.Dialog">

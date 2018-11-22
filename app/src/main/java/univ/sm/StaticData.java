@@ -2,7 +2,7 @@ package univ.sm;
 
 import java.util.ArrayList;
 
-import univ.sm.Model.shuttle.Shuttle;
+import univ.sm.model.shuttle.Shuttle;
 
 /**
  * Created by PE_LHS on 2018-01-18.
