@@ -36,6 +36,20 @@
     </com.google.android.gms.ads.AdView>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="클릭해주시면 서버운영에 도움이 됩니다 !"
+            android:textColor="#cc7373"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"

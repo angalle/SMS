@@ -90,7 +90,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.8"
         android:background="@drawable/backgroundlayoutcorner"
         android:orientation="vertical">
 
@@ -256,7 +256,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="95dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -275,7 +275,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="65dp"
                 android:background="#eeb8b8"
                 android:orientation="vertical"></LinearLayout>
         </LinearLayout>
@@ -288,5 +288,15 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/top_btn" />
     </RelativeLayout>
-
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-8944137857067935/8294232341">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>

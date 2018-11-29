@@ -70,7 +70,7 @@ public class MainView extends CommonView implements View.OnClickListener {
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
 
-        mAdView = (AdView) findViewById(R.id.adView);
+        mAdView = (AdView) findViewById(R.id.adView_main);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }

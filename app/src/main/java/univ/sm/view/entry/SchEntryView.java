@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
     ArrayList<Shuttle>[] changeTemp;
     RecyclerView recyclerView;
     EntryRecyclerAdapter ra;
+    private AdView mAdView;
 
     //LinearLayout animationBox;
     int originHeight;
@@ -165,6 +168,9 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
 
 
     private void initView(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView = (AdView)findViewById(R.id.adView_entry);
+        mAdView.loadAd(adRequest);
         /*주말/토요일/일요일 텍스트 이벤트*/
         destination_title = (TextView) findViewById(R.id.destination_title);
         schDetailWeekDay = (TextView) findViewById(R.id.sch_entry_weekDay);

@@ -242,7 +242,8 @@
                 android:src="@drawable/quick_btn" />
 
         </RelativeLayout>
-        <!--<ImageView
+        <!--
+            <ImageView
             android:layout_centerHorizontal="true"
             android:src="@drawable/quick_btn"
             android:id="@+id/quickBtn"
@@ -251,4 +252,15 @@
             android:adjustViewBounds="true" />-->
     </RelativeLayout>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-8944137857067935/7686893530">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>

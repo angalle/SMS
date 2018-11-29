@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     ImageView schDetailTopBar,  quickBtn,   changeDirection;
     TextView schDetailWeekDay,  schDetailSatureDay, schDetailSunDay;
     Spinner destination;
+    private AdView mAdView;
 
     RecyclerView recyclerView;
 
@@ -81,6 +84,9 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
 
     private void initView(){
          /*주말/토요일/일요일 텍스트 이벤트*/
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView = (AdView)findViewById(R.id.adView_detail);
+        mAdView.loadAd(adRequest);
         schDetailWeekDay = (TextView) findViewById(R.id.sch_detail_weekDay);
         schDetailSatureDay = (TextView) findViewById(R.id.sch_detail_satureDay);
         schDetailSunDay = (TextView) findViewById(R.id.sch_detail_sunDay);
