@@ -22,6 +22,7 @@ import univ.sm.view.detail.SchDetailFakeView;
 import univ.sm.view.detail.SchDetailView;
 import univ.sm.view.entry.SchEntryFakeView;
 import univ.sm.view.entry.SchEntryView;
+import univ.sm.view.entry.SchEntryWebView;
 import univ.sm.view.question.InfoView;
 
 
@@ -89,12 +90,14 @@ public class MainView extends CommonView implements View.OnClickListener {
                 }
                 break;
             case R.id.sch_entry_btn:
-                intent.setClass(MainView.this, SchEntryView.class);
+                intent.setClass(MainView.this, SchEntryWebView.class);
                 startActivity(intent);
-                if (g_limit_v.getString(Const.CAN_U_FIRST_2, null) == null) {
-                    fake.setClass(MainView.this, SchEntryFakeView.class);
-                    startActivity(fake);
-                }
+//                intent.setClass(MainView.this, SchEntryView.class);
+//                startActivity(intent);
+//                if (g_limit_v.getString(Const.CAN_U_FIRST_2, null) == null) {
+//                    fake.setClass(MainView.this, SchEntryFakeView.class);
+//                    startActivity(fake);
+//                }
                 break;
             case R.id.app_info_btn:
                 intent.setClass(MainView.this, InfoView.class);

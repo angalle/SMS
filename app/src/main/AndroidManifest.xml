@@ -23,6 +23,7 @@
         <activity android:name=".MainView"                                  android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
         <activity android:name=".view.CommonView"                           android:screenOrientation="portrait" android:theme="@style/popupTheme"/>
         <activity android:name=".view.detail.SchDetailView"                 android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
+        <activity android:name=".view.entry.SchEntryWebView"                android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
         <activity android:name=".view.entry.SchEntryView"                   android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
         <activity android:name=".view.entry.SchEntryFakeView"               android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
         <activity android:name=".view.detail.SchDetailFakeView"             android:screenOrientation="portrait" android:theme="@style/MainTheme"/>

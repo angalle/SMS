@@ -61,7 +61,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_weight="2.3"
-        android:weightSum="4"
+        android:weightSum="3"
         android:background="#f1f1f2"
         android:gravity="center"
         android:orientation="horizontal">
@@ -74,6 +74,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
+            android:visibility="gone"
             android:weightSum="5"
             android:id="@+id/sch_detail_btn">
 
