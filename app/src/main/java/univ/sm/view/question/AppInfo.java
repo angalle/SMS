@@ -3,7 +3,7 @@ package univ.sm.view.question;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Window;
 import android.widget.RadioGroup;
 

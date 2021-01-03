@@ -3,7 +3,7 @@ package univ.sm.view.board.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
