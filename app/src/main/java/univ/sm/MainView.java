@@ -33,7 +33,7 @@ public class MainView extends CommonView implements View.OnClickListener {
 
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
-    AdView mAdView;
+//    AdView mAdView;
     ImageView kakaoShare, facebookShare, settingBtn;
 
 
@@ -71,9 +71,9 @@ public class MainView extends CommonView implements View.OnClickListener {
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
 
-        mAdView = (AdView) findViewById(R.id.adView_main);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView) findViewById(R.id.adView_main);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -147,9 +147,9 @@ public class MainView extends CommonView implements View.OnClickListener {
     protected void onStop() {
         super.onStop();
         /**광고 초기화*/
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
-        requestNewInterstitial();
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
+//        requestNewInterstitial();
     }
 
     private void requestNewInterstitial() {

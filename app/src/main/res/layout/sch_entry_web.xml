@@ -12,15 +12,4 @@
         android:layout_height="match_parent"
         android:layout_weight="7"></WebView>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView_entry"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8944137857067935/8294232341">
-    </com.google.android.gms.ads.AdView>
 </LinearLayout>

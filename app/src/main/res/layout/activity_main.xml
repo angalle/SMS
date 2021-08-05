@@ -193,20 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:gravity="center"
-    >
-
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-8944137857067935/8779439198">
-        </com.google.android.gms.ads.AdView>
-
-    </LinearLayout>
+    />
 
     <!-- footer -->
     <RelativeLayout

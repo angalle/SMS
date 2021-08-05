@@ -21,7 +21,7 @@ import univ.sm.view.CommonView;
 public class SchEntryWebView extends CommonView{
 
     WebView webView;
-    private AdView mAdView;
+//    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class SchEntryWebView extends CommonView{
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        mAdView = (AdView)findViewById(R.id.adView_entry);
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView)findViewById(R.id.adView_entry);
+//        mAdView.loadAd(adRequest);
 
 
     }

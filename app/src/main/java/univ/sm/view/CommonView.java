@@ -22,7 +22,7 @@ import univ.sm.R;
  */
 
 public class CommonView extends AppCompatActivity {
-    private AdView mAdView;
+//    private AdView mAdView;
     Button backBtn,positiveBtn,negativeBtn;
     TextView backTv;
 
@@ -31,8 +31,8 @@ public class CommonView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AdRequest adRequest = new AdRequest.Builder().build();
         setContentView(R.layout.ad_dialog);
-        mAdView = (AdView)findViewById(R.id.adView);
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView)findViewById(R.id.adView);
+//        mAdView.loadAd(adRequest);
 
 
         backBtn = (Button)findViewById(R.id.back);
