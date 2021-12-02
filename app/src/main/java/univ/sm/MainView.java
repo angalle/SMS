@@ -12,6 +12,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import univ.sm.model.Const;
 import univ.sm.util.ShareUtil;
@@ -36,11 +37,14 @@ public class MainView extends CommonView implements View.OnClickListener {
 //    AdView mAdView;
     ImageView kakaoShare, facebookShare, settingBtn;
 
+    FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         sch_detail_btn = (LinearLayout) findViewById(R.id.sch_detail_btn);
         sch_entry_btn = (LinearLayout) findViewById(R.id.sch_entry_btn);
@@ -80,8 +84,14 @@ public class MainView extends CommonView implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent();
         Intent fake = new Intent();
+        Bundle params = null;
         switch (v.getId()) {
             case R.id.sch_detail_btn:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "버스시간표 상세 보기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchDetailView.class);
                 startActivity(intent);
                 if (g_limit_v.getString(Const.CAN_U_FIRST_1, null) == null) {
@@ -90,6 +100,11 @@ public class MainView extends CommonView implements View.OnClickListener {
                 }
                 break;
             case R.id.sch_entry_btn:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "버스시간표 전체 보기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchEntryWebView.class);
                 startActivity(intent);
 //                intent.setClass(MainView.this, SchEntryView.class);
@@ -100,10 +115,20 @@ public class MainView extends CommonView implements View.OnClickListener {
 //                }
                 break;
             case R.id.app_info_btn:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "앱 소개 페이지 보기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 intent.setClass(MainView.this, InfoView.class);
                 startActivity(intent);
                 break;
             case R.id.callboard_menu_btn:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "콜벤 페이지 보기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 intent.setClass(MainView.this, IndirectLoginView.class);
                 startActivity(intent);
 
@@ -111,12 +136,27 @@ public class MainView extends CommonView implements View.OnClickListener {
                 startActivity(intent);*/
                 break;
             case R.id.kakaoShare:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "카카오 공유하기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 ShareUtil.shareStaticKakao(this);
                 break;
             case R.id.facebookShare:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "페이스북 공유하기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 ShareUtil.shareFacebook(this);
                 break;
             case R.id.setting_button:
+                params = new Bundle();
+                params.putString("page", "메인");
+                params.putString("event", "클릭");
+                params.putString("value", "설정하기");
+                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SettingView.class);
                 startActivity(intent);
                 break;
