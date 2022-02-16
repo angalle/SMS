@@ -6,11 +6,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import univ.sm.BuildConfig;
 import univ.sm.MainView;
 import univ.sm.R;
 
@@ -22,18 +25,25 @@ import univ.sm.R;
  */
 
 public class CommonView extends AppCompatActivity {
-//    private AdView mAdView;
+    View mAdView;
     Button backBtn,positiveBtn,negativeBtn;
     TextView backTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AdRequest adRequest = new AdRequest.Builder().build();
         setContentView(R.layout.ad_dialog);
-//        mAdView = (AdView)findViewById(R.id.adView);
-//        mAdView.loadAd(adRequest);
-
+        mAdView = findViewById(R.id.adView);
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.MEDIUM_RECTANGLE);
+        if(BuildConfig.BUILD_TYPE == "debug"){
+            adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        }else{
+            adView.setAdUnitId("ca-app-pub-8944137857067935/8498895879");
+        }
+        ((LinearLayout)mAdView).addView(adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         backBtn = (Button)findViewById(R.id.back);
         backTv = (TextView)findViewById(R.id.back_tv);

@@ -1,17 +1,26 @@
 package univ.sm;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+//import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import univ.sm.model.Const;
@@ -34,7 +43,8 @@ public class MainView extends CommonView implements View.OnClickListener {
 
     SharedPreferences g_limit_v;
     SharedPreferences.Editor editor;
-//    AdView mAdView;
+    View mAdView;
+    InterstitialAd mInterstitialAd;
     ImageView kakaoShare, facebookShare, settingBtn;
 
     FirebaseAnalytics mFirebaseAnalytics;
@@ -43,6 +53,17 @@ public class MainView extends CommonView implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAdView = findViewById(R.id.adView_main);
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        if(BuildConfig.BUILD_TYPE == "debug"){
+            adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        }else{
+            adView.setAdUnitId("ca-app-pub-8944137857067935/8779439198");
+        }
+        ((LinearLayout)mAdView).addView(adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -75,9 +96,6 @@ public class MainView extends CommonView implements View.OnClickListener {
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
 
-//        mAdView = (AdView) findViewById(R.id.adView_main);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -161,41 +179,5 @@ public class MainView extends CommonView implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
-    }
-
-
-    public InterstitialAd mInterstitialAd;
-    @Override
-    protected void onResume() {
-        super.onResume();
-            if(mInterstitialAd != null){
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    mInterstitialAd.show();
-                }
-
-                @Override
-                public void onAdFailedToLoad(int errorCode) {
-                    Toast.makeText(getApplicationContext(), "erroCode" + errorCode, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        /**광고 초기화*/
-//        mInterstitialAd = new InterstitialAd(this);
-//        mInterstitialAd.setAdUnitId("ca-app-pub-8944137857067935/8003898402");
-//        requestNewInterstitial();
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mInterstitialAd.loadAd(adRequest);
     }
 }

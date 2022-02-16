@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.ndk.CrashlyticsNdk;
-
-import io.fabric.sdk.android.Fabric;
+//import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.ndk.CrashlyticsNdk;
+//
+//import io.fabric.sdk.android.Fabric;
 
 import univ.sm.util.CommonUtil;
 import univ.sm.MainView;
@@ -22,7 +22,7 @@ public class SplashView extends Activity {
         setContentView(R.layout.splash);
 
         /* setting fabric  */
-        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
+//        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
 
         /* check google play service */
         if (CommonUtil.checkPlayServices(this)) {

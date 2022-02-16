@@ -4,13 +4,17 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import univ.sm.BuildConfig;
 import univ.sm.R;
 import univ.sm.view.CommonView;
 
@@ -21,11 +25,10 @@ import univ.sm.view.CommonView;
 public class SchEntryWebView extends CommonView{
 
     WebView webView;
-//    private AdView mAdView;
+    View mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AdRequest adRequest = new AdRequest.Builder().build();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_entry_web);
 
@@ -36,9 +39,17 @@ public class SchEntryWebView extends CommonView{
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-//        mAdView = (AdView)findViewById(R.id.adView_entry);
-//        mAdView.loadAd(adRequest);
-
+        mAdView = findViewById(R.id.adView_main);
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        if(BuildConfig.BUILD_TYPE == "debug"){
+            adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        }else{
+            adView.setAdUnitId("ca-app-pub-8944137857067935/8779439198");
+        }
+        ((LinearLayout)mAdView).addView(adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
     }
 

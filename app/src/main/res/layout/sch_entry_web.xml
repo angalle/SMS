@@ -12,4 +12,11 @@
         android:layout_height="match_parent"
         android:layout_weight="7"></WebView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/adView_main"
+        android:orientation="horizontal"></LinearLayout>
+
 </LinearLayout>

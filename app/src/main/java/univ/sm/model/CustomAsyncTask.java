@@ -30,7 +30,7 @@ public class CustomAsyncTask extends AsyncTask<String,Void,Void>{
         try{
             LoopjConnection lc = LoopjConnection.getInstance(BoardView.context);
             Method method =lc.getClass().getDeclaredMethod(strings[0],noparams);
-            method.invoke(LoopjConnection.getInstance(BoardView.context),null);
+            method.invoke(LoopjConnection.getInstance(BoardView.context));
         }catch (Exception e){
             e.printStackTrace();
         }

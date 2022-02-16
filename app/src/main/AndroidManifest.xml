@@ -59,6 +59,10 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key"></meta-data>
+        <!-- Google AdMob-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8944137857067935~5728416406"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -25,6 +25,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeb8b8"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:id="@+id/adView">
+
+
+<!--        <com.google.android.gms.ads.AdView-->
+<!--            xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/adView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_gravity="center"-->
+<!--            ads:adSize="MEDIUM_RECTANGLE"-->
+<!--            ads:>-->
+<!--        </com.google.android.gms.ads.AdView>-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
@@ -74,7 +98,7 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:text="종료하기"
-            android:textAlignment="center" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/back_tv"
@@ -82,7 +106,7 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:text="뒤로가기"
-            android:textAlignment="center" />
+            android:gravity="center" />
 
     </LinearLayout>
 

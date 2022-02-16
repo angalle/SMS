@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.aakira.expandablelayout.ExpandableLayout;
+//import com.github.aakira.expandablelayout.ExpandableLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -43,7 +43,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
     int originHeight;
     boolean openFlag = false;
 
-    ExpandableLayout expandableLayout;
+//    ExpandableLayout expandableLayout;
 
     ArrayList<int[]> STATION;
     /*TERMINAL_C // ONYANG_C*/
@@ -93,10 +93,10 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
             moveImageBar(v);
         } else if (v.getId() == R.id.detail_btn) {
             if(openFlag){
-                expandableLayout.collapse();
+//                expandableLayout.collapse();
                 openFlag = false;
             }else if(!openFlag){
-                expandableLayout.expand();
+//                expandableLayout.expand();
                 openFlag = true;
             }
         }else if (v.getId() == R.id.KTX) {
@@ -185,7 +185,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
         Terminal = (TextView) findViewById(R.id.Terminal);
         Onyang = (TextView) findViewById(R.id.Onyang);
         //animationBox = (LinearLayout) findViewById(R.id.animationBox);
-        expandableLayout = (ExpandableLayout)findViewById(R.id.expandableLayout);
+//        expandableLayout = (ExpandableLayout)findViewById(R.id.expandableLayout);
         /* 각 버튼 마다 이벤트 리스너*/
         schDetailWeekDay.setOnClickListener(this);
         schDetailSatureDay.setOnClickListener(this);
@@ -217,7 +217,7 @@ public class SchEntryView extends CommonView implements View.OnClickListener,Vie
             ra = new EntryRecyclerAdapter(context, StaticData.getArrShuttle(STATION_FLAG,DAY_FLAG), Const.OPPOSIT);
             recyclerView.setAdapter(ra);
             //접혔다 폈다하는 레이아웃 동작/변수
-            expandableLayout.collapse();
+//            expandableLayout.collapse();
             openFlag = false;
         }
     }
