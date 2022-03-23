@@ -4,11 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import io.fabric.sdk.android.Fabric;
 
 import univ.sm.util.CommonUtil;
 import univ.sm.MainView;
