@@ -96,6 +96,12 @@ public class MainView extends CommonView implements View.OnClickListener {
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
 
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle params = new Bundle();
+        params.putString("page", "메인");
+        params.putString("event", "방문");
+        params.putString("value", "메인");
+        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
     }
 
     @Override
@@ -109,7 +115,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "버스시간표 상세 보기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchDetailView.class);
                 startActivity(intent);
                 if (g_limit_v.getString(Const.CAN_U_FIRST_1, null) == null) {
@@ -122,7 +128,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "버스시간표 전체 보기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchEntryWebView.class);
                 startActivity(intent);
 //                intent.setClass(MainView.this, SchEntryView.class);
@@ -137,7 +143,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "앱 소개 페이지 보기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, InfoView.class);
                 startActivity(intent);
                 break;
@@ -146,7 +152,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "콜벤 페이지 보기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, IndirectLoginView.class);
                 startActivity(intent);
 
@@ -158,7 +164,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "카카오 공유하기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 ShareUtil.shareStaticKakao(this);
                 break;
             case R.id.facebookShare:
@@ -166,7 +172,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "페이스북 공유하기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 ShareUtil.shareFacebook(this);
                 break;
             case R.id.setting_button:
@@ -174,7 +180,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "설정하기");
-                mFirebaseAnalytics.logEvent("hyper_dmp_v2", params);
+                mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SettingView.class);
                 startActivity(intent);
                 break;

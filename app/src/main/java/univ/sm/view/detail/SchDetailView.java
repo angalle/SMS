@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class SchDetailView extends CommonView implements View.OnClickListener,Vi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sch_detail);
+
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle params = new Bundle();
+        params.putString("page", "시간표 상세");
+        params.putString("event", "방문");
+        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
 
         /* view 초기화 */
         initView();

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import univ.sm.BuildConfig;
 import univ.sm.R;
@@ -50,6 +51,12 @@ public class SchEntryWebView extends CommonView{
         ((LinearLayout)mAdView).addView(adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle params = new Bundle();
+        params.putString("page", "웹뷰 시간표");
+        params.putString("event", "방문");
+        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
 
     }
 

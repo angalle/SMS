@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
@@ -57,6 +58,13 @@ public class BoardView extends CommonView implements View.OnClickListener,ViewTr
         activity = this;
         intent = getIntent();
         user = (User)intent.getSerializableExtra("user");
+
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle params = new Bundle();
+        params.putString("page", "콜벤");
+        params.putString("event", "방문");
+        params.putString("value", "콜벤목록");
+        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
     }
 
     /* 새로고침을 하기위한 메소드 추가. */

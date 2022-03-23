@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.ProfileTracker;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -82,7 +83,14 @@ public class IndirectLoginView extends CommonView {
 
             callback = new SessionCallback();
             Session.getCurrentSession().addCallback(callback);
-            //facebook();
+
+            FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            Bundle params = new Bundle();
+            params.putString("page", "콜벤");
+            params.putString("event", "방문");
+            params.putString("value", "로그인");
+            mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
+
         }
     }
 
