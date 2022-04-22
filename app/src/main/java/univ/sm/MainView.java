@@ -1,37 +1,27 @@
 package univ.sm;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-//import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import kr.pentacle.sdk_sender.HyperDMPPixelProvider;
 import univ.sm.model.Const;
 import univ.sm.util.ShareUtil;
 import univ.sm.view.CommonView;
+import univ.sm.view.GlobalApplication;
 import univ.sm.view.SettingView;
 import univ.sm.view.board.login.IndirectLoginView;
 import univ.sm.view.detail.SchDetailFakeView;
 import univ.sm.view.detail.SchDetailView;
-import univ.sm.view.entry.SchEntryFakeView;
-import univ.sm.view.entry.SchEntryView;
 import univ.sm.view.entry.SchEntryWebView;
 import univ.sm.view.question.InfoView;
 
@@ -54,6 +44,7 @@ public class MainView extends CommonView implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAdView = findViewById(R.id.adView_main);
+
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         if(BuildConfig.BUILD_TYPE == "debug"){
@@ -96,12 +87,17 @@ public class MainView extends CommonView implements View.OnClickListener {
         settingBtn = (ImageView) findViewById(R.id.setting_button);
         settingBtn.setOnClickListener(this);
 
-        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle params = new Bundle();
-        params.putString("page", "메인");
-        params.putString("event", "방문");
-        params.putString("value", "메인");
-        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
+//        Bundle params = new Bundle();
+//        params.putString("page", "메인");
+//        params.putString("event", "방문");
+//        params.putString("value", "메인");
+
+//        logger.logEvent("sent_friend_request", params);
+//
+//        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+//
+//
+//        mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
     }
 
     @Override
@@ -115,6 +111,7 @@ public class MainView extends CommonView implements View.OnClickListener {
                 params.putString("page", "메인");
                 params.putString("event", "클릭");
                 params.putString("value", "버스시간표 상세 보기");
+
                 mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchDetailView.class);
                 startActivity(intent);
@@ -131,12 +128,6 @@ public class MainView extends CommonView implements View.OnClickListener {
                 mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, SchEntryWebView.class);
                 startActivity(intent);
-//                intent.setClass(MainView.this, SchEntryView.class);
-//                startActivity(intent);
-//                if (g_limit_v.getString(Const.CAN_U_FIRST_2, null) == null) {
-//                    fake.setClass(MainView.this, SchEntryFakeView.class);
-//                    startActivity(fake);
-//                }
                 break;
             case R.id.app_info_btn:
                 params = new Bundle();
@@ -155,9 +146,6 @@ public class MainView extends CommonView implements View.OnClickListener {
                 mFirebaseAnalytics.logEvent("app_hyper_dmp_v2", params);
                 intent.setClass(MainView.this, IndirectLoginView.class);
                 startActivity(intent);
-
-                /*intent.setClass(MainView.this, BoardView.class);
-                startActivity(intent);*/
                 break;
             case R.id.kakaoShare:
                 params = new Bundle();

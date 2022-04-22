@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import kr.pentacle.sdk_sender.HyperDMPPixelProvider;
 import univ.sm.util.CommonUtil;
 import univ.sm.MainView;
 import univ.sm.R;
@@ -17,6 +18,7 @@ public class SplashView extends Activity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        HyperDMPPixelProvider.initialization(this, String.valueOf(R.string.kakao_ad_track_id));
 
         /* setting fabric  */
 //        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());

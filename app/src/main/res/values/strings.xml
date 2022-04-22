@@ -1,4 +1,20 @@
 <resources>
+    <string name="facebook_app_id">121739291742659</string>
+    <string name="fb_login_protocol_scheme">fb121739291742659</string>
+    <string name="facebook_client_token">d3dc60ca8f7e70e45c0d9dc6a5a964b3</string>
+
+    <string name="kakao_ad_track_id" translatable="false">3938771709582133633</string>
+
+    <!-- native advertise soon changing-->
+    <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
+    <!-- banner advertise -->
+    <string name="banner_ad_id">ca-app-pub-8944137857067935/8779439198</string>
+
+
+
+
+
+
     <string name="app_name">SMS</string>
     <string name="app_full_name">SunMoon Bus Time Scheduler</string>
 
@@ -28,10 +44,6 @@
 
     <string name="AsanCampus">Asan\nCampus</string>
 
-    <!-- native advertise soon changing-->
-    <string name="banner_ad_unit_id">ca-app-pub-7422694427130568/9960320947</string>
-    <!-- banner advertise -->
-    <string name="banner_ad_id">ca-app-pub-8944137857067935/8779439198</string>
     <string name="BoardTitle">게시물 목록</string>
     <string name="WRITER">작성자</string>
     <string name="DEPARTMENT">학과</string>
@@ -41,8 +53,6 @@
     <string name="join">가입</string>
     <string name="cancel">취소</string>
 
-    <string name="facebook_app_id">121739291742659</string>
-    <string name="fb_login_protocol_scheme">fb121739291742659</string>
     <string name="postinfo">
         ※본명을 사용하지 않거나 학번,학과를 다르게 입력한 경우
         계정이 경고없이 삭제될 수 있습니다.
@@ -77,4 +87,5 @@
     선문대학교 셔틀 링크
     http://lily.sunmoon.ac.kr/Page/About/About08_04_01.aspx
     </string>
+
 </resources>

@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="univ.sm">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".view.GlobalApplication"
         android:icon="@drawable/icon_blue"
         android:label="@string/app_name"
         android:theme="@style/MainTheme"
-        android:windowSoftInputMode="adjustPan"
-        >
+        android:windowSoftInputMode="adjustPan">
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -25,24 +28,59 @@
             <intent-filter>
                 <data android:scheme="univ.sm" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainView"                                  android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.CommonView"                           android:screenOrientation="portrait" android:theme="@style/popupTheme"/>
-        <activity android:name=".view.detail.SchDetailView"                 android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.entry.SchEntryWebView"                android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.entry.SchEntryView"                   android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.entry.SchEntryFakeView"               android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.detail.SchDetailFakeView"             android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.question.InfoView"                    android:screenOrientation="portrait" android:theme="@style/MainTheme"/>
-        <activity android:name=".view.board.login.IndirectLoginView"        android:theme="@style/MainTheme"/>
-        <activity android:name=".view.board.login.DirectLoginView"          android:theme="@style/MainTheme"/>
-        <activity android:name=".view.SettingView"                          android:theme="@style/PreferenceScreen"/>
-        <activity android:name=".view.board.BoardView"                      android:theme="@style/MainTheme"/>
-        <activity android:name=".view.board.detail.BoardDetailView"         android:theme="@style/MainTheme"/>
+        <activity
+            android:name=".MainView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.CommonView"
+            android:screenOrientation="portrait"
+            android:theme="@style/popupTheme" />
+        <activity
+            android:name=".view.detail.SchDetailView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.entry.SchEntryWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.entry.SchEntryView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.entry.SchEntryFakeView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.detail.SchDetailFakeView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.question.InfoView"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.board.login.IndirectLoginView"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.board.login.DirectLoginView"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.SettingView"
+            android:theme="@style/PreferenceScreen" />
+        <activity
+            android:name=".view.board.BoardView"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".view.board.detail.BoardDetailView"
+            android:theme="@style/MainTheme" />
         <!--**********************************************************************-->
         <!-- *********************안드로이드 fabric 관련 설정 ********************-->
         <!--**********************************************************************-->
@@ -57,16 +95,26 @@
             android:value="@integer/google_play_services_version"></meta-data>
         <!--kakao talk-->
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
+            android:name="com.kakao.shdk.AppKey"
             android:value="@string/kakao_app_key"></meta-data>
         <!-- Google AdMob-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8944137857067935~5728416406"/>
+            android:value="ca-app-pub-8944137857067935~5728416406" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+
+        <!-- Track ID 정보 추가 -->
+        <meta-data
+            android:name="com.kakao.ad.tracker.TRACK_ID"
+            android:value="@string/kakao_ad_track_id" />
+
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
@@ -83,24 +131,24 @@
             </intent-filter>
         </activity>
 
-        <provider
-            android:authorities="com.facebook.app.FacebookContentProvider121739291742659"
-        android:name="com.facebook.FacebookContentProvider"
-        android:exported="true"/>
 
-        <service
-            android:name=".fcm.FireBaseMessagingService">
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider121739291742659"
+            android:exported="true" />
+
+        <service android:name=".fcm.FireBaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-<!--        <service-->
-<!--            android:name=".fcm.FirebaseInstanceIDService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        <!--        <service-->
+        <!--            android:name=".fcm.FirebaseInstanceIDService">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
 
         <service
             android:name="univ.sm.fcm.RegistrationIntentService"
